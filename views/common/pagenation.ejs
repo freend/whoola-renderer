@@ -1,0 +1,29 @@
+<% var defNum = Math.floor((pageable.pageNumber + 1) / 10);
+         var startNum = (defNum * 10) + 1;
+         var endNum = (defNum * 10) + 10;
+         endNum = Math.min(totalElements, endNum);
+      %>
+<nav>
+  <ul class="pagination">
+    <li <% if(first == true) { %>
+        class="disabled"
+        <% } %>
+    >
+      <a href="products?page=<%= defNum - 10 %>" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+        <% for (var i = startNum; i <= endNum; i++) {
+                if(pageable.pageNumber + 1 == i) { %>
+                <li class="active"><a href="products?page=<%= i %>"> <%= i %> </a></li>
+            <% } else { %>
+                <li><a href="products?page=<%= i %>"><%= i %></a></li>
+        <%  }
+         } %>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

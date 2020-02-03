@@ -1,0 +1,10 @@
+<script>
+    window.onload = function() {
+        var msg = "<%= message%>";
+        if(msg != null) {
+            alert(msg);
+        }
+        var redirectUrl = "<%= ahref%>";
+        location.href = redirectUrl;
+    }
+</script>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(){
+    var token = localStorage.getItem('token');
+    document.getElementById('token').value = localStorage.getItem('token');
+});
+</script>
+<html lang="en">
+  <head>
+    <% include ../common/head %>
+  </head>
+  <body>
+  <% include ../common/navi %>
+    <div class="container">
+        <button type="button" class="btn btn-info" onClick="back(-1)">Back</button>
+        <form class="form-buy" action="/purchase" method=POST>
+            <input type="hidden" value="" id="token" name="token">
+            <input type="hidden" value="<%= amount%>" name="amount">
+            <input type="hidden" value="<%= id%>" name="id">
+            <label >name : <%= name%></label>
+            <br>
+            <label >company : <%= companyName%></label>
+            <br>
+            <label >Price : USD <%= amount%></label>
+            <input type="number" name="phoneNumber" class="form-control" placeholder="Input receive phone">
+            <button type="submit" class="btn btn-primary">Buy</button>
+        </form>
+    </div>
+  </body>
+</html>
+<script>
+function back() {
+    history.back();
+}
+
+</script>

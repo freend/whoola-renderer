@@ -1,0 +1,10 @@
+<script>
+    window.onload = function() {
+        var msg = "<%= message%>";
+        if(msg != null) {
+            alert('sign up complete, check your email');
+        }
+        var redirectUrl = "/";
+        location.href = redirectUrl;
+    }
+</script>

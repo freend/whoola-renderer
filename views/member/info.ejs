@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../common/head %>
+  </head>
+  <body>
+  <% include ../common/navi %>
+    <div class="container">
+    <form>
+          <div class="form-group">
+                name : <input type="text", class="form-control" value=<%= mail%> readonly>,
+                Referral Code : <input type="text", class="form-control" value=<%= myReferralCode %> readonly> <br>
+                from :
+                <% if (fromCountry == null) { %>
+                    <input type = "text" class="form-control", placeholder="insert country", name="fromCountry">
+                <% } else { %>
+                    <input type = "text" class="form-control", value=<%= fromCountry%> >
+                <% } %>
+                to :
+                <% if (toCountry == null) { %>
+                    <input type = "text" class="form-control", placeholder="insert country", name="toCountry">
+                <% } else { %>
+                    <input type = "text" class="form-control", value=<%= toCountry%> >
+                <% } %>
+                 <br>
+                first name :
+                <% if (firstName == null) { %>
+                    <input type = "text" class="form-control", placeholder="insert country", name="firstName">
+                <% } else { %>
+                    <input type = "text" class="form-control", value=<%= firstName%> >
+                <% } %>
+                last name :
+                <% if (lastName == null) { %>
+                    <input type = "text" class="form-control", placeholder="insert country", name="lastName">
+                <% } else { %>
+                    <input type = "text" class="form-control", value=<%= lastName%> >
+                <% } %>
+                Amount<br>
+                currency
+                <label>
+                    <% if (amount == null) {%>
+                        0.0
+                    <% } else { %>
+                        <%= amount%>
+                    <% } %>
+                </label>
+                point <label>0.0</label>
+          </div>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Update user info</button>
+        </form>
+    </div>
+  </body>
+</html>

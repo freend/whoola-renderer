@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../common/head %>
+  </head>
+  <body>
+  <% include ../common/navi %>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <td> id </td>
+                <td> product name </td>
+            </thead>
+            <% for (var i = 0; i < content.length; i++) { %>
+                <tr>
+                    <td><%= content[i].id %></td>
+                    <td><a href="/products/<%= content[i].id %>"><%= content[i].name %></a><td>
+                </tr>
+            <% } %>
+        </table>
+        <% include ../common/pagenation %>
+    </div>
+  </body>
+</html>
