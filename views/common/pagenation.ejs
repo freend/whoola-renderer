@@ -1,11 +1,11 @@
-<% var defNum = Math.floor((pageable.pageNumber + 1) / 10);
+<% var defNum = Math.floor((page.pageable.pageNumber + 1) / 10);
          var startNum = (defNum * 10) + 1;
          var endNum = (defNum * 10) + 10;
-         endNum = Math.min(totalElements, endNum);
+         endNum = Math.min(page.totalElements, endNum);
       %>
 <nav>
   <ul class="pagination">
-    <li <% if(first == true) { %>
+    <li <% if(page.first == true) { %>
         class="disabled"
         <% } %>
     >
@@ -14,7 +14,7 @@
       </a>
     </li>
         <% for (var i = startNum; i <= endNum; i++) {
-                if(pageable.pageNumber + 1 == i) { %>
+                if(page.pageable.pageNumber + 1 == i) { %>
                 <li class="active"><a href="products?page=<%= i %>"> <%= i %> </a></li>
             <% } else { %>
                 <li><a href="products?page=<%= i %>"><%= i %></a></li>
