@@ -10,11 +10,17 @@
             <thead>
                 <td> id </td>
                 <td> product name </td>
+                <td> Price </td>
+                <td> Test Original price </td>
+                <td> buy </td>
             </thead>
-            <% for (var i = 0; i < content.length; i++) { %>
+            <% for (var i = 0; i < page.content.length; i++) { %>
                 <tr>
-                    <td><%= content[i].id %></td>
-                    <td><a href="/products/<%= content[i].id %>"><%= content[i].name %></a><td>
+                    <td><%= page.content[i].id %></td>
+                    <td><a href="/products/<%= page.content[i].id %>"><%= page.content[i].name %></a><td>
+                    <td>USD <%= Math.ceil(page.content[i].amount * 100) / 100 %> </td>
+                    <td>USD <%= page.content[i].amount %> </td>
+                    <td><button class="btn btn-success" type="submit">Buy</button></td>
                 </tr>
             <% } %>
         </table>

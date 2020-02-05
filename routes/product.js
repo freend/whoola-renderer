@@ -16,6 +16,19 @@ router.get('/', function(req, res, next) {
             res.render('product/list', response.body);
         });
 });
+router.get('/operator', function (req, res, next) {
+    var operator = req.param('operator');
+    var receiver = req.param('receiver');
+    unirest
+        .get('http://localhost:8080/product/operator/' + operator + "?receiver=" + receiver)
+        .send()
+        .then((response) => {
+            if (response.body.status == '404') {
+                res.render('error', response.body);
+            }
+            res.render('product/list', response.body);
+        });
+});
 router.get('/:productId', function (req, res, next) {
     unirest
         .get('http://localhost:8080/product/' + req.params.productId)
