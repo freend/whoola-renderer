@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../common/head %>
+  </head>
+  <body>
+  <% include ../common/navi %>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <td> Receiver name </td>
+                <td> Phone number </td>
+                <td> Option </td>
+            </thead>
+            <% for (var i = 0; i < content.length; i++) { %>
+                <tr>
+                    <td><%= content[i].receiverName %></td>
+                    <td><a href="/products/<%= content[i].id %>"><%= content[i].receiverNumber %></a><td>
+                    <td> <button class="btn" type="submit">Update</button><button class="btn" type="submit">Delete</button> </td>
+                </tr>
+            <% } %>
+        </table>
+        <% if (content.length != 0) {%>
+            <% include ../common/pagenation %>
+        <% } %>
+        <% include ../receiver/add %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(){
+    var token = localStorage.getItem('token');
+    document.getElementById('token').value = localStorage.getItem('token');
+});
+
+</script>
+<div class="container">
+        <form class="form" action="/receiver/add" method="POST">
+          <div class="form-group">
+          <input type="hidden" value="" id="token" name="token">
+            <label >Name</label>
+            <input type="text" class="form-control" id="nameId" name="name" placeholder="insert invite name">
+          </div>
+          <div class="form-group">
+            <label >Phone Number</label>
+            <label >example) 821012345678 </label>
+            <input type="text" class="form-control" id="phoneId" name="phone" placeholder="Insert phone number"
+            onkeyup="validate(this.value)">
+            <div/>
+          <button type="submit" class="btn btn-default">Add</button>
+        </form>
+    </div>
