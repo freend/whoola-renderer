@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(){
+    var token = localStorage.getItem('token');
+    document.getElementById('token').value = localStorage.getItem('token');
+});
+</script>
 <html lang="en">
   <head>
     <% include ../common/head %>
@@ -15,7 +21,7 @@
             <% for (var i = 0; i < content.length; i++) { %>
                 <tr>
                     <td><%= content[i].receiverName %></td>
-                    <td><a href="/products/<%= content[i].id %>"><%= content[i].receiverNumber %></a><td>
+                    <td><a href="/products/operator?operator=<%= content[i].operatorId%>&receiver=<%= content[i].id %>"><%= content[i].receiverNumber %></a><td>
                     <td> <button class="btn" type="submit">Update</button><button class="btn" type="submit">Delete</button> </td>
                 </tr>
             <% } %>

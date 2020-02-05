@@ -25,9 +25,6 @@ router.get('/', function(req, res, next) {
             }
         });
 });
-// router.get('/add', function(req, res, next) {
-//     res.render('receiver/add', {"message": "null"});
-// });
 router.post('/add', function(req, res, next) {
     var apiUrl = 'http://localhost:8080/receiver';
     var token = req.body["token"];
@@ -36,16 +33,18 @@ router.post('/add', function(req, res, next) {
         res.render('common/error', {'message':'please log in', 'ahref': '/signin'});
     }
 
-    if (/^\[1-9][0-9]{6,14}$/.test(req.body["phone"])) {
+    if (/^[1-9][0-9]{6,14}$/.test(req.body["phone"])) {
         unirest
             .post(apiUrl)
             .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
-            .send({"receiverNumber": req.body["phone"], "receiverName" : req.body["name"]})
+            .send({"receiverNumber": "+" + req.body["phone"], "receiverName" : req.body["name"]})
             .then((response) => {
                 if (response.status != null) {
-                    res.json(response.body);
+                    res.render('common/modal', {"message":response.body, "ahref":"/receiver?token=" + token, "token":token});
                 }
-                res.render('product/' + req.body["id"], response.body);
+                else {
+                    res.render('common/error', response.body);
+                }
             });
     } else {
         res.render('receiver/list', {"message": "mobile_number is invalid"});
