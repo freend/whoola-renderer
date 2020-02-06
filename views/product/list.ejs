@@ -7,20 +7,21 @@
   <% include ../common/navi %>
     <div class="container">
         <table class="table table-striped">
-            <thead>
-                <td> id </td>
-                <td> product name </td>
-                <td> Price </td>
-                <td> Test Original price </td>
-                <td> buy </td>
-            </thead>
+        <input type="hidden" value="<%=receiver%>" id="productReceiver">
+                <tr>
+                    <td> id </td>
+                    <td> product name </td>
+                    <td> Price </td>
+                    <td> Test Original price </td>
+                    <td> buy </td>
+                </tr>
             <% for (var i = 0; i < page.content.length; i++) { %>
                 <tr>
                     <td><%= page.content[i].id %></td>
-                    <td><a href="/products/<%= page.content[i].id %>"><%= page.content[i].name %></a><td>
-                    <td>USD <%= Math.ceil(page.content[i].amount * 100) / 100 %> </td>
+                    <td><%= page.content[i].name %><td>
+                    <td>USD <label id="price_<%= page.content[i].id %>"><%= Math.ceil(page.content[i].amount * 100) / 100 %></label> </td>
                     <td>USD <%= page.content[i].amount %> </td>
-                    <td><button class="btn btn-success" type="submit">Buy</button></td>
+                    <td><button class="btn btn-success" onClick="noti(<%= page.content[i].id %>)">Buy</button></td>
                 </tr>
             <% } %>
         </table>
@@ -28,3 +29,32 @@
     </div>
   </body>
 </html>
+<script>
+    function noti(id) {
+        var form = document.createElement('form');
+            form.setAttribute('method', 'POST');
+            form.setAttribute('action', '/purchase');
+            document.charset = "utf-8";
+
+            var receiverField = document.createElement('input');
+            receiverField.setAttribute('type', 'hidden');
+            receiverField.setAttribute('name', 'receiver');
+            receiverField.setAttribute('value', productReceiver.value);
+            form.appendChild(receiverField);
+
+            var productField = document.createElement('input');
+            productField.setAttribute('type', 'hidden');
+            productField.setAttribute('name', 'productId');
+            productField.setAttribute('value', id);
+            form.appendChild(productField);
+
+            var tokenField = document.createElement('input');
+            tokenField.setAttribute('type', 'hidden');
+            tokenField.setAttribute('name', 'token');
+            tokenField.setAttribute('value', localStorage.getItem('token'));
+            form.appendChild(tokenField);
+            document.body.appendChild(form);
+
+            form.submit();
+    }
+</script>

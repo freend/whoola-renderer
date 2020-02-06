@@ -26,7 +26,8 @@ router.get('/operator', function (req, res, next) {
             if (response.body.status == '404') {
                 res.render('error', response.body);
             }
-            res.render('product/list', response.body);
+            var result = {"receiver": receiver, "page": response.body.page};
+            res.render('product/list', result);
         });
 });
 router.get('/:productId', function (req, res, next) {
