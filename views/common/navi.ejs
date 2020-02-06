@@ -16,10 +16,11 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/products">Product</a></li>
-        <li><a href="#">Invite Friend</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="#" onClick="setToken('/receiver?token=')">Receiver</a></li>
+        <li><a href="#" onClick="setToken('/purchase?token=')">Purchase History</a></li>
+        <li><a href="#" onClick="setToken('/invite?token=')">Invite Friend</a></li>
         <li><a href="#", id="btn1" onClick="setToken('/users/info?token=')">My Page</a></li>
+        <li><a href="mailto:whoola-admin@gmail.com">Contact Us</a></li>
 <!--         <li class="dropdown"> -->
 <!--           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a> -->
 <!--           <ul class="dropdown-menu" role="menu"> -->
@@ -45,7 +46,6 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#" onClick="setToken('/receiver?token=')">Receiver</a></li>
             <li><a href="#">Another action</a></li>
             <li><a href="#">Something else here</a></li>
             <li class="divider"></li>
