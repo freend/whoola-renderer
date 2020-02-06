@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(){
+    var token = localStorage.getItem('token');
+    document.getElementById('token').value = localStorage.getItem('token');
+});
+</script>
+<html lang="en">
+  <head>
+    <% include ../common/head %>
+  </head>
+  <body>
+  <% include ../common/navi %>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <td> id </td>
+                <td> Product name </td>
+                <td> Price </td>
+                <td> date </td>
+            </thead>
+            <% for (var i = 0; i < page.content.length; i++) { %>
+                <tr>
+                    <td><%= page.content[i].id %></td>
+                    <td><%= page.content[i].productName %></td>
+                    <td>USD <%= Math.ceil(page.content[i].productPrice * 100) / 100 %> </td>
+                    <td><%= page.content[i].createdAt %></td>
+                </tr>
+            <% } %>
+        </table>
+        <% if (page.content.length != 0) {%>
+            <% include ../common/pagenation %>
+        <% } %>
+    </div>
+  </body>
+</html>
