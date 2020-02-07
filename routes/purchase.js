@@ -6,7 +6,7 @@ var router = express.Router();
 const apiUrl = 'http://localhost:8080/purchase';
 router.get('/', function(req, res, next) {
     unirest
-        .get(apiUrl)
+        .get(apiUrl + "/list")
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
         .send()
         .then((response) => {
