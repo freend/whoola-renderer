@@ -8,20 +8,9 @@
     <div class="container">
     <form>
           <div class="form-group">
-                name : <input type="text", class="form-control" value=<%= mail%> readonly>,
+                <input type="hidden" value="" id="token" name="token">
+                name : <input type="text", class="form-control" value=<%= mail%> readonly>
                 Referral Code : <input type="text", class="form-control" value=<%= myReferralCode %> readonly> <br>
-                from :
-                <% if (fromCountry == null) { %>
-                    <input type = "text" class="form-control", placeholder="insert country", name="fromCountry">
-                <% } else { %>
-                    <input type = "text" class="form-control", value=<%= fromCountry%> >
-                <% } %>
-                to :
-                <% if (toCountry == null) { %>
-                    <input type = "text" class="form-control", placeholder="insert country", name="toCountry">
-                <% } else { %>
-                    <input type = "text" class="form-control", value=<%= toCountry%> >
-                <% } %>
                  <br>
                 first name :
                 <% if (firstName == null) { %>
