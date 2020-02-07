@@ -24,16 +24,14 @@
                 <% } else { %>
                     <input type = "text" class="form-control", value=<%= lastName%> >
                 <% } %>
-                Amount<br>
-                currency
+                Point
                 <label>
-                    <% if (amount == null) {%>
+                    <% if (point == null) {%>
                         0.0
                     <% } else { %>
-                        <%= amount%>
+                        <%= point%>
                     <% } %>
                 </label>
-                point <label>0.0</label>
           </div>
           <button class="btn btn-lg btn-primary btn-block" type="submit">Update user info</button>
         </form>
