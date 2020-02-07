@@ -19,7 +19,7 @@
                 <tr>
                     <td><%= page.content[i].id %></td>
                     <td><%= page.content[i].name %><td>
-                    <td>USD <label id="price_<%= page.content[i].id %>"><%= Math.ceil(page.content[i].amount * 100) / 100 %></label> </td>
+                    <td>USD <label id="price_<%= page.content[i].id %>"><%= page.content[i].amount %></label> </td>
                     <td>USD <%= page.content[i].amount %> </td>
                     <td><button class="btn btn-success" onClick="noti(<%= page.content[i].id %>)">Buy</button></td>
                 </tr>

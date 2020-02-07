@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 <tr>
                     <td><%= page.content[i].id %></td>
                     <td><%= page.content[i].productName %></td>
-                    <td>USD <%= Math.ceil(page.content[i].productPrice * 100) / 100 %> </td>
+                    <td>USD <%= page.content[i].productPrice %> </td>
                     <td><%= page.content[i].createdAt %></td>
                 </tr>
             <% } %>
