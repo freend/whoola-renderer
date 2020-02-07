@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function(){
             <thead>
                 <td> id </td>
                 <td> Product name </td>
+                <td> Phone Number </td>
                 <td> Price </td>
                 <td> date </td>
             </thead>
@@ -23,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 <tr>
                     <td><%= page.content[i].id %></td>
                     <td><%= page.content[i].productName %></td>
+                    <td><%= page.content[i].receivePhoneNumber %></td>
                     <td>USD <%= page.content[i].productPrice %> </td>
                     <td><%= page.content[i].createdAt %></td>
                 </tr>
