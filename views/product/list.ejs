@@ -21,7 +21,7 @@
                     <td><%= page.content[i].name %><td>
                     <td>USD <label id="price_<%= page.content[i].id %>"><%= page.content[i].amount %></label> </td>
                     <td>USD <%= page.content[i].amount %> </td>
-                    <td><button class="btn btn-success" onClick="noti(<%= page.content[i].id %>)">Buy</button></td>
+                    <td><button class="btn btn-success" onClick="buyDetail(<%= page.content[i].id %>)">Buy</button></td>
                 </tr>
             <% } %>
         </table>
@@ -30,6 +30,9 @@
   </body>
 </html>
 <script>
+    function buyDetail(productId) {
+        location.href = '/purchase/detail?productId=' + productId + '&receiver=' + productReceiver.value +'&token=' + localStorage.getItem('token');
+    }
     function noti(id) {
         var form = document.createElement('form');
             form.setAttribute('method', 'POST');

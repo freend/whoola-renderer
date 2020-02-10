@@ -16,13 +16,26 @@ document.addEventListener("DOMContentLoaded", function(){
         <form class="form-buy" action="/purchase" method=POST>
             <input type="hidden" value="" id="token" name="token">
             <input type="hidden" value="<%= amount%>" name="amount">
-            <input type="hidden" value="<%= id%>" name="id">
-            <label >name : <%= name%></label>
+            <input type="hidden" value="<%= receiverId%>" name="receiver">
+            <input type="hidden" value="<%= productId%>" name="productId">
+            <input type="hidden" value="<%= myPoint %>" name="totalPoint">
+            <label >name : <%= name%></label> <label>phone number : <%= receiverPhone %> </label>
             <br>
-            <label >company : <%= companyName%></label>
+            <label >product name : <%= productName%></label>
             <br>
             <label >Price : USD <%= amount%></label>
-            <input type="number" name="phoneNumber" class="form-control" placeholder="Input receive phone">
+            <br>
+            <label> Point :  <%= myPoint %></label>
+            <br>
+            <div class="col-lg-3">
+                <div class="input-group">
+                  <input type="text" class="form-control" value="<%= myPoint / 2 %>" name="point">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Apply</button>
+                  </span>
+                </div><!-- /input-group -->
+              </div><!-- /.col-lg-6 -->
+              <br><br>
             <button type="submit" class="btn btn-primary">Buy</button>
         </form>
     </div>
