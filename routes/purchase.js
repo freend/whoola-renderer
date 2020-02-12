@@ -22,7 +22,8 @@ router.get('/', function(req, res, next) {
                 }
             } else {
                 console.log(response.body);
-                res.render('purchase/list', response.body);
+                const result = {"page": response.body.page, "url": 'purchase'};
+                res.render('purchase/list', result);
             }
         });
 });

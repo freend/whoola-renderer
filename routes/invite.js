@@ -21,8 +21,8 @@ router.get('/', function(req, res, next) {
                         res.json(response.body);
                 }
             } else {
-                console.log(response.body);
-                res.render('invite/list', response.body);
+                const result = {"page": response.body.page, "url": 'invite/list'};
+                res.render('invite/list', result);
             }
         });
 });

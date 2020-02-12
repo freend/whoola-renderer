@@ -21,7 +21,8 @@ router.get('/', function(req, res, next) {
                 }
             } else {
                 console.log(response.body);
-                res.render('receiver/list', response.body);
+                const result = {"page": response.body.page, "url": 'receiver/list'};
+                res.render('receiver/list', result);
             }
         });
 });
