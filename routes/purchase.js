@@ -4,9 +4,15 @@ var router = express.Router();
 
 /* GET users listing. */
 const apiUrl = 'http://localhost:8080/purchase';
+var sendUrl;
 router.get('/', function(req, res, next) {
+    sendUrl = "";
+    sendUrl = apiUrl + "/list";
+    if (req.param('page') != null) {
+        sendUrl += '?page=' + req.param('page');
+    }
     unirest
-        .get(apiUrl + "/list")
+        .get(sendUrl)
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
         .send()
         .then((response) => {
