@@ -16,6 +16,20 @@ router.get('/', function(req, res, next) {
             res.render('product/list', response.body);
         });
 });
+router.get('/full', function(req, res, next) {
+    var apiUrl = 'http://localhost:8080/product';
+    if (req.param('page') != null) {
+        apiUrl += '?page=' + req.param('page');
+    }
+
+    unirest
+        .get(apiUrl)
+        .send()
+        .then((response) => {
+            const result = {"page": response.body.page, "url": '/products/full'};
+            res.render('product/fulllist', result);
+        });
+});
 router.get('/operator', function (req, res, next) {
     var operator = req.param('operator');
     var receiver = req.param('receiver');
