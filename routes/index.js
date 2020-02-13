@@ -23,7 +23,7 @@ const apiUrl = process.env.API_HOST;
               response.body.ahref = "/signup";
               res.render('common/error', response.body);
           } else {
-              res.json(response.body);
+              res.render("common/error", {'message': "sign up complete", 'ahref': '/'});
           }
       });
 });
