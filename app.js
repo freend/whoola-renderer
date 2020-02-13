@@ -14,6 +14,7 @@ const purchaseRouter = require('./routes/purchase');
 const receiverRouter = require('./routes/receiver');
 const inviteRouter = require('./routes/invite');
 const treeRouter = require('./routes/tree');
+const validateRouter = require('./routes/validate');
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use('/purchase', purchaseRouter);
 app.use('/receiver', receiverRouter);
 app.use('/invite', inviteRouter);
 app.use('/tree', treeRouter);
+app.use('/validate', validateRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
