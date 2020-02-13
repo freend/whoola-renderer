@@ -1,9 +1,9 @@
-var express = require('express');
-var unirest = require('unirest');
-var router = express.Router();
+const express = require('express');
+const unirest = require('unirest');
+const router = express.Router();
 
 /* GET users listing. */
-const apiUrl = 'http://localhost:8080/purchase';
+const apiUrl = process.env.API_HOST + '/purchase';
 var sendUrl;
 router.get('/', function(req, res, next) {
     sendUrl = "";

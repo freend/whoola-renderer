@@ -10,10 +10,10 @@ router.get('/', function(req, res, next) {
 router.get('/signup', function (req, res, next) {
   res.render('member/signup');
 });
-
-router.post('/signup', function (req, res, next) {
+const apiUrl = process.env.API_HOST;
+    router.post('/signup', function (req, res, next) {
   unirest
-      .post('http://localhost:8080/member/signup')
+      .post(apiUrl + '/member/signup')
       .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
       .send({
           "mail": req.body["id"], "password": req.body["password"], "inviteReferralCode": req.body["referralCode"]
@@ -32,7 +32,7 @@ router.get('/signin', function (req, res, next) {
 });
 router.post('/signin', function (req, res, next) {
     unirest
-        .post('http://localhost:8080/member/signin')
+        .post(apiUrl + '/member/signin')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
         .send({ "mail": req.body["id"], "password": req.body["password"] })
         .then((response) => {

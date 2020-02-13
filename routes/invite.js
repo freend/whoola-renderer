@@ -1,8 +1,8 @@
-var express = require('express');
-var unirest = require('unirest');
-var router = express.Router();
+const express = require('express');
+const unirest = require('unirest');
+const router = express.Router();
 
-var serverUrl = 'http://localhost:8080/invite';
+const serverUrl = process.env.API_HOST + '/invite';
 /* GET home page. */
 router.get('/', function(req, res, next) {
     unirest

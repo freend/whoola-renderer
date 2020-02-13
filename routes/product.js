@@ -1,29 +1,30 @@
-var express = require('express');
-var unirest = require('unirest');
-var router = express.Router();
+const express = require('express');
+const unirest = require('unirest');
+const router = express.Router();
 
 /* GET users listing. */
+const apiUrl = process.env.API_HOST + '/product';
 router.get('/', function(req, res, next) {
-    var apiUrl = 'http://localhost:8080/product';
+    var sendUrl = '';
     if (req.param('page') != null) {
-        apiUrl += '?page=' + req.param('page');
+        sendUrl += '?page=' + req.param('page');
     }
 
     unirest
-        .get(apiUrl)
+        .get(sendUrl)
         .send()
         .then((response) => {
             res.render('product/list', response.body);
         });
 });
 router.get('/full', function(req, res, next) {
-    var apiUrl = 'http://localhost:8080/product';
+    var sendUrl = '';
     if (req.param('page') != null) {
-        apiUrl += '?page=' + req.param('page');
+        sendUrl = apiUrl + '?page=' + req.param('page');
     }
 
     unirest
-        .get(apiUrl)
+        .get(sendUrl)
         .send()
         .then((response) => {
             const result = {"page": response.body.page, "url": '/products/full'};
@@ -34,7 +35,7 @@ router.get('/operator', function (req, res, next) {
     var operator = req.param('operator');
     var receiver = req.param('receiver');
     unirest
-        .get('http://localhost:8080/product/operator/' + operator + "?receiver=" + receiver)
+        .get(apiUrl + '/operator/' + operator + "?receiver=" + receiver)
         .send()
         .then((response) => {
             if (response.body.status == '404') {
@@ -46,7 +47,7 @@ router.get('/operator', function (req, res, next) {
 });
 router.get('/:productId', function (req, res, next) {
     unirest
-        .get('http://localhost:8080/product/' + req.params.productId)
+        .get(apiUrl + req.params.productId)
         .send()
         .then((response) => {
             if (response.body.status == '404') {

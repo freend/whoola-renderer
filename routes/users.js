@@ -1,6 +1,6 @@
-var express = require('express');
-var unirest = require('unirest');
-var router = express.Router();
+const express = require('express');
+const unirest = require('unirest');
+const router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -8,8 +8,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/info', function (req, res, next) {
+    if (req.query.token == "null" || req.query.token == null || req.query.token == undefined) {
+        res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+    }
     unirest
-        .get('http://localhost:8080/member/info')
+        .get(process.env.API_HOST + '/member/info')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
         .send()
         .then((response) => {
@@ -17,5 +20,16 @@ router.get('/info', function (req, res, next) {
             res.render('member/info', response.body);
         });
 });
-
+router.post('/info', function (req, res, next) {
+    unirest
+        .post(process.env.API_HOST + '/receiver')
+        .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
+        .send({"receiverNumber": "+" + req.body["phone"], "receiverName" : req.body["name"]})
+        .then((response) => {
+            if (response.status != null) {
+                res.json(response.body);
+            }
+            res.render('product/' + req.body["id"], response.body);
+        });
+});
 module.exports = router;
