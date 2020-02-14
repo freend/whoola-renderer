@@ -18,10 +18,7 @@ router.get('/', function(req, res, next) {
         });
 });
 router.get('/full', function(req, res, next) {
-    var sendUrl = '';
-    if (req.param('page') != null) {
-        sendUrl = apiUrl + '?page=' + req.param('page');
-    }
+    const sendUrl = apiUrl + '?page=' + req.param('page');
 
     unirest
         .get(sendUrl)
