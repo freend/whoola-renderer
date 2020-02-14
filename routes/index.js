@@ -19,6 +19,7 @@ const apiUrl = process.env.API_HOST;
           "mail": req.body["id"], "password": req.body["password"], "inviteReferralCode": req.body["referralCode"]
       })
       .then((response) => {
+          console.log("sign up result", response.body);
           if (response.body.responseMessage != null) {
               res.render("common/error", {'message': "sign up complete", 'ahref': '/'});
           } else {
