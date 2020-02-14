@@ -7,7 +7,6 @@
          endNum = Math.min(page.totalElements, endNum);
       %>
  <br>
-start number : <%= startNum %>, end number : <%= endNum %>
 <nav>
   <ul class="pagination">
     <li <% if(defNum == 0) { %>
@@ -37,7 +36,6 @@ start number : <%= startNum %>, end number : <%= endNum %>
 </nav>
 <script>
     function pageController(pageNum) {
-    alert('page ' + pageNum + ', url ' + '<%= url %>');
         location.href = '<%= url %>' + '?page='+ pageNum + '&token=' + localStorage.getItem('token');
     }
 </script>
