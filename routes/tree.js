@@ -19,7 +19,8 @@ router.get('/', function(req, res) {
                 }
             } else {
                 console.log(response.body);
-                res.render('tree/tree', {"data":response.body});
+                // res.json(response.body);
+                res.render('tree/tree', {"trees":response.body});
             }
         });
 });

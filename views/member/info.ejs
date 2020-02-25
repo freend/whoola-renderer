@@ -6,7 +6,7 @@
   <body>
   <% include ../common/navi %>
     <div class="container">
-    <form>
+    <form action="/users/info" method="POST">
           <div class="form-group">
                 <input type="hidden" value="" id="token" name="token">
                 name : <input type="text", class="form-control" value=<%= mail%> readonly>
