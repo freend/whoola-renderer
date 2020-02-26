@@ -12,10 +12,10 @@ document.addEventListener("DOMContentLoaded", function(){
     <style>
         rect
         {
-            fill:none;
-            stroke:silver;
-            width:80px;
-            height:40px;
+            fill:blue;
+            stroke:blue;
+            width:4px;
+            height:4px;
         }
         path
         {
@@ -26,50 +26,46 @@ document.addEventListener("DOMContentLoaded", function(){
         {
             dominant-baseline:middle;
             text-anchor:middle;
+        svg {
+            border:1px solid;
+        }
     </style>
     <% include ../common/head %>
   </head>
   <body>
   <% include ../common/navi %>
     <input type="hidden" id="myJsonData" value="<%=JSON.stringify(trees)%>" />
-    <div class="container">
+    <br>
+    <svg with="500" height="300"></svg>
     </div>
   </body>
 </html>
 <script>
-    var jsonData = document.getElementById("myJsonData").value;
+var jsonData = document.getElementById("myJsonData").value;
     var myJsonData = JSON.parse(jsonData);
 
-    var canvas = d3.select("div").append("svg")
-        .attr("width", 500)
-        .attr("height", 500)
+    var svg = d3.select("svg")
+        .attr("width", 800)
+        .attr("height", 400)
         .append("g")
-          .attr("transform", "translate(50, 50)");
+          .attr("transform", "translate(${root.dy / 3},${root.dx - x0})");
+    var data = myJsonData;
 
-    var data = [{"child":"John", "parent":""},
-                {"child":"Aaron", "parent":"Kevin"},
-                {"child":"Kevin", "parent":"John"},
-                {"child":"Hanna", "parent":"Ann"},
-                {"child":"Rose", "parent":"Sarah"},
-                {"child":"Ann", "parent":"John"},
-                {"child":"Sarah", "parent":"Kevin"},
-                {"child":"Mark", "parent":"Ann"},
-                {"child":"Angel", "parent":"Sarah"}
-                ];
     var dataStructure = d3.stratify()
-    .id(function (d) {return d.child;})
-    .parentId(function(d) {return d.parent;})(data);
+        .id(function (d) {return d.child;})
+        .parentId(function(d) {return d.parent;})(data);
+
+    console.log(dataStructure);
 
     var treeStructure = d3.tree().size([500, 300]);
     var information = treeStructure(dataStructure);
-    console.log(information.descendants());
 
-    var rectangles = canvas.append("g").selectAll("rect").data(information.descendants());
+    var rectangles = svg.append("g").selectAll("rect").data(information.descendants());
     rectangles.enter().append("rect")
-    .attr("x", function(d) {return d.x - 40;})
-    .attr("y", function(d) {return d.y - 20;});
+    .attr("x", function(d) {return d.x - 2;})
+    .attr("y", function(d) {return d.y + 2;});
 
-    var connections = canvas.append("g").selectAll("path").data(information.links());
+    var connections = svg.append("g").selectAll("path").data(information.links());
     connections.enter().append("path")
     .attr("d", function (d) {
         return "M" + d.source.x + ", " + d.source.y + " C " +
@@ -78,9 +74,9 @@ document.addEventListener("DOMContentLoaded", function(){
         d.target.x + ", " + d.target.y;
         });
 
-    var names = canvas.append("g").selectAll("text").data(information.descendants());
+    var names = svg.append("g").selectAll("text").data(information.descendants());
     names.enter().append("text")
     .text(function(d) {return d.data.child;})
     .attr("x", function(d) {return d.x;})
-    .attr("y", function(d) {return d.y;});
+    .attr("y", function(d) {return d.y + 15;});
 </script>
