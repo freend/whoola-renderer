@@ -6,24 +6,12 @@
   <body>
   <% include ../common/navi %>
     <div class="container">
-    <form action="/users/info" method="POST">
+    <form>
           <div class="form-group">
                 <input type="hidden" value="" id="token" name="token">
                 name : <input type="text", class="form-control" value=<%= mail%> readonly>
                 Referral Code : <input type="text", class="form-control" value=<%= myReferralCode %> readonly> <br>
                  <br>
-                first name :
-                <% if (firstName == null) { %>
-                    <input type = "text" class="form-control", placeholder="insert country", name="firstName">
-                <% } else { %>
-                    <input type = "text" class="form-control", value=<%= firstName%> >
-                <% } %>
-                last name :
-                <% if (lastName == null) { %>
-                    <input type = "text" class="form-control", placeholder="insert country", name="lastName">
-                <% } else { %>
-                    <input type = "text" class="form-control", value=<%= lastName%> >
-                <% } %>
                 Point
                 <label>
                     <% if (point == null) {%>
@@ -33,7 +21,6 @@
                     <% } %>
                 </label>
           </div>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Update user info</button>
         </form>
     </div>
   </body>

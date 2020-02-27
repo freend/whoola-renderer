@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(){
+    var token = localStorage.getItem('token');
+    document.getElementById('token').value = localStorage.getItem('token');
+});
+</script>
+
+<html lang="en">
+  <head>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style>
+        rect
+        {
+            fill:none;
+            stroke:silver;
+            width:80px;
+            height:40px;
+        }
+        path
+        {
+            fill:none;
+            stroke:red;
+        }
+        text
+        {
+            dominant-baseline:middle;
+            text-anchor:middle;
+    </style>
+    <% include ../common/head %>
+  </head>
+  <body>
+  <% include ../common/navi %>
+    <input type="hidden" id="myJsonData" value="<%=JSON.stringify(trees)%>" />
+    <div class="container">
+    </div>
+  </body>
+</html>
+<script>
+    var jsonData = document.getElementById("myJsonData").value;
+    var myJsonData = JSON.parse(jsonData);
+
+    var svg = d3.select("svg")
+        .attr("width", 800)
+        .attr("height", 400)
+        .append("g")
+          .attr("transform", "translate(${root.dy / 3},${root.dx - x0})");
+    var data = myJsonData;
+
+    var dataStructure = d3.stratify()
+        .id(function (d) {return d.child;})
+        .parentId(function(d) {return d.parent;})(data);
+
+    console.log(dataStructure);
+
+    var treeStructure = d3.tree().size([500, 300]);
+    var information = treeStructure(dataStructure);
+
+    var rectangles = svg.append("g").selectAll("rect").data(information.descendants());
+    rectangles.enter().append("rect")
+    .attr("x", function(d) {return d.x - 2;})
+    .attr("y", function(d) {return d.y + 2;});
+
+    var connections = svg.append("g").selectAll("path").data(information.links());
+    connections.enter().append("path")
+    .attr("d", function (d) {
+        return "M" + d.source.x + ", " + d.source.y + " C " +
+        d.source.x + ", " + (d.source.y + d.target.y) / 2 + " " +
+        d.target.x + ", " + (d.source.y + d.target.y) / 2 + " " +
+        d.target.x + ", " + d.target.y;
+        });
+
+    var names = svg.append("g").selectAll("text").data(information.descendants());
+    names.enter().append("text")
+    .text(function(d) {return d.data.child;})
+    .attr("x", function(d) {return d.x;})
+    .attr("y", function(d) {return d.y + 15;});
+</script>
