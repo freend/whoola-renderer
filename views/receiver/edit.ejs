@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(){
+    var token = localStorage.getItem('token');
+    document.getElementById('token').value = localStorage.getItem('token');
+});
+function deleteReceiver(value) {
+    alert('delete : ' + value);
+}
+</script>
+<html lang="en">
+  <head>
+    <% include ../common/head %>
+  </head>
+  <body>
+  <% include ../common/navi %>
+    <div class="container">
+        <% include ../receiver/add %>
+    </div>
+  </body>
+</html>

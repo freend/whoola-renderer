@@ -1,17 +1,43 @@
 <!DOCTYPE html>
 <div class="container">
-        <form class="form" action="/receiver/add" method="POST">
+        <form class="form" action=
+        <% if (id == null) { %>
+            "/receiver/add"
+        <% } else { %>
+            "/receiver/edit"
+        <% } %>
+        method="POST">
           <div class="form-group">
           <input type="hidden" value="" id="token" name="token">
+            <% if (id != null) {%>
+                <input type="hidden" value="<%= id %>" id="id" name="id">
+            <% } %>
             <label >Name</label>
-            <input type="text" class="form-control" id="nameId" name="name" placeholder="insert invite name">
+            <input type="text" class="form-control" id="nameId" name="name"
+            <% if(name == null) { %>
+                placeholder="insert invite name"
+            <% } else { %>
+                value="<%= name %>"
+            <% } %>
+             >
           </div>
           <div class="form-group">
             <label >Phone Number</label>
             <label >example) 821012345678 </label>
-            <input type="text" class="form-control" id="phoneId" name="phone" placeholder="Insert phone number"
+            <input type="text" class="form-control" id="phoneId" name="phone"
+            <% if(phone == null) { %>
+                placeholder="Insert phone number"
+            <% } else { %>
+                value="<%= phone %>"
+            <% } %>
             onkeyup="validate(this.value)">
             <div/>
-          <button type="submit" class="btn btn-default">Add</button>
+          <button type="submit" class="btn btn-default">
+          <% if(id == null) { %>
+              Add
+          <% } else { %>
+              Edit
+          <% } %>
+          </button>
         </form>
     </div>
