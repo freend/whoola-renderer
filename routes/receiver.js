@@ -38,7 +38,7 @@ router.post('/add', function(req, res, next) {
             .send({"receiverNumber": "+" + req.body["phone"], "receiverName" : req.body["name"]})
             .then((response) => {
                 if (response.status != null) {
-                    res.render('common/modal', {"message":response.body, "ahref":"/receiver?token=" + token, "token":token});
+                    res.render('common/modal', {"message":response.body.message, "ahref":"/receiver?token=" + token, "token":token});
                 }
                 else {
                     res.render('common/error', response.body);
