@@ -15,10 +15,16 @@ document.addEventListener("DOMContentLoaded", function(){
         <table class="table table-striped">
             <thead>
                 <td> invite mail address </td>
+                <td> invite mail sign up result </td>
             </thead>
             <% for (var i = 0; i < page.content.length; i++) { %>
                 <tr>
                     <td><%= page.content[i].invitedUserMail %></td>
+                    <% if(page.content[i].inviteResult == null) {%>
+                        <td>Not Sign Up</td>
+                    <% } else {%>
+                        <td>Sign Up</td>
+                    <% } %>
                 </tr>
             <% } %>
         </table>

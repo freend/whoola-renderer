@@ -21,6 +21,7 @@ router.get('/', function(req, res, next) {
                         res.json(response.body);
                 }
             } else {
+                console.log(response.body.page.content);
                 const result = {"page": response.body.page, "url": 'invite/list'};
                 res.render('invite/list', result);
             }
