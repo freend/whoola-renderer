@@ -62,6 +62,7 @@ router.get('/detail', function (req, res, next) {
                     "name": response.body.receiverName,
                     "productId": productId,
                     "receiverId": receiver,
+                    "operator": response.body.operator,
                     "token": token
                 };
                 res.render('purchase/detail', result);

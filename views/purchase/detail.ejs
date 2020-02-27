@@ -19,17 +19,23 @@ document.addEventListener("DOMContentLoaded", function(){
             <input type="hidden" value="<%= receiverId%>" name="receiver">
             <input type="hidden" value="<%= productId%>" name="productId">
             <input type="hidden" value="<%= myPoint %>" name="totalPoint">
-            <label >name : <%= name%></label> <label>phone number : <%= receiverPhone %> </label>
+            <label>name : <%= name%></label>
             <br>
-            <label >product name : <%= productName%></label>
+            <label>phone number : <%= receiverPhone %> </label>
             <br>
-            <label >Price : USD <%= amount%></label>
+            <label>operator : <%= operator %></label>
+            <br>
+            <label>product name : <%= productName%></label>
+            <br>
+            <label>Price : USD <%= amount%></label>
             <br>
             <label> Point :  <%= myPoint %></label>
             <br>
+            <label> use Point : <%= myPoint / 2 %> </label>
+            <br>
             <div class="col-lg-3">
                 <div class="input-group">
-                  <input type="text" class="form-control" value="<%= myPoint / 2 %>" name="point">
+                  <input type="text" maxlength="<%= myPoint / 2 %>" class="form-control" value="<%= myPoint / 2 %>" name="point">
                   <span class="input-group-btn">
                     <button class="btn btn-default" type="button">Apply</button>
                   </span>
