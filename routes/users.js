@@ -17,7 +17,13 @@ router.get('/info', function (req, res, next) {
         .send()
         .then((response) => {
             console.log(response.body);
-            res.render('member/info', response.body);
+            const result = {
+                "mail": response.body.mail,
+                "myReferralCode": response.body.myReferralCode,
+                "point": response.body.point,
+                "link": process.env.URLS + "/signupReferral/" + response.body.myReferralCode
+            };
+            res.render('member/info', result);
         });
 });
 router.post('/info', function (req, res, next) {

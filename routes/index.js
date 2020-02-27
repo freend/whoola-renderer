@@ -6,9 +6,13 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-
+router.get('/signupReferral/:referralCode', function (req, res) {
+    const result = {"referralCode": req.param('referralCode')}
+    res.render('member/signup', result);
+});
 router.get('/signup', function (req, res, next) {
-  res.render('member/signup');
+    const result = {"referralCode": null}
+  res.render('member/signup', result);
 });
 const apiUrl = process.env.API_HOST;
     router.post('/signup', function (req, res, next) {

@@ -3,6 +3,13 @@
   <head>
     <% include ../common/head %>
   </head>
+  <script>
+  function c_copy(){
+    var copyText = document.getElementById("link");
+      copyText.select();
+      document.execCommand("Copy");
+  }
+  </script>
   <body>
   <% include ../common/navi %>
     <div class="container">
@@ -10,16 +17,19 @@
           <div class="form-group">
                 <input type="hidden" value="" id="token" name="token">
                 name : <input type="text", class="form-control" value=<%= mail%> readonly>
-                Referral Code : <input type="text", class="form-control" value=<%= myReferralCode %> readonly> <br>
+                Referral Code : <input type="text", class="form-control" value=<%= myReferralCode %> readonly>
+                point : <input type="text", class="form-control" value=<%= point %> readonly>
                  <br>
-                Point
-                <label>
-                    <% if (point == null) {%>
-                        0.0
-                    <% } else { %>
-                        <%= point%>
-                    <% } %>
-                </label>
+                 <div class="col-lg-6">
+                     <div class="input-group">
+                       <input type="text" class="form-control" value="<%= link %>" id="link">
+                       <span class="input-group-btn">
+                         <button class="btn btn-default" type="button" onclick="c_copy()">Copy</button>
+                       </span>
+                     </div><!-- /input-group -->
+                   </div><!-- /.col-lg-6 -->
+                 </div><!-- /.row -->
+                 <br>
           </div>
         </form>
     </div>

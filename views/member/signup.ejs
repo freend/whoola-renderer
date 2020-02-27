@@ -15,7 +15,11 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
         <label class="sr-only">Referral Code</label>
-        <input type="text" id="inputReferral" name="referralCode" class="form-control" placeholder="Referral Code">
+        <% if (referralCode == null) { %>
+            <input type="text" id="inputReferral" name="referralCode" class="form-control" placeholder="Referral Code">
+        <% } else { %>
+            <input type="text" value="<%= referralCode %>" id="inputReferral" name="referralCode" class="form-control" class="form-control" readonly>
+        <% } %>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
       </form>
 
