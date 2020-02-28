@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function(){
     document.getElementById('token').value = localStorage.getItem('token');
 });
 </script>
-
 <html lang="en">
   <head>
     <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -36,17 +35,24 @@ document.addEventListener("DOMContentLoaded", function(){
   <% include ../common/navi %>
     <input type="hidden" id="myJsonData" value="<%=JSON.stringify(trees)%>" />
     <br>
-    <svg with="500" height="300"></svg>
+    <div id="container">
+        <table>
+            <tr>
+                <td width="10%"> My Tree</td>
+                <td width="80%"> <svg></svg> </td>
+                <td width="10%"> </td>
+            </tr>
+        </table>
     </div>
   </body>
 </html>
 <script>
 var jsonData = document.getElementById("myJsonData").value;
     var myJsonData = JSON.parse(jsonData);
-
     var svg = d3.select("svg")
-        .attr("width", 800)
+        .attr("width", 500)
         .attr("height", 400)
+        .style("border", "1px solid black")
         .append("g")
           .attr("transform", "translate(${root.dy / 3},${root.dx - x0})");
     var data = myJsonData;
