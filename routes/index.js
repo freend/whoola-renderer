@@ -6,6 +6,9 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
+router.get('/hoola-checker', function (req, res) {
+    res.json({"message": 'Hoola Moola'});
+});
 router.get('/signupReferral/:referralCode', function (req, res) {
     const result = {"referralCode": req.param('referralCode')}
     res.render('member/signup', result);
