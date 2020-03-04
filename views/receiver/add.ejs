@@ -8,20 +8,6 @@
         <% } %>
         method="POST">
           <div class="form-group">
-          <input type="hidden" value="" id="token" name="token">
-            <% if (id != null) {%>
-                <input type="hidden" value="<%= id %>" id="id" name="id">
-            <% } %>
-            <label >Name</label>
-            <input type="text" class="form-control" id="nameId" name="name"
-            <% if(name == null) { %>
-                placeholder="insert invite name"
-            <% } else { %>
-                value="<%= name %>"
-            <% } %>
-             >
-          </div>
-          <div class="form-group">
             <label >Phone Number</label>
             <label >example) 821012345678 </label>
             <input type="text" class="form-control" id="phoneId" name="phone"
@@ -31,7 +17,21 @@
                 value="<%= phone %>"
             <% } %>
             onkeyup="validate(this.value)">
-            <div/>
+          <div/>
+          <div class="form-group">
+            <input type="hidden" value="" id="token" name="token">
+              <% if (id != null) {%>
+                  <input type="hidden" value="<%= id %>" id="id" name="id">
+              <% } %>
+              <label >Name</label>
+              <input type="text" class="form-control" id="nameId" name="name"
+              <% if(name == null) { %>
+                  placeholder="insert invite name"
+              <% } else { %>
+                  value="<%= name %>"
+              <% } %>
+               >
+          </div>
           <button type="submit" class="btn btn-info">
           <% if(id == null) { %>
               Add

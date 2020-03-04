@@ -2,25 +2,39 @@
 <html lang="en">
   <head>
     <% include ../common/head %>
+    <link rel="stylesheet" href="/stylesheets/step.css">
   </head>
   <body>
   <% include ../common/navi %>
     <div class="container">
+        <div class="container my-3">
+            <h1 class="display-2 text-center mb-3">PURCHASE STEP</h1>
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col-12">
+                  <ul id="progressbar" class="text-center">
+                      <li class="active" id="step1"><div class="d-none d-md-block">STEP 1</div></li>
+                      <li class="active" id="step2"><div class="d-none d-md-block">STEP 2</div></li>
+                      <li class="" id="step3"><div class="d-none d-md-block">STEP 3</div></li>
+                  </ul>
+                </div>
+              <div class="col">
+             </div>
+           </div>
         <table class="table table-striped">
         <input type="hidden" value="<%=receiver%>" id="productReceiver">
                 <tr>
                     <td> id </td>
                     <td> product name </td>
                     <td> Price </td>
-                    <td> Test Original price </td>
                     <td> buy </td>
                 </tr>
             <% for (var i = 0; i < page.content.length; i++) { %>
                 <tr>
                     <td><%= page.content[i].id %></td>
-                    <td><%= page.content[i].name %><td>
+                    <td><%= page.content[i].name %></td>
                     <td>USD <label id="price_<%= page.content[i].id %>"><%= page.content[i].amount %></label> </td>
-                    <td>USD <%= page.content[i].amount %> </td>
                     <td><button class="btn btn-success" onClick="buyDetail(<%= page.content[i].id %>)">Buy</button></td>
                 </tr>
             <% } %>

@@ -8,48 +8,84 @@ document.addEventListener("DOMContentLoaded", function(){
 <html lang="en">
   <head>
     <% include ../common/head %>
+    <link rel="stylesheet" href="/stylesheets/step.css">
   </head>
   <body>
   <% include ../common/navi %>
     <div class="container">
-        <button type="button" class="btn btn-info" onClick="back(-1)">Back</button>
-        <form class="form-buy" action="/purchase" method=POST>
-            <input type="hidden" value="" id="token" name="token">
-            <input type="hidden" value="<%= amount%>" name="amount">
-            <input type="hidden" value="<%= receiverId%>" name="receiver">
-            <input type="hidden" value="<%= productId%>" name="productId">
-            <input type="hidden" value="<%= myPoint %>" name="totalPoint">
-            <label>name : <%= name%></label>
-            <br>
-            <label>phone number : <%= receiverPhone %> </label>
-            <br>
-            <label>operator : <%= operator %></label>
-            <br>
-            <label>product name : <%= productName%></label>
-            <br>
-            <label>Price : USD <%= amount%></label>
-            <br>
-            <label> Point :  <%= myPoint %></label>
-            <br>
-            <label> use Point : <%= myPoint / 2 %> </label>
-            <br>
-            <div class="col-lg-3">
-                <div class="input-group">
-                  <input type="text" maxlength="<%= myPoint / 2 %>" class="form-control" value="<%= myPoint / 2 %>" name="point">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Apply</button>
-                  </span>
-                </div><!-- /input-group -->
-              </div><!-- /.col-lg-6 -->
-              <br><br>
-            <button type="submit" class="btn btn-primary">Buy</button>
-        </form>
+        <input type="hidden" value="" id="token" name="token">
+        <input type="hidden" value="<%= amount%>" id="amount">
+        <input type="hidden" value="<%= receiverId%>" name="receiver">
+        <input type="hidden" value="<%= productId%>" name="productId">
+        <input type="hidden" value="<%= myPoint %>" name="totalPoint">
+        <div class="container my-3">
+            <h1 class="display-2 text-center mb-3">PURCHASE STEP</h1>
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col-12">
+                  <ul id="progressbar" class="text-center">
+                      <li class="active" id="step1"><div class="d-none d-md-block">STEP 1</div></li>
+                      <li class="active" id="step2"><div class="d-none d-md-block">STEP 2</div></li>
+                      <li class="active" id="step3"><div class="d-none d-md-block">STEP 3</div></li>
+                  </ul>
+                </div>
+              <div class="col">
+             </div>
+           </div>
+        <label>name : <%= name%></label>
+        <br>
+        <label>phone number : <%= receiverPhone %> </label>
+        <br>
+        <label>operator : <%= operator %></label>
+        <br>
+        <label>product name : <%= productName%></label>
+        <br>
+        <label>Price : USD <%= amount%></label>
+        <br>
+        <label> Point :  <%= myPoint %></label>
+        <br>
+        <label> use Point</label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+            <span class="input-group-text"><%= parseInt(myPoint / 2) %></span>
+          </div>
+          <input type="number" numberOnly class="form-control" aria-label="Amount (to the nearest dollar)" id="usePoint"
+          value="0">
+        </div>
+        <!--  https://www.paypal.com/cgi-bin/webscr -->
+        <input type="hidden" id="availPoint" value="<%= parseInt(myPoint / 2) %>">
+        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+             <input type="hidden" name="cmd" value="_xclick">
+             <input type="hidden" name="business" value="sb-47piji693531@business.example.com">
+             Product Name : <input type="text" readonly name="item_name" value="<%= productName%>"> <br>
+             Product Code : <input type="text" readonly name="item_number" value="<%= productId%>"> <br>
+             Currency : <input type="text" readonly name="currency_code" value="USD"> <br>
+             Price : <input type="text" readonly id="submitAmount" name="amount" value="<%= amount%>"> <br>
+             <!-- 여기에 Referral Code를 넣어주도록 하자 -->
+             <input type="hidden" name="custom" value="code:<%= referralCode %>,receiver:<%= receiverPhone %>">
+             <input type="hidden" name="charset" value="UTF-8">
+             <input type="image" name="submit" border="0"
+            src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"
+            alt="PayPal - The safer, easier way to pay online">
+            <button type="button" class="btn btn-danger" onClick="back(-1)">Back</button>
+         </form>
+         <br>
     </div>
   </body>
 </html>
+<% include ../common/footer %>
 <script>
 function back() {
     history.back();
 }
+$('#usePoint').on("propertychange change keyup paste input", function() {
+  $(this).val($(this).val().replace(/[^0-9]/g,''));
 
+  if ($(this).val() > $('#availPoint').val()) {
+    $(this).val($('#availPoint').val());
+  };
+  $('#submitAmount').val($('#amount').val() - $(this).val());
+});
 </script>

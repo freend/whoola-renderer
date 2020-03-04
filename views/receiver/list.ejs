@@ -14,30 +14,57 @@ function deleteReceiver(value) {
 <html lang="en">
   <head>
     <% include ../common/head %>
+    <link rel="stylesheet" href="/stylesheets/step.css">
   </head>
   <body>
   <% include ../common/navi %>
-    <div class="container">
+    <div class="container-fluid">
+      <div class="container my-3">
+        <h1 class="display-2 text-center mb-3">PURCHASE STEP</h1>
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col-12">
+              <ul id="progressbar" class="text-center">
+                  <li class="active" id="step1"><div class="d-none d-md-block">STEP 1</div></li>
+                  <li class="" id="step2"><div class="d-none d-md-block">STEP 2</div></li>
+                  <li class="" id="step3"><div class="d-none d-md-block">STEP 3</div></li>
+              </ul>
+            </div>
+          <div class="col">
+         </div>
+       </div>
+       <div class="card">
+         <div class="card-body">
+           Add Receive Phone Number, Or Select Below List
+         </div>
+       </div>
+    </div>
+    <% include ../receiver/add %>
     <input type="hidden" id="token" value="">
         <table class="table table-striped">
             <thead>
-                <td> Receiver name </td>
-                <td> Phone number </td>
-                <td> Option </td>
-            </thead>
-            <% for (var i = 0; i < page.content.length; i++) { %>
                 <tr>
-                    <td><%= page.content[i].receiverName %></td>
-                    <td><a href="/products/operator?operator=<%= page.content[i].operatorId%>&receiver=<%= page.content[i].id %>"><%= page.content[i].receiverNumber %></a><td>
-                    <td> <button class="btn" onclick="location.href='/receiver/edit?id=<%= page.content[i].id %>&name=<%= page.content[i].receiverName %>&phone=<%= page.content[i].receiverNumber %>'">Update</button>
-                    <button class="btn" onclick="deleteReceiver(<%= page.content[i].id %>)">Delete</button> </td>
+                    <th> Receiver name </th>
+                    <th> Phone number </th>
+                    <th> Update </th>
+                    <th> Delete </th>
                 </tr>
-            <% } %>
+            </thead>
+            <tbody>
+                <% for (var i = 0; i < page.content.length; i++) { %>
+                    <tr>
+                        <td><%= page.content[i].receiverName %></td>
+                        <td><a href="/products/operator?operator=<%= page.content[i].operatorId%>&receiver=<%= page.content[i].id %>"><%= page.content[i].receiverNumber %></a></td>
+                        <td><button class="btn btn-warning" onclick="location.href='/receiver/edit?id=<%= page.content[i].id %>&name=<%= page.content[i].receiverName %>&phone=<%= page.content[i].receiverNumber %>'">Update</button> </td>
+                        <td><button class="btn btn-danger" onclick="deleteReceiver(<%= page.content[i].id %>)">Delete</button> </td>
+                    </tr>
+                <% } %>
+            </tbody>
         </table>
         <% if (page.content.length != 0) {%>
             <% include ../common/pagenation %>
         <% } %>
-        <% include ../receiver/add %>
     </div>
   </body>
 </html>
