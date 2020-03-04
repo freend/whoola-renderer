@@ -20,11 +20,12 @@
                 Referral Code : <input type="text", class="form-control" value=<%= myReferralCode %> readonly>
                 point : <input type="text", class="form-control" value=<%= point %> readonly>
                  <br>
-                 <div class="col-lg-6">
+                 <label>Link</label>
+                 <div class="col-lg-7">
                      <div class="input-group">
-                       <input type="text" class="form-control" value="<%= link %>" id="link">
+                       <input type="text" readonly class="form-control form-control-plaintext" value="<%= link %>" id="link">
                        <span class="input-group-btn">
-                         <button class="btn btn-default" type="button" onclick="c_copy()">Copy</button>
+                         <button class="btn btn-default" type="button btn-success" onclick="c_copy()">Copy</button>
                        </span>
                      </div><!-- /input-group -->
                    </div><!-- /.col-lg-6 -->
