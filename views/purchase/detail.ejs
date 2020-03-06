@@ -56,6 +56,33 @@ document.addEventListener("DOMContentLoaded", function(){
         </div>
         <!--  https://www.paypal.com/cgi-bin/webscr -->
         <input type="hidden" id="availPoint" value="<%= parseInt(myPoint / 2) %>">
+        <hr width = "100%" color = "blue" size = "3">
+        <form class="form-buy" action="/purchase" method=POST>
+            <input type="hidden" value="" id="token" name="token">
+            <input type="hidden" value="<%= amount%>" name="amount">
+            <input type="hidden" value="<%= receiverId%>" name="receiver">
+            <input type="hidden" value="<%= productId%>" name="productId">
+            <input type="hidden" value="<%= myPoint %>" name="totalPoint">
+            <label >name : <%= name%></label> <label>phone number : <%= receiverPhone %> </label>
+            <br>
+            <label >product name : <%= productName%></label>
+            <br>
+            <label >Price : USD <%= amount%></label>
+            <br>
+            <label> Point :  <%= myPoint %></label>
+            <br>
+            <div class="col-lg-3">
+                <div class="input-group">
+                  <input type="text" class="form-control" value="<%= myPoint / 2 %>" name="point">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Apply</button>
+                  </span>
+                </div><!-- /input-group -->
+              </div><!-- /.col-lg-6 -->
+              <br><br>
+            <button type="submit" class="btn btn-primary">Buy</button>
+        </form>
+        <hr width = "100%" color = "blue" size = "3">
         <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
              <input type="hidden" name="cmd" value="_xclick">
              <input type="hidden" name="business" value="sb-47piji693531@business.example.com">
