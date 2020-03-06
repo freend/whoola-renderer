@@ -1,0 +1,53 @@
+const express = require('express');
+const unirest = require('unirest');
+const router = express.Router();
+
+const serverUrl = process.env.API_HOST + '/contact';
+router.get('/', function(req, res, next) {
+    unirest
+        .get(serverUrl)
+        .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
+        .send()
+        .then((response) => {
+            if (response.body.status != null) {
+                console.log('error', response.body);
+                switch (response.body.status) {
+                    case 403:
+                        console.log('not authorize');
+                        res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+                        break;
+                    default:
+                        res.json(response.body);
+                }
+            } else {
+                const result = {"mail": response.body};
+                res.render('contact/add', result);
+            }
+        });
+});
+router.post('/', function(req, res, next) {
+    var token = req.body["token"];
+
+    if (token == null) {
+        res.render('common/error', {'message':'please log in', 'ahref': '/signin'});
+    }
+
+    unirest
+        .post(serverUrl)
+        .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
+        .send({
+            "mail": req.body["mail"],
+            "title": req.body["title"],
+            "content": req.body["content"]
+        })
+        .then((response) => {
+            if (response.status != null) {
+                res.render('common/modal', {"message":response.body, "ahref":"/invite?token=" + token, "token":token});
+            }
+            else {
+                res.render('common/error', response.body);
+            }
+        });
+});
+
+module.exports = router;
