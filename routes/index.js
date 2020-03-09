@@ -1,7 +1,7 @@
 var express = require('express');
 var unirest = require('unirest');
 var router = express.Router();
-
+const apiUrl = process.env.API_HOST;
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -17,8 +17,7 @@ router.get('/signup', function (req, res, next) {
     const result = {"referralCode": null}
   res.render('member/signup', result);
 });
-const apiUrl = process.env.API_HOST;
-    router.post('/signup', function (req, res, next) {
+router.post('/signup', function (req, res, next) {
   unirest
       .post(apiUrl + '/member/signup')
       .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
@@ -30,7 +29,7 @@ const apiUrl = process.env.API_HOST;
           if (response.body.responseMessage != null) {
               res.render("common/error", {'message': "sign up complete", 'ahref': '/'});
           } else {
-              res.json(response.body);
+            res.render('common/modal', {"message" : response.body.responseMessage, "ahref": "/"});
           }
       });
 });
