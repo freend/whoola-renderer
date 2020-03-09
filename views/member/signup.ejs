@@ -13,7 +13,10 @@
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" id="inputEmail" name="id" class="form-control" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        <label for="inputPassword" class="sr-only">Password Check</label>
+        <input type="password" id="password-check" name="password-confirm" class="form-control" placeholder="Password again" required>
+        <label id="match">Check password</label>
         <label class="sr-only">Referral Code</label>
         <% if (referralCode == null) { %>
             <input type="text" id="inputReferral" name="referralCode" class="form-control" placeholder="Referral Code">
@@ -25,9 +28,22 @@
 
     </div> <!-- /container -->
 
-
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
+<script>
+$('#password-check').keyup(function (event) {
+  var match = $('#match');
+  var pass = $('#password');
+  var confirm = $('#password-check');
+  if (pass.val() == confirm.val()) {
+    match.css("color", 'blue');
+    match.text('correct');
+  } else {
+    match.css("color", 'red');
+    match.text('not correct');
+  }
+});
+</script>
 <% include ../common/footer %>
