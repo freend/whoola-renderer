@@ -17,6 +17,14 @@ router.get('/info', function (req, res, next) {
         .send()
         .then((response) => {
             console.log(response.body);
+            switch (response.body.status) {
+                case 403:
+                    console.log('not authorize');
+                    res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+                    break;
+                default:
+                    res.json(response.body);
+            }
             const result = {
                 "mail": response.body.mail,
                 "myReferralCode": response.body.myReferralCode,
