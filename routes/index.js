@@ -26,11 +26,7 @@ router.post('/signup', function (req, res, next) {
       })
       .then((response) => {
           console.log("sign up result", response.body);
-          if (response.body.responseMessage != null) {
-              res.render("common/error", {'message': "sign up complete", 'ahref': '/'});
-          } else {
-            res.render('common/modal', {"message" : response.body.responseMessage, "ahref": "/"});
-          }
+          res.render('common/modal', {"message" : response.body, "ahref": '/'});
       });
 });
 router.get('/signin', function (req, res, next) {
