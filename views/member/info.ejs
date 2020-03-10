@@ -3,17 +3,9 @@
   <head>
     <% include ../common/head %>
   </head>
-  <script>
-  function c_copy(){
-    var copyText = document.getElementById("link");
-      copyText.select();
-      document.execCommand("Copy");
-  }
-  </script>
   <body>
   <% include ../common/navi %>
     <div class="container">
-    <form>
           <div class="form-group">
                 <input type="hidden" value="" id="token" name="token">
                 name : <input type="text", class="form-control" value=<%= mail%> readonly>
@@ -25,15 +17,21 @@
                      <div class="input-group">
                        <input type="text" readonly class="form-control form-control-plaintext" value="<%= link %>" id="link">
                        <span class="input-group-btn">
-                         <button class="btn btn-default" type="button btn-success" onclick="c_copy()">Copy</button>
+                         <button class="btn btn-default" type="button btn-secondary" onclick="c_copy()">Copy</button>
                        </span>
                      </div><!-- /input-group -->
                    </div><!-- /.col-lg-6 -->
                  </div><!-- /.row -->
                  <br>
           </div>
-        </form>
     </div>
   </body>
 </html>
+<script>
+function c_copy(){
+  var copyText = document.getElementById("link");
+    copyText.select();
+    document.execCommand("Copy");
+}
+</script>
 <% include ../common/footer %>

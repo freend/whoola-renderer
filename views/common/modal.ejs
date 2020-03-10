@@ -1,7 +1,6 @@
 <script>
     window.onload = function() {
         var myToken = "<%= token%>";
-        console.log("token : " + myToken);
         if(myToken != null) {
             myStorage = window.localStorage;
             localStorage.setItem('token', myToken);

@@ -22,8 +22,6 @@ router.get('/info', function (req, res, next) {
                     console.log('not authorize');
                     res.render('common/error', {"message": "sign in", "ahref": "/signin"});
                     break;
-                default:
-                    res.json(response.body);
             }
             const result = {
                 "mail": response.body.mail,
