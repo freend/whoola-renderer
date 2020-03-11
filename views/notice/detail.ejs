@@ -12,9 +12,22 @@ document.addEventListener("DOMContentLoaded", function(){
   <body>
   <% include ../common/navi %>
     <div class="container">
-        <label>Title : <%= title%></label><label>Date : <%= createAt%></label>
-        <br>
-        <%= content %>
+      <div class="row">
+        <div class="col">
+          <label>Title : <%= title%></label>
+        </div>
+        <div class="col">
+          
+        </div>
+        <div class="col">
+          <label>Date : <%= createAt%></label>
+        </div>
+      </div>
+        <label>Contents</label>
+        <p>
+          <%= content %>
+        </p>
+        <button type="button" class="btn btn-info" onclick="back()">List</button>
     </div>
   </body>
 </html>
