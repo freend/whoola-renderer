@@ -2,6 +2,15 @@
 <html lang="en">
   <head>
     <% include ../common/head %>
+    <script type="text/javascript" src="/javascripts/validate.js"></script>
+    <style type="text/css">
+      .input[type=text] {
+      -webkit-ime-mode:disabled;
+      -moz-ime-mode:disabled;
+      -ms-ime-mode:disabled;
+      ime-mode:disabled;
+      }
+      </style>
   </head>
 
   <body>
@@ -10,14 +19,11 @@
 
       <form class="form-signin" action="/signin" method=POST>
         <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" name="id" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
+        <div class="form-group">
+          <label for="inputEmail">Email address</label>
+          <input type="email" id="inputEmail" name="id" class="form-control" placeholder="Email address" required autofocus>
+          <label for="inputPassword">Password</label>
+          <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
@@ -36,10 +42,9 @@
 <script>
   $('#forget-password').click(function(){
     const mail = $('#inputEmail');
-    const emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; //이메일 정규식
     if (mail.val() == '') {
       alert('please insert sign up e-mail address');
-    } else if(!emailRule.test(mail.val())) {    
+    } else if(!validateMail(mail)) {
       alert('do not match email');
     } else {
       $(location).attr('href', 'validate/password/' + mail.val());

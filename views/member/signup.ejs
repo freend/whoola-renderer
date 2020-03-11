@@ -2,48 +2,118 @@
 <html lang="en">
   <head>
     <% include ../common/head %>
+    <script type="text/javascript" src="/javascripts/validate.js"></script>
   </head>
-
   <body>
     <% include ../common/navi %>
     <div class="container">
-
-      <form class="form-signup" action="/signup" method=POST>
+      <form class="form-signup" action="/signup" method=POST id="submit-form">
         <h2 class="form-signin-heading">Please sign up</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" name="id" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-        <label for="inputPassword" class="sr-only">Password Check</label>
-        <input type="password" id="password-check" name="password-confirm" class="form-control" placeholder="Password again" required>
-        <label id="match">Check password</label>
-        <label class="sr-only">Referral Code</label>
-        <% if (referralCode == null) { %>
-            <input type="text" id="inputReferral" name="referralCode" class="form-control" placeholder="Referral Code">
-        <% } else { %>
-            <input type="text" value="<%= referralCode %>" id="inputReferral" name="referralCode" class="form-control" class="form-control" readonly>
-        <% } %>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+        <div class="form-group">
+          <label for="inputEmail">Email address</label>
+          <input type="email" id="inputEmail" name="id" class="form-control" placeholder="Email address" required autofocus style="ime-mode:disabled">
+        </div>
+        <div class="form-group">
+          <label for="inputPassword">Password</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Password" required style="ime-mode:disabled">
+          <label for="inputPassword">Password Check</label>
+          <input type="password" id="password-check" name="password-confirm" class="form-control" placeholder="Password again" required style="ime-mode:disabled">
+          <label id="match">Check password</label>
+        </div>
+        <div class="form-group">
+          <label for="inputReferral">Referral Code</label>
+          <% if (referralCode == null) { %>
+              <input type="text" id="inputReferral" name="referralCode" class="form-control" placeholder="Referral Code" style="ime-mode:disabled">
+          <% } else { %>
+              <input type="text" value="<%= referralCode %>" id="inputReferral" name="referralCode" class="form-control" readonly>
+          <% } %>
+        </div>
+        <div class="row">
+          <div class="col">
+            <!-- Button trigger modal -->
+            <input type="checkbox" class="form-check-input" id="checkContract" required>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalScrollable">
+              Contract
+            </button>
+          </div>
+          <div class="col">
+            <button class="btn btn-primary" type="button" id="btnSubmit">Sign Up</button>
+          </div>
+        </div>
       </form>
-
     </div> <!-- /container -->
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- Contract -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="agreeContract">Agree Contract</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
 <script>
-$('#password-check').keyup(function (event) {
-  var match = $('#match');
-  var pass = $('#password');
-  var confirm = $('#password-check');
-  if (pass.val() == confirm.val()) {
-    match.css("color", 'blue');
-    match.text('correct');
-  } else {
-    match.css("color", 'red');
-    match.text('not correct');
-  }
-});
+  $('#btnSubmit').click(function(event){
+    const chkContract = $('#checkContract');
+    const mail = $('#inputEmail');
+    const pass = $('#password');
+    const passCheck = $('#password-check');
+    const match = $('#match');
+
+    if (chkContract.is(":checked") == false) {
+      alert('agree contract');
+      chkContract.focus();
+      return false;
+    } 
+    if (!validateMail(mail.val())) {
+      alert('do not match email');
+      return false;
+    }
+    if (pass.val() == '') {
+      alert('password required');
+      return false;
+    }
+    if (passCheck.val() == '') {
+      alert('password check required');
+      return false;
+    }
+    if (match.textContent != 'correct') {
+      alert('password not match');
+      return false;
+    }
+    $('#submit-form').submit();
+  });
+
+  $('#agreeContract').click(function(event) {
+    $('#checkContract').attr("checked", true);
+  });
+
+  $('#password-check').keyup(function (event) {
+    var match = $('#match');
+    var pass = $('#password');
+    var confirm = $('#password-check');
+    if (pass.val() == confirm.val()) {
+      match.css("color", 'blue');
+      match.text('correct');
+    } else {
+      match.css("color", 'red');
+      match.text('not correct');
+    }
+  });
 </script>
 <% include ../common/footer %>
