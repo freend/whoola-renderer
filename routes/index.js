@@ -26,7 +26,14 @@ router.post('/signup', function (req, res, next) {
       })
       .then((response) => {
           console.log("sign up result", response.body);
-          res.render('common/modal', {"message" : response.body, "ahref": '/'});
+          switch (response.status) {
+              case 500 :
+                  res.render('common/error', {"message" : response.body.message, "ahref": '/signup'});
+                  break;
+              case 200:
+                  res.render('common/error', {"message" : response.body, "ahref": '/'});
+                  break;
+          }
       });
 });
 router.get('/signin', function (req, res, next) {
@@ -40,7 +47,7 @@ router.post('/signin', function (req, res, next) {
         .then((response) => {
             if (response.body.status != null) {
                 console.log("log in failed")
-                response.body.ahref = "/";
+                response.body.ahref = "/signin";
                 res.render('common/error', response.body);
             } else {
                 console.log("log in success");
