@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../common/head %>
+    <link rel="stylesheet" href="/stylesheets/step.css">
+  </head>
+  <body>
+  <% include ../common/navi %>
+    <div class="container">
+        <div class="container my-3">
+            <h1 class="display-2 text-center mb-3">PURCHASE STEP</h1>
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col-12">
+                  <ul id="progressbar" class="text-center">
+                      <li class="active" id="step1"><div class="d-none d-md-block">STEP 1</div></li>
+                      <li class="active" id="step2"><div class="d-none d-md-block">STEP 2</div></li>
+                      <li class="" id="step3"><div class="d-none d-md-block">STEP 3</div></li>
+                  </ul>
+                </div>
+              <div class="col">
+             </div>
+           </div>
+        <table class="table table-striped">
+                <tr>
+                    <td> id </td>
+                    <td> product name </td>
+                    <td> Price </td>
+                    <td> buy </td>
+                </tr>
+            <% for (var i = 0; i < list.length; i++) { %>
+                <tr>
+                    <td><%= list[i].id %></td>
+                    <td><%= list[i].name %></td>
+                    <td>USD <label id="price_<%= list[i].id %>"><%= list[i].amount %></label> </td>
+                    <td><button class="btn btn-success" onClick="buyDetail(<%= list[i].id %>)">Buy</button></td>
+                </tr>
+            <% } %>
+        </table>
+    </div>
+  </body>
+</html>
+<script>
+    function buyDetail(productId) {
+        location.href = '/purchase/detail?productId=' + productId + '&receiver=' + <%=productReceiver%> +'&token=' + localStorage.getItem('token');
+    }
+    function noti(id) {
+        var form = document.createElement('form');
+            form.setAttribute('method', 'POST');
+            form.setAttribute('action', '/purchase');
+            document.charset = "utf-8";
+
+            var receiverField = document.createElement('input');
+            receiverField.setAttribute('type', 'hidden');
+            receiverField.setAttribute('name', 'receiver');
+            receiverField.setAttribute('value', productReceiver.value);
+            form.appendChild(receiverField);
+
+            var productField = document.createElement('input');
+            productField.setAttribute('type', 'hidden');
+            productField.setAttribute('name', 'productId');
+            productField.setAttribute('value', id);
+            form.appendChild(productField);
+
+            var tokenField = document.createElement('input');
+            tokenField.setAttribute('type', 'hidden');
+            tokenField.setAttribute('name', 'token');
+            tokenField.setAttribute('value', localStorage.getItem('token'));
+            form.appendChild(tokenField);
+            document.body.appendChild(form);
+
+            form.submit();
+    }
+</script>
+<% include ../common/footer %>

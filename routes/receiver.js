@@ -78,11 +78,14 @@ router.post('/add', function(req, res, next) {
             .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
             .send({"receiverNumber": "+" + req.body["phone"], "receiverName" : req.body["name"]})
             .then((response) => {
-                if (response.status != null) {
-                    res.render('common/modal', {"message":response.body.message, "ahref":"/receiver?token=" + token, "token":token});
-                }
-                else {
-                    res.render('common/error', response.body);
+                console.log("result : " + response.body);
+                switch (response.status) {
+                    case 200:
+                        res.render('product/operatorlist', response.body);
+                        break;
+                    default:
+                        res.render('common/error', response.body);
+                        break;
                 }
             });
     } else {
