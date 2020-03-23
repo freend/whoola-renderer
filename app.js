@@ -1,11 +1,8 @@
-process.env.NODE_ENV = ( process.env.NODE_ENV && ( process.env.NODE_ENV ).trim().toLowerCase() == 'production' ) ? 'production' : 'develop';
-process.env.NODE_ENV = "DEVELOP";
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const dotenv = require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -67,5 +64,29 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+let config;
+if (process.env.NODE_ENV == undefined) {
+  process.env.NODE_ENV = 'LOCAL';
+}
+switch (process.env.NODE_ENV) {
+  case 'LOCAL':
+    config = require('./config/local');
+    break;
+  case 'DEVELOP':
+    config = require('./config/develop');
+    break;
+  default:
+    console.log('error');
+    break;
+}
+
+process.env.PORT = config.info.PORT;
+process.env.URLS = config.info.URLS;
+process.env.API_HOST = config.info.API_HOST;
+
 console.log("node env", process.env.NODE_ENV);
+console.log("API_HOST", process.env.API_HOST);
+console.log("port", process.env.PORT);
+console.log("URLS", process.env.URLS);
+
 module.exports = app;
