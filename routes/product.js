@@ -3,7 +3,6 @@ const unirest = require('unirest');
 const router = express.Router();
 
 /* GET users listing. */
-const apiUrl = process.env.API_HOST + '/product';
 router.get('/', function(req, res, next) {
     var sendUrl = '';
     if (req.param('page') != null) {
@@ -18,7 +17,7 @@ router.get('/', function(req, res, next) {
         });
 });
 router.get('/full', function(req, res, next) {
-    const sendUrl = apiUrl + '?page=' + req.param('page');
+    const sendUrl = process.env.API_HOST + '/product' + '?page=' + req.param('page');
 
     unirest
         .get(sendUrl)
@@ -29,10 +28,10 @@ router.get('/full', function(req, res, next) {
         });
 });
 router.get('/operator', function (req, res, next) {
-    var operator = req.param('operator');
-    var receiver = req.param('receiver');
+    const operator = req.param('operator');
+    const receiver = req.param('receiver');
     unirest
-        .get(apiUrl + '/operator/' + operator + "?receiver=" + receiver)
+        .get(process.env.API_HOST + '/product/operator/' + operator + "?receiver=" + receiver)
         .send()
         .then((response) => {
             if (response.body.status == '404') {
@@ -44,7 +43,7 @@ router.get('/operator', function (req, res, next) {
 });
 router.get('/:productId', function (req, res, next) {
     unirest
-        .get(apiUrl + req.params.productId)
+        .get(process.env.API_HOST + '/product' + req.params.productId)
         .send()
         .then((response) => {
             if (response.body.status == '404') {

@@ -2,11 +2,10 @@ const express = require('express');
 const unirest = require('unirest');
 const router = express.Router();
 
-const serverUrl = process.env.API_HOST + '/withdraw';
 /* GET home page. */
 router.get('/', function(req, res, next) {
     unirest
-        .get(serverUrl + '/amount')
+        .get(process.env.API_HOST + '/withdraw' + '/amount')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
         .send()
         .then((response) => {
@@ -27,7 +26,7 @@ router.get('/', function(req, res, next) {
 });
 router.get('/list', function(req, res, next) {
     unirest
-        .get(serverUrl + '/mywithdraw')
+        .get(process.env.API_HOST + '/withdraw' + '/mywithdraw')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
         .send()
         .then((response) => {
@@ -56,7 +55,7 @@ router.post('/', function(req, res, next) {
     }
 
     unirest
-        .post(serverUrl)
+        .post(process.env.API_HOST + '/withdraw')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
         .send({
             "amount": req.body["amount"],

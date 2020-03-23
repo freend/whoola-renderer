@@ -2,10 +2,9 @@ const express = require('express');
 const unirest = require('unirest');
 const router = express.Router();
 
-const serverUrl = process.env.API_HOST + '/contact';
 router.get('/', function(req, res, next) {
     unirest
-        .get(serverUrl)
+        .get(process.env.API_HOST + '/contact')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
         .send()
         .then((response) => {
@@ -33,7 +32,7 @@ router.post('/', function(req, res, next) {
     }
 
     unirest
-        .post(serverUrl)
+        .post(process.env.API_HOST + '/contact')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
         .send({
             "mail": req.body["mail"],

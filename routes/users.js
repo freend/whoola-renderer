@@ -27,7 +27,8 @@ router.get('/info', function (req, res, next) {
                 "mail": response.body.mail,
                 "myReferralCode": response.body.myReferralCode,
                 "point": response.body.point,
-                "link": process.env.URLS + "/signupReferral/" + response.body.myReferralCode
+                "link": process.env.URLS + "/signupReferral/" + response.body.myReferralCode,
+                "paypal": response.body.paypalAccount
             };
             res.render('member/info', result);
         });

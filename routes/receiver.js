@@ -83,8 +83,11 @@ router.post('/add', function(req, res, next) {
                     case 200:
                         res.render('product/operatorlist', response.body);
                         break;
+                    case 403:
+                        res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+                        break;
                     default:
-                        res.render('common/error', response.body);
+                        res.render('common/modal', {"message": response.body.message, "ahref": "/receiver?token=" + token, "token": token});
                         break;
                 }
             });

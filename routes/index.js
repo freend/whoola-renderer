@@ -1,9 +1,9 @@
 var express = require('express');
 var unirest = require('unirest');
 var router = express.Router();
-const apiUrl = process.env.API_HOST;
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    console.log("process.env.API_HOST", process.env.API_HOST);
   res.render('index', { title: 'Express' });
 });
 router.get('/hoola-checker', function (req, res) {
@@ -19,7 +19,7 @@ router.get('/signup', function (req, res, next) {
 });
 router.post('/signup', function (req, res, next) {
   unirest
-      .post(apiUrl + '/member/signup')
+      .post(process.env.API_HOST + '/member/signup')
       .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
       .send({
           "mail": req.body["id"], "password": req.body["password"], "inviteReferralCode": req.body["referralCode"]
@@ -41,10 +41,11 @@ router.get('/signin', function (req, res, next) {
 });
 router.post('/signin', function (req, res, next) {
     unirest
-        .post(apiUrl + '/member/signin')
+        .post(process.env.API_HOST + '/member/signin')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
         .send({ "mail": req.body["id"], "password": req.body["password"] })
         .then((response) => {
+            console.log(response);
             if (response.body.status != null) {
                 console.log("log in failed")
                 response.body.ahref = "/signin";

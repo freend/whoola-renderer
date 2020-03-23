@@ -2,7 +2,6 @@ const express = require('express');
 const unirest = require('unirest');
 const router = express.Router();
 
-const apiUrl = process.env.API_HOST + '/notice';
 /* GET home page. */
 router.get('/', function(req, res, next) {
     var sendUrl = '';
@@ -11,7 +10,7 @@ router.get('/', function(req, res, next) {
     }
 
     unirest
-        .get(apiUrl)
+        .get(process.env.API_HOST + '/notice')
         .send()
         .then((response) => {
             const result = {"page": response.body, "url": 'notice/list'};
@@ -20,7 +19,7 @@ router.get('/', function(req, res, next) {
 });
 router.get('/:id', function (req, res, next) {
     unirest
-        .get(apiUrl + '/' + req.params.id)
+        .get(process.env.API_HOST + '/notice' + '/' + req.params.id)
         .send()
         .then((response) => {
             if (response.body.status == '404') {

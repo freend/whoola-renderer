@@ -3,16 +3,13 @@ const unirest = require('unirest');
 const router = express.Router();
 
 /* GET users listing. */
-const apiUrl = process.env.API_HOST + '/purchase';
 var sendUrl;
 router.get('/', function(req, res, next) {
-    sendUrl = "";
-    sendUrl = apiUrl + "/list";
     if (req.param('page') != null) {
         sendUrl += '?page=' + req.param('page');
     }
     unirest
-        .get(sendUrl)
+        .get(process.env.API_HOST + '/purchase/list')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
         .send()
         .then((response) => {
@@ -64,7 +61,7 @@ router.get('/detail', function (req, res, next) {
     const receiver = req.param('receiver');
     const token = req.param('token');
     unirest
-        .get(apiUrl+'?productid=' + productId + '&receiveid=' + receiver)
+        .get(process.env.API_HOST + '/purchase' + '?productid=' + productId + '&receiveid=' + receiver)
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
         .send()
         .then((response) => {
@@ -79,7 +76,6 @@ router.get('/detail', function (req, res, next) {
                         res.json(response.body);
                 }
             } else {
-                console.log(response.body);
                 const result = {
                     "productName": response.body.productName,
                     "amount": response.body.productPrice,
@@ -109,19 +105,22 @@ router.post('/', function(req, res, next) {
             + '&receiver=' + req.body["receiver"] + '&token=' + token});
     }
     unirest
-        .post(apiUrl)
+        .post(process.env.API_HOST + '/purchase')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
         .send({ "productId": req.body["productId"], "receiverId": req.body["receiver"], "point": req.body["point"] })
         .then((response) => {
-            if (response.status != null) {
-                if (response.status == 403) {
+            switch (response.status) {
+                case 403:
                     res.render('common/error', {'message':'please log in', 'ahref': '/signin'});
-                } else {
+                    break;
+                case 200:
+                    res.render('common/error', {'message':response.body, 'ahref': '/purchase?token=' + token});
+                    break;
+                default:
                     res.json(response.body);
-                }
-
+                    break;
             }
-            res.render('product/' + req.body["id"], response.body);
+            // res.render('product/' + req.body["id"], response.body);
         });
 });
 router.get('/validate', function(req, res, next) {

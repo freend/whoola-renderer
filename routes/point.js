@@ -2,11 +2,10 @@ const express = require('express');
 const unirest = require('unirest');
 const router = express.Router();
 
-const serverUrl = process.env.API_HOST + '/point';
 /* GET home page. */
 router.get('/', function(req, res, next) {
     unirest
-        .get(serverUrl)
+        .get(process.env.API_HOST + '/point')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
         .send()
         .then((response) => {
@@ -34,7 +33,7 @@ router.post('/add', function(req, res, next) {
     }
 
     unirest
-        .post(serverUrl)
+        .post(process.env.API_HOST + '/point')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
         .send({"invitedUserMail": req.body["mail"]})
         .then((response) => {
