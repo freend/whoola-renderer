@@ -8,9 +8,14 @@
     <div class="container">
           <div class="form-group">
                 <input type="hidden" value="" id="token" name="token">
-                name : <input type="text", class="form-control" value=<%= mail%> readonly>
-                Referral Code : <input type="text", class="form-control" value=<%= myReferralCode %> readonly>
-                point : <input type="text", class="form-control" value=<%= point %> readonly>
+                name : <input type="text", class="form-control" value="<%= mail%>" readonly>
+                Referral Code : <input type="text", class="form-control" value="<%= myReferralCode %>" readonly>
+                point : <input type="text", class="form-control" value="<%= point %>" readonly>
+                paypal : <input type="text", class="form-control" value="<%= paypal %>" readonly>
+                <% if(paypal == null) {%>
+                <br>
+                <button type="button" class="btn btn-success">Add Pay Pal Account</button>
+                <% } %>
                  <br>
                  <label>Link</label>
                  <div class="col-lg-7">
