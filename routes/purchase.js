@@ -86,7 +86,12 @@ router.get('/detail', function (req, res, next) {
                     "receiverId": receiver,
                     "operator": response.body.operator,
                     "token": token,
-                    "referralCode": response.body.referralCode
+                    "referralCode": response.body.referralCode,
+                    "paypalUrl": response.body.paypalUrl,
+                    "paypalToken": response.body.paypalToken,
+                    "paypalCommand": response.body.paypalCommand,
+                    "paypalId": response.body.paypalId,
+                    "mode": process.env.NODE_ENV
                 };
                 res.render('purchase/detail', result);
             }
