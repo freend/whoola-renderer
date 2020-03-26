@@ -6,17 +6,18 @@
         <% } else { %>
             "/receiver/edit"
         <% } %>
-        method="POST">
+        method="POST" id="submit-form">
           <div class="form-group">
             <label >Phone Number</label>
-            <label >example) 821012345678 </label>
+            <label >use only number not use dash or space</label>
+            <label id="match">Phone number</label>
             <input type="text" class="form-control" id="phoneId" name="phone"
             <% if(phone == null) { %>
                 placeholder="Insert phone number"
             <% } else { %>
                 value="<%= phone %>"
             <% } %>
-            onkeyup="validate(this.value)">
+            >
           <div/>
           <div class="form-group">
             <input type="hidden" value="" id="token" name="token">
@@ -32,7 +33,7 @@
               <% } %>
                >
           </div>
-          <button type="submit" class="btn btn-info">
+          <button type="button" id="btnSubmit" class="btn btn-info">
           <% if(id == null) { %>
               Add
           <% } else { %>
@@ -41,3 +42,24 @@
           </button>
         </form>
     </div>
+    <script>
+        $('#btnSubmit').click(function(event){
+            const match = $('#match');
+            if(match.val() == 'Wrong Phone Number') {
+                return false;
+            }
+            $('#submit-form').submit();
+        });
+        $('#phoneId').keyup(function(event){
+            const match = $('#match');
+            $(this).val($(this).val().replace(/[^0-9]/g,''));
+            const value = $(this).val();
+            if (/^[1-9][0-9]{6,14}$/.test(value)) {
+                match.css("color", 'blue');
+                match.text('Right Phone Number');
+            } else {
+                match.css("color", 'red');
+                match.text('Wrong Phone Number');
+            }
+        });
+    </script>

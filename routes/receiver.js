@@ -92,7 +92,7 @@ router.post('/add', function(req, res, next) {
                 }
             });
     } else {
-        res.render('receiver/list', {"message": "mobile_number is invalid"});
+        res.render('common/modal', {"message": "mobile number is invalid", "ahref":"/receiver?token=" + token, "token":token});
     }
 });
 
