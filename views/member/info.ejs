@@ -28,6 +28,7 @@
                    </div><!-- /.col-lg-6 -->
                  </div><!-- /.row -->
                  <br>
+                 <button type="button" href="#" class="btn btn-success" onClick="setToken('/users/password?token=')">Change Password</button>
           </div>
     </div>
   </body>
@@ -37,6 +38,9 @@ function c_copy(){
   var copyText = document.getElementById("link");
     copyText.select();
     document.execCommand("Copy");
+}
+function setToken(value) {
+	location.href = value + localStorage.getItem('token');
 }
 </script>
 <% include ../common/footer %>
