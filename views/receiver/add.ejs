@@ -35,7 +35,7 @@
           </div>
           <button type="button" id="btnSubmit" class="btn btn-info">
           <% if(id == null) { %>
-              Add
+              Select Category
           <% } else { %>
               Edit
           <% } %>
@@ -45,7 +45,9 @@
     <script>
         $('#btnSubmit').click(function(event){
             const match = $('#match');
-            if(match.val() == 'Wrong Phone Number') {
+            console.log('check : ' + match.text());
+            if(match.text() != 'Right Phone Number') {
+                alert('check receive phone number');
                 return false;
             }
             $('#submit-form').submit();
