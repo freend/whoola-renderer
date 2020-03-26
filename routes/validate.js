@@ -83,7 +83,8 @@ router.post('/reset', function(req, res, next){
 router.get('/password/:mail/:validateCode',function(req, res, next){
     const result = {
         "mail": req.param('mail'),
-        "validateCode": req.param('validateCode')
+        "validateCode": req.param('validateCode'),
+        "flag": false
     }
     res.render('member/password', result);
 });

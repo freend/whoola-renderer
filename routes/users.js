@@ -45,4 +45,14 @@ router.post('/info', function (req, res, next) {
             res.render('product/' + req.body["id"], response.body);
         });
 });
+router.get('/password', function (req, res, next) {
+    if (req.query.token == "null" || req.query.token == null || req.query.token == undefined) {
+        res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+    }
+    const result = {
+        "token": req.query.token,
+        "flag": true
+    };
+    res.render('member/password', result);
+});
 module.exports = router;
