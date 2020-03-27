@@ -53,7 +53,7 @@ router.get('/complete', function (req, res, next) {
                 "msg": response.body,
                 "ahref": "/home"
             }
-            res.json(response.body);
+            res.render('common/modal', {"message": response.body, "ahref": "/receiver"});
         });
 });
 router.get('/detail', function (req, res, next) {

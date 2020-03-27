@@ -1,6 +1,7 @@
 <script>
     window.onload = function() {
-        var myToken = "<%= token%>";
+        alert("token : " + localStorage.getItem('token'));
+        var myToken = localStorage.getItem('token');
         if(myToken != null) {
             myStorage = window.localStorage;
             localStorage.setItem('token', myToken);
@@ -11,7 +12,7 @@
         }
         var redirectUrl = "<%= ahref%>";
         if (redirectUrl != null) {
-            location.href = redirectUrl;
+            location.href = redirectUrl + "?token=" + localStorage.getItem('token');
         }
     }
 </script>

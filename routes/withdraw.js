@@ -63,7 +63,7 @@ router.post('/', function(req, res, next) {
         })
         .then((response) => {
             if (response.status != null) {
-                res.render('common/modal', {"message":response.body, "ahref":"/withdraw?token=" + token, "token":token});
+                res.render('common/modal', {"message":response.body, "ahref":"/withdraw"});
             }
             else {
                 res.render('common/error', response.body);

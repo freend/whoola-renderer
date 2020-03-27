@@ -38,7 +38,7 @@ router.post('/add', function(req, res, next) {
         .send({"invitedUserMail": req.body["mail"]})
         .then((response) => {
             if (response.status != null) {
-                res.render('common/modal', {"message":response.body, "ahref":"/invite?token=" + token, "token":token});
+                res.render('common/modal', {"message":response.body, "ahref":"/invite"});
             }
             else {
                 res.render('common/error', response.body);

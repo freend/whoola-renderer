@@ -55,7 +55,7 @@ router.post('/edit', function(req, res, next) {
             })
             .then((response) => {
                 if (response.status != null) {
-                    res.render('common/modal', {"message":response.body.message, "ahref":"/receiver?token=" + token, "token":token});
+                    res.render('common/modal', {"message":response.body.message, "ahref":"/receiver"});
                 }
                 else {
                     res.render('common/error', response.body);
@@ -87,12 +87,12 @@ router.post('/add', function(req, res, next) {
                         res.render('common/error', {"message": "sign in", "ahref": "/signin"});
                         break;
                     default:
-                        res.render('common/modal', {"message": response.body.message, "ahref": "/receiver?token=" + token, "token": token});
+                        res.render('common/modal', {"message": response.body.message, "ahref": "/receiver"});
                         break;
                 }
             });
     } else {
-        res.render('common/modal', {"message": "mobile number is invalid", "ahref":"/receiver?token=" + token, "token":token});
+        res.render('common/modal', {"message": "mobile number is invalid", "ahref":"/receiver"});
     }
 });
 
@@ -109,7 +109,7 @@ router.get('/delete/:id', function(req, res, next) {
         .send({"id": req.param('id')})
         .then((response) => {
             if (response.status != null) {
-                res.render('common/modal', {"message":response.body.message, "ahref":"/receiver?token=" + token, "token":token});
+                res.render('common/modal', {"message":response.body.message, "ahref":"/receiver"});
             }
             else {
                 res.render('common/error', response.body);
