@@ -53,7 +53,12 @@ router.post('/signin', function (req, res, next) {
             } else {
                 console.log("log in success");
                 response.body.token = response.body;
-                res.render('common/error', {"message" : "log in complete", "ahref": "/receiver?token=" + response.body});
+                res.render('common/loginmodal',
+                    {
+                        "message" : "log in complete",
+                        "ahref": "/receiver",
+                        "token": response.body
+                    });
             }
         });
 });

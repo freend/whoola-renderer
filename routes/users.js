@@ -11,6 +11,7 @@ router.get('/info', function (req, res, next) {
     if (req.query.token == "null" || req.query.token == null || req.query.token == undefined) {
         res.render('common/error', {"message": "sign in", "ahref": "/signin"});
     }
+    console.log("token", req.query.token);
     unirest
         .get(process.env.API_HOST + '/member/info')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})

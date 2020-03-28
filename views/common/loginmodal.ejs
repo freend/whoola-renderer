@@ -1,0 +1,13 @@
+<script>
+    window.onload = function() {
+        window.localStorage.setItem('token', "<%= token %>");
+        var getMessage = "<%= message%>";
+        if (getMessage != null) {
+            alert(getMessage);
+        }
+        var redirectUrl = "<%= ahref%>";
+        if (redirectUrl != null) {
+            location.href = redirectUrl + "?token=" + localStorage.getItem('token');
+        }
+    }
+</script>
