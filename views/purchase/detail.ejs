@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function(){
         <input type="hidden" value="<%= amount%>" id="amount">
         <input type="hidden" value="<%= receiverId%>" name="receiver">
         <input type="hidden" value="<%= productId%>" name="productId">
-        <input type="hidden" value="<%= myPoint %>" name="totalPoint">
+        <input type="hidden" value="<%= totalPoint %>" name="totalPoint">
         <div class="container my-3">
             <h1 class="display-2 text-center mb-3">PURCHASE STEP</h1>
             <div class="row">
@@ -43,19 +43,19 @@ document.addEventListener("DOMContentLoaded", function(){
         <br>
         <label>Price : USD <%= amount%></label>
         <br>
-        <label> Point :  <%= myPoint %></label>
+        <label>Total Point :  <%= totalPoint %></label> <label> Fee : </label> <label> <%= maxFee %></label>
         <br>
         <label> use Point</label>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text">$</span>
-            <span class="input-group-text"><%= parseInt(myPoint / 2) %></span>
+            <span class="input-group-text"><%= ablePoint%></span>
           </div>
           <input type="number" numberOnly class="form-control" aria-label="Amount (to the nearest dollar)" id="usePoint"
           value="0">
         </div>
         <!--  https://www.paypal.com/cgi-bin/webscr -->
-        <input type="hidden" id="availPoint" value="<%= parseInt(myPoint / 2) %>">
+        <input type="hidden" id="availPoint" value="<%= ablePoint %>">
         <form action="<%= paypalUrl %>" method="post">
              <input type="hidden" name="cmd" value="_xclick">
              <input type="hidden" name="business" value="<%= paypalId %>">
