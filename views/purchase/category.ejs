@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(){
+    var token = localStorage.getItem('token');
+    document.getElementById('token').value = localStorage.getItem('token');
+});
+</script>
+<html lang="en">
+  <head>
+    <% include ../common/head %>
+    <link rel="stylesheet" href="/stylesheets/step.css">
+  </head>
+  <body>
+  <% include ../common/navi %>
+    <div class="container">
+        <input type="hidden" value="" id="token" name="token">
+        <input type="hidden" value="<%= amount%>" id="amount">
+        <input type="hidden" value="<%= receiverId%>" name="receiver">
+        <input type="hidden" value="<%= productId%>" name="productId">
+        <input type="hidden" value="<%= myPoint %>" name="totalPoint">
+        <span class="border"></span>
+        <span class="border"></span>
+        <span class="border"></span>
+        <span class="border"></span>
+        <span class="border"></span>
+        <span class="border"></span>
+        <span class="border"></span>
+        <span class="border"></span>
+        <span class="border"></span>
+    </div>
+  </body>
+</html>
+<% include ../common/footer %>

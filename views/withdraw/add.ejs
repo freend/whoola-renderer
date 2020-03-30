@@ -17,10 +17,10 @@ document.addEventListener("DOMContentLoaded", function(){
               <input type="hidden" value="" id="token" name="token">
               <input type="hidden" id="availAmount" value="<%= availAmount%>">
               <input type="hidden" id="totalAmount" value="<%= haveAmount%>">
+              <input type="hidden" id="maxfee" value="<%= fee%>">
               <div class="form-group">
-                <label>Total : <%= haveAmount%></label>
-                <label >Request Amount</label>
-                
+                <label>Able Amount : <%= haveAmount%></label>
+                <label>Fee : </label><label id="fee"><%= fee%></label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
@@ -47,9 +47,11 @@ document.addEventListener("DOMContentLoaded", function(){
   }
   $('#amount').on("propertychange change keyup paste input", function() {
     $(this).val($(this).val().replace(/[^0-9]/g,''));
-  
+    var fees = parseInt($(this).val() * 100) * 0.1
+    $('#fee').text(fees / 100);
     if ($(this).val() > $('#availAmount').val()) {
       $(this).val($('#availAmount').val());
+      $('#fee').text($('#maxfee').val());
     };
   });
   </script>
