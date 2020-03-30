@@ -23,15 +23,17 @@ router.get('/info', function (req, res, next) {
                     console.log('not authorize');
                     res.render('common/error', {"message": "sign in", "ahref": "/signin"});
                     break;
+                default:
+                    const result = {
+                        "mail": response.body.mail,
+                        "myReferralCode": response.body.myReferralCode,
+                        "point": response.body.point,
+                        "link": process.env.URLS + "/signupReferral/" + response.body.myReferralCode,
+                        "paypal": response.body.paypalAccount
+                    };
+                    res.render('member/info', result);
+                    break;
             }
-            const result = {
-                "mail": response.body.mail,
-                "myReferralCode": response.body.myReferralCode,
-                "point": response.body.point,
-                "link": process.env.URLS + "/signupReferral/" + response.body.myReferralCode,
-                "paypal": response.body.paypalAccount
-            };
-            res.render('member/info', result);
         });
 });
 router.post('/info', function (req, res, next) {
