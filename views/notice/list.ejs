@@ -24,36 +24,4 @@
     </div>
   </body>
 </html>
-<script>
-    function buyDetail(productId) {
-        location.href = '/purchase/detail?productId=' + productId + '&receiver=' + productReceiver.value +'&token=' + localStorage.getItem('token');
-    }
-    function noti(id) {
-        var form = document.createElement('form');
-            form.setAttribute('method', 'POST');
-            form.setAttribute('action', '/purchase');
-            document.charset = "utf-8";
-
-            var receiverField = document.createElement('input');
-            receiverField.setAttribute('type', 'hidden');
-            receiverField.setAttribute('name', 'receiver');
-            receiverField.setAttribute('value', productReceiver.value);
-            form.appendChild(receiverField);
-
-            var productField = document.createElement('input');
-            productField.setAttribute('type', 'hidden');
-            productField.setAttribute('name', 'productId');
-            productField.setAttribute('value', id);
-            form.appendChild(productField);
-
-            var tokenField = document.createElement('input');
-            tokenField.setAttribute('type', 'hidden');
-            tokenField.setAttribute('name', 'token');
-            tokenField.setAttribute('value', localStorage.getItem('token'));
-            form.appendChild(tokenField);
-            document.body.appendChild(form);
-
-            form.submit();
-    }
-</script>
 <% include ../common/footer %>
