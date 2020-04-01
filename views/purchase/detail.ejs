@@ -59,10 +59,10 @@ document.addEventListener("DOMContentLoaded", function(){
         <form action="<%= paypalUrl %>" method="post">
              <input type="hidden" name="cmd" value="_xclick">
              <input type="hidden" name="business" value="<%= paypalId %>">
-             Product Name : <input type="text" readonly name="item_name" value="<%= productName%>"> <br>
-             Product Code : <input type="text" readonly name="item_number" value="<%= productId%>"> <br>
-             Currency : <input type="text" readonly name="currency_code" value="USD"> <br>
-             Price : <input type="text" readonly id="submitAmount" name="amount" value="<%= amount%>"> <br>
+             <input type="hidden" readonly name="item_name" value="<%= productName%>"> <br>
+             <input type="hidden" readonly name="item_number" value="<%= productId%>"> <br>
+             <input type="hidden" readonly name="currency_code" value="USD"> <br>
+             <input type="hidden" readonly id="submitAmount" name="amount" value="<%= amount%>"> <br>
              <!-- 여기에 Referral Code를 넣어주도록 하자 -->
              <input type="hidden" name="custom" value="code:<%= referralCode %>,receiver:<%= receiverPhone %>">
              <input type="hidden" name="charset" value="UTF-8">
@@ -77,15 +77,50 @@ document.addEventListener("DOMContentLoaded", function(){
 </html>
 <% include ../common/footer %>
 <script>
-function back() {
-    history.back();
-}
+$(document).ready(function(){
+    $('#pointBtn').hide();
+});
 $('#usePoint').on("propertychange change keyup paste input", function() {
   $(this).val($(this).val().replace(/[^0-9]/g,''));
 
-  if ($(this).val() > $('#availPoint').val()) {
+  if ($(this).val() >= $('#availPoint').val()) {
     $(this).val($('#availPoint').val());
-  };
+    $('input[name=submit]').hide();
+    $('#pointBtn').show();
+  } else {
+    $('input[name=submit]').show();
+    $('#pointBtn').hide();
+  }
   $('#submitAmount').val($('#amount').val() - $(this).val());
+  $('#viewAmount').text($('#submitAmount').val());
+  $('#viewPoint').text($(this).val());
+  $('#useFee').text(parseInt(($(this).val() * 100) * 0.05) / 100);
 });
+function buyPoint() {
+        var form = document.createElement('form');
+        form.setAttribute('method', 'POST');
+        form.setAttribute('action', '/purchase');
+        document.charset = "utf-8";
+
+        var receiverField = document.createElement('input');
+        receiverField.setAttribute('type', 'hidden');
+        receiverField.setAttribute('name', 'receiver');
+        receiverField.setAttribute('value', $('input[name=receiver]').val());
+        form.appendChild(receiverField);
+
+        var productField = document.createElement('input');
+        productField.setAttribute('type', 'hidden');
+        productField.setAttribute('name', 'productId');
+        productField.setAttribute('value', $('input[name=productId]').val());
+        form.appendChild(productField);
+
+        var tokenField = document.createElement('input');
+        tokenField.setAttribute('type', 'hidden');
+        tokenField.setAttribute('name', 'token');
+        tokenField.setAttribute('value', localStorage.getItem('token'));
+        form.appendChild(tokenField);
+        document.body.appendChild(form);
+
+        form.submit();
+    }
 </script>
