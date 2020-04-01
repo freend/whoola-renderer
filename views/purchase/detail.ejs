@@ -81,9 +81,14 @@ document.addEventListener("DOMContentLoaded", function(){
 <script>
 $(document).ready(function(){
     $('#pointBtn').hide();
+    var usePoint = 0;
 });
 $('#usePoint').on("propertychange change keyup paste input", function() {
-  $(this).val($(this).val().replace(/[^0-9]/g,''));
+  if (/^\d+(?:[.]?[\d]?[\d])?$/.test($(this).val())) {
+    usePoint = $(this).val();
+  } else {
+    $(this).val(usePoint);
+  }
 
   if ($(this).val() >= $('#availPoint').val()) {
     $(this).val($('#availPoint').val());
