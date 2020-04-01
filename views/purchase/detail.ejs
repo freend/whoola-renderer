@@ -35,15 +35,16 @@ document.addEventListener("DOMContentLoaded", function(){
            </div>
         <label>name : <%= name%></label>
         <br>
-        <label>phone number : <%= receiverPhone %> </label>
+        <label>phone number : </label> <label id="receiver"> <%= receiverPhone %> </label>
         <br>
         <label>operator : <%= operator %></label>
         <br>
         <label>product name : <%= productName%></label>
         <br>
-        <label>Price : USD <%= amount%></label>
+        <label>Price : USD</label> <label id="viewAmount"> <%= amount%></label>
         <br>
-        <label>Total Point :  <%= totalPoint %></label> <label> Fee : </label> <label> <%= maxFee %></label>
+        <label>Total Point : <%= totalPoint %></label>
+         <label> Max Fee : </label> <label> <%= maxFee %></label>
         <br>
         <label> use Point</label>
         <div class="input-group mb-3">
@@ -54,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function(){
           <input type="number" numberOnly class="form-control" aria-label="Amount (to the nearest dollar)" id="usePoint"
           value="0">
         </div>
+        <label> Use Fee : </label> <label id="useFee"> 0</label>
         <!--  https://www.paypal.com/cgi-bin/webscr -->
         <input type="hidden" id="availPoint" value="<%= ablePoint %>">
         <form action="<%= paypalUrl %>" method="post">
@@ -66,10 +68,10 @@ document.addEventListener("DOMContentLoaded", function(){
              <!-- 여기에 Referral Code를 넣어주도록 하자 -->
              <input type="hidden" name="custom" value="code:<%= referralCode %>,receiver:<%= receiverPhone %>">
              <input type="hidden" name="charset" value="UTF-8">
-             <input type="image" name="submit" border="0"
+             <input type="image" name="submit" border="0" id="paypalBtn"
             src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"
             alt="PayPal - The safer, easier way to pay online">
-            <button type="button" class="btn btn-danger" onClick="back(-1)">Back</button>
+            <button type="button" class="btn btn-danger" onClick="buyPoint()" id="pointBtn">Buy Point</button>
          </form>
          <br>
     </div>
