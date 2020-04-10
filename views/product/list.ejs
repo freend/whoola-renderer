@@ -30,16 +30,15 @@
                     <td> Price </td>
                     <td> buy </td>
                 </tr>
-            <% for (var i = 0; i < page.content.length; i++) { %>
-                <tr>
-                    <td><%= page.content[i].id %></td>
-                    <td><%= page.content[i].name %></td>
-                    <td>USD <label id="price_<%= page.content[i].id %>"><%= page.content[i].amount %></label> </td>
-                    <td><button class="btn btn-success" onClick="buyDetail(<%= page.content[i].id %>)">Buy</button></td>
-                </tr>
-            <% } %>
+                <% for (var i = 0; i < page.length; i++) { %>
+                    <tr>
+                        <td><%= page[i].id %></td>
+                        <td><%= page[i].name %></td>
+                        <td>USD <label id="price_<%= page[i].id %>"><%= page[i].salesAmount %></label> </td>
+                        <td><button class="btn btn-success" onClick="buyDetail(<%= page[i].id %>)">Buy</button></td>
+                    </tr>
+                <% } %>
         </table>
-        <% include ../common/pagenation %>
     </div>
   </body>
 </html>
