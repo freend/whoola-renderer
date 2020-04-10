@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../common/header %>
+</head>
+<body>
+    <% include ../common/navigator %>
+    <script src="/static/javascripts/validate.js"></script>
+    <section>
+        <h1 class="title">Contact Us</h1>
+        <div class="conts_wrap">
+            <div class="contactus_wrap">
+                <div class="left">
+                    <div class="box">
+                        <p>
+                            <span><img src="/static/images/icon_time.png" alt=""></span>
+                            <span>WORKING HOURS</span>
+                        </p>
+                        <p>
+                            <b>We are Open 24/7</b>
+                            <br>
+                            <b>Everytiem, Everywhere</b>
+                        </p>
+                    </div>
+                    <div class="box">
+                        <p>
+                            <span><img src="/static/images/icon_letter.png" alt=""></span>
+                            <span>EMAIL US</span>
+                        </p>
+                        <p>
+                            <b>support@hoolamoolah.com</b>
+                        </p>
+                    </div>
+                </div>
+                <div class="right">
+                    <form action="/contact" method=POST id="submit-form">
+                        <div class="box"><input type="text" placeholder="Email address" name="mail" id="mail"></div>
+                        <div class="box"><input type="text" placeholder="Title" name="title" id="title"></div>
+                        <div class="box"><textarea placeholder="Message" name="content" id="content"></textarea></div>
+                        <div class="btn_group">
+                            <button class="btn_send" id="btnSubmit">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        $('#btnSubmit').click(function(event){
+            const mail = $('#mail');
+            const title = $('#title');
+            const content = $('#content');
+            if (mail.val() == '') {
+                alert('please insert sign up e-mail address');
+                return false;
+            } else if(!validateMail(mail.val())) {
+                alert('do not match email');
+                return false;
+            }
+            if (title.val() == '') {
+                alert('please insert title');
+                return false;
+            }
+            if (content.val() == '') {
+                alert('please insert content');
+                return false;
+            }
+            $('#submit-form').submit();
+
+        });
+    </script>
+    <footer>
+        <% include ../common/footers %>
+    </footer>
+</body>
+
+</html>
