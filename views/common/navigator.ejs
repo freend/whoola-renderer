@@ -1,0 +1,40 @@
+    <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(){
+        const token = localStorage.getItem('token');
+    });
+    </script>
+    <header>
+        <div class="logo"><img src="/static/images/logo.png" alt=""></div>
+        <button class="btn_hamburger"><img src="/static/images/hamburger.jpg" alt=""></button>
+        <div class="gnb_wrap">
+            <ul class="gnb">
+                <li><a href="#" onClick="setToken('/order?token=')">Order</a></li>
+                <li><a href="#" onClick="setToken('/withdraw?token=')">Withdraw</a></li>
+                <li><a href="#" onClick="setToken('/invite?page=1&token=')">Invite Friend</a></li>
+                <li><a href="/notice?page=1">Notice</a></li>
+                <li><a href="#" onClick="setToken('/contact?token=')">Contact Us</a></li>
+                <li>
+                    <div class="header_btn">
+                        <button class="on" onclick="location.href='/signup'">Register</button>
+                        <button onclick="location.href='/login'">Log in</button>
+                        <div class="mypage_open">
+                            <h2>My Page <i class="a"></i></h2>
+                            <ul class="mypage_menu">
+                                <li><a href="#" onClick="setToken('/users/info?token=')">My Info</a></li>
+                                <li><a href="#" onClick="setToken('/purchase?page=1&token=')">Purchase History</a></li>
+                                <li><a href="#" onClick="setToken('/withdraw/list?page=1&token=')">Withdraw History</a></li>
+                                <li><a href="#" onClick="setToken('/point?page=1&token=')">Point History</a></li>
+                                <li><a href="#" onClick="setToken('/tree?token=')">My Tree</a></li>
+                            </ul>
+                        </div>
+                        <button onclick="javascript:location.href='logout.html'">Log Out</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <script>
+        function setToken(value) {
+            location.href = value + localStorage.getItem('token');
+        }
+    </script>
