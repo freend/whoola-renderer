@@ -29,7 +29,7 @@ router.get('/password/:mail', function(req, res, next){
         .then((response) => {
             if (response.status != null) {
                 if (response.status == 403) {
-                    res.render('common/error', {'message':'please log in', 'ahref': '/signin'});
+                    res.render('common/error', {'message':'please log in', 'ahref': '/login'});
                 } else if (response.status == 200) {
                     const result = {
                         "message": response.body.responseMessage,
@@ -59,7 +59,7 @@ router.post('/reset', function(req, res, next){
         .then((response) => {
             if (response.status != null) {
                 if (response.status == 403) {
-                    res.render('common/error', {'message':'please log in', 'ahref': '/signin'});
+                    res.render('common/error', {'message':'please log in', 'ahref': '/login'});
                 } else if (response.status == 200) {
                     const result = {
                         "message": response.body.responseMessage,

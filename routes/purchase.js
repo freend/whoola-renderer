@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
                 switch (response.body.status) {
                     case 403:
                         console.log('not authorize');
-                        res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+                        res.render('common/error', {"message": "sign in", "ahref": "/login"});
                         break;
                     default:
                         res.json(response.body);
@@ -67,7 +67,7 @@ router.get('/detail', function (req, res, next) {
                 switch (response.body.status) {
                     case 403:
                         console.log('not authorize');
-                        res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+                        res.render('common/error', {"message": "sign in", "ahref": "/login"});
                         break;
                     default:
                         res.json(response.body);
@@ -102,7 +102,7 @@ router.post('/', function(req, res, next) {
     const token = req.body["token"];
 
     if (token == null || token == undefined) {
-        res.render('common/error', {'message':'please log in', 'ahref': '/signin'});
+        res.render('common/error', {'message':'please log in', 'ahref': '/login'});
     }
     const totalPoint = req.body["totalPoint"];
     const point = req.body["point"];
@@ -117,7 +117,7 @@ router.post('/', function(req, res, next) {
         .then((response) => {
             switch (response.status) {
                 case 403:
-                    res.render('common/error', {'message':'please log in', 'ahref': '/signin'});
+                    res.render('common/error', {'message':'please log in', 'ahref': '/login'});
                     break;
                 case 200:
                     res.render('common/error', {'message':response.body, 'ahref': '/purchase?token=' + token});
@@ -141,7 +141,7 @@ router.get('/validate', function(req, res, next) {
         .then((response) => {
             if (response.status != null) {
                 if (response.status == 403) {
-                    res.render('common/error', {'message':'please log in', 'ahref': '/signin'});
+                    res.render('common/error', {'message':'please log in', 'ahref': '/login'});
                 } else {
                     res.json(response.body);
                 }

@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
                 console.log('error', response.body);
                 if (response.body.status === 403) {
                     console.log('not authorize');
-                    res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+                    res.render('common/error', {"message": "sign in", "ahref": "/login"});
                 } else {
                     res.json(response.body);
                 }

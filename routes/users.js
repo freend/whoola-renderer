@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/info', function (req, res, next) {
     if (req.query.token == "null" || req.query.token == null || req.query.token == undefined) {
-        res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+        res.render('common/error', {"message": "sign in", "ahref": "/login"});
     }
     unirest
         .get(process.env.API_HOST + '/member/info')
@@ -19,7 +19,7 @@ router.get('/info', function (req, res, next) {
             switch (response.body.status) {
                 case 403:
                     console.log('not authorize');
-                    res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+                    res.render('common/error', {"message": "sign in", "ahref": "/login"});
                     break;
                 default:
                     console.log('info result', response.body);
@@ -48,7 +48,7 @@ router.post('/paypal', function (req, res, next) {
     const token = req.body["token"];
 
     if (token == null) {
-        res.render('common/error', {'message':'please log in', 'ahref': '/signin'});
+        res.render('common/error', {'message':'please log in', 'ahref': '/login'});
     }
 
     unirest
@@ -59,7 +59,7 @@ router.post('/paypal', function (req, res, next) {
             switch (response.body.status) {
                 case 403:
                     console.log('not authorize');
-                    res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+                    res.render('common/error', {"message": "sign in", "ahref": "/login"});
                     break;
                 default:
                     const result = {
@@ -89,7 +89,7 @@ router.post('/info', function (req, res, next) {
 });
 router.get('/password', function (req, res, next) {
     if (req.query.token == "null" || req.query.token == null || req.query.token == undefined) {
-        res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+        res.render('common/error', {"message": "sign in", "ahref": "/login"});
     }
     const result = {
         "token": req.query.token,
@@ -101,7 +101,7 @@ router.post('/password', function (req, res, next) {
     const token = req.body["token"];
     console.log("token", token);
     if (token == "null" || token == null || token == undefined) {
-        res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+        res.render('common/error', {"message": "sign in", "ahref": "/login"});
     }
     unirest
         .put(process.env.API_HOST + '/member/password')

@@ -36,10 +36,12 @@ router.post('/signup', function (req, res, next) {
           }
       });
 });
-router.get('/signin', function (req, res, next) {
-    res.render('member/signin');
+// call login page
+router.get('/login', function (req, res, next) {
+    res.render('member/login');
 });
-router.post('/signin', function (req, res, next) {
+// get login info
+router.post('/login', function (req, res, next) {
     unirest
         .post(process.env.API_HOST + '/member/signin')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
@@ -48,7 +50,7 @@ router.post('/signin', function (req, res, next) {
             console.log(response);
             if (response.body.status != null) {
                 console.log("log in failed")
-                response.body.ahref = "/signin";
+                response.body.ahref = "/login";
                 res.render('common/error', response.body);
             } else {
                 console.log("log in success");

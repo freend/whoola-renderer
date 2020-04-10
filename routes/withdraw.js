@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
                 switch (response.body.status) {
                     case 403:
                         console.log('not authorize');
-                        res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+                        res.render('common/error', {"message": "sign in", "ahref": "/login"});
                         break;
                     default:
                         res.json(response.body);
@@ -35,7 +35,7 @@ router.get('/list', function(req, res, next) {
                 switch (response.body.status) {
                     case 403:
                         console.log('not authorize');
-                        res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+                        res.render('common/error', {"message": "sign in", "ahref": "/login"});
                         break;
                     default:
                         res.json(response.body);
@@ -51,7 +51,7 @@ router.post('/', function(req, res, next) {
     var token = req.body["token"];
 
     if (token == null) {
-        res.render('common/error', {'message':'please log in', 'ahref': '/signin'});
+        res.render('common/error', {'message':'please log in', 'ahref': '/login'});
     }
 
     unirest

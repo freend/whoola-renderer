@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
                 console.log('error', response.body);
                 if (response.body.status === 403) {
                     console.log('not authorize');
-                    res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+                    res.render('common/error', {"message": "sign in", "ahref": "/login"});
                 } else {
                     res.json(response.body);
                 }
@@ -42,7 +42,7 @@ router.post('/edit', function(req, res, next) {
     const token = req.body["token"];
 
     if (token == null) {
-        res.render('common/error', {'message':'please log in', 'ahref': '/signin'});
+        res.render('common/error', {'message':'please log in', 'ahref': '/login'});
     }
     console.log("phone", req.body["phone"]);
     if (/^[1-9][0-9]{6,14}$/.test(req.body["phone"])) {
@@ -69,7 +69,7 @@ router.post('/add', function(req, res, next) {
     const token = req.body["token"];
 
     if (token == null) {
-        res.render('common/error', {'message':'please log in', 'ahref': '/signin'});
+        res.render('common/error', {'message':'please log in', 'ahref': '/login'});
     }
 
     if (/^[1-9][0-9]{6,14}$/.test(req.body["phone"])) {
@@ -84,7 +84,7 @@ router.post('/add', function(req, res, next) {
                         res.render('purchase/category', response.body);
                         break;
                     case 403:
-                        res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+                        res.render('common/error', {"message": "sign in", "ahref": "/login"});
                         break;
                     default:
                         res.render('common/modal', {"message": response.body.message, "ahref": "/receiver"});
@@ -100,7 +100,7 @@ router.get('/delete/:id', function(req, res, next) {
     const token = req.param('token');
 
     if (token == null) {
-        res.render('common/error', {'message':'please log in', 'ahref': '/signin'});
+        res.render('common/error', {'message':'please log in', 'ahref': '/login'});
     }
 
     unirest
