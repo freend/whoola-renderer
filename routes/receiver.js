@@ -81,7 +81,7 @@ router.post('/add', function(req, res, next) {
                 console.log("result : " + response.body);
                 switch (response.status) {
                     case 200:
-                        res.render('product/operatorlist', response.body);
+                        res.render('purchase/category', response.body);
                         break;
                     case 403:
                         res.render('common/error', {"message": "sign in", "ahref": "/signin"});

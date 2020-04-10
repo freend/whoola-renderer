@@ -16,20 +16,26 @@ router.get('/', function(req, res, next) {
             res.render('product/list', response.body);
         });
 });
-router.get('/full', function(req, res, next) {
-    const sendUrl = process.env.API_HOST + '/product' + '?page=' + req.param('page');
-
+router.get('/operator/service', function (req, res, next) {
+    const operator = req.param('operator');
+    const receiver = req.param('receiver');
     unirest
-        .get(sendUrl)
+        .get(process.env.API_HOST + '/product/operator/service?operatorId=' + operator + "&receiverId=" + receiver)
         .send()
         .then((response) => {
-            const result = {"page": response.body.page, "url": '/products/full'};
-            res.render('product/fulllist', result);
+            if (response.body.status == '404') {
+                res.render('error', response.body);
+            }
+            const result = {"receiverId": receiver, "operator": operator, "service": response.body};
+            // res.json(result);
+            res.render('purchase/category', result);
         });
 });
 router.get('/operator', function (req, res, next) {
     const operator = req.param('operator');
     const receiver = req.param('receiver');
+    const service = req.param('service');
+    const token = req.param('token');
     unirest
         .get(process.env.API_HOST + '/product/operator/' + operator + "?receiver=" + receiver + "&service=" + service)
         .send()

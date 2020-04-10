@@ -13,21 +13,37 @@ document.addEventListener("DOMContentLoaded", function(){
   <body>
   <% include ../common/navi %>
     <div class="container">
+    Select Service Category
+    </div>
+    <div class="container">
         <input type="hidden" value="" id="token" name="token">
-        <input type="hidden" value="<%= amount%>" id="amount">
-        <input type="hidden" value="<%= receiverId%>" name="receiver">
-        <input type="hidden" value="<%= productId%>" name="productId">
-        <input type="hidden" value="<%= myPoint %>" name="totalPoint">
-        <span class="border"></span>
-        <span class="border"></span>
-        <span class="border"></span>
-        <span class="border"></span>
-        <span class="border"></span>
-        <span class="border"></span>
-        <span class="border"></span>
-        <span class="border"></span>
-        <span class="border"></span>
+        <input type="hidden" value="<%= receiverId%>" name="receiver" id="receiver">
+        <input type="hidden" value="<%= operator%>" name="operator" id="operator">
+<!--         <button class="btn btn-primary" disabled id="border2">Internet</button> -->
+        <button type="button" class="btn btn-primary" disabled id="border1" href="#" onclick="serviceList(1)">Mobile TopUp / Internet</button>
+        <button type="button" class="btn btn-primary" disabled id="border3" href="#" onclick="serviceList(3)">Utilities</button>
+        <button type="button" class="btn btn-primary" disabled id="border4" href="#" onclick="serviceList(4)">Gift Cards</button>
+        <button type="button" class="btn btn-primary" disabled id="border5" href="#" onclick="serviceList(5)">Land Line</button>
+        <button type="button" class="btn btn-primary" disabled id="border6" href="#" onclick="serviceList(6)">Television</button>
+        <button type="button" class="btn btn-primary" disabled id="border9" href="#" onclick="serviceList(9)">VoIP</button>
     </div>
   </body>
 </html>
+<script>
+function serviceList(serviceId) {
+    location.href = '/products/operator?operator=' + $('#operator').val() + '&receiver=' + $('#receiver').val()
+     + '&service=' + serviceId
+     + '&token=' + localStorage.getItem('token');
+}
+window.onload = function() {
+    const token = localStorage.getItem('token');
+    const receiver = <%= receiverId %>;
+    const operator = <%= operator %>;
+    const service = [<%= service %>];
+    for (i = 0; i < service.length; i++) {
+        console.log(i + ", " + service[i]);
+        $('#border' + service[i]).attr('disabled', false);
+    }
+}
+</script>
 <% include ../common/footer %>
