@@ -59,7 +59,7 @@ router.post('/', function(req, res, next) {
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
         .send({
             "amount": req.body["amount"],
-            "withdrawAccount": req.body["account"]
+            "fee": req.body["fee"]
         })
         .then((response) => {
             if (response.status != null) {

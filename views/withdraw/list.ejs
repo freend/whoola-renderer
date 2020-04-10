@@ -16,16 +16,16 @@ document.addEventListener("DOMContentLoaded", function(){
             <thead>
                 <td> State </td>
                 <td> Amount </td>
-                <td> Account </td>
-                <td> Content </td>
+                <td> Fee </td>
+                <td> Message </td>
                 <td> Create </td>
                 <td> Response </td>
             </thead>
             <% for (var i = 0; i < page.content.length; i++) { %>
                 <tr>
                     <td><%= page.content[i].withdrawState %></td>
-                    <td> USD <%= page.content[i].amount %></td>
-                    <td><%= page.content[i].withdrawAccount %></td>
+                    <td> USD <%= (page.content[i].amount / 100) %></td>
+                    <td><%= (page.content[i].fee / 100) %></td>
                     <td><%= page.content[i].content %></td>
                     <td><%= page.content[i].createAt %></td>
                     <td><%= page.content[i].responseAt %></td>

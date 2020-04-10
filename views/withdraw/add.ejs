@@ -13,14 +13,14 @@ document.addEventListener("DOMContentLoaded", function(){
   <% include ../common/navi %>
     <div class="container">
         <div class="container">
-            <form class="form" action="/withdraw" method="POST">
-              <input type="hidden" value="" id="token" name="token">
               <input type="hidden" id="availAmount" value="<%= availAmount%>">
               <input type="hidden" id="totalAmount" value="<%= haveAmount%>">
               <input type="hidden" id="maxfee" value="<%= fee%>">
+            <form class="form" action="/withdraw" method="POST">
+              <input type="hidden" value="" id="token" name="token">
               <div class="form-group">
-                <label>Able Amount : <%= haveAmount%></label>
-                <label>Fee : </label><label id="fee"><%= fee%></label>
+                <label>Withdraw HM dollar : <%= haveAmount%></label>
+                <label>Withdraw max fee : </label><label id="fee"><%= fee%></label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
@@ -28,13 +28,11 @@ document.addEventListener("DOMContentLoaded", function(){
                   </div>
                   <input type="number" numberOnly class="form-control"
                   aria-label="Amount (to the nearest dollar)" id="amount" name="amount" value="0">
+                  <input type="hidden" name="fee" id="acceptFee">
                 </div>
-
-                <label >Withdraw Account</label>
-                <input type="text" class="form-control" id="account" name="account" >
               <div/>
               <div class="form-group">
-                <button type="submit" class="btn btn-info">Add</button>
+                <button type="submit" class="btn btn-info">Request</button>
               </div>
             </form>
         </div>
@@ -43,20 +41,24 @@ document.addEventListener("DOMContentLoaded", function(){
 </html>
 <script>
 $(document).ready(function(){
-    var requestWithdraw = 0;
+    var requestWithdraw;
 });
   $('#amount').on("propertychange change keyup paste input", function() {
     if (/^\d+(?:[.]?[\d]?[\d])?$/.test($(this).val())) {
       requestWithdraw = $(this).val();
     } else {
+      if ($(this).val().length <= 1) {
+        requestWithdraw = '';
+      }
       $(this).val(requestWithdraw);
     }
-
-    var fees = parseInt($(this).val() * 100) * 0.1
-    $('#fee').text(fees / 100);
-    if ($(this).val() >= $('#availAmount').val()) {
+    var fees = parseInt($(this).val() * 100) / 100;
+    $('#fee').text(Math.ceil(fees) / 100);
+    $('#acceptFee').val($('#fee').text());
+    if (parseFloat($(this).val()) >= parseFloat($('#availAmount').val())) {
       $(this).val($('#availAmount').val());
       $('#fee').text($('#maxfee').val());
+      $('#acceptFee').val($('#maxfee').val());
     };
   });
   </script>
