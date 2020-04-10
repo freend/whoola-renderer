@@ -8,13 +8,15 @@
     <div class="container">
           <div class="form-group">
                 <input type="hidden" value="" id="token" name="token">
-                name : <input type="text", class="form-control" value="<%= mail%>" readonly>
+                Email : <input type="text", class="form-control" value="<%= mail%>" readonly>
                 Referral Code : <input type="text", class="form-control" value="<%= myReferralCode %>" readonly>
+                Buy This Month : <input type="text", class="form-control" value="<%= buyThisMonth %>" readonly>
                 point : <input type="text", class="form-control" value="<%= point %>" readonly>
-                paypal : <input type="text", class="form-control" value="<%= paypal %>" readonly>
+                Pay pal Account : <input type="text", class="form-control" value="<%= paypal %>" readonly>
+                Business level : <input type="text", class="form-control" value="" id="businessLevel" readonly>
                 <% if(paypal == null) {%>
                 <br>
-                <button type="button" class="btn btn-success">Add Pay Pal Account</button>
+                <button type="button" class="btn btn-success" onClick="setToken('/users/paypal?token=')">Add Pay Pal Account</button>
                 <% } %>
                  <br>
                  <label>Link</label>
@@ -39,6 +41,11 @@ function c_copy(){
     copyText.select();
     document.execCommand("Copy");
 }
+window.onload = function() {
+    const text = "name : <%= level.name %>, 1 level HM dollar percent : <%= level.oneLevelPercent %>%, "
+    + "2 level HM dollar percent : <%= level.twoLevelPercent %>%"
+    $('#businessLevel').val(text);
+};
 function setToken(value) {
 	location.href = value + localStorage.getItem('token');
 }

@@ -16,7 +16,46 @@ router.get('/info', function (req, res, next) {
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
         .send()
         .then((response) => {
-            console.log(response.body);
+            switch (response.body.status) {
+                case 403:
+                    console.log('not authorize');
+                    res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+                    break;
+                default:
+                    console.log('info result', response.body);
+                    const result = {
+                        "mail": response.body.mail,
+                        "myReferralCode": response.body.myReferralCode,
+                        "point": response.body.point,
+                        "link": process.env.URLS + "/signupReferral/" + response.body.myReferralCode,
+                        "paypal": response.body.paypalAccount,
+                        "buyThisMonth": response.body.buyThisMonth,
+                        "level": response.body.level
+                    };
+                    res.render('member/info', result);
+                    break;
+            }
+        });
+});
+router.get('/paypal', function(req, res, next) {
+    const token = req.query.token;
+    const result = {
+        "token": token
+    };
+    res.render('member/paypal', result);
+});
+router.post('/paypal', function (req, res, next) {
+    const token = req.body["token"];
+
+    if (token == null) {
+        res.render('common/error', {'message':'please log in', 'ahref': '/signin'});
+    }
+
+    unirest
+        .post(process.env.API_HOST + '/member/paypal')
+        .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
+        .send({"paypalAccount": req.body["account"]})
+        .then((response) => {
             switch (response.body.status) {
                 case 403:
                     console.log('not authorize');
