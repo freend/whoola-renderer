@@ -16,6 +16,7 @@ const pointRouter = require('./routes/point');
 const withdrawRouter = require('./routes/withdraw');
 const contactRouter = require('./routes/contact');
 const noticeRouter = require('./routes/notice');
+const orderRouter = require('./routes/order');
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use('/point', pointRouter);
 app.use('/withdraw', withdrawRouter);
 app.use('/contact', contactRouter);
 app.use('/notice', noticeRouter);
+app.use('/order', orderRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

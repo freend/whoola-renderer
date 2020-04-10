@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../common/header %>
+</head>
+<body>
+    <% include ../common/navigator %>
+    <section>
+        <h1 class="title">
+            <span class="blind"><b>Step1</b> Number</span>
+            Purchase Step
+            <span><b>Step2</b> Product List</span>
+        </h1>
+        <h2 class="sub_title">
+            Add Receive Phone Number, Or Select Below List
+        </h2>
+        <div class="conts_wrap">
+            <div class="purchase_wrap">
+                <form class="form" action=
+                <% if (id == null) { %>
+                    "/receiver/add"
+                <% } else { %>
+                    "/receiver/edit"
+                <% } %>
+                method="POST" id="submit-form">
+                <input type="hidden" value="<%= token %>" id="token" name="token">
+                <div class="input_box">
+                    <h3>Phone Number</h3>
+                    <div><input type="text" id="phoneId" name="phone"
+                        <% if(phone == null) { %>
+                            placeholder="Insert Phone Number"
+                        <% } else { %>
+                            value = "<%=phone %>"
+                        <% } %>
+                    ></div>
+                    <small>Phone Number use only number not use dash or space Phone number
+                    </small>
+                    Phone Number regex : <label id="match"></label>
+                </div>
+                <div class="input_box">
+                    <h3>Name</h3>
+                    <div><input type="text" class="form-control" id="nameId" name="name"
+                        <% if(name == null) { %>
+                            placeholder="insert invite name"
+                        <% } else { %>
+                            value="<%= name %>"
+                        <% } %>
+                         >
+                    </div>
+                </div>
+                    
+                <div class="btn_group">
+                    <button id="btnSubmit">
+                        <% if(id == null) { %>
+                            Select Category
+                        <% } else { %>
+                            Edit
+                        <% } %>
+                        </button>
+                </div>
+                </form>
+                <div class="purchase_tbl mt_50">
+                    <% if (id == null) { %>
+                        <% include receiver %>
+                    <% } %>
+                    <small class="mo_show">업데이트나 제거를 원하실 경우, PC에서 접속해주세요.</small>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        $('#btnSubmit').click(function(event){
+            const match = $('#match');
+            if(match.text() != 'Right Phone Number') {
+                alert('check receive phone number');
+                return false;
+            }
+            // if($('#nameId').val() == '') {
+            //     alert('receive name');
+            //     return false;
+            // }
+            $('#submit-form').submit();
+        });
+        $('#phoneId').keyup(function(event){
+            const match = $('#match');
+            $(this).val($(this).val().replace(/[^0-9]/g,''));
+            const value = $(this).val();
+            if (/^[1-9][0-9]{6,14}$/.test(value)) {
+                match.css("color", 'blue');
+                match.text('Right Phone Number');
+            } else {
+                match.css("color", 'red');
+                match.text('Wrong Phone Number');
+            }
+        });
+    </script>
+    <footer>
+        <% include ../common/footers %>
+    </footer>
+
+
+</body>
+
+</html>

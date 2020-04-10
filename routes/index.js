@@ -58,7 +58,7 @@ router.post('/login', function (req, res, next) {
                 res.render('common/loginmodal',
                     {
                         "message" : "log in complete",
-                        "ahref": "/receiver",
+                        "ahref": "/order",
                         "token": response.body
                     });
             }
