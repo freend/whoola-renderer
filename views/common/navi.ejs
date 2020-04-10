@@ -9,7 +9,7 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item"> <a class="nav-link" href="#" onClick="setToken('/receiver?token=')">Order</a> </li>
       <li class="nav-item"> <a class="nav-link" href="#" onClick="setToken('/withdraw?token=')">Withdraw</a></li>
-      <li class="nav-item"> <a class="nav-link" href="#" onClick="setToken('/invite?token=')">Invite Friend</a></li>
+      <li class="nav-item"> <a class="nav-link" href="#" onClick="setToken('/invite?page=1&token=')">Invite Friend</a></li>
       <li class="nav-item"> <a class="nav-link" href="#" onClick="setToken('/tree?token=')">My Tree</a></li>
       <li class="nav-item"> <a class="nav-link" href="#" onClick="setToken('/contact?token=')">Contact Us</a> </li>
       <li class="nav-item"> <a class="nav-link" href="/notice?page=1">Notice</a> </li>
@@ -19,9 +19,9 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#" onClick="setToken('/users/info?token=')">My Info</a>
-          <a class="dropdown-item" href="#" onClick="setToken('/purchase?token=')">Purchase History</a>
-          <a class="dropdown-item" href="#" onClick="setToken('/withdraw/list?token=')">Withdraw History</a>
-          <a class="dropdown-item" href="#" onClick="setToken('/point?token=')">Point History</a>
+          <a class="dropdown-item" href="#" onClick="setToken('/purchase?page=1&token=')">Purchase History</a>
+          <a class="dropdown-item" href="#" onClick="setToken('/withdraw/list?page=1&token=')">Withdraw History</a>
+          <a class="dropdown-item" href="#" onClick="setToken('/point?page=1&token=')">Point History</a>
         </div>
       </li>
       <li class="nav-item dropdown">
