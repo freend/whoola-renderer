@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Whoola Moolah</title>
+    <title>Hoola Moolah</title>
     <% include ../common/head %>
     <script type="text/javascript" src="/javascripts/validate.js"></script>
     <!-- Favicons -->
@@ -32,7 +32,7 @@
     <link href="/stylesheets/signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
-    <form class="form-signin" action="/signin" method=POST>
+    <form class="form-signin" action="/signup" method=POST id="submit-form">
       <img class="mb-4" src="https://getbootstrap.com/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
       <label for="inputEmail" class="sr-only">Email address</label>
@@ -58,6 +58,7 @@
           </button>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="button" id="btnSubmit">Sign Up</button>
+      <button class="btn btn-lg btn-info btn-block" type="button" href="#" onclick="location.href = '/signin'">Sign In</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
     </form>
     <% include contract %>
@@ -65,6 +66,7 @@
 </html>
 <script>
   $('#btnSubmit').click(function(event){
+    $(this).attr('disabled', true);
     const chkContract = $('#checkContract');
     const mail = $('#inputEmail');
     const pass = $('#password');
@@ -74,22 +76,27 @@
     if (chkContract.is(":checked") == false) {
       alert('agree contract');
       chkContract.focus();
+      $(this).attr('disabled', false);
       return false;
     }
     if (!validateMail(mail.val())) {
       alert('do not match email');
+      $(this).attr('disabled', false);
       return false;
     }
     if (pass.val() == '') {
       alert('password required');
+      $(this).attr('disabled', false);
       return false;
     }
     if (passCheck.val() == '') {
       alert('password check required');
+      $(this).attr('disabled', false);
       return false;
     }
-    if (match.textContent != 'correct') {
+    if (match.text() != 'correct') {
       alert('password not match');
+      $(this).attr('disabled', false);
       return false;
     }
     $('#submit-form').submit();
