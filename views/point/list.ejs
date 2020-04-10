@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 <tr>
                     <td><%= page.content[i].id %></td>
                     <td><%= page.content[i].content %></td>
-                    <td><%= page.content[i].point %></td>
+                    <td><%= page.content[i].point / 100 %></td>
                 </tr>
             <% } %>
         </table>
