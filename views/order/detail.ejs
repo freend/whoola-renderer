@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../common/header %>
+</head>
+<body>
+    <% include ../common/navigator %>
+    <section>
+        <h1 class="title">
+            <span><b>Step2</b> Purchase</span>
+            Purchase Step
+            <span class="blind"><b>Step3</b> Purchase</span>
+        </h1>
+
+        <div class="conts_wrap">
+            <div class="purchase_wrap">
+
+
+                <div class="purchase_tbl2 mt_50">
+                    <table>
+                        <caption class="blind">Purchase table</caption>
+                        <colgroup>
+                            <col style="width: 20%">
+                            <col style="width: 30%">
+                            <col style="width: 20%">
+                            <col style="width: 30%">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th class="txt_l">Name</th>
+                                <td><%= name%></td>
+                                <th class="txt_l">Phone number</th>
+                                <td><%= receiverPhone %></td>
+                            </tr>
+                            <tr>
+                                <th class="txt_l">Operator</th>
+                                <td><%= operator %></td>
+                                <th class="txt_l">Product Name</th>
+                                <td><%= productName%></td>
+                            </tr>
+                            <tr>
+                                <th class="txt_l">Currency</th>
+                                <td>USD</td>
+                                <th class="txt_l">Price</th>
+                                <td><%= salesAmount%></td>
+                            </tr>
+                            <tr>
+                                <th class="txt_l">My HM Dollar</th>
+                                <td><%= totalPoint %></td>
+                                <th class="txt_l">HM Dollar Total Fee</th>
+                                <td><%= maxFee %></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="totalPrice">
+                    <h3>Total Price</h3>
+                    <span>USD</span>
+                    <b><%= salesAmount%></b>
+                </div>
+
+                <div class="purchase_tbl3">
+                    <table>
+                        <caption class="blind">Purchase table</caption>
+                        <colgroup>
+                            <col style="width: 17%">
+                            <col style="width: auto">
+                            <col style="width: 23%">
+                            <col style="width: auto">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th class="txt_l">Use Point</th>
+                                <td>
+                                    <div class="total_txt">
+                                        <span>$</span>
+                                        <span><%= totalPoint %></span>
+                                        <b>0.13</b>
+                                    </div>
+                                </td>
+                                <th class="txt_l txt_pur">Payment Amount</th>
+                                <td>+000000000000000000</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <form action="<%= paypalUrl %>" method="post">
+        <input type="checkbox" class="form-check-input" id="checkPurchase" required>제품 정보 및 이용자 정보를 확인하셨습니까?<br>
+        <input class="btn btn-primary" type="submit" value="Buy Now" name="submit" id="paypalBtn" disabled>
+        <div class="purchase_btn">
+            <button type="button" class="btn btn-danger" onClick="buyPoint()" id="pointBtn">Buy Point</button>
+        </div>
+            <input type="hidden" name="cmd" value="_xclick">
+            <input type="hidden" name="business" value="<%= paypalId %>">
+            <input type="hidden" readonly name="item_name" value="<%= productName%>"> <br>
+            <input type="hidden" readonly name="item_number" value="<%= productId%>"> <br>
+            <input type="hidden" readonly name="currency_code" value="USD"> <br>
+            <input type="hidden" readonly id="submitAmount" name="amount" value="<%= salesAmount%>"> <br>
+            <!-- 여기에 Referral Code를 넣어주도록 하자 -->
+            <input type="hidden" name="custom" value="code:<%= referralCode %>,receiver:<%= receiverPhone %>">
+            <input type="hidden" name="charset" value="UTF-8">
+        </form>
+    </section>
+
+    <footer>
+        <div class="copyright">
+            <div class="link">
+                <a href="notice.html">Notice</a>
+                <a href="contactus.html">Contact Us</a>
+                <span class="blank_link">
+                    <a href="#" class="blank"></a>
+                    <a href="#" class="blank"></a>
+                    <a href="" class="blank"></a>
+                </span>
+            </div>
+            <span class="copy_txt">ⓒ hoola moolah 2020</span>
+        </div>
+
+    </footer>
+
+    <script>
+    $(document).ready(function(){
+        $('#pointBtn').hide();
+        var usePoint = 0;
+    });
+    $('#usePoint').on("propertychange change keyup paste input", function() {
+        if (/^\d+(?:[.]?[\d]?[\d])?$/.test($(this).val())) {
+        usePoint = $(this).val();
+        } else {
+        $(this).val(usePoint);
+        }
+    
+        if (parseFloat($(this).val()) >= parseFloat($('#availPoint').val())) {
+        $(this).val($('#availPoint').val());
+        $('input[name=submit]').hide();
+        $('#pointBtn').show();
+        } else {
+        $('input[name=submit]').show();
+        $('#pointBtn').hide();
+        }
+        $('#submitAmount').val($('#amount').val() - $(this).val());
+        $('#viewAmount').text($('#submitAmount').val());
+        $('#viewPoint').text($(this).val());
+        $('#useFee').text(parseInt(($(this).val() * 100) * 0.05) / 100);
+    });
+    function buyPoint() {
+            var form = document.createElement('form');
+            form.setAttribute('method', 'POST');
+            form.setAttribute('action', '/purchase');
+            document.charset = "utf-8";
+    
+            var receiverField = document.createElement('input');
+            receiverField.setAttribute('type', 'hidden');
+            receiverField.setAttribute('name', 'receiver');
+            receiverField.setAttribute('value', $('input[name=receiver]').val());
+            form.appendChild(receiverField);
+    
+            var productField = document.createElement('input');
+            productField.setAttribute('type', 'hidden');
+            productField.setAttribute('name', 'productId');
+            productField.setAttribute('value', $('input[name=productId]').val());
+            form.appendChild(productField);
+    
+            var tokenField = document.createElement('input');
+            tokenField.setAttribute('type', 'hidden');
+            tokenField.setAttribute('name', 'token');
+            tokenField.setAttribute('value', localStorage.getItem('token'));
+            form.appendChild(tokenField);
+            document.body.appendChild(form);
+    
+            form.submit();
+        }
+        // check box event checked
+        $("#checkPurchase").change(function(){
+            if($("#checkPurchase").is(":checked")){
+                $('#paypalBtn').attr('disabled', false);
+            }else{
+                $('#paypalBtn').attr('disabled', true);
+            }
+        });
+    </script>
+</body>
+
+</html>

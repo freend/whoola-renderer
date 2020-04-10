@@ -94,7 +94,7 @@ router.get('/detail', function (req, res, next) {
                     "salesAmount": response.body.salesAmount,
                     "mode": process.env.NODE_ENV
                 };
-                res.render('purchase/detail', result);
+                res.render('order/detail', result);
             }
         });
 });
