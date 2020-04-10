@@ -90,6 +90,8 @@ router.get('/detail', function (req, res, next) {
                     "paypalToken": response.body.paypalToken,
                     "paypalCommand": response.body.paypalCommand,
                     "paypalId": response.body.paypalId,
+                    "priceFee": response.body.priceFee,
+                    "salesAmount": response.body.salesAmount,
                     "mode": process.env.NODE_ENV
                 };
                 res.render('purchase/detail', result);

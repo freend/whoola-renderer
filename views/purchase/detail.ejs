@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function(){
   <% include ../common/navi %>
     <div class="container">
         <input type="hidden" value="" id="token" name="token">
-        <input type="hidden" value="<%= amount%>" id="amount">
+        <input type="hidden" value="<%= salesAmount%>" id="amount">
         <input type="hidden" value="<%= receiverId%>" name="receiver">
         <input type="hidden" value="<%= productId%>" name="productId">
         <input type="hidden" value="<%= totalPoint %>" name="totalPoint">
@@ -41,10 +41,11 @@ document.addEventListener("DOMContentLoaded", function(){
         <br>
         <label>product name : <%= productName%></label>
         <br>
-        <label>Price : USD</label> <label id="viewAmount"> <%= amount%></label>
+        <label>Price : USD</label> <label id="viewAmount"> <%= salesAmount%></label>
         <br>
         <label>Total Point : <%= totalPoint %></label>
          <label> Max Fee : </label> <label> <%= maxFee %></label>
+         <label>포인트 결제가 되지 않습니다. 얼리버드 기간중에 사용가능 하도록 할 예정입니다.</label>
         <br>
         <label> use Point</label>
         <div class="input-group mb-3">
@@ -53,25 +54,27 @@ document.addEventListener("DOMContentLoaded", function(){
             <span class="input-group-text"><%= ablePoint%></span>
           </div>
           <input type="number" numberOnly class="form-control" aria-label="Amount (to the nearest dollar)" id="usePoint"
-          value="0">
+          value="0" readonly>
         </div>
         <label> Use Fee : </label> <label id="useFee"> 0</label>
         <!--  https://www.paypal.com/cgi-bin/webscr -->
         <input type="hidden" id="availPoint" value="<%= ablePoint %>">
         <form action="<%= paypalUrl %>" method="post">
+<!--              <input type="image" name="submit" border="0" id="paypalBtn" -->
+<!--             src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" -->
+<!--             alt="PayPal - The safer, easier way to pay online"> -->
+            <input type="checkbox" class="form-check-input" id="checkPurchase" required>제품 정보 및 이용자 정보를 확인하셨습니까?<br>
+            <input class="btn btn-primary" type="submit" value="Buy Now" name="submit" id="paypalBtn" disabled>
+            <button type="button" class="btn btn-danger" onClick="buyPoint()" id="pointBtn">Buy Point</button>
              <input type="hidden" name="cmd" value="_xclick">
              <input type="hidden" name="business" value="<%= paypalId %>">
              <input type="hidden" readonly name="item_name" value="<%= productName%>"> <br>
              <input type="hidden" readonly name="item_number" value="<%= productId%>"> <br>
              <input type="hidden" readonly name="currency_code" value="USD"> <br>
-             <input type="hidden" readonly id="submitAmount" name="amount" value="<%= amount%>"> <br>
+             <input type="hidden" readonly id="submitAmount" name="amount" value="<%= salesAmount%>"> <br>
              <!-- 여기에 Referral Code를 넣어주도록 하자 -->
              <input type="hidden" name="custom" value="code:<%= referralCode %>,receiver:<%= receiverPhone %>">
              <input type="hidden" name="charset" value="UTF-8">
-             <input type="image" name="submit" border="0" id="paypalBtn"
-            src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"
-            alt="PayPal - The safer, easier way to pay online">
-            <button type="button" class="btn btn-danger" onClick="buyPoint()" id="pointBtn">Buy Point</button>
          </form>
          <br>
     </div>
@@ -90,7 +93,7 @@ $('#usePoint').on("propertychange change keyup paste input", function() {
     $(this).val(usePoint);
   }
 
-  if ($(this).val() >= $('#availPoint').val()) {
+  if (parseFloat($(this).val()) >= parseFloat($('#availPoint').val())) {
     $(this).val($('#availPoint').val());
     $('input[name=submit]').hide();
     $('#pointBtn').show();
@@ -130,4 +133,12 @@ function buyPoint() {
 
         form.submit();
     }
+    // check box event checked
+    $("#checkPurchase").change(function(){
+        if($("#checkPurchase").is(":checked")){
+            $('#paypalBtn').attr('disabled', false);
+        }else{
+            $('#paypalBtn').attr('disabled', true);
+        }
+    });
 </script>
