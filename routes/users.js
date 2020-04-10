@@ -97,4 +97,19 @@ router.get('/password', function (req, res, next) {
     };
     res.render('member/password', result);
 });
+router.post('/password', function (req, res, next) {
+    const token = req.body["token"];
+    console.log("token", token);
+    if (token == "null" || token == null || token == undefined) {
+        res.render('common/error', {"message": "sign in", "ahref": "/signin"});
+    }
+    unirest
+        .put(process.env.API_HOST + '/member/password')
+        .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
+        .send({"currentPassword": req.body["currentPassword"], "newPassword" : req.body["password"]})
+        .then((response) => {
+            console.log("response", response);
+            res.json({'message': response})
+        });
+});
 module.exports = router;
