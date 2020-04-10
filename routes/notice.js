@@ -4,13 +4,8 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    var sendUrl = '';
-    if (req.param('page') != null) {
-        sendUrl += '?page=' + req.param('page');
-    }
-
     unirest
-        .get(process.env.API_HOST + '/notice')
+        .get(process.env.API_HOST + '/notice' + '?page=' + req.param('page'))
         .send()
         .then((response) => {
             const result = {"page": response.body, "url": 'notice/list'};

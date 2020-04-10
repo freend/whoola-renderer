@@ -5,7 +5,7 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
     unirest
-        .get(process.env.API_HOST + '/point')
+        .get(process.env.API_HOST + '/point?page=' + req.param('page'))
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
         .send()
         .then((response) => {
@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
                         res.json(response.body);
                 }
             } else {
-                const result = {"page": response.body.page, "url": 'invite/list'};
+                const result = {"page": response.body.page, "url": 'point'};
                 res.render('point/list', result);
             }
         });

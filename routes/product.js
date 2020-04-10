@@ -31,7 +31,7 @@ router.get('/operator', function (req, res, next) {
     const operator = req.param('operator');
     const receiver = req.param('receiver');
     unirest
-        .get(process.env.API_HOST + '/product/operator/' + operator + "?receiver=" + receiver)
+        .get(process.env.API_HOST + '/product/operator/' + operator + "?receiver=" + receiver + "&service=" + service)
         .send()
         .then((response) => {
             if (response.body.status == '404') {

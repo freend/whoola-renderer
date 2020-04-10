@@ -5,11 +5,8 @@ const router = express.Router();
 /* GET users listing. */
 var sendUrl;
 router.get('/', function(req, res, next) {
-    if (req.param('page') != null) {
-        sendUrl += '?page=' + req.param('page');
-    }
     unirest
-        .get(process.env.API_HOST + '/purchase/list')
+        .get(process.env.API_HOST + '/purchase/list?page=' + req.param('page'))
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
         .send()
         .then((response) => {

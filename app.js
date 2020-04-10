@@ -66,17 +66,17 @@ app.use(function(err, req, res, next) {
 });
 let config;
 if (process.env.NODE_ENV == undefined) {
-  process.env.NODE_ENV = 'LOCAL';
+  process.env.NODE_ENV = 'local';
 }
 switch (process.env.NODE_ENV) {
-  case 'LOCAL':
-    config = require('./config/local');
-    break;
-  case 'DEVELOP':
+  case 'dev':
     config = require('./config/develop');
     break;
+  case 'prod':
+    config = require('./config/prod');
+    break;
   default:
-    console.log('error');
+    config = require('./config/local');
     break;
 }
 

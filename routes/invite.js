@@ -5,7 +5,7 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
     unirest
-        .get(process.env.API_HOST + '/invite')
+        .get(process.env.API_HOST + '/invite?page=' + req.param('page'))
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
         .send()
         .then((response) => {
