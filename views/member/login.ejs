@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../common/header %>
+    <script src="javascripts/validate.js"></script>
+</head>
+<body>
+    <% include ../common/navigator %>
+    <section>
+        <h1 class="title">Log in</h1>
+        <form class="form-signin" action="/login" method=POST>
+            <div class="conts_wrap">
+                <div class="login_wrap">
+                    <div class="login_email">
+                        <h2>Email address</h2>
+                        <div class="input_box">
+                            <input type="email" name="id" id="inputEmail" required autofocus>
+                        </div>
+                        <h2>Password</h2>
+                        <div class="input_box">
+                            <input type="password" name="password" required>
+                        </div>
+                        <button class="btn_login" type="submit">Log in</button>
+                    </div>
+                    <div class="or">
+                        <p>or</p>
+                    </div>
+                    <div class="btn_group forget_sign">
+                        <button id="forget-password" class="btn_forget" type="button">Forget Password</button>
+                        <button href="#" onclick="location.href = '/signup'">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+    <script>
+        $('#forget-password').click(function(){
+          const mail = $('#inputEmail');
+          if (mail.val() == '') {
+            alert('please insert sign up e-mail address');
+          } else if(!validateMail(mail.val())) {
+            alert('do not match email');
+          } else {
+            $(location).attr('href', 'validate/password/' + mail.val());
+          }
+        });
+    </script>
+
+    <footer>
+        <% include ../common/footers %>
+    </footer>
+</body>
+</html>
