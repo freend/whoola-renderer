@@ -38,7 +38,26 @@
         </div>
     </header>
     <script>
+        function logout() {
+            localStorage.removeItem('token');
+            location.href = "/";
+        }
         function setToken(value) {
             location.href = value + localStorage.getItem('token');
         }
+        $(document).ready(function(){
+            const haveToken = localStorage.getItem('token');
+            var isLogin = '';
+            var isLogout = '';
+
+            if (haveToken != null) {
+                isLogin = 'none';
+                isLogout = 'block';
+            } else {
+                isLogin = 'block';
+                isLogout = 'none';
+            }
+            $('#isLogout').css("display", isLogin);
+            $('#isLogin').css("display", isLogout);
+        });
     </script>
