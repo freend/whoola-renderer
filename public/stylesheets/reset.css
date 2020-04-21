@@ -283,7 +283,7 @@ input[type="checkbox"]:checked + em {
 }
 
 *:focus{
-	/*outline: none*/
+	outline: none
 }
 /*공통팝업창*/
 .popup-wrap{
