@@ -12,21 +12,35 @@
         <% for (var i = 0; i < page.content.length; i++) { %>
         <tr>
             <td> <%= page.content[i].receiverName %> </td>
-            <td> <a href="/products/operator?operator=<%= page.content[i].operatorId%>&receiver=<%= page.content[i].id %>"><%= page.content[i].receiverNumber %></a> </td>
+            <td> <a href="#" onclick="fillField(<%= page.content[i].receiverNumber %>, '<%= page.content[i].receiverName %>');"><%= page.content[i].receiverNumber %></a> </td>
             <td class="txt_c"><button class="up"
                 onclick="location.href='/order/edit?id=<%= page.content[i].id %>&name=<%= page.content[i].receiverName %>&phone=<%= page.content[i].receiverNumber %>&token=<%= token %>'">
                 Update</button></td>
-            <td class="txt_c"><button class="del" onclick="deleteReceiver(<%= page.content[i].id %>)">
+            <td class="txt_c"><button class="del" onclick="deleteReceiver(<%= page.content[i].id %>, '<%= page.content[i].receiverName %>')">
                 Delete</button></td>
         </tr>
         <% } %>
     </tbody>
 </table>
 <script>
-    function deleteReceiver(value) {
-        var con_test = confirm("Are you delete? " + value);
+    function deleteReceiver(value, name) {
+        var con_test = confirm("Would you like to delete this recipient? " + name);
         if(con_test == true) {
             location.href='/receiver/delete/' + value + '?token=' + localStorage.getItem('token');
+        }
+    }
+    function fillField(phoneNumber, receiver) {
+        $('#phoneId').val(phoneNumber);
+        $('#nameId').val(receiver);
+        const match = $('#match');
+        $('#phoneId').val($('#phoneId').val().replace(/[^0-9]/g,''));
+        const value = $('#phoneId').val();
+        if (/^[1-9][0-9]{6,14}$/.test(value)) {
+            match.css("color", 'blue');
+            match.text('Valid Phone Number');
+        } else {
+            match.css("color", 'red');
+            match.text('Invalid Phone Number');
         }
     }
 </script>

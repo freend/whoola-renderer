@@ -3,19 +3,24 @@ var unirest = require('unirest');
 var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    console.log("process.env.API_HOST", process.env.API_HOST);
-  res.render('index', { title: 'Express' });
+    res.render('main/landing', {"env": process.env.NODE_ENV});
 });
-router.get('/hoola-checker', function (req, res) {
-    res.json({"message": 'Hoola Moola'});
+router.get('/checker', function (req, res) {
+    res.json({"message": 'Hoola Moola 2020-04-28 v03'});
 });
 router.get('/signupReferral/:referralCode', function (req, res) {
-    const result = {"referralCode": req.param('referralCode')}
-    res.render('member/signup', result);
+    const result = {
+        "referralCode": req.param('referralCode'),
+        "env": process.env.NODE_ENV
+    }
+    res.render('member/register', result);
 });
 router.get('/signup', function (req, res, next) {
-    const result = {"referralCode": null}
-  res.render('member/signup', result);
+    const result = {
+        "referralCode": null,
+        "env": process.env.NODE_ENV
+    }
+  res.render('member/register', result);
 });
 router.post('/signup', function (req, res, next) {
   unirest
@@ -31,14 +36,25 @@ router.post('/signup', function (req, res, next) {
                   res.render('common/error', {"message" : response.body.message, "ahref": '/signup'});
                   break;
               case 200:
-                  res.render('common/error', {"message" : response.body, "ahref": '/'});
+                  res.render('member/complete', {
+                      "message" : response.body,
+                      "ahref": '/',
+                      "env": process.env.NODE_ENV
+                  });
                   break;
           }
       });
 });
 // call login page
 router.get('/login', function (req, res, next) {
-    res.render('member/login');
+    const result = {"env": process.env.NODE_ENV};
+    res.render('member/login', result);
+});
+router.get('/sample', function (req, res, next) {
+    res.render('member/complete', {
+        "ahref": '/',
+        "env": process.env.NODE_ENV
+    });
 });
 // get login info
 router.post('/login', function (req, res, next) {
@@ -57,8 +73,9 @@ router.post('/login', function (req, res, next) {
                 response.body.token = response.body;
                 res.render('common/loginmodal',
                     {
-                        "message" : "log in complete",
+                        "message" : "Log-in Successful",
                         "ahref": "/order",
+                        "env": process.env.NODE_ENV,
                         "token": response.body
                     });
             }

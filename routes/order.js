@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
                 console.log('error', response.body);
                 if (response.body.status === 403) {
                     console.log('not authorize');
-                    res.render('common/error', {"message": "sign in", "ahref": "/login"});
+                    res.render('common/error', {"message": "Please log in", "ahref": "/login"});
                 } else {
                     res.json(response.body);
                 }
@@ -26,7 +26,8 @@ router.get('/', function(req, res, next) {
                     "name": null,
                     "phone": null,
                     "token": req.query.token,
-                    "url": 'receiver/list'
+                    "url": 'receiver/list',
+                    "env": process.env.NODE_ENV
                 };
                 res.render('order/user', result);
             }
@@ -38,7 +39,8 @@ router.get('/edit', function(req, res, next) {
         "id": req.param('id'),
         "name": req.param('name'),
         "phone": phone,
-        "token": req.param('token')
+        "token": req.param('token'),
+        "env": process.env.NODE_ENV
     };
     res.render('order/user', result);
 });
@@ -59,9 +61,10 @@ router.post('/edit', function(req, res, next) {
             })
             .then((response) => {
                 if (response.status != null) {
-                    res.render('common/modal', {"message":response.body.message, "ahref":"/receiver"});
+                    res.render('common/modal', {"message":response.body.message, "ahref":"/order"});
                 }
                 else {
+                    //TODO - "env": process.env.NODE_ENV check
                     res.render('common/error', response.body);
                 }
             });
@@ -82,21 +85,22 @@ router.post('/add', function(req, res, next) {
             .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
             .send({"receiverNumber": "+" + req.body["phone"], "receiverName" : req.body["name"]})
             .then((response) => {
-                console.log("result : " + response.body);
+                console.log("order category : " + response.body);
                 switch (response.status) {
                     case 200:
-                        res.render('purchase/category', response.body);
+                        //TODO - "env": process.env.NODE_ENV check
+                        res.render('purchase/service', response.body);
                         break;
                     case 403:
-                        res.render('common/error', {"message": "sign in", "ahref": "/login"});
+                        res.render('common/error', {"message": "Please log in", "ahref": "/login"});
                         break;
                     default:
-                        res.render('common/modal', {"message": response.body.message, "ahref": "/receiver"});
+                        res.render('common/modal', {"message": response.body.message, "ahref": "/order"});
                         break;
                 }
             });
     } else {
-        res.render('common/modal', {"message": "mobile number is invalid", "ahref":"/receiver"});
+        res.render('common/modal', {"message": "mobile number is invalid", "ahref":"/order"});
     }
 });
 
@@ -113,7 +117,11 @@ router.get('/delete/:id', function(req, res, next) {
         .send({"id": req.param('id')})
         .then((response) => {
             if (response.status != null) {
-                res.render('common/modal', {"message":response.body.message, "ahref":"/receiver"});
+                res.render('common/modal', {
+                    "message":response.body.message,
+                    "ahref":"/order",
+                    "env": process.env.NODE_ENV
+                });
             }
             else {
                 res.render('common/error', response.body);

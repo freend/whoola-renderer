@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/info', function (req, res, next) {
     if (req.query.token == "null" || req.query.token == null || req.query.token == undefined) {
-        res.render('common/error', {"message": "sign in", "ahref": "/login"});
+        res.render('common/error', {"message": "Please log in", "ahref": "/login"});
     }
     unirest
         .get(process.env.API_HOST + '/member/info')
@@ -19,7 +19,7 @@ router.get('/info', function (req, res, next) {
             switch (response.body.status) {
                 case 403:
                     console.log('not authorize');
-                    res.render('common/error', {"message": "sign in", "ahref": "/login"});
+                    res.render('common/error', {"message": "Please log in", "ahref": "/login"});
                     break;
                 default:
                     console.log('info result', response.body);
@@ -30,9 +30,10 @@ router.get('/info', function (req, res, next) {
                         "link": process.env.URLS + "/signupReferral/" + response.body.myReferralCode,
                         "paypal": response.body.paypalAccount,
                         "buyThisMonth": response.body.buyThisMonth,
-                        "level": response.body.level
+                        "level": response.body.level,
+                        "env": process.env.NODE_ENV
                     };
-                    res.render('member/info', result);
+                    res.render('member/myinfo', result);
                     break;
             }
         });
@@ -40,7 +41,8 @@ router.get('/info', function (req, res, next) {
 router.get('/paypal', function(req, res, next) {
     const token = req.query.token;
     const result = {
-        "token": token
+        "token": token,
+        "env": process.env.NODE_ENV
     };
     res.render('member/paypal', result);
 });
@@ -59,7 +61,7 @@ router.post('/paypal', function (req, res, next) {
             switch (response.body.status) {
                 case 403:
                     console.log('not authorize');
-                    res.render('common/error', {"message": "sign in", "ahref": "/login"});
+                    res.render('common/error', {"message": "Please log in", "ahref": "/login"});
                     break;
                 default:
                     const result = {
@@ -67,9 +69,12 @@ router.post('/paypal', function (req, res, next) {
                         "myReferralCode": response.body.myReferralCode,
                         "point": response.body.point,
                         "link": process.env.URLS + "/signupReferral/" + response.body.myReferralCode,
-                        "paypal": response.body.paypalAccount
+                        "paypal": response.body.paypalAccount,
+                        "buyThisMonth": response.body.buyThisMonth,
+                        "level": response.body.level,
+                        "env": process.env.NODE_ENV
                     };
-                    res.render('member/info', result);
+                    res.render('member/myinfo', result);
                     break;
             }
         });
@@ -84,16 +89,18 @@ router.post('/info', function (req, res, next) {
             if (response.status != null) {
                 res.json(response.body);
             }
+            //TODO "env": process.env.NODE_ENV
             res.render('product/' + req.body["id"], response.body);
         });
 });
 router.get('/password', function (req, res, next) {
     if (req.query.token == "null" || req.query.token == null || req.query.token == undefined) {
-        res.render('common/error', {"message": "sign in", "ahref": "/login"});
+        res.render('common/error', {"message": "Please log in", "ahref": "/login"});
     }
     const result = {
         "token": req.query.token,
-        "flag": true
+        "flag": true,
+        "env": process.env.NODE_ENV
     };
     res.render('member/password', result);
 });
@@ -101,15 +108,28 @@ router.post('/password', function (req, res, next) {
     const token = req.body["token"];
     console.log("token", token);
     if (token == "null" || token == null || token == undefined) {
-        res.render('common/error', {"message": "sign in", "ahref": "/login"});
+        res.render('common/error', {"message": "Please log in", "ahref": "/login"});
     }
     unirest
         .put(process.env.API_HOST + '/member/password')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
         .send({"currentPassword": req.body["currentPassword"], "newPassword" : req.body["password"]})
         .then((response) => {
-            console.log("response", response);
-            res.json({'message': response})
+            if (response.body.status != null) {
+                var result = {
+                    'message': response.body.message,
+                    'ahref': '/users/password',
+                    "env": process.env.NODE_ENV
+                }
+            } else {
+                result = {
+                    'message': response.body,
+                    'ahref': '/users/info',
+                    "env": process.env.NODE_ENV
+                }
+            }
+
+            res.render('common/modal', result);
         });
 });
 module.exports = router;

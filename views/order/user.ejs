@@ -7,12 +7,18 @@
     <% include ../common/navigator %>
     <section>
         <h1 class="title">
+            <% if(phone == null) { %>
             <span class="blind"><b>Step1</b> Number</span>
             Purchase Step
-            <span><b>Step2</b> Product List</span>
+            <span><b>Step2 </b>View Product Category</span>
+            <% }%>
         </h1>
         <h2 class="sub_title">
-            Add Receive Phone Number, Or Select Below List
+            <% if(phone == null) { %>
+                Add Receive Phone Number, Or Select Below List
+            <% } else { %>
+                Update User Name And Phone Number
+            <% } %>
         </h2>
         <div class="conts_wrap">
             <div class="purchase_wrap">
@@ -28,31 +34,33 @@
                     <h3>Phone Number</h3>
                     <div><input type="text" id="phoneId" name="phone"
                         <% if(phone == null) { %>
-                            placeholder="Insert Phone Number"
+                            placeholder="Enter Phone Number"
                         <% } else { %>
                             value = "<%=phone %>"
                         <% } %>
                     ></div>
-                    <small>Phone Number use only number not use dash or space Phone number
-                    </small>
-                    Phone Number regex : <label id="match"></label>
+                    <small style="color: red;">Please check if the recipient phone number and mobile carrier match. (The 0 after the country code may mistake the mobile carrier. Please check if the correct carrier is chosen when ordering.)</small><br>
+                    <small><label id="match"></label></small>
                 </div>
                 <div class="input_box">
                     <h3>Name</h3>
                     <div><input type="text" class="form-control" id="nameId" name="name"
                         <% if(name == null) { %>
-                            placeholder="insert invite name"
+                            placeholder="Enter Receiver Name"
                         <% } else { %>
                             value="<%= name %>"
                         <% } %>
                          >
                     </div>
+                    <% if(id != null) { %>
+                        <input type="hidden" name="id" id="id" value="<%=id %>">
+                    <% } %>
                 </div>
                     
                 <div class="btn_group">
                     <button id="btnSubmit">
                         <% if(id == null) { %>
-                            Select Category
+                            View Product Category
                         <% } else { %>
                             Edit
                         <% } %>
@@ -63,7 +71,6 @@
                     <% if (id == null) { %>
                         <% include receiver %>
                     <% } %>
-                    <small class="mo_show">업데이트나 제거를 원하실 경우, PC에서 접속해주세요.</small>
                 </div>
             </div>
         </div>
@@ -71,14 +78,10 @@
     <script>
         $('#btnSubmit').click(function(event){
             const match = $('#match');
-            if(match.text() != 'Right Phone Number') {
-                alert('check receive phone number');
+            if(match.text() != 'Valid Phone Number') {
+                alert('Invalid Phone Number');
                 return false;
             }
-            // if($('#nameId').val() == '') {
-            //     alert('receive name');
-            //     return false;
-            // }
             $('#submit-form').submit();
         });
         $('#phoneId').keyup(function(event){
@@ -87,12 +90,25 @@
             const value = $(this).val();
             if (/^[1-9][0-9]{6,14}$/.test(value)) {
                 match.css("color", 'blue');
-                match.text('Right Phone Number');
+                match.text('Valid Phone Number');
             } else {
                 match.css("color", 'red');
-                match.text('Wrong Phone Number');
+                match.text('Invalid Phone Number');
             }
         });
+        $(window).bind("pageshow", function (event) {
+        const match = $('#match');
+        const value = $('#phoneId').val();
+        if (/^[1-9][0-9]{6,14}$/.test(value)) {
+            match.css("color", 'blue');
+            match.text('Valid Phone Number');
+        } else {
+            if (value != '') {
+                match.css("color", 'red');
+                match.text('Invalid Phone Number');
+            }
+        }
+    });
     </script>
     <footer>
         <% include ../common/footers %>

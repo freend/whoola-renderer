@@ -36,6 +36,10 @@
 </nav>
 <script>
     function pageController(pageNum) {
-        location.href = '<%= url %>' + '?page='+ pageNum + '&token=' + localStorage.getItem('token');
+        if ('<%= url %>' == 'notice') {
+          location.href = '<%= url %>' + '?page='+ pageNum;
+        } else {
+          location.href = '<%= url %>' + '?page='+ pageNum + '&token=' + localStorage.getItem('token');
+        }
     }
 </script>

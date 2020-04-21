@@ -4,9 +4,10 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    const token = req.query.token;
     unirest
         .get(process.env.API_HOST + '/invite?page=' + req.param('page'))
-        .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
+        .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
         .send()
         .then((response) => {
             if (response.body.status != null) {
@@ -14,15 +15,20 @@ router.get('/', function(req, res, next) {
                 switch (response.body.status) {
                     case 403:
                         console.log('not authorize');
-                        res.render('common/error', {"message": "sign in", "ahref": "/login"});
+                        res.render('common/error', {"message": "Please log in", "ahref": "/login"});
                         break;
                     default:
                         res.json(response.body);
                 }
             } else {
-                console.log(response.body.page.content);
-                const result = {"page": response.body.page, "url": 'invite/list'};
-                res.render('invite/list', result);
+                console.log(response.body);
+                const result = {
+                    "page": response.body.page,
+                    "url": 'invite',
+                    "token": token,
+                    "env": process.env.NODE_ENV
+                };
+                res.render('invite/invite', result);
             }
         });
 });
@@ -37,8 +43,25 @@ router.post('/add', function(req, res, next) {
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
         .send({"invitedUserMail": req.body["mail"]})
         .then((response) => {
+            console.log('response', response);
             if (response.status != null) {
-                res.render('common/modal', {"message":response.body, "ahref":"/invite"});
+                var message = '';
+                switch (response.status) {
+                    case 200:
+                        message = response.body;
+                        break;
+                    default:
+                        message = response.body.message;
+                        break;
+                }
+                res.render('common/modal', {
+                    "page": response.body.page,
+                    "url": 'invite',
+                    "token": token,
+                    "message":message,
+                    "env": process.env.NODE_ENV,
+                    "ahref":"/invite?page=1"
+                });
             }
             else {
                 res.render('common/error', response.body);

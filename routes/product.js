@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
     if (req.param('page') != null) {
         sendUrl += '?page=' + req.param('page');
     }
-
+    //TODO "env": process.env.NODE_ENV
     unirest
         .get(sendUrl)
         .send()
@@ -26,7 +26,11 @@ router.get('/operator/service', function (req, res, next) {
             if (response.body.status == '404') {
                 res.render('error', response.body);
             }
-            const result = {"receiverId": receiver, "operator": operator, "service": response.body};
+            const result = {"receiverId": receiver,
+                "operator": operator,
+                "service": response.body,
+                "env": process.env.NODE_ENV
+            };
             // res.json(result);
             res.render('purchase/category', result);
         });
@@ -40,11 +44,17 @@ router.get('/operator', function (req, res, next) {
         .get(process.env.API_HOST + '/product/operator/' + operator + "?receiver=" + receiver + "&service=" + service)
         .send()
         .then((response) => {
+            console.log('response body', response.body.list);
             if (response.body.status == '404') {
                 res.render('error', response.body);
             }
-            const result = {"receiver": receiver, "page": response.body.page, "url": 'product/list'};
-            res.render('product/list', result);
+            const result = {
+                "receiver": receiver,
+                "list": response.body.list,
+                "url": 'product/list',
+                "env": process.env.NODE_ENV
+            };
+            res.render('order/product', result);
         });
 });
 router.get('/:productId', function (req, res, next) {
@@ -55,6 +65,7 @@ router.get('/:productId', function (req, res, next) {
             if (response.body.status == '404') {
                 res.render('error', response.body);
             }
+            //TODO "env": process.env.NODE_ENV
             res.render('product/detail', response.body);
         });
 });

@@ -46,8 +46,8 @@
         $('#btnSubmit').click(function(event){
             const match = $('#match');
             console.log('check : ' + match.text());
-            if(match.text() != 'Right Phone Number') {
-                alert('check receive phone number');
+            if(match.text() != 'Valid Phone Number') {
+                alert('Invalid Phone Number');
                 return false;
             }
             $('#submit-form').submit();
@@ -58,10 +58,10 @@
             const value = $(this).val();
             if (/^[1-9][0-9]{6,14}$/.test(value)) {
                 match.css("color", 'blue');
-                match.text('Right Phone Number');
+                match.text('Valid Phone Number');
             } else {
                 match.css("color", 'red');
-                match.text('Wrong Phone Number');
+                match.text('Invalid Phone Number');
             }
         });
     </script>

@@ -11,7 +11,11 @@
         }
         var redirectUrl = "<%= ahref%>";
         if (redirectUrl != null) {
-            location.href = redirectUrl + "?token=" + localStorage.getItem('token');
+            if (redirectUrl == '/order') {
+                location.href = redirectUrl + "?token=" + localStorage.getItem('token');
+            } else {
+                location.href = redirectUrl + "&token=" + localStorage.getItem('token');
+            }
         }
     }
 </script>

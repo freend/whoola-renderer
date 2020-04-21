@@ -8,15 +8,13 @@
     <% include ../common/navigator %>
     <section>
         <h1 class="title">
-            <span><b>Step2</b> Purchase</span>
-            Purchase Step
+            <span><b>Step3</b> Select Plan</span>
+            Payment
             <span class="blind"><b>Step3</b> Purchase</span>
         </h1>
 
         <div class="conts_wrap">
             <div class="purchase_wrap">
-
-
                 <div class="purchase_tbl2 mt_50">
                     <table>
                         <caption class="blind">Purchase table</caption>
@@ -39,59 +37,96 @@
                                 <th class="txt_l">Product Name</th>
                                 <td><%= productName%></td>
                             </tr>
-                            <tr>
                                 <th class="txt_l">Currency</th>
                                 <td>USD</td>
                                 <th class="txt_l">Price</th>
-                                <td><%= salesAmount%></td>
+                                <td><%= salesAmount%>$</td>
                             </tr>
+                            <% if (description != '') { %>
+                            <tr>
+                                <th class="txt_l">Description</th>
+                                <td colspan="3"><%= description %></td>
+                            </tr>
+                            <% } %>
                             <tr>
                                 <th class="txt_l">My HM Dollar</th>
-                                <td><%= totalPoint %></td>
+                                <td><%= totalPoint %>$</td>
                                 <th class="txt_l">HM Dollar Total Fee</th>
-                                <td><%= maxFee %></td>
+                                <td><%= maxFee %>$</td>
                             </tr>
 
                         </tbody>
                     </table>
-
                 </div>
-                <div class="totalPrice">
-                    <h3>Total Price</h3>
-                    <span>USD</span>
-                    <b><%= salesAmount%></b>
+                <div class="payment_wrap">
+                    <div class="payment_box">
+                        <span>Order Price</span>
+                        <span id="orderPrice"></span>
+                        <i>-</i>
+                    </div>
+                    <div class="payment_box">
+                        <span>Discount</span>
+                        <span id="deductionAmount"></span>
+                        <i>=</i>
+                    </div>
+                    <div class="payment_box">
+                        <span>Total Amount</span>
+                        <span id="finalPayment"></span>
+                    </div>
+                    <div class="payment_box">
+                        <p>
+                            <span>Price</span>
+                            <span><%= salesAmount%>$</span>
+                        </p>
+                        <p>
+                            <span>Processing Fee
+                                <!-- <b class="tip"><img src="/static/images/img_tip.png"></b> -->
+                                <em class="tipTxt">
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                                    <a href="#a" class="close">Close</a>
+                                </em>
+                            </span>
+                            <span id="processFee"></span>
+                        </p>
+                        <p>
+                            <span>Total Price</span>
+                            <span id="totalPrice"></span>
+                        </p>
+                    </div>
+                    <div class="payment_box">
+                        <p>
+                            <span>HM Dollar</span>
+                        </p>
+                        <p>
+                            <span>Available :<b> <%= totalPoint %></b></span>
+                            <span><input type="text" value="0" readonly></span>
+                        </p>
+                    </div>
+                    <div class="payment_box">
+                        <div class="chk_wrap">
+                            <input type="checkbox" id="term">
+                            <label for="term">Did you check the payment and service user details?</label>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="purchase_tbl3">
-                    <table>
-                        <caption class="blind">Purchase table</caption>
-                        <colgroup>
-                            <col style="width: 17%">
-                            <col style="width: auto">
-                            <col style="width: 23%">
-                            <col style="width: auto">
-                        </colgroup>
-                        <tbody>
-                            <tr>
-                                <th class="txt_l">Use Point</th>
-                                <td>
-                                    <div class="total_txt">
-                                        <span>$</span>
-                                        <span><%= totalPoint %></span>
-                                        <b>0.13</b>
-                                    </div>
-                                </td>
-                                <th class="txt_l txt_pur">Payment Amount</th>
-                                <td>+000000000000000000</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
+                    <form action="<%= paypalUrl %>" method="post" id="buyPaypal">
+                        <div class="btn_group">
+                            <button class="btn_buy" id="paypalBtn" onclick="buyItem()" type="button">Buy</button>
+                        </div>
+                        <input type="hidden" name="cmd" value="_xclick">
+                        <input type="hidden" name="business" value="<%= paypalId %>">
+                        <input type="hidden" readonly name="item_name" value="<%= productName%>"> <br>
+                        <input type="hidden" readonly name="item_number" value="<%= productId%>"> <br>
+                        <input type="hidden" readonly name="currency_code" value="USD"> <br>
+                        <input type="hidden" readonly id="submitAmount" name="amount" value=""> <br>
+                        <!-- 여기에 Referral Code를 넣어주도록 하자 -->
+                        <input type="hidden" name="custom" value="code:<%= referralCode %>,receiver:<%= receiverPhone %>">
+                        <input type="hidden" name="charset" value="UTF-8">
+                    </form>
                 </div>
             </div>
         </div>
-        <form action="<%= paypalUrl %>" method="post">
+        <!-- <form action="<%= paypalUrl %>" method="post">
         <input type="checkbox" class="form-check-input" id="checkPurchase" required>제품 정보 및 이용자 정보를 확인하셨습니까?<br>
         <input class="btn btn-primary" type="submit" value="Buy Now" name="submit" id="paypalBtn" disabled>
         <div class="purchase_btn">
@@ -103,33 +138,53 @@
             <input type="hidden" readonly name="item_number" value="<%= productId%>"> <br>
             <input type="hidden" readonly name="currency_code" value="USD"> <br>
             <input type="hidden" readonly id="submitAmount" name="amount" value="<%= salesAmount%>"> <br>
-            <!-- 여기에 Referral Code를 넣어주도록 하자 -->
             <input type="hidden" name="custom" value="code:<%= referralCode %>,receiver:<%= receiverPhone %>">
             <input type="hidden" name="charset" value="UTF-8">
-        </form>
+        </form> -->
     </section>
-
     <footer>
-        <div class="copyright">
-            <div class="link">
-                <a href="notice.html">Notice</a>
-                <a href="contactus.html">Contact Us</a>
-                <span class="blank_link">
-                    <a href="#" class="blank"></a>
-                    <a href="#" class="blank"></a>
-                    <a href="" class="blank"></a>
-                </span>
-            </div>
-            <span class="copy_txt">ⓒ hoola moolah 2020</span>
-        </div>
-
+        <% include ../common/footers %>
     </footer>
 
     <script>
     $(document).ready(function(){
+        // hide buy point
         $('#pointBtn').hide();
+        // disable buy button
+        // $('#paypalBtn').attr('disabled', true);
+        // fee setting
+        feeProcess(<%= salesAmount %>);
         var usePoint = 0;
     });
+    function feeProcess(salesAmount) {
+        const feePercent = <%= feePercentValue %> / 100;
+        const processFee = strictFloat(Math.ceil((salesAmount * feePercent) * 100) / 100);
+        console.log('processFee : ' + processFee);
+        $('#processFee').text(processFee + '$');
+        $('#totalPrice').text(strictFloat(salesAmount + processFee) + '$');
+        $('#orderPrice').text(strictFloat(salesAmount + processFee) + '$');
+        $('#deductionAmount').text(0 + '$');
+        $('#finalPayment').text(strictFloat(salesAmount + processFee) + '$');
+        $('#submitAmount').val(strictFloat(salesAmount + processFee));
+    }
+    function strictFloat(value) {
+      console.log('value', value);
+      var changeInt = parseInt(value * 100);
+      return Math.ceil(changeInt) / 100;
+    }
+    function buyItem() {
+        const isPayable = <%= payable %>;
+        if(!$('#term').is(":checked")){
+            alert('Please agree to the terms');
+            return false;
+        } else {
+            if (isPayable == false) {
+                alert('order is temporary unavailable');
+                return false;
+            }
+            document.getElementById('buyPaypal').submit();
+        }
+    }
     $('#usePoint').on("propertychange change keyup paste input", function() {
         if (/^\d+(?:[.]?[\d]?[\d])?$/.test($(this).val())) {
         usePoint = $(this).val();
@@ -138,18 +193,19 @@
         }
     
         if (parseFloat($(this).val()) >= parseFloat($('#availPoint').val())) {
-        $(this).val($('#availPoint').val());
-        $('input[name=submit]').hide();
-        $('#pointBtn').show();
+            $(this).val($('#availPoint').val());
+            $('input[name=submit]').hide();
+            $('#pointBtn').show();
         } else {
-        $('input[name=submit]').show();
-        $('#pointBtn').hide();
+            $('input[name=submit]').show();
+            $('#pointBtn').hide();
         }
         $('#submitAmount').val($('#amount').val() - $(this).val());
         $('#viewAmount').text($('#submitAmount').val());
         $('#viewPoint').text($(this).val());
         $('#useFee').text(parseInt(($(this).val() * 100) * 0.05) / 100);
     });
+    
     function buyPoint() {
             var form = document.createElement('form');
             form.setAttribute('method', 'POST');
@@ -177,14 +233,6 @@
     
             form.submit();
         }
-        // check box event checked
-        $("#checkPurchase").change(function(){
-            if($("#checkPurchase").is(":checked")){
-                $('#paypalBtn').attr('disabled', false);
-            }else{
-                $('#paypalBtn').attr('disabled', true);
-            }
-        });
     </script>
 </body>
 

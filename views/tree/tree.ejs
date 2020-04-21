@@ -1,12 +1,7 @@
 <!DOCTYPE html>
-<script type="text/javascript">
-document.addEventListener("DOMContentLoaded", function(){
-    var token = localStorage.getItem('token');
-    document.getElementById('token').value = localStorage.getItem('token');
-});
-</script>
-<html lang="en">
+<html>
   <head>
+    <% include ../common/header %>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <style>
         rect
@@ -29,22 +24,30 @@ document.addEventListener("DOMContentLoaded", function(){
             border:1px solid;
         }
     </style>
-    <% include ../common/head %>
-  </head>
-  <body>
-  <% include ../common/navi %>
-    <input type="hidden" id="myJsonData" value="<%=JSON.stringify(trees)%>" />
-    <br>
-    <div id="container">
-        <table>
-            <tr>
-                <td width="10%"> My Tree</td>
-                <td width="80%"> <svg></svg> </td>
-                <td width="10%"> </td>
-            </tr>
-        </table>
-    </div>
-  </body>
+</head>
+<body>
+  <% include ../common/navigator %>
+    <section>
+        <h1 class="title">My Tree</h1>
+        <div class="conts_wrap">
+            <input type="hidden" id="myJsonData" value="<%=JSON.stringify(trees)%>" />
+            <br>
+            <div id="container">
+                <table>
+                    <tr>
+                        <td width="10%"> My Tree</td>
+                        <td width="80%"> <svg></svg> </td>
+                        <td width="10%"> </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+  <footer>
+      <% include ../common/footers %>
+  </footer>
+</body>
+
 </html>
 <script>
 var jsonData = document.getElementById("myJsonData").value;
@@ -54,7 +57,7 @@ var jsonData = document.getElementById("myJsonData").value;
         .attr("height", 400)
         .style("border", "1px solid black")
         .append("g")
-          .attr("transform", "translate(${root.dy / 3},${root.dx - x0})");
+            .attr("transform", "translate(${root.dy / 3},${root.dx - x0})");
     var data = myJsonData;
 
     var dataStructure = d3.stratify()
@@ -86,4 +89,3 @@ var jsonData = document.getElementById("myJsonData").value;
     .attr("x", function(d) {return d.x;})
     .attr("y", function(d) {return d.y + 15;});
 </script>
-<% include ../common/footer %>

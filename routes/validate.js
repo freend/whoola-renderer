@@ -16,7 +16,11 @@ router.get('/signup/:mail/:valicateCode', function(req, res, next) {
                         res.json(response.body);
                 }
             } else {
-                res.render("common/error", {'message': "validate complete", 'ahref': '/'});
+                res.render("common/error", {
+                    'message': "validate complete",
+                    'ahref': '/',
+                    "env": process.env.NODE_ENV
+                });
             }
         });
 });
@@ -34,9 +38,10 @@ router.get('/password/:mail', function(req, res, next){
                     const result = {
                         "message": response.body.responseMessage,
                         "ahref": "/",
-                        "token": null
+                        "token": null,
+                        "env": process.env.NODE_ENV
                     }
-                    res.render('common/modal', result);
+                    res.render('common/error', result);
                 }
                  else {
                     res.json(response.body);
@@ -64,14 +69,16 @@ router.post('/reset', function(req, res, next){
                     const result = {
                         "message": response.body.responseMessage,
                         "ahref": "/",
-                        "token": null
+                        "token": null,
+                        "env": process.env.NODE_ENV
                     }
                     res.render('common/modal', result);
                 }
                  else {
                     const result = {
                         "message": response.body.message,
-                        "ahref": "/"
+                        "ahref": "/",
+                        "env": process.env.NODE_ENV
                     }
                     res.render('common/error', result);
                 }
@@ -84,7 +91,8 @@ router.get('/password/:mail/:validateCode',function(req, res, next){
     const result = {
         "mail": req.param('mail'),
         "validateCode": req.param('validateCode'),
-        "flag": false
+        "flag": false,
+        "env": process.env.NODE_ENV
     }
     res.render('member/password', result);
 });

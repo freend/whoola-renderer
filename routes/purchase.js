@@ -15,15 +15,19 @@ router.get('/', function(req, res, next) {
                 switch (response.body.status) {
                     case 403:
                         console.log('not authorize');
-                        res.render('common/error', {"message": "sign in", "ahref": "/login"});
+                        res.render('common/error', {"message": "Please log in", "ahref": "/login"});
                         break;
                     default:
                         res.json(response.body);
                 }
             } else {
-                console.log(response.body);
-                const result = {"page": response.body.page, "url": 'purchase'};
-                res.render('purchase/list', result);
+                console.log(response.body.page);
+                const result = {
+                    "page": response.body.page,
+                    "url": 'purchase',
+                    "env": process.env.NODE_ENV
+                };
+                res.render('purchase/history', result);
             }
         });
 });
@@ -49,8 +53,9 @@ router.get('/complete', function (req, res, next) {
             const result = {
                 "msg": response.body,
                 "ahref": "/home"
-            }
-            res.render('common/modal', {"message": response.body, "ahref": "/receiver"});
+            };
+            //TODO "env": process.env.NODE_ENV
+            res.render('common/modal', {"message": response.body, "ahref": "/purchase?page=1"});
         });
 });
 router.get('/detail', function (req, res, next) {
@@ -67,10 +72,11 @@ router.get('/detail', function (req, res, next) {
                 switch (response.body.status) {
                     case 403:
                         console.log('not authorize');
-                        res.render('common/error', {"message": "sign in", "ahref": "/login"});
+                        res.render('common/error', {"message": "Please log in", "ahref": "/login"});
                         break;
                     default:
-                        res.json(response.body);
+                        res.render('common/error', {"message": response.body.message, "ahref": "/order?token=" + token});
+                        break;
                 }
             } else {
                 const result = {
@@ -92,7 +98,11 @@ router.get('/detail', function (req, res, next) {
                     "paypalId": response.body.paypalId,
                     "priceFee": response.body.priceFee,
                     "salesAmount": response.body.salesAmount,
-                    "mode": process.env.NODE_ENV
+                    "description": response.body.description,
+                    "mode": process.env.NODE_ENV,
+                    "feePercentValue": response.body.feePercentValue,
+                    "payable": response.body.payable,
+                    "env": process.env.NODE_ENV
                 };
                 res.render('order/detail', result);
             }
@@ -120,7 +130,11 @@ router.post('/', function(req, res, next) {
                     res.render('common/error', {'message':'please log in', 'ahref': '/login'});
                     break;
                 case 200:
-                    res.render('common/error', {'message':response.body, 'ahref': '/purchase?token=' + token});
+                    res.render('common/error', {
+                        'message':response.body,
+                        'ahref': '/purchase?token=' + token,
+                        "env": process.env.NODE_ENV
+                    });
                     break;
                 default:
                     res.json(response.body);

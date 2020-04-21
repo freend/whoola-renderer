@@ -4,9 +4,10 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    const token = req.query.token;
     unirest
         .get(process.env.API_HOST + '/withdraw' + '/amount')
-        .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
+        .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
         .send()
         .then((response) => {
             if (response.body.status != null) {
@@ -14,13 +15,22 @@ router.get('/', function(req, res, next) {
                 switch (response.body.status) {
                     case 403:
                         console.log('not authorize');
-                        res.render('common/error', {"message": "sign in", "ahref": "/login"});
+                        res.render('common/error', {"message": "Please log in", "ahref": "/login"});
                         break;
                     default:
                         res.json(response.body);
                 }
             } else {
-                res.render('withdraw/add', response.body);
+                console.log('body', response.body);
+                const result = {
+                  'haveAmount': response.body.haveAmount,
+                  'availAmount': response.body.availAmount,
+                  'fee': response.body.fee,
+                  'paypalAccount': response.body.paypalAccount,
+                  'token': token,
+                    "env": process.env.NODE_ENV
+                };
+                res.render('withdraw/withdraw', result);
             }
         });
 });
@@ -35,15 +45,20 @@ router.get('/list', function(req, res, next) {
                 switch (response.body.status) {
                     case 403:
                         console.log('not authorize');
-                        res.render('common/error', {"message": "sign in", "ahref": "/login"});
+                        res.render('common/error', {"message": "Please log in", "ahref": "/login"});
                         break;
                     default:
+                        //TODO "env": process.env.NODE_ENV
                         res.json(response.body);
                 }
             } else {
                 console.log(response.body.page.content);
-                const result = {"page": response.body.page, "url": 'withdraw/list'};
-                res.render('withdraw/list', result);
+                const result = {
+                    "page": response.body.page,
+                    "url": 'list',
+                    "env": process.env.NODE_ENV
+                };
+                res.render('withdraw/history', result);
             }
         });
 });
@@ -63,7 +78,11 @@ router.post('/', function(req, res, next) {
         })
         .then((response) => {
             if (response.status != null) {
-                res.render('common/modal', {"message":response.body, "ahref":"/withdraw"});
+                res.render('common/modal', {
+                    "message":response.body,
+                    "ahref":"/withdraw",
+                    "env": process.env.NODE_ENV
+                });
             }
             else {
                 res.render('common/error', response.body);

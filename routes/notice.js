@@ -8,10 +8,11 @@ router.get('/', function(req, res, next) {
         .get(process.env.API_HOST + '/notice' + '?page=' + req.param('page'))
         .send()
         .then((response) => {
-            const result = {"page": response.body, "url": 'notice/list'};
-            res.render('notice/list', result);
+            const result = {"page": response.body, "url": 'notice', "env": process.env.NODE_ENV};
+            res.render('notice/notice', result);
         });
 });
+//TODO - Not Used
 router.get('/:id', function (req, res, next) {
     unirest
         .get(process.env.API_HOST + '/notice' + '/' + req.params.id)

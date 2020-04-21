@@ -13,14 +13,17 @@ router.get('/', function(req, res) {
                 console.log('error', response.body);
                 if (response.body.status === 403) {
                     console.log('not authorize');
-                    res.render('common/error', {"message": "sign in", "ahref": "/login"});
+                    res.render('common/error', {"message": "Please log in", "ahref": "/login"});
                 } else {
                     res.json(response.body);
                 }
             } else {
                 console.log(response.body);
                 // res.json(response.body);
-                res.render('tree/tree', {"trees":response.body});
+                res.render('tree/tree', {
+                    "trees":response.body,
+                    "env": process.env.NODE_ENV
+                });
             }
         });
 });

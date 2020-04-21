@@ -14,14 +14,18 @@ router.get('/', function(req, res, next) {
                 switch (response.body.status) {
                     case 403:
                         console.log('not authorize');
-                        res.render('common/error', {"message": "sign in", "ahref": "/login"});
+                        res.render('common/error', {"message": "Please log in", "ahref": "/login"});
                         break;
                     default:
                         res.json(response.body);
                 }
             } else {
-                const result = {"page": response.body.page, "url": 'point'};
-                res.render('point/list', result);
+                const result = {
+                    "page": response.body.page,
+                    "url": 'point',
+                    "env": process.env.NODE_ENV
+                };
+                res.render('point/history', result);
             }
         });
 });
@@ -38,7 +42,11 @@ router.post('/add', function(req, res, next) {
         .send({"invitedUserMail": req.body["mail"]})
         .then((response) => {
             if (response.status != null) {
-                res.render('common/modal', {"message":response.body, "ahref":"/invite"});
+                res.render('common/modal', {
+                    "message":response.body,
+                    "ahref":"/invite",
+                    "env": process.env.NODE_ENV
+                });
             }
             else {
                 res.render('common/error', response.body);
