@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../common/header %>
+</head>
+<body>
+    <% include ../common/navigator %>
+    <section>
+        <h1 class="title">Account</h1>
+        <div class="conts_wrap">
+            <div class="myinfo_wrap">
+                <div class="left">
+                    <div class="box">
+                        <h1>
+                            <%= mail%>
+                        </h1>
+                        <dl>
+                            <dt class="bold">Business Level</dt>
+                            <dd><img id="levelImg" src=""></dd>
+                        </dl>
+                        <dl>
+                            <dt>Name</dt>
+                            <dd class="bold" id="levelName"></dd>
+                        </dl>
+                        <dl>
+                            <dt>Tier 1 Commission</dt>
+                            <dd class="bold" id="level1"></dd>
+                        </dl>
+                        <dl>
+                            <dt>Tier 2 Commission</dt>
+                            <dd class="bold" id="level2"></dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="box">
+                       <dl>
+                            <dt>Referral Code</dt>
+                            <dd class="bold">
+                                <input type="text" id="code" value="<%= myReferralCode %>" readonly>
+                                <a href="#" onclick="copyCode()"><img src="/static/images/icon_docu.png"></a>
+                           </dd>
+                        </dl>
+                        <dl>
+                            <dt>My Spending</dt>
+                            <dd class="bold"><%= buyThisMonth %></dd>
+                        </dl>
+                        <dl>
+                            <dt>HM Dollar</dt>
+                            <dd class="bold"><%= point %> $</dd>
+                        </dl>
+                        <dl>
+                            <dt>PayPal Account</dt>
+                            <dd class="bold"><%= paypal %></dd>
+                        </dl>
+                        <dl>
+                            <dt>Referral Link</dt>
+                            <dd class="bold">
+                                <!-- <%= link %> -->
+                                <input type="text" id="link" value="<%= link %>" readonly>
+                                <a href="#" onClick="copyUrl();return false;"><img src="/static/images/icon_docu.png"></a>
+                            </dd>
+                        </dl>
+                    </div>
+                   <div class="btn_group">
+                    <button class="btn_o btn_big" onClick="setToken('/users/paypal?token=')">PayPal Account Setting</button>
+                    <button class="btn_big" onClick="setToken('/users/password?token=')">Change Password</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <style type="text/css">
+        input {
+            font-weight:bold;
+            border-top: none;
+            border-right:none;
+            border-left:none;
+            border-bottom: none;
+            margin-left: -10px;
+            width: 300px;
+        }
+     </style>
+    <script>
+        function copyCode() {
+            const copyText = document.getElementById("code");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            document.execCommand("Copy");
+            alert('Copied');
+        }
+        function copyUrl() {
+            const copyText = document.getElementById("link");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            document.execCommand("Copy");
+            alert('Copied');
+        }
+        window.onload = function() {
+            const name = "<%= level.name %>";
+            const level1 = "<%= level.oneLevelPercent %>%";
+            const level2 = "<%= level.twoLevelPercent %>%";
+            $('#levelName').text(name);
+            $('#level1').text(level1);
+            $('#level2').text(level2);
+            
+            switch (name) {
+                case 'moon':
+                url = '/static/images/icon_moon.png';
+                break;
+                case 'earth':
+                url = '/static/images/icon_earth.png';
+                break;
+                case 'sun':
+                url = '/static/images/icon_sun.png'
+                break;
+                default:
+                url = '';
+                break;
+            }
+            $('#levelImg').attr("src", url);
+        };
+        function setToken(value) {
+            location.href = value + localStorage.getItem('token');
+        }
+    </script>
+
+    <footer>
+        <% include ../common/footers %>
+    </footer>
+</body>
+</html>

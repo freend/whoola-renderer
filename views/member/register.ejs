@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../common/header %>
+    <script src="/static/javascripts/validate.js"></script>
+</head>
+<body>
+    <% include ../common/navigator %>
+    <section>
+        <h1 class="title">HoolaMoolah Sign Up</h1>
+        <form action="/signup" method=POST id="submit-form">
+            <div class="conts_wrap">
+                <div class="signup_wrap">
+                    <div class="left">
+                        <div class="signup_input">
+                        <h2>Email address</h2>
+                        <div class="input_box">
+                            <input type="email" id="inputEmail" name="id" autofocus>
+                            <small id="emailText">input e mail address</small>
+                        </div>
+                        <h2>Password</h2>
+                        <div class="input_box">
+                            <input type="password" id="password" name="password">
+                            <small></small>
+                        </div>
+                            <h2>Re-Password</h2>
+                        <div class="input_box">
+                            <input type="password" id="password-check" name="password-confirm">
+                            <small id="match"></small>
+                        </div>
+                            <h2>Referral Code</h2>
+                        <div class="input_box">
+                            <% if (referralCode == null) { %>
+                                <input type="text" id="inputReferral" name="referralCode" placeholder="not Enter Referral Code (Leave blank if you don't have a code)">
+                            <% } else { %>
+                                <input type="text" value="<%= referralCode %>" id="inputReferral" name="referralCode" readonly>
+                            <% } %>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="right">
+                        <% include contract %>
+                        <div class="chk_wrap">
+                            <input type="checkbox" id="term">
+                            <label for="term">Please agree to the terms of service</label>
+                        </div>
+                    </div>
+                    <div class="btn_group">
+                        <button class="btn_login" id="btnSubmit">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+    <footer>
+        <% include ../common/footers %>
+    </footer>
+</body>
+    <script>
+    $('#btnSubmit').click(function(event){
+      $(this).attr('disabled', true);
+      const chkContract = $('#term');
+      const mail = $('#inputEmail');
+      const pass = $('#password');
+      const passCheck = $('#password-check');
+      const match = $('#match');
+  
+      if (chkContract.is(":checked") == false) {
+        alert('Please agree to the terms of service');
+        chkContract.focus();
+        $(this).attr('disabled', false);
+        return false;
+      }
+      if (!validateMail(mail.val())) {
+        alert('do not match email');
+        $('#emailText').text('do not match email');
+        $(this).attr('disabled', false);
+        return false;
+      } else {
+        $('#emailText').text('match email');
+      }
+      if (pass.val() == '') {
+        alert('password required');
+        $(this).attr('disabled', false);
+        return false;
+      }
+      if (passCheck.val() == '') {
+        alert('password check required');
+        $(this).attr('disabled', false);
+        return false;
+      }
+      if (match.text() != 'Passwords Match!') {
+        alert('password not match');
+        $(this).attr('disabled', false);
+        return false;
+      }
+      $('#submit-form').submit();
+    });
+  
+    $('#agreeContract').click(function(event) {
+      $('#checkContract').attr("checked", true);
+    });
+  
+    $('#password-check').keyup(function (event) {
+      var match = $('#match');
+      var pass = $('#password');
+      var confirm = $('#password-check');
+      if (pass.val() == confirm.val()) {
+        match.css("color", 'blue');
+        match.text('Passwords Match!');;
+      } else {
+        match.css("color", 'red');
+        match.text('Passwords do not match');
+      }
+    });
+  </script>
+</html>
