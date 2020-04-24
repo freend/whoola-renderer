@@ -1,0 +1,66 @@
+<% if (page.totalPages > 1) {
+        const currentPage = page.pageable.pageNumber;
+        const totalPage = page.totalPages;
+        const totalElements = page.totalElements
+        var defaultNumber = Math.floor((currentPage + 10) / 10) - 1;
+         var startNum = (defaultNumber * 10) + 1;
+         var endNum = (defaultNumber * 10) + 10;
+         if (endNum > totalPage) {
+            endNum = totalPage;
+         }
+         endNum = Math.min(totalElements, endNum);
+         console.log('defaultNumber', defaultNumber);
+         console.log('start number', startNum);
+         console.log('end num', endNum);
+    %>
+    <div class="paging_wrap">
+        <% if(defaultNumber != 0) { %>
+        <a href="#" onclick="groupController('pre')" class="pre"><img src="/static/images/page_pre.png" alt="prev"></a>
+        <% } else { %>
+        <a href="#" class="pre"><img src="/static/images/page_pre.png" alt="prev"></a>
+        <% } %>
+        <% for (var i = startNum; i <= endNum; i++) {
+            if (i == (currentPage + 1)) { %>
+                <a href="#" class="page_no selec"><%= i %></a>
+            <% } else { %>
+                <a href="#" onClick="pageController(<%= i %>)" class="page_no"><%= i %></a>
+            <% } %>
+        <% } %>
+        <% if (endNum == totalPage) { %>
+        <a href="#" class="next"><img src="/static/images/page_next.png" alt="next"></a>
+        <% } else { %>
+        <a href="#" onclick="groupController('next')" class="next"><img src="/static/images/page_next.png" alt="next"></a>
+        <% } %>
+    </div>
+    <script>
+        function pageController(pageNum) {
+            if ('<%= url %>' == 'notice') {
+                location.href = '<%= url %>' + '?page='+ pageNum;
+            } else {
+                location.href = '<%= url %>' + '?page='+ pageNum + '&token=' + localStorage.getItem('token');
+            }
+        }
+        function groupController(direction) {
+            if ('<%= url %>' == 'notice') {
+                switch (direction) {
+                    case 'pre':
+                        location.href = '<%= url %>' + '?page='+ (<%= startNum %> - 10);
+                    break;
+                    case 'next':
+                        location.href = '<%= url %>' + '?page='+ (<%= endNum %> + 1);
+                    break;
+                }
+            }
+            else {
+                switch (direction) {
+                    case 'pre':
+                        location.href = '<%= url %>' + '?page='+ (<%= startNum %> - 10) + '&token=' + localStorage.getItem('token');
+                    break;
+                    case 'next':
+                        location.href = '<%= url %>' + '?page='+ (<%= endNum %> + 1) + '&token=' + localStorage.getItem('token');
+                    break;
+                }
+            }
+        }
+    </script>
+<% } %>
