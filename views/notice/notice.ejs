@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../common/header %>
+</head>
+
+<body>
+    <% include ../common/navigator %>
+    <section>
+        <h1 class="title">Announcements</h1>
+        <div class="conts_wrap">
+            <div class="accordion_wrap">
+                <% for (var i = 0; i < page.content.length; i++) { %>
+                    <div class="notice_list">
+                        <button class="accordion">
+                            <span><%= page.content[i].createAt %></span> 
+                            <b><%= page.content[i].title %></b></button>
+                        <div class="panel" style="white-space: pre-line;">
+                            <%= page.content[i].content %>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+            <% include ../common/page %>
+        </div>
+    </section>
+
+    <footer>
+        <% include ../common/footers %>
+    </footer>
+
+
+</body>
+
+</html>
