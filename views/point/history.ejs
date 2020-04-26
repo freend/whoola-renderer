@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../common/header %>
+</head>
+
+<body>
+    <% include ../common/navigator %>
+    <section>
+        <h1 class="title">
+            Point History
+        </h1>
+        <div class="conts_wrap">
+            <div class="purchase_wrap">
+
+                <div class="purchaseH mt_50">
+                    <table class="type02">
+                        <caption class="blind">Purchase update delete table</caption>
+                        <thead>
+                            <tr>
+                                <th>Contents</th>
+                                <th>HM Dollar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (var i = 0; i < page.content.length; i++) { %>
+                            <tr>
+                                <td><%= page.content[i].content %></td>
+                                <td><%= page.content[i].point / 100 %></td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                    <% include ../common/page %>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <footer>
+        <% include ../common/footers %>
+    </footer>
+</body>
+</html>
