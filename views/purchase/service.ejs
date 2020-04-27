@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../common/header %>
+</head>
+<body>
+    <% include ../common/navigator %>
+    <section>
+        <h1 class="title">
+            <span><b>Step1</b> User Info</span>
+            View Product Category
+            <span><b>Step3</b> Select Plan</span>
+        </h1>
+        <div class="conts_wrap">
+            <input type="hidden" value="" id="token" name="token">
+            <input type="hidden" value="<%= receiverId%>" name="receiver" id="receiver">
+            <input type="hidden" value="<%= operator%>" name="operator" id="operator">
+            <div class="ssc_wrap">
+                <div class="ssc_box" id="serviceBtn-1">
+                    <div class="iconsBox"><span class="blind">mobile</span></div>
+                    <div class="ssc_txt">
+                        <p>Mobile Top-up / Internet</p>
+                    </div>
+                </div>
+                
+                <div class="ssc_box" id="serviceBtn-2">
+                    <div class="iconsBox"><span class="blind">internet</span></div>
+                    <div class="ssc_txt">
+                        <p>Internet</p>
+                    </div>
+                </div>
+                
+                <div class="ssc_box" id="serviceBtn-6">
+                    <div class="iconsBox"><span class="blind">television</span></div>
+                    <div class="ssc_txt">
+                        <p>Television</p>
+                    </div>
+                </div>
+                
+                <div class="ssc_box" id="serviceBtn-5">
+                    <div class="iconsBox"><span class="blind">landline</span></div>
+                    <div class="ssc_txt">
+                        <p>Landline</p>
+                    </div>
+                </div>
+                
+                <div class="ssc_box" id="serviceBtn-4">
+                    <div class="iconsBox"><span class="blind">giftcard</span></div>
+                    <div class="ssc_txt">
+                        <p>Gift card</p>
+                    </div>
+                </div>
+                
+                 <div class="ssc_box" id="serviceBtn-3">
+                    <div class="iconsBox"><span class="blind">utility</span></div>
+                    <div class="ssc_txt">
+                        <p>Utilities</p>
+                    </div>
+                </div>
+                
+                 <div class="ssc_box" id="serviceBtn-7">
+                    <div class="iconsBox"><span class="blind">voip</span></div>
+                    <div class="ssc_txt">
+                        <p>VoIP</p>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <% include ../common/footers %>
+    </footer>
+
+
+</body>
+<script>
+    function serviceList(serviceId) {
+        location.href = '/products/operator?operator=' + $('#operator').val()
+         + '&receiver=' + $('#receiver').val()
+         + '&service=' + serviceId
+         + '&token=' + $('#token').val();
+    }
+    window.onload = function() {
+        // const token = localStorage.getItem('token');
+        // const receiver = <%= receiverId %>;
+        // const operator = <%= operator %>;
+        const service = [<%= service %>];
+        for (i = 0; i < service.length; i++) {
+            $('#serviceBtn-' + service[i]).attr('class', 'ssc_box on');
+        }
+        for (var i = 0; i < 9; i++) {
+            $('#serviceBtn-' + i).click(function(){
+                const activate = ($(this).attr('class') == 'ssc_box') ? false : true;
+                if (activate == false) {
+                    alert('not support item');
+                } else {
+                    const serviceId = $(this).attr('id').split('-')[1];
+                    serviceList(serviceId);
+                }
+            });
+        }
+    }
+    </script>
+</html>
