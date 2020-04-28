@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../common/header %>
+</head>
+<body>
+  <% include ../common/navigator %>
+  <section>
+    <h1 class="title">
+        Withdraw
+    </h1>
+    <div class="conts_wrap">
+      <div class="withdraw_wrap">
+        <div class="withdraw_tbl mt_50">
+          <table>
+            <caption class="blind">Purchase table</caption>
+            <colgroup>
+              <col style="width: 75%">
+              <col style="width: 25%">
+    
+            </colgroup>
+            <tbody>
+              <tr>
+                <th>My HM Dollar</th>
+                <td><%= haveAmount %></td>
+              </tr>
+              <tr>
+                <th>Enter Withdrawal Amount</th>
+                <td><input id="viewAmount" type="text" numberOnly placeholder="<%= availAmount %>"></td>
+              </tr>
+              <tr>
+                <th>Withdrawal Fee</th>
+                <td id="viewFee"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="payment_wrap withdraw">
+          <div class="payment_box withdraw">
+            <span>My HM Dollar</span>
+            <span><%= haveAmount %></span>
+            <i>-</i>
+          </div>
+          <div class="payment_box withdraw">
+            <span>Withdraw Amount</span>
+            <span id="totalAmount"></span>
+            <i>=</i>
+          </div>
+          <div class="payment_box withdraw">
+            <span>Balance</span>
+            <span id="remainAmount"></span>
+          </div>
+        </div>
+        <form class="form" action="/withdraw" method="POST" id="form-submit">
+          <div class="btn_group">
+            <input type="hidden" value="<%= token %>" id="token" name="token">
+            <input type="hidden" name="fee" id="requestFee">
+            <input type="hidden" name="amount" id="requestAmount">
+            <button class="btn_request" type="button" onclick="requestCheck()">Request</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--팝업-->
+    <% if (paypalAccount == null) { %>
+    <div class="conts_pop" style="display: block">
+      <div class="pop_wrap" style="">
+        <h1>Withdrawal Invalid</h1>
+        <p>You do not have a registered Paypal account.</p>
+        <p class="bold">If you would like to withdraw, please register a Paypal account and please try again.</p>
+        <div class="btn_group">
+          <button class="btn_submit" onClick="setToken('/users/paypal?token=')">Go</button>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </section>
+  <footer>
+      <% include ../common/footers %>
+  </footer>
+  <script>
+    var totalAmount = 0;
+    var requestAmount = 0;
+    var totalFee = 0;
+    var requestFee = 0;
+    var limitAmount= 0;
+    window.onload = function() {
+        totalAmount = <%= haveAmount %>;
+        requestAmount = <%= availAmount %>;
+        limitAmount = <%= availAmount %>;
+        totalFee = <%= fee %>;
+        requestFee = <%= fee %>;
+        changeValue();
+    }
+    function changeValue() {
+        // display fee
+        $('#viewFee').text(strictFloat(requestFee));
+        // request fee
+        $('#requestFee').val(requestFee);
+        $('#requestAmount').val(requestAmount);
+        // bottom calculate.
+        $('#totalAmount').text(strictFloat(requestAmount + requestFee));
+        $('#remainAmount').text(strictFloat(totalAmount - strictFloat(requestAmount + requestFee)));
+    }
+    $('#viewAmount').on("propertychange change keyup paste input", function () {
+      // if (/^\d+(?:[.]?[\d]?[\d])?$/.test($(this).val())) {
+      //   requestAmount = $(this).val();
+      //   console.log(true, requestAmount);
+      // } else {
+      //   if ($(this).val().length < 1) {
+      //     requestAmount = '';
+      //   }
+      //   console.log(false, requestAmount);
+      //   $(this).val(requestAmount);
+      // }
+      if($(this).val() == '') {
+        $(this).val(limitAmount);
+      }
+      requestAmount = parseFloat($(this).val());
+      requestFee = strictFloat(requestAmount * 0.1);
+      requestFee = requestAmount * 0.1;
+      if (requestAmount >= limitAmount) {
+        requestAmount = limitAmount;
+        requestFee = totalFee;
+        $(this).val(limitAmount);
+      };
+      changeValue();
+    });
+    function setToken(value) {
+        location.href = value + localStorage.getItem('token');
+    }
+    function strictFloat(value) {
+      console.log('value', value);
+      var changeInt = parseInt(value * 100);
+      return Math.ceil(changeInt) / 100;
+    }
+    function requestCheck() {
+      const amount = $('#requestAmount').val();
+      const fee = $('#requestFee').val();
+      const result = confirm("Do you want to withdraw " + amount + "HM Dollar? (Processing fee:" + fee + "HM Dollar)");
+      if(result){
+        if (amount == '' || amount == 0 || amount == 0.0) {
+          alert('Insufficient HM Dollar to withdraw');
+          return false;
+        } else {
+          $('#form-submit').submit();
+        }
+      }else{
+          alert("Your withdrawal request has been successfully cancelled.");
+      }
+    }
+  </script>
+</body>
+
+</html>
