@@ -91,6 +91,15 @@
         totalFee = <%= fee %>;
         requestFee = <%= fee %>;
         changeValue();
+        console.log('total ', totalAmount);
+        if (totalAmount < 10) {
+          console.log('check this');
+          $('#viewAmount').attr('disabled', true);
+          underRequestAmount();
+        }
+    }
+    function underRequestAmount() {
+      alert('Minimum Withdrawable amount is 10HM Dollars');
     }
     function changeValue() {
         // display fee
@@ -135,6 +144,10 @@
       return Math.ceil(changeInt) / 100;
     }
     function requestCheck() {
+      if (totalAmount < 10) {
+        underRequestAmount();
+        return false;
+      }
       const amount = $('#requestAmount').val();
       const fee = $('#requestFee').val();
       const result = confirm("Do you want to withdraw " + amount + "HM Dollar? (Processing fee:" + fee + "HM Dollar)");
