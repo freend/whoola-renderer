@@ -60,6 +60,36 @@ router.get('/complete', function (req, res, next) {
             res.render('common/modal', {"message": response.body, "ahref": "/purchase?page=1"});
         });
 });
+router.post('/point', function (req, res, next) {
+    const token = req.body["token"];
+    const request = {
+        "productId": req.body["productId"],
+        "point": req.body["pointAmount"],
+        "phoneNumber": req.body["receiver"]
+    };
+    unirest
+        .post(process.env.API_HOST + '/purchase')
+        .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
+        .send(request)
+        .then((response) => {
+            switch (response.status) {
+                case 403:
+                    res.render('common/error', {'message':'please log in', 'ahref': '/login'});
+                    break;
+                case 200:
+                    res.render('common/error', {
+                        'message':response.body,
+                        'ahref': '/purchase?token=' + token,
+                        "env": process.env.NODE_ENV
+                    });
+                    break;
+                default:
+                    res.json(response.body);
+                    break;
+            }
+            // res.render('product/' + req.body["id"], response.body);
+        });
+});
 router.get('/detail', function (req, res, next) {
     const productId = req.param('productId');
     const receiver = req.param('receiver');
@@ -109,41 +139,6 @@ router.get('/detail', function (req, res, next) {
                 };
                 res.render('order/detail', result);
             }
-        });
-});
-router.post('/', function(req, res, next) {
-    const token = req.body["token"];
-
-    if (token == null || token == undefined) {
-        res.render('common/error', {'message':'please log in', 'ahref': '/login'});
-    }
-    const totalPoint = req.body["totalPoint"];
-    const point = req.body["point"];
-    if (point > totalPoint / 2) {
-        res.render('common/error', {'message':'point over', 'ahref': '/purchase/detail?productId=' + req.body["productId"]
-            + '&receiver=' + req.body["receiver"] + '&token=' + token});
-    }
-    unirest
-        .post(process.env.API_HOST + '/purchase')
-        .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
-        .send({ "productId": req.body["productId"], "receiverId": req.body["receiver"], "point": req.body["point"] })
-        .then((response) => {
-            switch (response.status) {
-                case 403:
-                    res.render('common/error', {'message':'please log in', 'ahref': '/login'});
-                    break;
-                case 200:
-                    res.render('common/error', {
-                        'message':response.body,
-                        'ahref': '/purchase?token=' + token,
-                        "env": process.env.NODE_ENV
-                    });
-                    break;
-                default:
-                    res.json(response.body);
-                    break;
-            }
-            // res.render('product/' + req.body["id"], response.body);
         });
 });
 router.get('/validate', function(req, res, next) {

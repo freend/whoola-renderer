@@ -112,6 +112,7 @@
                     <form action="<%= paypalUrl %>" method="post" id="buyPaypal">
                         <div class="btn_group">
                             <button class="btn_buy" id="paypalBtn" onclick="buyItem()" type="button">Buy</button>
+                            <button class="btn_buy" id="pointBtn" onclick="buyPoint()" type="button">Buy Point</button>
                         </div>
                         <!-- required -->
                         <input type="hidden" name="cmd" value="_xclick"> 
@@ -128,21 +129,12 @@
                 </div>
             </div>
         </div>
-        <!-- <form action="<%= paypalUrl %>" method="post">
-        <input type="checkbox" class="form-check-input" id="checkPurchase" required>제품 정보 및 이용자 정보를 확인하셨습니까?<br>
-        <input class="btn btn-primary" type="submit" value="Buy Now" name="submit" id="paypalBtn" disabled>
-        <div class="purchase_btn">
-            <button type="button" class="btn btn-danger" onClick="buyPoint()" id="pointBtn">Buy Point</button>
-        </div>
-            <input type="hidden" name="cmd" value="_xclick">
-            <input type="hidden" name="business" value="<%= paypalId %>">
-            <input type="hidden" readonly name="item_name" value="<%= productName%>"> <br>
-            <input type="hidden" readonly name="item_number" value="<%= productId%>"> <br>
-            <input type="hidden" readonly name="currency_code" value="USD"> <br>
-            <input type="hidden" readonly id="submitAmount" name="amount" value="<%= salesAmount%>"> <br>
-            <input type="hidden" name="custom" value="code:<%= referralCode %>,receiver:<%= receiverPhone %>">
-            <input type="hidden" name="charset" value="UTF-8">
-        </form> -->
+        <form action="/purchase/point" method="POST" id="buyPoint">
+            <input type="hidden" readonly name="token">
+            <input type="hidden" readonly name="productId" value="<%= productId%>">
+            <input type="hidden" readonly name="pointAmount" value="<%= salesAmount %>">
+            <input type="hidden" readonly name="receiver" value="<%= receiverPhone %>">
+        </form>
     </section>
     <footer>
         <% include ../common/footers %>
@@ -207,57 +199,24 @@
                 alert('order is temporary unavailable');
                 return false;
             }
+        }
+        return true;
+    }
+    function buyPoint() {
+        if (beforePayment()) {
+            document.getElementById('buyPoint').submit();
+            console.log('productId', $('input[name = productId]').val());
+            console.log('amount', $('input[name = pointAmount]').val());
+            console.log('receiver', $('input[name = receiver]').val());
+            console.log('token', $('input[name = token]').val());
+        }
+    }
+    // buy item to pay pal.
+    function buyItem() {
+        if(beforePayment()) {
             document.getElementById('buyPaypal').submit();
         }
     }
-    $('#usePoint').on("propertychange change keyup paste input", function() {
-        if (/^\d+(?:[.]?[\d]?[\d])?$/.test($(this).val())) {
-        usePoint = $(this).val();
-        } else {
-        $(this).val(usePoint);
-        }
-    
-        if (parseFloat($(this).val()) >= parseFloat($('#availPoint').val())) {
-            $(this).val($('#availPoint').val());
-            $('input[name=submit]').hide();
-            $('#pointBtn').show();
-        } else {
-            $('input[name=submit]').show();
-            $('#pointBtn').hide();
-        }
-        $('#submitAmount').val($('#amount').val() - $(this).val());
-        $('#viewAmount').text($('#submitAmount').val());
-        $('#viewPoint').text($(this).val());
-        $('#useFee').text(parseInt(($(this).val() * 100) * 0.05) / 100);
-    });
-    
-    function buyPoint() {
-            var form = document.createElement('form');
-            form.setAttribute('method', 'POST');
-            form.setAttribute('action', '/purchase');
-            document.charset = "utf-8";
-    
-            var receiverField = document.createElement('input');
-            receiverField.setAttribute('type', 'hidden');
-            receiverField.setAttribute('name', 'receiver');
-            receiverField.setAttribute('value', $('input[name=receiver]').val());
-            form.appendChild(receiverField);
-    
-            var productField = document.createElement('input');
-            productField.setAttribute('type', 'hidden');
-            productField.setAttribute('name', 'productId');
-            productField.setAttribute('value', $('input[name=productId]').val());
-            form.appendChild(productField);
-    
-            var tokenField = document.createElement('input');
-            tokenField.setAttribute('type', 'hidden');
-            tokenField.setAttribute('name', 'token');
-            tokenField.setAttribute('value', localStorage.getItem('token'));
-            form.appendChild(tokenField);
-            document.body.appendChild(form);
-    
-            form.submit();
-        }
     </script>
 </body>
 
