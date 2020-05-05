@@ -64,9 +64,10 @@ router.post('/point', function (req, res, next) {
     const token = req.body["token"];
     const request = {
         "productId": req.body["productId"],
-        "point": req.body["pointAmount"],
+        "usePoint": req.body["pointAmount"],
         "phoneNumber": req.body["receiver"]
     };
+    console.log('req', request);
     unirest
         .post(process.env.API_HOST + '/purchase')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
@@ -77,9 +78,9 @@ router.post('/point', function (req, res, next) {
                     res.render('common/error', {'message':'please log in', 'ahref': '/login'});
                     break;
                 case 200:
-                    res.render('common/error', {
+                    res.render('common/modal', {
                         'message':response.body,
-                        'ahref': '/purchase?token=' + token,
+                        'ahref': '/purchase?page=1',
                         "env": process.env.NODE_ENV
                     });
                     break;
