@@ -26,7 +26,7 @@
               </tr>
               <tr>
                 <th>Enter Withdrawal Amount</th>
-                <td><input id="viewAmount" type="text" numberOnly placeholder="<%= availAmount %>"></td>
+                <td><input id="viewAmount" type="number" placeholder="<%= availAmount %>"></td>
               </tr>
               <tr>
                 <th>Withdrawal Fee</th>
@@ -112,16 +112,6 @@
         $('#remainAmount').text(strictFloat(totalAmount - strictFloat(requestAmount + requestFee)));
     }
     $('#viewAmount').on("propertychange change keyup paste input", function () {
-      // if (/^\d+(?:[.]?[\d]?[\d])?$/.test($(this).val())) {
-      //   requestAmount = $(this).val();
-      //   console.log(true, requestAmount);
-      // } else {
-      //   if ($(this).val().length < 1) {
-      //     requestAmount = '';
-      //   }
-      //   console.log(false, requestAmount);
-      //   $(this).val(requestAmount);
-      // }
       if($(this).val() == '') {
         $(this).val(limitAmount);
       }
