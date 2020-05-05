@@ -99,7 +99,7 @@
                         </p>
                         <p>
                             <span>Available :<b> <%= totalPoint %></b></span>
-                            <span><input type="text" value="0" readonly></span>
+                            <span><input type="number" id="discountFee"></span>
                         </p>
                     </div>
                     <div class="payment_box">
@@ -113,14 +113,16 @@
                         <div class="btn_group">
                             <button class="btn_buy" id="paypalBtn" onclick="buyItem()" type="button">Buy</button>
                         </div>
-                        <input type="hidden" name="cmd" value="_xclick">
+                        <!-- required -->
+                        <input type="hidden" name="cmd" value="_xclick"> 
                         <input type="hidden" name="business" value="<%= paypalId %>">
                         <input type="hidden" readonly name="item_name" value="<%= productName%>"> <br>
                         <input type="hidden" readonly name="item_number" value="<%= productId%>"> <br>
                         <input type="hidden" readonly name="currency_code" value="USD"> <br>
                         <input type="hidden" readonly id="submitAmount" name="amount" value=""> <br>
-                        <!-- 여기에 Referral Code를 넣어주도록 하자 -->
-                        <input type="hidden" name="custom" value="code:<%= referralCode %>,receiver:<%= receiverPhone %>">
+                        <!-- required -->
+                        <input type="hidden" readonly id="useFee" name="fee"> <br>
+                        <input type="hidden" id="custom" name="custom" value="">
                         <input type="hidden" name="charset" value="UTF-8">
                     </form>
                 </div>
@@ -147,33 +149,56 @@
     </footer>
 
     <script>
+    const productTotalAmount = <%= salesAmount %>;
+    $('#discountFee').val(0);
     $(document).ready(function(){
-        // hide buy point
-        $('#pointBtn').hide();
-        // disable buy button
-        // $('#paypalBtn').attr('disabled', true);
-        // fee setting
-        feeProcess(<%= salesAmount %>);
+        $('#pointBtn').hide(); // disable all buy point
+        $('input[name=token]').val(localStorage.getItem('token'));
+        feeProcess(productTotalAmount);
         var usePoint = 0;
+        isAblePoint();
     });
+    function isAblePoint() {
+        const buyThisMonth = <%= buyThisMonth %>;
+        console.log('buy this month', buyThisMonth);
+        if (buyThisMonth < 20) {
+            $('#discountFee').attr('disabled', true);
+        }
+    }
     function feeProcess(salesAmount) {
         const feePercent = <%= feePercentValue %> / 100;
-        const processFee = strictFloat(Math.ceil((salesAmount * feePercent) * 100) / 100);
-        console.log('processFee : ' + processFee);
+        const processFee = strictFloat(Math.ceil((productTotalAmount * feePercent) * 100) / 100);
         $('#processFee').text(processFee + '$');
-        $('#totalPrice').text(strictFloat(salesAmount + processFee) + '$');
-        $('#orderPrice').text(strictFloat(salesAmount + processFee) + '$');
-        $('#deductionAmount').text(0 + '$');
+        $('#totalPrice').text(strictFloat(productTotalAmount + processFee) + '$');
+        $('#orderPrice').text(strictFloat(productTotalAmount + processFee) + '$');
+        $('#deductionAmount').text(strictFloat(productTotalAmount - salesAmount) + '$');
         $('#finalPayment').text(strictFloat(salesAmount + processFee) + '$');
         $('#submitAmount').val(strictFloat(salesAmount + processFee));
+        $('#custom').val('code:<%= referralCode %>\,receiver:<%= receiverPhone %>,point:' + $('#discountFee').val());
     }
     function strictFloat(value) {
-      console.log('value', value);
       var changeInt = parseInt(value * 100);
       return Math.ceil(changeInt) / 100;
     }
-    function buyItem() {
-        const isPayable = <%= payable %>;
+    const ablePoint = <%= totalPoint %>;
+    // var inputPoint;
+    $('#discountFee').on("propertychange change keyup paste input", function() {
+        const point = $(this);
+        $('#paypalBtn').show();
+        $('#pointBtn').hide();
+
+        if(point.val() > ablePoint) {
+            point.val(ablePoint);
+        } if(point.val() >= productTotalAmount) {
+            point.val(productTotalAmount);
+            $('#paypalBtn').hide();
+            $('#pointBtn').show();
+        } 
+        var amount = strictFloat(productTotalAmount) - strictFloat(point.val());
+        feeProcess(amount);
+    });
+    const isPayable = <%= payable %>;
+    function beforePayment() {
         if(!$('#term').is(":checked")){
             alert('Please agree to the terms');
             return false;

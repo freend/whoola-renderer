@@ -34,6 +34,7 @@ router.get('/', function(req, res, next) {
 router.get('/complete', function (req, res, next) {
     const code = req.param('cm').split(',')[0].toString().split(':')[1].toString();
     const receive = req.param('cm').split(',')[1].toString().split(':')[1].toString();
+    const point = req.param('cm').split(',')[2].toString().split(':')[1].toString();
     const result = {
         "amount": req.param('amt'),
         "currency": req.param('cc'),
@@ -42,7 +43,8 @@ router.get('/complete', function (req, res, next) {
         "productName": req.param('item_name'),
         "productId": req.param('item_number'),
         "state": req.param('st'),
-        "txId": req.param('tx')
+        "txId": req.param('tx'),
+        "point": point
     };
     unirest
         .post(process.env.API_HOST + '/paypal')
@@ -102,6 +104,7 @@ router.get('/detail', function (req, res, next) {
                     "mode": process.env.NODE_ENV,
                     "feePercentValue": response.body.feePercentValue,
                     "payable": response.body.payable,
+                    "buyThisMonth": response.body.buyThisMonth,
                     "env": process.env.NODE_ENV
                 };
                 res.render('order/detail', result);
