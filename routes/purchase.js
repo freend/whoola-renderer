@@ -118,7 +118,6 @@ router.get('/detail', function (req, res, next) {
                     "receiverPhone": response.body.receiverPhone,
                     "totalPoint": response.body.totalPoint,
                     "ablePoint": response.body.ablePoint,
-                    "maxFee": response.body.maxFee,
                     "name": response.body.receiverName,
                     "productId": productId,
                     "receiverId": receiver,

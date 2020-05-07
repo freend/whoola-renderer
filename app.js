@@ -17,6 +17,7 @@ const withdrawRouter = require('./routes/withdraw');
 const contactRouter = require('./routes/contact');
 const noticeRouter = require('./routes/notice');
 const orderRouter = require('./routes/order');
+const businessRouter = require('./routes/business');
 
 const app = express();
 
@@ -50,6 +51,7 @@ app.use('/withdraw', withdrawRouter);
 app.use('/contact', contactRouter);
 app.use('/notice', noticeRouter);
 app.use('/order', orderRouter);
+app.use('/business', businessRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
