@@ -178,7 +178,9 @@
         const point = $(this);
         $('#paypalBtn').show();
         $('#pointBtn').hide();
-
+        if ($(this).val() < 0) {
+            $(this).val(0);
+        }
         if(point.val() > ablePoint) {
             point.val(ablePoint);
         } if(point.val() >= productTotalAmount) {

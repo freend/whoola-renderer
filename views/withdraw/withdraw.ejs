@@ -118,6 +118,9 @@
       requestAmount = parseFloat($(this).val());
       requestFee = strictFloat(requestAmount * 0.1);
       requestFee = requestAmount * 0.1;
+      if ($(this).val() < 0) {
+        $(this).val(0);
+      }
       if (requestAmount >= limitAmount) {
         requestAmount = limitAmount;
         requestFee = totalFee;
