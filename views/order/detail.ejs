@@ -25,18 +25,21 @@
                             <col style="width: 30%">
                         </colgroup>
                         <tbody>
+                            <% if (operator != 'hoolamoolah') { %>
                             <tr>
                                 <th class="txt_l">Name</th>
                                 <td><%= name%></td>
                                 <th class="txt_l">Phone number</th>
                                 <td><%= receiverPhone %></td>
                             </tr>
+                            <% } %>
                             <tr>
                                 <th class="txt_l">Operator</th>
                                 <td><%= operator %></td>
                                 <th class="txt_l">Product Name</th>
                                 <td><%= productName%></td>
                             </tr>
+                            <tr>
                                 <th class="txt_l">Currency</th>
                                 <td>USD</td>
                                 <th class="txt_l">Price</th>
@@ -214,6 +217,7 @@
     // buy item to pay pal.
     function buyItem() {
         if(beforePayment()) {
+            alert("don't close window to purchase complete");
             document.getElementById('buyPaypal').submit();
         }
     }
