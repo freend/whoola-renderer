@@ -8,6 +8,9 @@
   <script src="/static/javascripts/validate.js"></script>
     <section>
         <h1 class="title">Invite</h1>
+        <h2 class="sub_title">
+          Today Invited : <%= invited %> / Today Total : <%= total %>
+      </h2>
         <form class="form" action="/invite/add" method="POST" id="form-submit">
           <input type="hidden" value="<%= token%>" id="token" name="token">
           <div class="conts_wrap">
@@ -30,17 +33,35 @@
       <% include ../common/footers %>
   </footer>
   <script>
+    const total = <%= total %>;
+    const invited = <%= invited %>;
+    
     function requestCheck() {
       const mail = $('#mail').val();
       if (!validateMail(mail)) {
         alert('do not match email');
         return false;
       }
-      const result = confirm("Would you like to send an invitation email to " + mail);
-      if(result){
-        $('#form-submit').submit();
-      }else{
-          alert("Your invitation email was cancelled and did not send.");
+      if (ableMailSend() == true) {
+        const result = confirm("Would you like to send an invitation email to " + mail);
+        if(result){
+          $('#form-submit').submit();
+        }else{
+            alert("Your invitation email was cancelled and did not send.");
+        }
+      }
+    }
+    window.onload = function() {
+      if (invited >= total) {
+        ableMailSend();
+      }
+    }
+    function ableMailSend() {
+      if (invited >= total) {
+        alert('오늘 발송가능 수량을 초과했습니다.');
+        return false;
+      } else {
+        return true;
       }
     }
   </script>
