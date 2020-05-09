@@ -56,6 +56,12 @@
                         <input type="hidden" name="id" id="id" value="<%=id %>">
                     <% } %>
                 </div>
+
+                <% if(id == null) { %>
+                <div class="input_box">
+                    <a style="color: blue; text-decoration: underline;" href="https://medium.com/hoolamoolah/why-and-how-paypal-is-used-on-hoolamoolah-b021471f2a30" target="_blank">Why and How Paypal is used on hoolamoolah</a>
+                </div>
+                <% } %>
                     
                 <div class="btn_group">
                     <button id="btnSubmit">

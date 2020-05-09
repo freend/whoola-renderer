@@ -99,8 +99,11 @@
                             <span>HM Dollar</span>
                         </p>
                         <p>
-                            <span>Available :<b> <%= totalPoint %></b></span>
+                            <span>Available :<b id="ablePoint"> <%= totalPoint %></b></span>
                             <span><input type="number" id="discountFee"></span>
+                        </p>
+                        <p>
+                            <span id="message"></span>
                         </p>
                     </div>
                     <div class="payment_box">
@@ -143,6 +146,8 @@
 
     <script>
     const productTotalAmount = <%= salesAmount %>;
+    const feePercent = <%= feePercentValue %> / 100;
+    const processFee = strictFloat(Math.ceil((productTotalAmount * feePercent) * 100) / 100);
     $('#discountFee').val(0);
     $(document).ready(function(){
         $('#pointBtn').hide(); // disable all buy point
@@ -156,16 +161,19 @@
         console.log('buy this month', buyThisMonth);
         if (buyThisMonth < 20) {
             $('#discountFee').attr('disabled', true);
+            $('#ablePoint').text(0);
+            $('#message').text('이번달 총액 20$ 이하는 사용할 수 없습니다.');
+        } else {
+            $('#ablePoint').text(<%= totalPoint %>);
         }
     }
     function feeProcess(salesAmount) {
-        const feePercent = <%= feePercentValue %> / 100;
-        const processFee = strictFloat(Math.ceil((productTotalAmount * feePercent) * 100) / 100);
+        console.log('sales amount : ' + salesAmount + ', processFee : ' + processFee);
         $('#processFee').text(processFee + '$');
         $('#totalPrice').text(strictFloat(productTotalAmount + processFee) + '$');
         $('#orderPrice').text(strictFloat(productTotalAmount + processFee) + '$');
         $('#deductionAmount').text(strictFloat(productTotalAmount - salesAmount) + '$');
-        $('#finalPayment').text(strictFloat(salesAmount + processFee) + '$');
+        $('#finalPayment').text(strictFloat(strictFloat(salesAmount) + strictFloat(processFee)) + '$');
         $('#submitAmount').val(strictFloat(salesAmount + processFee));
         $('#custom').val('code:<%= referralCode %>\,receiver:<%= receiverPhone %>,point:' + $('#discountFee').val());
     }
@@ -184,8 +192,8 @@
         }
         if(point.val() > ablePoint) {
             point.val(ablePoint);
-        } if(point.val() >= productTotalAmount) {
-            point.val(productTotalAmount);
+        } if(point.val() >= strictFloat(productTotalAmount + processFee)) {
+            point.val(strictFloat(productTotalAmount + processFee));
             $('#paypalBtn').hide();
             $('#pointBtn').show();
         } 
@@ -217,10 +225,26 @@
     // buy item to pay pal.
     function buyItem() {
         if(beforePayment()) {
-            alert("don't close window to purchase complete");
+            alert("Please DO NOT CLOSE the Paypal window or click the Back button on your browser until the Payment Confirmation window pops up.");
             document.getElementById('buyPaypal').submit();
         }
     }
+
+    //click back before setting
+    /*
+    $(window).bind("pageshow", function (event) {
+        const match = $('#match');
+        const value = $('#phoneId').val();
+        if (/^[1-9][0-9]{6,14}$/.test(value)) {
+            match.css("color", 'blue');
+            match.text('Valid Phone Number');
+        } else {
+            if (value != '') {
+                match.css("color", 'red');
+                match.text('Invalid Phone Number');
+            }
+        }
+    */
     </script>
 </body>
 
