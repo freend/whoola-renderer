@@ -91,9 +91,7 @@
         totalFee = <%= fee %>;
         requestFee = <%= fee %>;
         changeValue();
-        console.log('total ', totalAmount);
         if (totalAmount < 10) {
-          console.log('check this');
           $('#viewAmount').attr('disabled', true);
           underRequestAmount();
         }
@@ -108,8 +106,8 @@
         $('#requestFee').val(requestFee);
         $('#requestAmount').val(requestAmount);
         // bottom calculate.
-        $('#totalAmount').text(strictFloat(requestAmount + requestFee));
-        $('#remainAmount').text(strictFloat(totalAmount - strictFloat(requestAmount + requestFee)));
+        $('#totalAmount').text((requestAmount + requestFee).toFixed(2));
+        $('#remainAmount').text((totalAmount - (requestAmount + requestFee)).toFixed(2));
     }
     $('#viewAmount').on("propertychange change keyup paste input", function () {
       if($(this).val() == '') {
@@ -132,7 +130,6 @@
         location.href = value + localStorage.getItem('token');
     }
     function strictFloat(value) {
-      console.log('value', value);
       var changeInt = parseInt(value * 100);
       return Math.ceil(changeInt) / 100;
     }
