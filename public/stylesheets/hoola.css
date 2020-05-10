@@ -2302,7 +2302,7 @@ border-radius: 6px;
 }
 .pop_wrap_main{
    
-    border: 3px solid #FF9A43; width: 485px; height: 423px; background-color: #fff; border-radius: 5px; padding: 40px; text-align: center; margin: 0 auto; margin-top: 10%;    word-break: keep-all;
+    border: 3px solid #FF9A43; width: 485px; height: 580px; background-color: #fff; border-radius: 5px; padding: 40px; text-align: center; margin: 0 auto; margin-top: 10%;    word-break: keep-all;
 }
 .pop_wrap h1,
 .pop_wrap_main h1{
