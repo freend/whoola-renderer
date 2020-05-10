@@ -105,17 +105,14 @@
             $('#level2').text(level2);
             
             switch (name) {
-                case 'moon':
-                url = '/static/images/icon_moon.png';
+                case 'Family':
+                url = '/static/images/icon_family.png';
                 break;
-                case 'earth':
-                url = '/static/images/icon_earth.png';
-                break;
-                case 'sun':
-                url = '/static/images/icon_sun.png'
+                case 'Premium':
+                url = '/static/images/icon_premium.png';
                 break;
                 default:
-                url = '';
+                url = '/static/images/icon_user.png';
                 break;
             }
             $('#levelImg').attr("src", url);
