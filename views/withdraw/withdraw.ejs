@@ -106,8 +106,8 @@
         $('#requestFee').val(requestFee);
         $('#requestAmount').val(requestAmount);
         // bottom calculate.
-        $('#totalAmount').text((requestAmount + requestFee).toFixed(2));
-        $('#remainAmount').text((totalAmount - (requestAmount + requestFee)).toFixed(2));
+        $('#totalAmount').text(strictFloat(requestAmount + requestFee));
+        $('#remainAmount').text(strictFloat(totalAmount - (requestAmount + requestFee)));
     }
     $('#viewAmount').on("propertychange change keyup paste input", function () {
       if($(this).val() == '') {
@@ -116,8 +116,8 @@
       requestAmount = parseFloat($(this).val());
       requestFee = strictFloat(requestAmount * 0.1);
       requestFee = requestAmount * 0.1;
-      if ($(this).val() < 0) {
-        $(this).val(0);
+      if ($(this).val() < 9.09) {
+        $(this).val(9.09);
       }
       if (requestAmount >= limitAmount) {
         requestAmount = limitAmount;
@@ -130,8 +130,7 @@
         location.href = value + localStorage.getItem('token');
     }
     function strictFloat(value) {
-      var changeInt = parseInt(value * 100);
-      return Math.ceil(changeInt) / 100;
+      return parseFloat(new Number(value).toFixed(2));
     }
     function requestCheck() {
       if (totalAmount < 10) {
