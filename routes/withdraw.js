@@ -80,12 +80,12 @@ router.post('/', function(req, res, next) {
             if (response.status != null) {
                 res.render('common/modal', {
                     "message":response.body,
-                    "ahref":"/withdraw",
+                    "ahref":"/withdraw/list?page=1",
                     "env": process.env.NODE_ENV
                 });
             }
             else {
-                res.render('common/error', response.body);
+                res.render('common/modal', response.body);
             }
         });
 });
