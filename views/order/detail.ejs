@@ -162,7 +162,7 @@
         if (buyThisMonth < 20) {
             $('#discountFee').attr('disabled', true);
             $('#ablePoint').text(0);
-            $('#message').text('이번달 총액 20$ 이하는 사용할 수 없습니다.');
+            $('#message').text('To use your HM Dollar, your monthly purchase must be over $20.');
         } else {
             $('#ablePoint').text(<%= totalPoint %>);
         }
