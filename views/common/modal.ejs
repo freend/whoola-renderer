@@ -11,7 +11,7 @@
         }
         var redirectUrl = "<%= ahref%>";
         if (redirectUrl != null) {
-            if (redirectUrl == '/order') {
+            if (redirectUrl == '/order' || redirectUrl == '/users/info') {
                 location.href = redirectUrl + "?token=" + localStorage.getItem('token');
             } else {
                 location.href = redirectUrl + "&token=" + localStorage.getItem('token');
