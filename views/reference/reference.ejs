@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../common/header %>
+</head>
+
+<body>
+    <% include ../common/navigator %>
+    <section>
+        <h1 class="title">
+            Promotion Kit
+        </h1>
+        <div class="conts_wrap">
+            <div class="purchase_wrap">
+                <% for (var i = 0; i < list.length; i++) { %>
+                <div class="purchase_box">
+                    <div class="purchase_txt">
+                        <a href="https://s3-ap-southeast-1.amazonaws.com/reference.hoolamoolah.com/<%= list[i].link%>" download="">
+                            <img style="max-width: 100%;max-height: 100%;" src="https://s3-ap-southeast-1.amazonaws.com/reference.hoolamoolah.com/<%= list[i].thumbnail%>" />
+                        </a>
+                        <p><span><%= list[i].title%></span></p>
+                    </div>
+                    <!-- <div class="purchase_btn">
+                        <a href="#" download="https://s3-ap-southeast-1.amazonaws.com/reference.hoolamoolah.com/<%= list[i].link%>"><button>Download</button></a>
+                    </div> -->
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <% include ../common/footers %>
+    </footer>
+</body>
+</html>
