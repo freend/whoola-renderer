@@ -40,11 +40,33 @@ router.get('/info', function (req, res, next) {
 });
 router.get('/paypal', function(req, res, next) {
     const token = req.query.token;
-    const result = {
-        "token": token,
-        "env": process.env.NODE_ENV
-    };
-    res.render('member/paypal', result);
+    if (token == null) {
+        res.render('common/error', {'message':'please log in', 'ahref': '/login'});
+    }
+    unirest
+        .get(process.env.API_HOST + '/member/paypal')
+        .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
+        .send()
+        .then(
+            (response) => {
+                switch (response.body.status) {
+                    case 403:
+                        console.log('not authorize');
+                        res.render('common/error', {"message": "Please log in", "ahref": "/login"});
+                        break;
+                    default:
+                        console.log('account', response.body);
+                        const result = {
+                            "token": token,
+                            "env": process.env.NODE_ENV,
+                            "paypalAccount": response.body.paypalAccount
+                        };
+                        res.render('member/paypal', result);
+                        break;
+                }
+            }
+        );
+
 });
 router.post('/paypal', function (req, res, next) {
     const token = req.body["token"];
