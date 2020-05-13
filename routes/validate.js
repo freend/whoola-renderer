@@ -9,12 +9,13 @@ router.get('/signup/:mail/:valicateCode', function(req, res, next) {
         .send()
         .then((response) => {
             if (response.body.status != null) {
-                console.log('error', response.body);
-                res.json(response.body);
-                switch (response.body.status) {
-                    default:
-                        res.json(response.body);
-                }
+                res.render('common/error',
+                    {
+                        'message': response.body.message,
+                        'ahref': '/',
+                        "env": process.env.NODE_ENV
+                    }
+                    );
             } else {
                 res.render("common/error", {
                     'message': "validate complete",
