@@ -99,6 +99,7 @@
           $('#viewAmount').attr('disabled', true);
           underRequestAmount();
         }
+        $('#viewAmount').val(requestAmount);
     }
     function underRequestAmount() {
       alert('Minimum Withdrawable amount is 10HM Dollars');
@@ -114,14 +115,14 @@
         $('#remainAmount').text(strictFloat(totalAmount - (requestAmount + requestFee)));
     }
     $('#viewAmount').on("propertychange change keyup paste input", function () {
-      if($(this).val() == '') {
-        $(this).val(limitAmount);
-      }
       requestAmount = parseFloat($(this).val());
       requestFee = strictFloat(requestAmount * 0.1);
-      // requestFee = requestAmount * 0.1;
       if ($(this).val() < 0) {
         $(this).val(0);
+      }
+      if ($(this).val() == '') {
+        requestAmount = 0;
+        requestFee = 0;
       }
       if (requestAmount >= limitAmount) {
         requestAmount = limitAmount;
@@ -142,14 +143,14 @@
         return false;
       }
       
-      const result = confirm("Do you want to withdraw " + amount + "HM Dollar? (Processing fee:" + fee + "HM Dollar)");
+      if (requestAmount == 0 || $('#requestAmount').val() == '') {
+        alert('Insufficient HM Dollar to withdraw');
+        return false;
+      }
+      
+      const result = confirm("Do you want to withdraw " + requestAmount + "HM Dollar? (Processing fee:" + requestFee + "HM Dollar)");
       if(result){
-        if (amount == '' || amount == 0 || amount == 0.0) {
-          alert('Insufficient HM Dollar to withdraw');
-          return false;
-        } else {
-          $('#form-submit').submit();
-        }
+        $('#form-submit').submit();
       }else{
           alert("Your withdrawal request has been successfully cancelled.");
       }
