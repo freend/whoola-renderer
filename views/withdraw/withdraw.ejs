@@ -119,9 +119,9 @@
       }
       requestAmount = parseFloat($(this).val());
       requestFee = strictFloat(requestAmount * 0.1);
-      requestFee = requestAmount * 0.1;
-      if ($(this).val() < 9.09) {
-        $(this).val(9.09);
+      // requestFee = requestAmount * 0.1;
+      if ($(this).val() < 0) {
+        $(this).val(0);
       }
       if (requestAmount >= limitAmount) {
         requestAmount = limitAmount;
@@ -137,12 +137,11 @@
       return parseFloat(new Number(value).toFixed(2));
     }
     function requestCheck() {
-      if (totalAmount < 10) {
+      if ((requestAmount + requestFee) < 10) {
         underRequestAmount();
         return false;
       }
-      const amount = $('#requestAmount').val();
-      const fee = $('#requestFee').val();
+      
       const result = confirm("Do you want to withdraw " + amount + "HM Dollar? (Processing fee:" + fee + "HM Dollar)");
       if(result){
         if (amount == '' || amount == 0 || amount == 0.0) {

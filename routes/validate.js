@@ -98,4 +98,24 @@ router.get('/password/:mail/:validateCode',function(req, res, next){
     res.render('member/password', result);
 });
 
+router.get('/withdraw/:mail/:validateCode', function (req, res, next) {
+    unirest
+        .put(process.env.API_HOST + '/validate/withdraw')
+        .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
+        .send({
+                "validateCode": req.param('validateCode'),
+                "mail": req.param('mail')
+            })
+        .then(
+            (response) => {
+                const result = {
+                    "message": response.body,
+                    "ahref": '/',
+                    "env": process.env.NODE_ENV
+                };
+                res.render('common/error', result);
+            }
+        );
+});
+
 module.exports = router;
