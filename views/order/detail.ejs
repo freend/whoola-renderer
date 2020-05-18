@@ -3,6 +3,7 @@
 
 <head>
     <% include ../common/header %>
+    <script src="/static/javascripts/purchase.js"></script>
 </head>
 <body>
     <% include ../common/navigator %>
@@ -146,8 +147,13 @@
 
     <script>
     const productTotalAmount = <%= salesAmount %>;
-    const feePercent = <%= feePercentValue %> / 100;
-    const processFee = strictFloat(Math.ceil((productTotalAmount * feePercent) * 100) / 100);
+    const buyThisMonth = <%= buyThisMonth %>;
+    const totalPoint = <%= totalPoint %>;
+    const ablePoint = <%= totalPoint %>;
+    const isPayable = <%= payable %>;
+    // const feePercent = <%= feePercentValue %> / 100;
+    // const processFee = strictFloat(Math.ceil((productTotalAmount * feePercent) * 100) / 100);
+    const processFee = getProcessFee(productTotalAmount);
     $('#discountFee').val(0);
     $(document).ready(function(){
         $('#pointBtn').hide(); // disable all buy point
@@ -156,95 +162,6 @@
         var usePoint = 0;
         isAblePoint();
     });
-    function isAblePoint() {
-        const buyThisMonth = <%= buyThisMonth %>;
-        console.log('buy this month', buyThisMonth);
-        if (buyThisMonth < 20) {
-            $('#discountFee').attr('disabled', true);
-            $('#ablePoint').text(0);
-            $('#message').text('To use your HM Dollar, your monthly purchase must be over $20.');
-        } else {
-            $('#ablePoint').text(<%= totalPoint %>);
-        }
-    }
-    function feeProcess(salesAmount) {
-        console.log('sales amount : ' + salesAmount + ', processFee : ' + processFee);
-        $('#processFee').text(processFee + '$');
-        $('#totalPrice').text(strictFloat(productTotalAmount + processFee) + '$');
-        $('#orderPrice').text(strictFloat(productTotalAmount + processFee) + '$');
-        $('#deductionAmount').text(strictFloat(productTotalAmount - salesAmount) + '$');
-        console.log('>>', strictFloat(salesAmount + processFee));
-        $('#finalPayment').text(strictFloat(salesAmount + processFee) + '$');
-        $('#submitAmount').val(strictFloat(salesAmount + processFee));
-        $('#custom').val('code:<%= referralCode %>\,receiver:<%= receiverPhone %>,point:' + $('#discountFee').val());
-    }
-    function strictFloat(value) {
-      return parseFloat(new Number(value).toFixed(2));
-    }
-    const ablePoint = <%= totalPoint %>;
-    // var inputPoint;
-    $('#discountFee').on("propertychange change keyup paste input", function() {
-        const point = $(this);
-        $('#paypalBtn').show();
-        $('#pointBtn').hide();
-        if ($(this).val() < 0) {
-            $(this).val(0);
-        }
-        if(point.val() > ablePoint) {
-            point.val(ablePoint);
-        } if(point.val() >= strictFloat(productTotalAmount + processFee)) {
-            point.val(strictFloat(productTotalAmount + processFee));
-            $('#paypalBtn').hide();
-            $('#pointBtn').show();
-        } 
-        var amount = strictFloat(productTotalAmount) - strictFloat(point.val());
-        feeProcess(amount);
-    });
-    const isPayable = <%= payable %>;
-    function beforePayment() {
-        if(!$('#term').is(":checked")){
-            alert('Please agree to the terms');
-            return false;
-        } else {
-            if (isPayable == false) {
-                alert('order is temporary unavailable');
-                return false;
-            }
-        }
-        return true;
-    }
-    function buyPoint() {
-        if (beforePayment()) {
-            document.getElementById('buyPoint').submit();
-            console.log('productId', $('input[name = productId]').val());
-            console.log('amount', $('input[name = pointAmount]').val());
-            console.log('receiver', $('input[name = receiver]').val());
-            console.log('token', $('input[name = token]').val());
-        }
-    }
-    // buy item to pay pal.
-    function buyItem() {
-        if(beforePayment()) {
-            alert("Please DO NOT CLOSE the Paypal window or click the Back button on your browser until the Payment Confirmation window pops up.");
-            document.getElementById('buyPaypal').submit();
-        }
-    }
-
-    //click back before setting
-    /*
-    $(window).bind("pageshow", function (event) {
-        const match = $('#match');
-        const value = $('#phoneId').val();
-        if (/^[1-9][0-9]{6,14}$/.test(value)) {
-            match.css("color", 'blue');
-            match.text('Valid Phone Number');
-        } else {
-            if (value != '') {
-                match.css("color", 'red');
-                match.text('Invalid Phone Number');
-            }
-        }
-    */
     </script>
 </body>
 
