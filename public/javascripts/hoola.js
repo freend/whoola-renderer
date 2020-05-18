@@ -28,10 +28,10 @@
                 $(this).siblings().removeClass("on");
                 $(this).addClass("on");
             });
-    //  $(".ssc_box").click(function(){
-    //             $(this).siblings().removeClass("on");
-    //             $(this).addClass("on");
-    //         });
+     $(".ssc_box").click(function(){
+                $(this).siblings().removeClass("on");
+                $(this).addClass("on");
+            });
      
      $(".tip").click(function(){
          $(this).next(".tipTxt").toggle()

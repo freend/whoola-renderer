@@ -84,22 +84,16 @@
          + '&token=' + $('#token').val();
     }
     window.onload = function() {
-        // const token = localStorage.getItem('token');
-        // const receiver = <%= receiverId %>;
-        // const operator = <%= operator %>;
+        $('.ssc_box').css('display', 'none');
         const service = [<%= service %>];
+        console.log('service', service);
         for (i = 0; i < service.length; i++) {
-            $('#serviceBtn-' + service[i]).attr('class', 'ssc_box on');
+            $('#serviceBtn-' + service[i]).css('display', 'block');
         }
         for (var i = 0; i < 9; i++) {
             $('#serviceBtn-' + i).click(function(){
-                const activate = ($(this).attr('class') == 'ssc_box') ? false : true;
-                if (activate == false) {
-                    alert('not support item');
-                } else {
-                    const serviceId = $(this).attr('id').split('-')[1];
-                    serviceList(serviceId);
-                }
+                const serviceId = $(this).attr('id').split('-')[1];
+                serviceList(serviceId);
             });
         }
     }
