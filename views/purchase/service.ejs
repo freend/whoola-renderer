@@ -19,7 +19,7 @@
                 <div class="ssc_box" id="serviceBtn-1">
                     <div class="iconsBox"><span class="blind">mobile</span></div>
                     <div class="ssc_txt">
-                        <p>Mobile Top-up / Internet</p>
+                        <p>Mobile</p>
                     </div>
                 </div>
                 
@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 
-                 <div class="ssc_box" id="serviceBtn-7">
+                 <div class="ssc_box" id="serviceBtn-9">
                     <div class="iconsBox"><span class="blind">voip</span></div>
                     <div class="ssc_txt">
                         <p>VoIP</p>
@@ -90,7 +90,7 @@
         for (i = 0; i < service.length; i++) {
             $('#serviceBtn-' + service[i]).css('display', 'block');
         }
-        for (var i = 0; i < 9; i++) {
+        for (var i = 0; i <= 9; i++) {
             $('#serviceBtn-' + i).click(function(){
                 const serviceId = $(this).attr('id').split('-')[1];
                 serviceList(serviceId);

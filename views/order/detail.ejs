@@ -152,6 +152,8 @@
     const ablePoint = <%= totalPoint %>;
     const isPayable = <%= payable %>;
     const processFee = getProcessFee(productTotalAmount);
+    const referralCode = '<%= referralCode %>';
+    const receivePhone = '<%= receiverPhone %>';
     $('#discountFee').val(0);
     $(document).ready(function(){
         $('#pointBtn').hide(); // disable all buy point
