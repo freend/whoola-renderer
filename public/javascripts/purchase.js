@@ -39,24 +39,22 @@ function strictFloat(value) {
     return parseFloat(new Number(value).toFixed(2));
 }
 
-// var inputPoint;
-$('#discountFee').on("propertychange change keyup paste input", function () {
-    const point = $(this);
+function calculateDiscount(point) {
     $('#paypalBtn').show();
     $('#pointBtn').hide();
-    if ($(this).val() < 0) {
-        $(this).val(0);
+    if (point < 0) {
+        $('#discountFee').val(0);
     }
-    if (point.val() > ablePoint) {
-        point.val(ablePoint);
-    } if (point.val() >= strictFloat(productTotalAmount + processFee)) {
-        point.val(strictFloat(productTotalAmount + processFee));
+    if (point > ablePoint) {
+        $('#discountFee').val(ablePoint);
+    } if ($('#discountFee').val() >= strictFloat(productTotalAmount + processFee)) {
+        $('#discountFee').val(strictFloat(productTotalAmount + processFee));
         $('#paypalBtn').hide();
         $('#pointBtn').show();
     }
-    var amount = strictFloat(productTotalAmount) - strictFloat(point.val());
+    var amount = strictFloat(productTotalAmount) - strictFloat(point);
     feeProcess(amount);
-});
+}
 
 function beforePayment() {
     if (!$('#term').is(":checked")) {

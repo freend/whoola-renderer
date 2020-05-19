@@ -162,6 +162,10 @@
         var usePoint = 0;
         isAblePoint();
     });
+    // var inputPoint;
+    $('#discountFee').on("propertychange change keyup paste input", function () {
+        calculateDiscount($(this).val());
+    });
     </script>
 </body>
 
