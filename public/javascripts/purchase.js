@@ -85,18 +85,8 @@ function buyItem() {
     }
 }
 
-//click back before setting
-/*
+
 $(window).bind("pageshow", function (event) {
-    const match = $('#match');
-    const value = $('#phoneId').val();
-    if (/^[1-9][0-9]{6,14}$/.test(value)) {
-        match.css("color", 'blue');
-        match.text('Valid Phone Number');
-    } else {
-        if (value != '') {
-            match.css("color", 'red');
-            match.text('Invalid Phone Number');
-        }
-    }
-*/
+    $('#discountFee').val(0);
+    $('#term').attr('checked', false);
+});
