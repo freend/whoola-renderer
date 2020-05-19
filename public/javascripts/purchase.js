@@ -26,15 +26,14 @@ function isAblePoint() {
     }
 }
 function feeProcess(salesAmount) {
-    console.log('sales amount : ' + salesAmount + ', processFee : ' + processFee);
     $('#processFee').text(processFee + '$');
     $('#totalPrice').text(strictFloat(productTotalAmount + processFee) + '$');
     $('#orderPrice').text(strictFloat(productTotalAmount + processFee) + '$');
     $('#deductionAmount').text(strictFloat(productTotalAmount - salesAmount) + '$');
-    console.log('>>', strictFloat(salesAmount + processFee));
     $('#finalPayment').text(strictFloat(salesAmount + processFee) + '$');
     $('#submitAmount').val(strictFloat(salesAmount + processFee));
     $('#custom').val('code:' + referralCode + ',receiver:' + receivePhone + ',point:' + $('#discountFee').val());
+    console.log('>>', strictFloat(salesAmount + processFee));
 }
 function strictFloat(value) {
     return parseFloat(new Number(value).toFixed(2));
