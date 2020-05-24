@@ -85,8 +85,8 @@
     }
     window.onload = function() {
         $('.ssc_box').css('display', 'none');
-        const service = [<%= service %>];
-        console.log('service', service);
+        // const service = [<%= service %>];
+        const service = [1];
         for (i = 0; i < service.length; i++) {
             $('#serviceBtn-' + service[i]).css('display', 'block');
         }
