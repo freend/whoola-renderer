@@ -7,42 +7,97 @@
 </head>
 <body>
     <% include ../common/navigator %>
-    <div class="big_line" data-aos="zoom-in"></div>
-    <div class="dots"><p>·</p><p>·</p><p>·</p></div>
+    <div class="big_line"></div>
     <section>
         <h1 class="title">Network Based Global online <br>Top-up Platform</h1>
         <div class="icon_wrap">
-            <ul class="icon_left">
-                <li><a href="#a"><span class="blind">mobile</span></a></li>
-                <li><a href="#a"><span class="blind">internet</span></a></li>
-                <li><a href="#a"><span class="blind">television</span></a></li>
-                <li><a href="#a"><span class="blind">telephone</span></a></li>
-            </ul>
-                <div class="select_st">
-                    <label for="select01" class="blind">Select</label>
-                    <select name="select01" id="select01">
-                        <option value="1">Sign up</option>
-                        <option value="2">Log in</option>
-                        <option value="3">Account</option>
-                    </select>
-                    <button onclick="selectMenu()">Go</button>
-                </div>
-          
-            <ul class="icon_right">
-                <li><a href="#a"><span class="blind">gift card</span></a></li>
-                <li><a href="#a"><span class="blind">utilities</span></a></li>
-                <li><a href="#a"><span class="blind">VolP</span></a></li>
-                <li><a href="#a"><span class="blind">more</span></a></li>
-            </ul>
+            <div class="select_st">
+                <form class="form" action= "/order" method="POST" id="submit-form">
+                    <input type="text" id="phoneId" name="phone" placeholder="Enter Phone Number" width="60%">
+                    <button id="btnSubmit">Select Plan</button>
+                </form>
+            </div>
         </div>
         <div class="conts_wrap" style="">
             <div class="nbgo_wrap">
-                <div class="nbgo_box1" data-aos="fade-up">
+                <div class="nbgo_box3">
+                    <p class="txtA">3 Step Profit Sharing</p>
+                    <!-- <p class="txtB">See how much you can earn after logging in.</p> -->
+                    <div class="tab_wrap">
+                    
+                        <div class="tab" >
+                          <button class="tablinks" onclick="openCity(event, 'Premium')" id="defaultOpen">Premium</button>
+                          <button class="tablinks" onclick="openCity(event, 'family')">family</button>
+                        
+                        </div>
+    
+                        <div id="Premium" class="tabcontent">
+                            <div class="tab mobile">
+                                <button class="on">Premium</button>
+                            </div>
+                          <p>
+                              <span>Requirements</span>
+                              <span>Minimum monthly spending <b class="color_p">over $50</b></span>
+                          </p>
+                          <p>
+                              <span>Benefits</span>
+                              <span>
+                                <b class="firTier">9%</b>
+                                <b class="color_p">9% of Purchase Amount on First Tier Cuctomers</b>
+                              </span>
+                              <span>
+                                <b class="secTier">1%</b>
+                                <b class="color_o">1% of Purchase Amount on Second Tier Cuctomers</b>
+                              </span>
+                          </p>
+                        </div>
+    
+                        <div id="family" class="tabcontent">
+                            <div class="tab mobile">
+                                <button class="on">family</button>
+                            </div>
+                          <p>
+                              <span>Requirements</span>
+                              <span>Minimum monthly spending <b class="color_p">over $20</b></span>
+                          </p>
+                          <p>
+                              <span>Benefits</span>
+                              <span>
+                                <b class="firTier">5%</b>
+                                <b class="color_p">5% of Purchase Amount on First Tier Cuctomers</b>
+                              </span>
+                              <span>
+                                <b class="secTier">1%</b>
+                                <b class="color_o">1% of Purchase Amount on Second Tier Cuctomers</b>
+                              </span>
+                          </p>
+                        </div>
+    
+                        
+                        
+                        <div class="cautions">
+                            <div>Cautions</div>
+                            <div>
+                                <p><b class="bold">*Tier 1</b> means Direct Customers </p>
+                                <p><b class="bold">*Tier 2</b> means Tier 1's Direct Customers </p>
+                                <p>The monthly spending will be reset on the <b class="color_p">1st day of each month.</b></p>
+                            </div>
+                        </div>
+    
+                    
+                    </div>
+                </div>
+                <div class="nbgo_box4">
+                     <p><img src="/static/images/img03.png"></p>
+                </div>
+            </div>
+            <div class="nbgo_wrap">
+                <div class="nbgo_box1">
                     <p class="txtA">Easy Top-up<br>Sign-Up in 30<br> Seconds</p>
                     <p class="txtB">Sound Interesting? Check out how!</p>
                     <button onclick="gotoHow()">How to Use</button>
                 </div>
-                <div class="nbgo_box2" data-aos="fade-up">
+                <div class="nbgo_box2">
                     <p><img src="/static/images/icon_clock.png"></p>
                     <p>
                     <span><img src="/static/images/icon_mobile.png"></span>
@@ -50,70 +105,21 @@
                     </p>
                 </div>
             </div>
-            <div class="nbgo_wrap">
-                    
-                <div class="nbgo_box3" data-aos="fade-up">
-                    <p class="txtA">3 Step Profit <br>Sharing</p>
-                    <p class="txtB">See how much you can earn after logging in.</p>
-                    <button onclick="location.href='/signup'">Sign up</button>
-                </div>
-                <div class="nbgo_box4" data-aos="fade-up">
-                     <p><img src="/static/images/img07.png"></p>
-                </div>
-            </div>
             <div class="mid_conts">
-                <div class="mid_logo web"  data-aos="zoom-in">
+                <div class="mid_logo web" >
                     <!--<img src="/static/images/logo_l.png">-->
                 </div>
-                <div class="mid_logo mobile"  data-aos="zoom-in">
+                <div class="mid_logo mobile" >
                     <p>
                        Roadmap
                     </p>
                 </div>
            
             
-                <div class="txt_box" data-aos="fade-up">
+                <div class="txt_box">
                     In 2020, you will be able to use your HM Dollar to watch YouTube and network on Facebook. Furthermore, HoolaMoolah plans to partner with famous e-commerce services and we will never stop there, HM Dollar will be accepted when you use delivery services, when you pay at convenience stores and all the possible services you use in your everyday life.
                 </div>
                 
-            </div>
-            
-            <div class="history">
-                <div data-aos="fade-up" data-aos-delay="100">
-                    <p><img src="/static/images/icon_i.png"></p>
-                    <p>2020</p> 
-                    <p> 
-                        Launch Hoola Moolah<br><br>
-                        Launch YouTube, Facebook product<br><br>
-                        Initiate HM Cares Foundation (Charity, year-end)
-                    </p>
-                </div>
-                <div data-aos="fade-up" data-aos-delay="200">
-                    <p><img src="/static/images/icon_n.png"></p>
-                    <p>2021</p> 
-                    <p> 
-                        Partner with e-commerce service providers<br><br>
-                        Build 10 HM Cares Library (location TBA)
-                    </p>
-                </div>
-                <div data-aos="fade-up" data-aos-delay="300">
-                    <p><img src="/static/images/icon_n.png"></p>
-                    <p>2022</p> 
-                    <p> 
-                        Build 10 HM Cares Library (location TBA)<br><br>
-                        Build 10 HM Cares Schools (location TBA)
-                    </p>
-                </div>
-                <div data-aos="fade-up" data-aos-delay="400">
-                    <p><img src="/static/images/icon_n.png"></p>
-                    <p>2023+</p> 
-                    <p> 
-                        Partner with delivery services, convenience stores<br><br>
-                        Build 10 HM Cares Library (location TBA)<br><br>
-                        Build 10 HM Cares Schools (location TBA)<br><br>
-                        Build 10 HM Cares Town (location TBA)
-                    </p>
-                </div>
             </div>
         </div>
     </section>
@@ -145,6 +151,21 @@
         function closePop() {
             $('#earlyPop').css("display", 'none');
         }
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" on", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " on";
+            console.log('cityName', cityName);
+        }
+        document.getElementById("defaultOpen").click();
     </script>
 </body>
 </html>

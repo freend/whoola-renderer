@@ -1546,7 +1546,7 @@ h3.title{
   padding: 14px 16px;
   transition: 0.3s;
   font-size: 17px;
-        width: 33.33%;
+        width: 50%;
     margin: 0px;
     border-radius: 0px;
     color: #aaa;
@@ -1561,16 +1561,16 @@ h3.title{
 .tab button::before{
     content: "";
     position: absolute;
-    width: 30px;
+    width: 45px;
     height:30px;
-    background-image: url(../images/icons3.png);
+    /* background-image: url(../images/icons3.png); */
     left: 50%;
-    margin-left: -63px;
+    margin-left: -75px;
     top: 9px;
 }
 
 .tab button:nth-child(2)::before{
-    background-position: -30px 0px
+    background-position: -45px 0px
 }
 
 .tab button:nth-child(3)::before{
@@ -1583,7 +1583,7 @@ h3.title{
 
 #Earth .tab.mobile button.on:before,
 .tab button:nth-child(2).on:before{
-    background-position: -30px -30px 
+    background-position: -45px -30px 
 }
 #Sun .tab.mobile button.on:before,
 .tab button:nth-child(3).on:before{
@@ -1647,16 +1647,29 @@ h3.title{
     padding: 14px 10px;
     background-color: #fff
 }
-.secTier{
-     width: 60px;
+
+.firTier2{
+    width: 60px;
     height: 60px;
+    border-radius: 50%;
+    border: 1px solid #6055CB;
+    box-shadow: 0px 3px 1px #6055CB;
+    color: #6055CB;
+    font-size: 2.5rem;
+    font-weight: bold;
+    padding: 10px 10px;
+    background-color: #fff
+}
+.secTier{
+     width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: 1px solid #FF9A43;
     box-shadow: 0px 3px 1px #FF9A43;
     color: #FF9A43;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: bold;
-    padding: 13px 10px;
+    padding: 6px 5px;
     background-color: #fff
 }
 
@@ -1766,11 +1779,14 @@ h3.title{
     height: 100%
 }
 
-
+.select_st input[type="text"] {
+    border:none;
+    height: 40px;
+}
 .select_st {
     display: inline-block;
-    min-width: 200px;
-    height: 38px;
+    min-width: 450px;
+    height: 40px;
     overflow: hidden;
    
     vertical-align: top;
@@ -1780,6 +1796,8 @@ h3.title{
     box-sizing: border-box;
     position: relative;
     margin-top: 4px;
+
+    filter: drop-shadow(5px 5px 5px);
 }
 
 .select_st select {
@@ -1804,7 +1822,7 @@ h3.title{
     top: 0px;
     border-radius:0px 0px 0px 0px;
     border-top: 0px;
-    height: 37px;
+    height: 100%;
     background-color: #efeefa;
     margin: 0px;
     
