@@ -5,6 +5,18 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
     const token = req.query.token;
+    if(token === "null") {
+        const result = {"page": {
+                'content': []
+            },
+            "total": 10,
+            "invited": 0,
+            "url": 'invite',
+            "token": 'null',
+            'env': process.env.NODE_ENV
+        };
+        res.render('invite/invite', result);
+    }
     unirest
         .get(process.env.API_HOST + '/invite?page=' + req.param('page'))
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
