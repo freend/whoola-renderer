@@ -91,56 +91,7 @@ router.post('/point', function (req, res, next) {
             // res.render('product/' + req.body["id"], response.body);
         });
 });
-router.get('/detail', function (req, res, next) {
-    const productId = req.param('productId');
-    const receiver = req.param('receiver');
-    const token = req.param('token');
-    unirest
-        .get(process.env.API_HOST + '/purchase' + '?productid=' + productId + '&receiveid=' + receiver)
-        .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
-        .send()
-        .then((response) => {
-            if (response.body.status != null) {
-                console.log('error', response.body);
-                switch (response.body.status) {
-                    case 403:
-                        console.log('not authorize');
-                        res.render('common/error', {"message": "Please log in", "ahref": "/login"});
-                        break;
-                    default:
-                        res.render('common/error', {"message": response.body.message, "ahref": "/order?token=" + token});
-                        break;
-                }
-            } else {
-                const result = {
-                    "productName": response.body.productName,
-                    "amount": response.body.productPrice,
-                    "receiverPhone": response.body.receiverPhone,
-                    "totalPoint": response.body.totalPoint,
-                    "ablePoint": response.body.ablePoint,
-                    "name": response.body.receiverName,
-                    "productId": productId,
-                    "receiverId": receiver,
-                    "operator": response.body.operator,
-                    "token": token,
-                    "referralCode": response.body.referralCode,
-                    "paypalUrl": response.body.paypalUrl,
-                    "paypalToken": response.body.paypalToken,
-                    "paypalCommand": response.body.paypalCommand,
-                    "paypalId": response.body.paypalId,
-                    "priceFee": response.body.priceFee,
-                    "salesAmount": response.body.salesAmount,
-                    "description": response.body.description,
-                    "mode": process.env.NODE_ENV,
-                    "feePercentValue": response.body.feePercentValue,
-                    "payable": response.body.payable,
-                    "buyThisMonth": response.body.buyThisMonth,
-                    "env": process.env.NODE_ENV
-                };
-                res.render('order/detail', result);
-            }
-        });
-});
+
 router.get('/validate', function(req, res, next) {
     unirest
         .post("https://www.sandbox.paypal.com/cgi-bin/webscr")

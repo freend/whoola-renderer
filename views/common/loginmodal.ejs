@@ -6,7 +6,12 @@
             alert(getMessage);
         }
         var redirectUrl = "<%= ahref%>";
-        if (redirectUrl != null) {
+        const productId = "<%= productId %>";
+        if(productId != "") {
+            redirectUrl += "/detail?productId=<%= productId %>&receiver=<%= phoneNumber %>&token=" + localStorage.getItem('token');
+            location.href = redirectUrl;
+        }
+        else {
             location.href = redirectUrl + "?token=" + localStorage.getItem('token');
         }
     }

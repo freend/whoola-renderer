@@ -16,13 +16,19 @@ router.get('/signupReferral/:referralCode', function (req, res) {
     res.render('member/register', result);
 });
 router.get('/signup', function (req, res, next) {
+    const product = req.param('productId');
+    const number = req.param('phoneNumber');
     const result = {
         "referralCode": null,
-        "env": process.env.NODE_ENV
+        "env": process.env.NODE_ENV,
+        "productId": (product == undefined) ? "" : product,
+        "phoneNumber": (number == undefined) ? "" : number
     }
   res.render('member/register', result);
 });
 router.post('/signup', function (req, res, next) {
+    const productId = req.body["productId"];
+    const phoneNumber = req.body["phoneNumber"];
   unirest
       .post(process.env.API_HOST + '/member/signup')
       .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
@@ -30,16 +36,19 @@ router.post('/signup', function (req, res, next) {
           "mail": req.body["id"], "password": req.body["password"], "inviteReferralCode": req.body["referralCode"]
       })
       .then((response) => {
-          console.log("sign up result", response.body);
+          console.log("sign up result", response.body.token.toString());
           switch (response.status) {
               case 500 :
                   res.render('common/error', {"message" : response.body.message, "ahref": '/signup'});
                   break;
               case 200:
-                  res.render('member/complete', {
-                      "message" : response.body,
-                      "ahref": '/',
-                      "env": process.env.NODE_ENV
+                  res.render('common/loginmodal', {
+                      "message" : response.body.message,
+                      "ahref": "/order",
+                      "env": process.env.NODE_ENV,
+                      "token": response.body.token.toString(),
+                      "productId": productId,
+                      "phoneNumber": phoneNumber
                   });
                   break;
           }
@@ -47,7 +56,13 @@ router.post('/signup', function (req, res, next) {
 });
 // call login page
 router.get('/login', function (req, res, next) {
-    const result = {"env": process.env.NODE_ENV};
+    const product = req.param('productId');
+    const number = req.param('phoneNumber');
+    const result = {
+        "env": process.env.NODE_ENV,
+        "productId": (product == undefined) ? "" : product,
+        "phoneNumber": (number == undefined) ? "" : number
+    };
     res.render('member/login', result);
 });
 router.get('/sample', function (req, res, next) {
@@ -58,6 +73,8 @@ router.get('/sample', function (req, res, next) {
 });
 // get login info
 router.post('/login', function (req, res, next) {
+    const productId = req.body["productId"];
+    const phoneNumber = req.body["phoneNumber"];
     unirest
         .post(process.env.API_HOST + '/member/signin')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
@@ -76,7 +93,9 @@ router.post('/login', function (req, res, next) {
                         "message" : "Log-in Successful",
                         "ahref": "/order",
                         "env": process.env.NODE_ENV,
-                        "token": response.body
+                        "token": response.body,
+                        "productId": productId,
+                        "phoneNumber": phoneNumber
                     });
             }
         });

@@ -85,6 +85,26 @@ function buyItem() {
     }
 }
 
+function initNonMember(flag) {
+    if(flag) {
+        $('#signup').show();
+        $('#login').show();
+        $('#paypalBtn').hide();
+        $('#isLogout').hide();
+    } else {
+        $('#signup').hide();
+        $('#login').hide();
+        $('#paypalBtn').show();
+    }
+}
+
+function buySignUp(id, number) {
+    location.href = '/signup?productId=' + id + '&phoneNumber=' + number;
+}
+function buyLogIn(id, number) {
+    location.href = '/login?productId=' + id + '&phoneNumber=' + number;
+}
+
 
 $(window).bind("pageshow", function (event) {
     $('#discountFee').val(0);

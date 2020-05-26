@@ -6,33 +6,126 @@ const router = express.Router();
  */
 /* order first depth. */
 router.get('/', function(req, res, next) {
+    const token = req.query.token;
+    console.log('token', token);
+    if(token == "null") {
+        const result = {"page": {
+                'content': []
+            },
+            "id": null,
+            "name": null,
+            "phone": null,
+            "token": "null",
+            "url": 'receiver/list',
+            "env": process.env.NODE_ENV
+        };
+        res.render('order/user', result);
+    } else {
+        unirest
+            .get(process.env.API_HOST + '/receiver')
+            .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
+            .send()
+            .then((response) => {
+                if (response.body.status != null) {
+                    console.log('error', response.body);
+                    if (response.body.status === 403) {
+                        console.log('not authorize');
+                        res.render('common/error', {"message": "Please log in", "ahref": "/login"});
+                    } else {
+                        res.json(response.body);
+                    }
+                } else {
+                    console.log('page : ' + response.body.page.content.length);
+                    const result = {"page": response.body.page,
+                        "id": null,
+                        "name": null,
+                        "phone": null,
+                        "token": req.query.token,
+                        "url": 'receiver/list',
+                        "env": process.env.NODE_ENV
+                    };
+                    res.render('order/user', result);
+                }
+            });
+    }
+
+});
+router.post('/', function(req, res, next) {
+    const token = req.body["token"];
+    if (/^[1-9][0-9]{6,14}$/.test(req.body["phone"])) {
+        unirest
+            .get(process.env.API_HOST + '/product?phoneNumber=' + req.body["phone"])
+            .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
+            .send()
+            .then((response) => {
+                switch (response.status) {
+                    case 200:
+                        res.render('order/product', {
+                            'list': response.body,
+                            'env': process.env.NODE_ENV,
+                            'receiver': req.body["phone"]
+                        });
+                        break;
+                    default:
+                        res.render('common/modal', {"message": response.body.message, "ahref": "/order"});
+                        break;
+                }
+            });
+    } else {
+        res.render('common/modal', {"message": "mobile number is invalid", "ahref":"/order"});
+    }
+});
+router.get('/detail', function (req, res, next) {
+    const productId = req.param('productId');
+    const receiver = req.param('receiver');
+    const token = req.param('token');
     unirest
-        .get(process.env.API_HOST + '/receiver')
+        .get(process.env.API_HOST + '/purchase' + '?productId=' + productId + '&phoneNumber=' + receiver)
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
         .send()
         .then((response) => {
             if (response.body.status != null) {
                 console.log('error', response.body);
-                if (response.body.status === 403) {
-                    console.log('not authorize');
-                    res.render('common/error', {"message": "Please log in", "ahref": "/login"});
-                } else {
-                    res.json(response.body);
+                switch (response.body.status) {
+                    case 403:
+                        console.log('not authorize');
+                        res.render('common/error', {"message": "Please log in", "ahref": "/login"});
+                        break;
+                    default:
+                        res.render('common/error', {"message": response.body.message, "ahref": "/order?token=" + token});
+                        break;
                 }
             } else {
-                console.log('page : ' + response.body.page.content.length);
-                const result = {"page": response.body.page,
-                    "id": null,
-                    "name": null,
-                    "phone": null,
-                    "token": req.query.token,
-                    "url": 'receiver/list',
+                const result = {
+                    "productName": response.body.productName,
+                    "amount": response.body.productPrice,
+                    "receiverPhone": response.body.receiverPhone,
+                    "totalPoint": response.body.totalPoint,
+                    "ablePoint": response.body.ablePoint,
+                    "name": response.body.receiverName,
+                    "productId": productId,
+                    "receiverId": receiver,
+                    "operator": response.body.operator,
+                    "token": token,
+                    "referralCode": response.body.referralCode,
+                    "paypalUrl": response.body.paypalUrl,
+                    "paypalToken": response.body.paypalToken,
+                    "paypalCommand": response.body.paypalCommand,
+                    "paypalId": response.body.paypalId,
+                    "priceFee": response.body.priceFee,
+                    "salesAmount": response.body.salesAmount,
+                    "description": response.body.description,
+                    "mode": process.env.NODE_ENV,
+                    "feePercentValue": response.body.feePercentValue,
+                    "payable": response.body.payable,
+                    "buyThisMonth": response.body.buyThisMonth,
                     "env": process.env.NODE_ENV
                 };
-                res.render('order/user', result);
+                res.render('order/detail', result);
             }
         });
 });
+/* under method change position */
 router.get('/edit', function(req, res, next) {
     const phone = req.param('phone').substring(1);
     const result = {
@@ -72,37 +165,7 @@ router.post('/edit', function(req, res, next) {
         res.render('receiver/list', {"message": "mobile_number is invalid"});
     }
 });
-router.post('/add', function(req, res, next) {
-    const token = req.body["token"];
 
-    if (token == null) {
-        res.render('common/error', {'message':'please log in', 'ahref': '/login'});
-    }
-
-    if (/^[1-9][0-9]{6,14}$/.test(req.body["phone"])) {
-        unirest
-            .post(process.env.API_HOST + '/receiver')
-            .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
-            .send({"receiverNumber": "+" + req.body["phone"], "receiverName" : req.body["name"]})
-            .then((response) => {
-                console.log("order category : " + response.body);
-                switch (response.status) {
-                    case 200:
-                        //TODO - "env": process.env.NODE_ENV check
-                        res.render('purchase/service', response.body);
-                        break;
-                    case 403:
-                        res.render('common/error', {"message": "Please log in", "ahref": "/login"});
-                        break;
-                    default:
-                        res.render('common/modal', {"message": response.body.message, "ahref": "/order"});
-                        break;
-                }
-            });
-    } else {
-        res.render('common/modal', {"message": "mobile number is invalid", "ahref":"/order"});
-    }
-});
 
 router.get('/delete/:id', function(req, res, next) {
     const token = req.param('token');

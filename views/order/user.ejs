@@ -10,12 +10,15 @@
             <% if(phone == null) { %>
             <span class="blind"><b>Step1</b> Number</span>
             Purchase Step
-            <span><b>Step2 </b>View Product Category</span>
+            <span><b>Step2 </b>Select Plan</span>
             <% }%>
         </h1>
         <h2 class="sub_title">
             <% if(phone == null) { %>
-                Add Receive Phone Number, Or Select Below List
+                Add Receive Phone Number
+                <% if(token != "null") { %>
+                    , Or Select Below List
+                <% } %>
             <% } else { %>
                 Update User Name And Phone Number
             <% } %>
@@ -24,7 +27,7 @@
             <div class="purchase_wrap">
                 <form class="form" action=
                 <% if (id == null) { %>
-                    "/receiver/add"
+                    "/order"
                 <% } else { %>
                     "/receiver/edit"
                 <% } %>
@@ -42,6 +45,7 @@
                     <small style="color: red;">Please check if the recipient phone number and mobile carrier match.</small><br>
                     <small><label id="match"></label></small>
                 </div>
+                <% if(token != "null") { %>
                 <div class="input_box">
                     <h3>Name</h3>
                     <div><input type="text" class="form-control" id="nameId" name="name"
@@ -50,12 +54,13 @@
                         <% } else { %>
                             value="<%= name %>"
                         <% } %>
-                         >
+                            >
                     </div>
                     <% if(id != null) { %>
                         <input type="hidden" name="id" id="id" value="<%=id %>">
                     <% } %>
                 </div>
+                <% } %>
 
                 <% if(id == null) { %>
                 <div class="input_box">
@@ -66,7 +71,7 @@
                 <div class="btn_group">
                     <button id="btnSubmit">
                         <% if(id == null) { %>
-                            View Product Category
+                            Select Plan
                         <% } else { %>
                             Edit
                         <% } %>
@@ -74,8 +79,12 @@
                 </div>
                 </form>
                 <div class="purchase_tbl mt_50">
-                    <% if (id == null) { %>
+                    <% if (id == null && token != "null") { %>
                         <% include receiver %>
+                    <% } else { %>
+                        <div class="nbgo_box1">
+                            <p><img src="/static/images/using.png"></p>
+                        </div>
                     <% } %>
                 </div>
             </div>
