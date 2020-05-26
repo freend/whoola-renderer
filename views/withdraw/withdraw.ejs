@@ -9,7 +9,33 @@
     <h1 class="title">
         Withdraw
     </h1>
+    <h2 class="sub_title">
+      <% if(buyMonth < 20) { %>
+        In order to withdraw HM Dollar, your purchase during the month must be more than $20.
+      <% } %>
+  </h2>
     <div class="conts_wrap">
+      <div class="puchase_wrap">
+        <div class="purchase_tbl2 mt_50">
+          <table>
+              <caption class="blind">Purchase table</caption>
+              <colgroup>
+                  <col style="width: 20%">
+                  <col style="width: 30%">
+                  <col style="width: 20%">
+                  <col style="width: 30%">
+              </colgroup>
+              <tbody>
+                  <tr>
+                      <th class="txt_l">Pay pal Account</th>
+                      <td><%= paypalAccount %></td>
+                      <th class="txt_l">Buy This Month</th>
+                      <td><%= buyMonth %></td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+      </div>
       <div class="withdraw_wrap">
         <div class="withdraw_tbl mt_50">
           <table>
@@ -20,10 +46,6 @@
     
             </colgroup>
             <tbody>
-              <tr>
-                <th>Pay pal Account</th>
-                <td><%= paypalAccount %></td>
-              </tr>
               <tr>
                 <th>My HM Dollar</th>
                 <td><%= haveAmount %></td>
@@ -36,6 +58,7 @@
                 <th>Withdrawal Fee</th>
                 <td id="viewFee"></td>
               </tr>
+              <tr></tr>
             </tbody>
           </table>
         </div>
@@ -65,8 +88,8 @@
         </form>
       </div>
     </div>
-    <!--팝업-->
-    <% if (paypalAccount == null) { %>
+    <!--pay pal account pop up-->
+    <% if (paypalAccount == null && token != null) { %>
     <div class="conts_pop" style="display: block">
       <div class="pop_wrap" style="">
         <h1>Withdrawal Invalid</h1>
@@ -88,21 +111,32 @@
     var totalFee = 0;
     var requestFee = 0;
     var limitAmount= 0;
+    var buyMonth = 0;
+
     window.onload = function() {
+        buyMonth = <%= buyMonth %>;
         totalAmount = <%= haveAmount %>;
         requestAmount = <%= availAmount %>;
         limitAmount = <%= availAmount %>;
         totalFee = <%= fee %>;
         requestFee = <%= fee %>;
-        changeValue();
-        if (totalAmount < 10) {
-          $('#viewAmount').attr('disabled', true);
-          underRequestAmount();
-        }
+        underRequestAmount(buyMonth);
         $('#viewAmount').val(requestAmount);
+        initNoneUser();
+        changeValue();
     }
-    function underRequestAmount() {
-      alert('Minimum Withdrawable amount is 10HM Dollars');
+    function underRequestAmount(value) {
+      if (value < 20) {
+        $('.btn_request').attr('disabled', true);
+        $('#viewAmount').attr('disabled', true);
+        requestAmount = 0;
+        requestFee = 0;
+      }
+    }
+    function initNoneUser() {
+      if('<%= token %>' == 'null') {
+        $('.btn_request').hide();
+      }
     }
     function changeValue() {
         // display fee
@@ -138,11 +172,7 @@
       return parseFloat(new Number(value).toFixed(2));
     }
     function requestCheck() {
-      if ((requestAmount + requestFee) < 10) {
-        underRequestAmount();
-        return false;
-      }
-      
+      underRequestAmount(requestAmount + requestFee);
       if (requestAmount == 0 || $('#requestAmount').val() == '') {
         alert('Insufficient HM Dollar to withdraw');
         return false;

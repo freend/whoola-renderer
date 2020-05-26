@@ -5,6 +5,18 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
     const token = req.query.token;
+    if (token === "null") {
+        const result = {
+            'haveAmount': 0,
+            'availAmount': 0,
+            'fee': 0,
+            'paypalAccount': '',
+            'token': 'null',
+            'buyMonth': 0,
+            'env': process.env.NODE_ENV
+        };
+        res.render('withdraw/withdraw', result);
+    }
     unirest
         .get(process.env.API_HOST + '/withdraw' + '/amount')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
@@ -23,11 +35,12 @@ router.get('/', function(req, res, next) {
             } else {
                 console.log('body', response.body);
                 const result = {
-                  'haveAmount': response.body.haveAmount,
-                  'availAmount': response.body.availAmount,
-                  'fee': response.body.fee,
-                  'paypalAccount': response.body.paypalAccount,
-                  'token': token,
+                    'haveAmount': response.body.haveAmount,
+                    'availAmount': response.body.availAmount,
+                    'fee': response.body.fee,
+                    'paypalAccount': response.body.paypalAccount,
+                    'token': token,
+                    'buyMonth': response.body.buyThisMonth,
                     'env': process.env.NODE_ENV
                 };
                 res.render('withdraw/withdraw', result);
