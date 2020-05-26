@@ -1,5 +1,5 @@
 function getProcessFee(amount) {
-    console.log('amount', amount);
+    // console.log('amount', amount);
     if (amount >= 5.00 && amount < 10) {
         return 1.00;
     }
@@ -16,7 +16,7 @@ function getProcessFee(amount) {
     return 0.6;
 }
 function isAblePoint() {
-    console.log('buy this month', buyThisMonth);
+    // console.log('buy this month', buyThisMonth);
     if (buyThisMonth < 20) {
         $('#discountFee').attr('disabled', true);
         $('#ablePoint').text(0);
@@ -33,7 +33,7 @@ function feeProcess(salesAmount) {
     $('#finalPayment').text(strictFloat(salesAmount + processFee) + '$');
     $('#submitAmount').val(strictFloat(salesAmount + processFee));
     $('#custom').val('code:' + referralCode + ',receiver:' + receivePhone + ',point:' + $('#discountFee').val());
-    console.log('>>', strictFloat(salesAmount + processFee));
+    // console.log('>>', strictFloat(salesAmount + processFee));
 }
 function strictFloat(value) {
     return parseFloat(new Number(value).toFixed(2));
@@ -71,10 +71,10 @@ function beforePayment() {
 function buyPoint() {
     if (beforePayment()) {
         document.getElementById('buyPoint').submit();
-        console.log('productId', $('input[name = productId]').val());
-        console.log('amount', $('input[name = pointAmount]').val());
-        console.log('receiver', $('input[name = receiver]').val());
-        console.log('token', $('input[name = token]').val());
+        // console.log('productId', $('input[name = productId]').val());
+        // console.log('amount', $('input[name = pointAmount]').val());
+        // console.log('receiver', $('input[name = receiver]').val());
+        // console.log('token', $('input[name = token]').val());
     }
 }
 // buy item to pay pal.
