@@ -3,7 +3,7 @@ var unirest = require('unirest');
 var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('main/landing', {"env": process.env.NODE_ENV});
+    res.render('main/landing', {'env': process.env.NODE_ENV});
 });
 router.get('/checker', function (req, res) {
     res.json({"message": 'Hoola Moola 2020-04-28 v03'});
@@ -11,7 +11,7 @@ router.get('/checker', function (req, res) {
 router.get('/signupReferral/:referralCode', function (req, res) {
     const result = {
         "referralCode": req.param('referralCode'),
-        "env": process.env.NODE_ENV
+        'env': process.env.NODE_ENV
     }
     res.render('member/register', result);
 });
@@ -20,7 +20,7 @@ router.get('/signup', function (req, res, next) {
     const number = req.param('phoneNumber');
     const result = {
         "referralCode": null,
-        "env": process.env.NODE_ENV,
+        'env': process.env.NODE_ENV,
         "productId": (product == undefined) ? "" : product,
         "phoneNumber": (number == undefined) ? "" : number
     }
@@ -45,7 +45,7 @@ router.post('/signup', function (req, res, next) {
                   res.render('common/loginmodal', {
                       "message" : response.body.message,
                       "ahref": "/order",
-                      "env": process.env.NODE_ENV,
+                      'env': process.env.NODE_ENV,
                       "token": response.body.token.toString(),
                       "productId": productId,
                       "phoneNumber": phoneNumber
@@ -59,7 +59,7 @@ router.get('/login', function (req, res, next) {
     const product = req.param('productId');
     const number = req.param('phoneNumber');
     const result = {
-        "env": process.env.NODE_ENV,
+        'env': process.env.NODE_ENV,
         "productId": (product == undefined) ? "" : product,
         "phoneNumber": (number == undefined) ? "" : number
     };
@@ -68,7 +68,7 @@ router.get('/login', function (req, res, next) {
 router.get('/sample', function (req, res, next) {
     res.render('member/complete', {
         "ahref": '/',
-        "env": process.env.NODE_ENV
+        'env': process.env.NODE_ENV
     });
 });
 // get login info
@@ -92,7 +92,7 @@ router.post('/login', function (req, res, next) {
                     {
                         "message" : "Log-in Successful",
                         "ahref": "/order",
-                        "env": process.env.NODE_ENV,
+                        'env': process.env.NODE_ENV,
                         "token": response.body,
                         "productId": productId,
                         "phoneNumber": phoneNumber

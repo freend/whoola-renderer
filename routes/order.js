@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', function(req, res, next) {
     const token = req.query.token;
     console.log('token', token);
-    if(token == "null") {
+    if(token === "null") {
         const result = {"page": {
                 'content': []
             },
@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
             "phone": null,
             "token": "null",
             "url": 'receiver/list',
-            "env": process.env.NODE_ENV
+            'env': process.env.NODE_ENV
         };
         res.render('order/user', result);
     } else {
@@ -42,7 +42,7 @@ router.get('/', function(req, res, next) {
                         "phone": null,
                         "token": req.query.token,
                         "url": 'receiver/list',
-                        "env": process.env.NODE_ENV
+                        'env': process.env.NODE_ENV
                     };
                     res.render('order/user', result);
                 }
@@ -119,7 +119,7 @@ router.get('/detail', function (req, res, next) {
                     "feePercentValue": response.body.feePercentValue,
                     "payable": response.body.payable,
                     "buyThisMonth": response.body.buyThisMonth,
-                    "env": process.env.NODE_ENV
+                    'env': process.env.NODE_ENV
                 };
                 res.render('order/detail', result);
             }
@@ -133,7 +133,7 @@ router.get('/edit', function(req, res, next) {
         "name": req.param('name'),
         "phone": phone,
         "token": req.param('token'),
-        "env": process.env.NODE_ENV
+        'env': process.env.NODE_ENV
     };
     res.render('order/user', result);
 });
@@ -157,7 +157,7 @@ router.post('/edit', function(req, res, next) {
                     res.render('common/modal', {"message":response.body.message, "ahref":"/order"});
                 }
                 else {
-                    //TODO - "env": process.env.NODE_ENV check
+                    //TODO - 'env': process.env.NODE_ENV check
                     res.render('common/error', response.body);
                 }
             });
@@ -183,7 +183,7 @@ router.get('/delete/:id', function(req, res, next) {
                 res.render('common/modal', {
                     "message":response.body.message,
                     "ahref":"/order",
-                    "env": process.env.NODE_ENV
+                    'env': process.env.NODE_ENV
                 });
             }
             else {

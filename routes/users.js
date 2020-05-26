@@ -31,7 +31,7 @@ router.get('/info', function (req, res, next) {
                         "paypal": response.body.paypalAccount,
                         "buyThisMonth": response.body.buyThisMonth,
                         "level": response.body.level,
-                        "env": process.env.NODE_ENV
+                        'env': process.env.NODE_ENV
                     };
                     res.render('member/myinfo', result);
                     break;
@@ -58,7 +58,7 @@ router.get('/paypal', function(req, res, next) {
                         console.log('account', response.body);
                         const result = {
                             "token": token,
-                            "env": process.env.NODE_ENV,
+                            'env': process.env.NODE_ENV,
                             "paypalAccount": response.body.paypalAccount
                         };
                         res.render('member/paypal', result);
@@ -94,7 +94,7 @@ router.post('/paypal', function (req, res, next) {
                         "paypal": response.body.paypalAccount,
                         "buyThisMonth": response.body.buyThisMonth,
                         "level": response.body.level,
-                        "env": process.env.NODE_ENV
+                        'env': process.env.NODE_ENV
                     };
                     res.render('member/myinfo', result);
                     break;
@@ -111,7 +111,7 @@ router.post('/info', function (req, res, next) {
             if (response.status != null) {
                 res.json(response.body);
             }
-            //TODO "env": process.env.NODE_ENV
+            //TODO 'env': process.env.NODE_ENV
             res.render('product/' + req.body["id"], response.body);
         });
 });
@@ -122,7 +122,7 @@ router.get('/password', function (req, res, next) {
     const result = {
         "token": req.query.token,
         "flag": true,
-        "env": process.env.NODE_ENV
+        'env': process.env.NODE_ENV
     };
     res.render('member/password', result);
 });
@@ -141,13 +141,13 @@ router.post('/password', function (req, res, next) {
                 var result = {
                     'message': response.body.message,
                     'ahref': '/users/password',
-                    "env": process.env.NODE_ENV
+                    'env': process.env.NODE_ENV
                 }
             } else {
                 result = {
                     'message': response.body,
                     'ahref': '/users/info',
-                    "env": process.env.NODE_ENV
+                    'env': process.env.NODE_ENV
                 }
             }
 

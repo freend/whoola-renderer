@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
     if (req.param('page') != null) {
         sendUrl += '?page=' + req.param('page');
     }
-    //TODO "env": process.env.NODE_ENV
+    //TODO 'env': process.env.NODE_ENV
     unirest
         .get(sendUrl)
         .send()
@@ -29,7 +29,7 @@ router.get('/operator/service', function (req, res, next) {
             const result = {"receiverId": receiver,
                 "operator": operator,
                 "service": response.body,
-                "env": process.env.NODE_ENV
+                'env': process.env.NODE_ENV
             };
             // res.json(result);
             res.render('purchase/category', result);
@@ -52,7 +52,7 @@ router.get('/operator', function (req, res, next) {
                 "receiver": receiver,
                 "list": response.body.list,
                 "url": 'product/list',
-                "env": process.env.NODE_ENV
+                'env': process.env.NODE_ENV
             };
             res.render('order/product', result);
         });
@@ -65,7 +65,7 @@ router.get('/:productId', function (req, res, next) {
             if (response.body.status == '404') {
                 res.render('error', response.body);
             }
-            //TODO "env": process.env.NODE_ENV
+            //TODO 'env': process.env.NODE_ENV
             res.render('product/detail', response.body);
         });
 });

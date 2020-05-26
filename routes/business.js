@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
         .then((response) => {
             console.log(response);
                 const result = {
-                    "env": process.env.NODE_ENV,
+                    'env': process.env.NODE_ENV,
                     "list": response.body
                 };
                 res.render('business/business', result);

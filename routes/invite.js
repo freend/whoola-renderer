@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
                     "invited": response.body.invited,
                     "url": 'invite',
                     "token": token,
-                    "env": process.env.NODE_ENV
+                    'env': process.env.NODE_ENV
                 };
                 res.render('invite/invite', result);
             }
@@ -61,7 +61,7 @@ router.post('/add', function(req, res, next) {
                     "url": 'invite',
                     "token": token,
                     "message":message,
-                    "env": process.env.NODE_ENV,
+                    'env': process.env.NODE_ENV,
                     "total": response.body.total,
                     "invited": response.body.invited,
                     "ahref":"/invite?page=1"

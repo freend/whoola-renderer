@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
                   'fee': response.body.fee,
                   'paypalAccount': response.body.paypalAccount,
                   'token': token,
-                    "env": process.env.NODE_ENV
+                    'env': process.env.NODE_ENV
                 };
                 res.render('withdraw/withdraw', result);
             }
@@ -48,7 +48,7 @@ router.get('/list', function(req, res, next) {
                         res.render('common/error', {"message": "Please log in", "ahref": "/login"});
                         break;
                     default:
-                        //TODO "env": process.env.NODE_ENV
+                        //TODO 'env': process.env.NODE_ENV
                         res.json(response.body);
                 }
             } else {
@@ -56,7 +56,7 @@ router.get('/list', function(req, res, next) {
                 const result = {
                     "page": response.body.page,
                     "url": 'list',
-                    "env": process.env.NODE_ENV
+                    'env': process.env.NODE_ENV
                 };
                 res.render('withdraw/history', result);
             }
@@ -81,7 +81,7 @@ router.post('/', function(req, res, next) {
                 res.render('common/modal', {
                     "message":response.body,
                     "ahref":"/withdraw/list?page=1",
-                    "env": process.env.NODE_ENV
+                    'env': process.env.NODE_ENV
                 });
             }
             else {

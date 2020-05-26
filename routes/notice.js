@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
         .get(process.env.API_HOST + '/notice' + '?page=' + req.param('page'))
         .send()
         .then((response) => {
-            const result = {"page": response.body, "url": 'notice', "env": process.env.NODE_ENV};
+            const result = {"page": response.body, "url": 'notice', 'env': process.env.NODE_ENV};
             res.render('notice/notice', result);
         });
 });

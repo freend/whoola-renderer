@@ -22,7 +22,7 @@ router.get('/', function(req, res) {
                 // res.json(response.body);
                 res.render('tree/tree', {
                     "trees":response.body,
-                    "env": process.env.NODE_ENV
+                    'env': process.env.NODE_ENV
                 });
             }
         });

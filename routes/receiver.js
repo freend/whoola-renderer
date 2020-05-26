@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
                     "name": null,
                     "phone": null,
                     "url": 'receiver/list',
-                    "env": process.env.NODE_ENV
+                    'env': process.env.NODE_ENV
                 };
                 res.render('receiver/list', result);
             }
@@ -36,7 +36,7 @@ router.get('/edit', function(req, res, next) {
         "id": req.param('id'),
         "name": req.param('name'),
         "phone": phone,
-        "env": process.env.NODE_ENV
+        'env': process.env.NODE_ENV
     };
     res.render('receiver/edit', result);
 });
@@ -60,7 +60,7 @@ router.post('/edit', function(req, res, next) {
                     res.render('common/modal', {
                         "message":response.body.message,
                         "ahref":"/order",
-                        "env": process.env.NODE_ENV
+                        'env': process.env.NODE_ENV
                     });
                 }
                 else {
@@ -70,7 +70,7 @@ router.post('/edit', function(req, res, next) {
     } else {
         res.render('receiver/list', {
             "message": "mobile_number is invalid",
-            "env": process.env.NODE_ENV
+            'env': process.env.NODE_ENV
         });
     }
 });
@@ -90,7 +90,7 @@ router.post('/add', function(req, res, next) {
                 switch (response.status) {
                     case 200:
                         const result = {
-                            "env": process.env.NODE_ENV,
+                            'env': process.env.NODE_ENV,
                             "phoneNumber": response.body.phoneNumber,
                             "receiverId": response.body.receiverId,
                             "service": response.body.service,
@@ -110,7 +110,7 @@ router.post('/add', function(req, res, next) {
         res.render('common/modal', {
             "message": "mobile number is invalid",
             "ahref":"/order",
-            "env": process.env.NODE_ENV
+            'env': process.env.NODE_ENV
         });
     }
 });

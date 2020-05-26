@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
                 const result = {
                     "page": response.body.page,
                     "url": 'purchase',
-                    "env": process.env.NODE_ENV
+                    'env': process.env.NODE_ENV
                 };
                 res.render('purchase/history', result);
             }
@@ -56,7 +56,7 @@ router.get('/complete', function (req, res, next) {
                 "msg": response.body,
                 "ahref": "/home"
             };
-            //TODO "env": process.env.NODE_ENV
+            //TODO 'env': process.env.NODE_ENV
             res.render('common/modal', {"message": response.body, "ahref": "/purchase?page=1"});
         });
 });
@@ -81,7 +81,7 @@ router.post('/point', function (req, res, next) {
                     res.render('common/modal', {
                         'message':response.body,
                         'ahref': '/purchase?page=1',
-                        "env": process.env.NODE_ENV
+                        'env': process.env.NODE_ENV
                     });
                     break;
                 default:

@@ -3,7 +3,7 @@ const unirest = require('unirest');
 const router = express.Router();
 
 router.get('/', function(req, res, next) {
-    const result = {"env": process.env.NODE_ENV};
+    const result = {'env': process.env.NODE_ENV};
     res.render('contact/contact', result);
 });
 router.post('/', function(req, res, next) {
@@ -21,7 +21,7 @@ router.post('/', function(req, res, next) {
                 res.render('common/error', {
                     "message":response.body,
                     "ahref":"/contact",
-                    "env": process.env.NODE_ENV
+                    'env': process.env.NODE_ENV
                 });
             }
             else {

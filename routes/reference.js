@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
                 console.log(response.body);
                 res.render('reference/reference', {
                     "list":response.body,
-                    "env": process.env.NODE_ENV
+                    'env': process.env.NODE_ENV
                 });
             }
         });

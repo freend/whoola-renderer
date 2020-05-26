@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
                 const result = {
                     "page": response.body.page,
                     "url": 'point',
-                    "env": process.env.NODE_ENV
+                    'env': process.env.NODE_ENV
                 };
                 res.render('point/history', result);
             }
@@ -45,7 +45,7 @@ router.post('/add', function(req, res, next) {
                 res.render('common/modal', {
                     "message":response.body,
                     "ahref":"/invite",
-                    "env": process.env.NODE_ENV
+                    'env': process.env.NODE_ENV
                 });
             }
             else {

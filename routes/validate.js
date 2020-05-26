@@ -13,14 +13,14 @@ router.get('/signup/:mail/:valicateCode', function(req, res, next) {
                     {
                         'message': response.body.message,
                         'ahref': '/',
-                        "env": process.env.NODE_ENV
+                        'env': process.env.NODE_ENV
                     }
                     );
             } else {
                 res.render("common/error", {
                     'message': "validate complete",
                     'ahref': '/',
-                    "env": process.env.NODE_ENV
+                    'env': process.env.NODE_ENV
                 });
             }
         });
@@ -40,7 +40,7 @@ router.get('/password/:mail', function(req, res, next){
                         "message": response.body.responseMessage,
                         "ahref": "/",
                         "token": null,
-                        "env": process.env.NODE_ENV
+                        'env': process.env.NODE_ENV
                     }
                     res.render('common/error', result);
                 }
@@ -71,7 +71,7 @@ router.post('/reset', function(req, res, next){
                         "message": response.body.responseMessage,
                         "ahref": "/",
                         "token": null,
-                        "env": process.env.NODE_ENV
+                        'env': process.env.NODE_ENV
                     }
                     res.render('common/modal', result);
                 }
@@ -79,7 +79,7 @@ router.post('/reset', function(req, res, next){
                     const result = {
                         "message": response.body.message,
                         "ahref": "/",
-                        "env": process.env.NODE_ENV
+                        'env': process.env.NODE_ENV
                     }
                     res.render('common/error', result);
                 }
@@ -93,7 +93,7 @@ router.get('/password/:mail/:validateCode',function(req, res, next){
         "mail": req.param('mail'),
         "validateCode": req.param('validateCode'),
         "flag": false,
-        "env": process.env.NODE_ENV
+        'env': process.env.NODE_ENV
     }
     res.render('member/password', result);
 });
@@ -111,7 +111,7 @@ router.get('/withdraw/:mail/:validateCode', function (req, res, next) {
                 const result = {
                     "message": response.body,
                     "ahref": '/',
-                    "env": process.env.NODE_ENV
+                    'env': process.env.NODE_ENV
                 };
                 res.render('common/error', result);
             }
