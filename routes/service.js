@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
             "phone": null,
             "token": "null",
             "url": 'receiver/list',
-            'category': 'order',
+            'category': 'service',
             'env': process.env.NODE_ENV
         };
         res.render('order/user', result);
@@ -43,7 +43,7 @@ router.get('/', function(req, res, next) {
                         "phone": null,
                         "token": req.query.token,
                         "url": 'receiver/list',
-                        'category': 'order',
+                        'category': 'service',
                         'env': process.env.NODE_ENV
                     };
                     res.render('order/user', result);
@@ -55,20 +55,21 @@ router.post('/', function(req, res, next) {
     const token = req.body["token"];
     if (/^[1-9][0-9]{6,14}$/.test(req.body["phone"])) {
         unirest
-            .get(process.env.API_HOST + '/product?phoneNumber=' + req.body["phone"])
+            .get(process.env.API_HOST + '/product/service?phoneNumber=' + req.body["phone"])
             .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
             .send()
             .then((response) => {
                 switch (response.status) {
                     case 200:
-                        res.render('order/product', {
-                            'list': response.body,
+                        res.render('purchase/service', {
+                            'service': response.body.service,
                             'env': process.env.NODE_ENV,
+                            'isoCode': response.body.isoCode,
                             'receiver': req.body["phone"]
                         });
                         break;
                     default:
-                        res.render('common/modal', {"message": response.body.message, "ahref": "/order"});
+                        res.render('common/modal', {"message": response.body.message, "ahref": "/service"});
                         break;
                 }
             });
@@ -76,6 +77,48 @@ router.post('/', function(req, res, next) {
         res.render('common/modal', {"message": "mobile number is invalid", "ahref":"/order"});
     }
 });
+router.get('/operator', function (req, res, next) {
+    const service = req.param('service');
+    const receiver = req.param('receiver');
+    const isoCode = req.param('isoCode');
+    const token = req.param('token');
+    unirest
+        .get(process.env.API_HOST + '/product/operator?service=' + service + "&isoCode=" + isoCode)
+        .send()
+        .then((response) => {
+            if (response.body.status == '404') {
+                res.render('error', response.body);
+            }
+            const result = {
+                "receiver": receiver,
+                "list": response.body,
+                'env': process.env.NODE_ENV
+            };
+            res.render('order/product', result);
+        });
+});
+// router.get('/operator', function (req, res, next) {
+//     const operator = req.param('operator');
+//     const receiver = req.param('receiver');
+//     const service = req.param('service');
+//     const token = req.param('token');
+//     unirest
+//         .get(process.env.API_HOST + '/product/operator/' + operator + "?receiver=" + receiver + "&service=" + service)
+//         .send()
+//         .then((response) => {
+//             console.log('response body', response.body.list);
+//             if (response.body.status == '404') {
+//                 res.render('error', response.body);
+//             }
+//             const result = {
+//                 "receiver": receiver,
+//                 "list": response.body.list,
+//                 "url": 'product/list',
+//                 'env': process.env.NODE_ENV
+//             };
+//             res.render('order/product', result);
+//         });
+// });
 router.get('/detail', function (req, res, next) {
     const productId = req.param('productId');
     const receiver = req.param('receiver');
@@ -108,7 +151,7 @@ router.get('/detail', function (req, res, next) {
                     "receiverId": receiver,
                     "operator": response.body.operator,
                     "token": token,
-                    "email": response.body.email,
+                    "referralCode": response.body.referralCode,
                     "paypalUrl": response.body.paypalUrl,
                     "paypalToken": response.body.paypalToken,
                     "paypalCommand": response.body.paypalCommand,
@@ -119,7 +162,6 @@ router.get('/detail', function (req, res, next) {
                     "mode": process.env.NODE_ENV,
                     "feePercentValue": response.body.feePercentValue,
                     "payable": response.body.payable,
-                    "service": response.body.service,
                     "buyThisMonth": response.body.buyThisMonth,
                     'env': process.env.NODE_ENV
                 };
@@ -167,8 +209,6 @@ router.post('/edit', function(req, res, next) {
         res.render('receiver/list', {"message": "mobile_number is invalid"});
     }
 });
-
-
 router.get('/delete/:id', function(req, res, next) {
     const token = req.param('token');
 

@@ -13,8 +13,8 @@
         </h1>
         <div class="conts_wrap">
             <input type="hidden" value="" id="token" name="token">
-            <input type="hidden" value="<%= receiverId%>" name="receiver" id="receiver">
-            <input type="hidden" value="<%= operator%>" name="operator" id="operator">
+            <input type="hidden" value="<%= receiver%>" name="receiver" id="receiver">
+            <input type="hidden" value="<%= isoCode%>" name="isoCode" id="isoCode">
             <div class="ssc_wrap">
                 <div class="ssc_box" id="serviceBtn-1">
                     <div class="iconsBox"><span class="blind">mobile</span></div>
@@ -54,7 +54,7 @@
                  <div class="ssc_box" id="serviceBtn-3">
                     <div class="iconsBox"><span class="blind">utility</span></div>
                     <div class="ssc_txt">
-                        <p>Utilities</p>
+                        <p>Electricity bill</p>
                     </div>
                 </div>
                 
@@ -78,17 +78,18 @@
 </body>
 <script>
     function serviceList(serviceId) {
-        location.href = '/products/operator?operator=' + $('#operator').val()
-         + '&receiver=' + $('#receiver').val()
+        location.href = '/service/operator?receiver=' + $('#receiver').val()
          + '&service=' + serviceId
+         + '&isoCode=' + $('#isoCode').val()
          + '&token=' + $('#token').val();
     }
     window.onload = function() {
         $('.ssc_box').css('display', 'none');
-        // const service = [<%= service %>];
-        const service = [1];
+        const service = [<%= service %>];
         for (i = 0; i < service.length; i++) {
-            $('#serviceBtn-' + service[i]).css('display', 'block');
+            if (service[i] != 1) {
+                $('#serviceBtn-' + service[i]).css('display', 'block');
+            }
         }
         for (var i = 0; i <= 9; i++) {
             $('#serviceBtn-' + i).click(function(){

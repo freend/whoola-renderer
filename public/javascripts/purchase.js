@@ -32,8 +32,6 @@ function feeProcess(salesAmount) {
     $('#deductionAmount').text(strictFloat(productTotalAmount - salesAmount) + '$');
     $('#finalPayment').text(strictFloat(salesAmount + processFee) + '$');
     $('#submitAmount').val(strictFloat(salesAmount + processFee));
-    $('#custom').val('code:' + referralCode + ',receiver:' + receivePhone + ',point:' + $('#discountFee').val());
-    // console.log('>>', strictFloat(salesAmount + processFee));
 }
 function strictFloat(value) {
     return parseFloat(new Number(value).toFixed(2));
@@ -66,10 +64,34 @@ function beforePayment() {
             return false;
         }
     }
+    if ($('#noneMember').val() == '') {
+        alert('do not match email');
+        return false;
+    } else {
+        if (!validateMail($('#noneMember').val())) {
+            alert('do not match email');
+            return false;
+        }
+    }
     return true;
+}
+function customUpdate() {
+    var account = '';
+    if ($('#account').val() != undefined) {
+        account = $('#account').val();
+    }
+    if ($('#noneMember').val() != undefined) {
+        email = $('#noneMember').val();
+    }
+    $('#custom').val(
+        'code:' + email + ',receiver:' + receivePhone + ',point:' + $('#discountFee').val()
+        + ',accountNumber:' + account
+    );
+    console.log('custom', $('#custom').val());
 }
 function buyPoint() {
     if (beforePayment()) {
+        customUpdate();
         document.getElementById('buyPoint').submit();
         // console.log('productId', $('input[name = productId]').val());
         // console.log('amount', $('input[name = pointAmount]').val());
@@ -80,31 +102,11 @@ function buyPoint() {
 // buy item to pay pal.
 function buyItem() {
     if (beforePayment()) {
+        customUpdate();
         alert("Please DO NOT CLOSE the Paypal window or click the Back button on your browser until the Payment Confirmation window pops up.");
         document.getElementById('buyPaypal').submit();
     }
 }
-
-function initNonMember(flag) {
-    if(flag) {
-        $('#signup').show();
-        $('#login').show();
-        $('#paypalBtn').hide();
-        $('#isLogout').hide();
-    } else {
-        $('#signup').hide();
-        $('#login').hide();
-        $('#paypalBtn').show();
-    }
-}
-
-function buySignUp(id, number) {
-    location.href = '/signup?productId=' + id + '&phoneNumber=' + number;
-}
-function buyLogIn(id, number) {
-    location.href = '/login?productId=' + id + '&phoneNumber=' + number;
-}
-
 
 $(window).bind("pageshow", function (event) {
     $('#discountFee').val(0);

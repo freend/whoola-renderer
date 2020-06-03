@@ -14,36 +14,129 @@
             <div class="purchase_wrap">
 
                 <div class="purchaseH mt_50">
-                    <table class="type02">
-                        <caption class="blind">Purchase update delete table</caption>
+                    <table class="type03">
+                        <caption class="blind">Withdraw History table</caption>
+                        <colgroup>
+                            <col style="width: 20%">
+                            <col style="width: auto">
+                            <col style="width: 10%">
+                            <col style="width: auto">
+                            <col style="width: auto">
+                            <col style="width: 15%">
+                        </colgroup>
                         <thead>
-                            <thead>
-                                <td> State </td>
-                                <td> Amount </td>
-                                <td> Fee </td>
-                                <td> Message </td>
-                                <td> Create </td>
-                                <td> Response </td>
-                            </thead>
+                            <tr>
+                                <th class="txt_c">State</th>
+                                <th>Amount (USD)</th>
+                                <th>Fee</th>
+                                <th>Create Date</th>
+                                <th>Response</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <% for (var i = 0; i < page.content.length; i++) { %>
-                                <tr>
-                                    <td><%= page.content[i].withdrawState %></td>
-                                    <td> USD <%= (page.content[i].amount / 100) %></td>
-                                    <td><%= (page.content[i].fee / 100) %></td>
-                                    <td><%= page.content[i].content %></td>
-                                    <td><%= page.content[i].createAt %></td>
-                                    <td><%= page.content[i].responseAt %></td>
-                                </tr>
+                            <tr>
+                                <td>
+                                <% switch (page.content[i].withdrawState) {
+                                    case "REQUESTED" :%>
+                                    <p class="dots_wrap">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </p>
+                                    <span class="color_p">REQUEST</span>
+                                    <%  break; 
+                                        case "REQUEST_CONFIRMED":%>
+                                    <p class="dots_wrap">
+                                        <span class="dotA"></span>
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </p>
+                                    <span class="color_p">CONFIRM</span>
+                                    <% break;
+                                        case "ACCEPTED":%>
+                                    <p class="dots_wrap">
+                                        <span class="dotA"></span>
+                                        <span class="dotA"></span>
+                                        <span class="dot"></span>
+                                    </p>
+                                    <span class="color_p">ACCEPT</span>
+                                <%  break;
+                                    case "CANCELED":%>
+                                    <p class="dots_wrap">
+                                        <span class="dotB"></span>
+                                        <span class="dotB"></span>
+                                        <span class="dotB"></span>
+                                    </p>
+                                    <span class="color_o">CANCELED</span>
+                                <%  break;
+                                    case "REJECTED":%>
+                                    <p class="dots_wrap">
+                                        <span class="dotA"></span>
+                                        <span class="dotB"></span>
+                                        <span class="dot"></span>
+                                    </p>
+                                    <span class="color_o">REJECT</span>
+                                <%  break;
+                                    case "COMPLETE":%>
+                                    <p class="dots_wrap">
+                                        <span class="dotA"></span>
+                                        <span class="dotA"></span>
+                                        <span class="dotA"></span>
+                                    </p>
+                                    <span>COMPLETE</span>
+                                <%  break;
+                                } %>
+                                </td>
+                                <td><%= (page.content[i].amount / 100) %></td>
+                                <td><%= (page.content[i].fee / 100) %></td>
+                                <td><%= page.content[i].createAt %></td>
+                                <td><%= page.content[i].responseAt %></td>
+                                <% if (page.content[i].withdrawState == "REQUESTED" || page.content[i].withdrawState == "REQUEST_CONFIRMED") { %>
+                                    <td><button class="btn_submit" onclick="cancelPopup('<%= page.content[i].id %>', '<%= page.content[i].createAt %>', '<%= page.content[i].amount / 100 %>')">Cancel</button></td>
+                                <% } else { %>
+                                    <td><button class="btn_done">Done</button></td>
+                                <% } %>
+                            </tr>
                             <% } %>
+                        </tbody>
                     </table>
                     <% include ../common/page %>
                 </div>
 
             </div>
         </div>
+        <div class="conts_pop" style="display: none">
+            <div class="pop_wrap" style="">
+                <h1>Request for withdrawal cancellation</h1>
+                <p id="cancelTitle"></p>
+                <p class="bold">Are you sure to cancel the withdrawal request?</p>
+                <div class="btn_group">
+                    <button class="btn_submit" onclick="requestCancel()">Yes</button>
+                    <button class="btn_done" onclick="closePopup()">No</button>
+                </div>
+            </div>
+        </div>
     </section>
     <footer>
         <% include ../common/footers %>
     </footer>
+    <script src="/static/javascripts/withdraw.js"></script>
+    <script>
+    var withdrawId = 0;
+    function requestCancel() {
+        console.log(withdrawId);
+        location.href = '/withdraw/cancel?id=' + withdrawId + '&token=' + localStorage.getItem('token');
+    }
+    function cancelPopup(id, createAt, amount) {
+        withdrawId = id;
+        $('#cancelTitle').text("As to the $" + amount + " withdrawal request submitted " + createAt + ",");
+        $('.conts_pop').css("display", 'block');
+    }
+    function closePopup() {
+        $('.conts_pop').css("display", 'none');
+    }
+    </script>
 </body>
 </html>

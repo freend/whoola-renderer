@@ -75,6 +75,33 @@ router.get('/list', function(req, res, next) {
             }
         });
 });
+router.get('/cancel', function (req, res, next) {
+
+    const token = req.param('token');
+    const id = req.param('id');
+    console.log('id', id);
+    if (token == null) {
+        res.render('common/error', {'message':'please log in', 'ahref': '/login'});
+    }
+    unirest
+        .delete(process.env.API_HOST + '/withdraw')
+        .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
+        .send({
+            'id': id
+        })
+        .then((response) => {
+            if (response.status != null) {
+                res.render('common/modal', {
+                    "message":response.body,
+                    "ahref":"/withdraw/list?page=1",
+                    'env': process.env.NODE_ENV
+                });
+            }
+            else {
+                res.render('common/modal', response.body);
+            }
+        });
+});
 router.post('/', function(req, res, next) {
     var token = req.body["token"];
 

@@ -32,19 +32,25 @@ router.get('/', function(req, res, next) {
         });
 });
 router.get('/complete', function (req, res, next) {
-    const code = req.param('cm').split(',')[0].toString().split(':')[1].toString();
-    const receive = req.param('cm').split(',')[1].toString().split(':')[1].toString();
-    const point = req.param('cm').split(',')[2].toString().split(':')[1].toString();
+    const arr = req.param('cm').split(',');
+    const code = arr[0].toString().split(':')[1].toString();
+    const receive = arr[1].toString().split(':')[1].toString();
+    const point = arr[2].toString().split(':')[1].toString();
+    let account = "";
+    if (arr.length == 4) {
+        account = arr[3].toString().split(':')[1].toString();
+    }
     const result = {
         "amount": req.param('amt'),
         "currency": req.param('cc'),
-        "code": code,
+        "email": code,
         "receive": receive,
         "productName": req.param('item_name'),
         "productId": req.param('item_number'),
         "state": req.param('st'),
         "txId": req.param('tx'),
-        "point": point
+        "point": point,
+        "accountNumber": account
     };
     unirest
         .post(process.env.API_HOST + '/paypal')
@@ -56,10 +62,14 @@ router.get('/complete', function (req, res, next) {
                 "msg": response.body,
                 "ahref": "/home"
             };
+            let url = 'common/modal';
             //TODO 'env': process.env.NODE_ENV
-            res.render('common/modal', {"message": response.body, "ahref": "/purchase?page=1"});
+            res.render(url, {"message": response.body.message, "ahref": '/purchase?page=1'});
         });
 });
+router.get('/success', function (req, res, next) {
+    res.render('order/complete', {"env": process.env.NODE_ENV});
+})
 router.post('/point', function (req, res, next) {
     const token = req.body["token"];
     const request = {
@@ -91,7 +101,6 @@ router.post('/point', function (req, res, next) {
             // res.render('product/' + req.body["id"], response.body);
         });
 });
-
 router.get('/validate', function(req, res, next) {
     unirest
         .post("https://www.sandbox.paypal.com/cgi-bin/webscr")

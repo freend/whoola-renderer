@@ -10,7 +10,11 @@
             <% if(phone == null) { %>
             <span class="blind"><b>Step1</b> Number</span>
             Purchase Step
-            <span><b>Step2 </b>Select Plan</span>
+                <% if(category == 'order') { %>
+                    <span><b>Step2 </b>Select Plan</span>
+                <% } else {%>
+                    <span><b>Step2 </b>Select Service</span>
+                <% } %>
             <% }%>
         </h1>
         <h2 class="sub_title">
@@ -26,8 +30,12 @@
         <div class="conts_wrap">
             <div class="purchase_wrap">
                 <form class="form" action=
-                <% if (id == null) { %>
+                <% if (id == null) { 
+                    if (category == "order") {%>
                     "/order"
+                    <% } else { %>
+                    "/service"
+                    <% } %>
                 <% } else { %>
                     "/receiver/edit"
                 <% } %>
@@ -70,8 +78,12 @@
                     
                 <div class="btn_group">
                     <button id="btnSubmit">
-                        <% if(id == null) { %>
+                        <% if(id == null) { 
+                            if (category == 'order') {%>
                             Select Plan
+                            <% } else { %>
+                                Select Service
+                            <% } %>
                         <% } else { %>
                             Edit
                         <% } %>

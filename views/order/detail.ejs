@@ -4,6 +4,8 @@
 <head>
     <% include ../common/header %>
     <script src="/static/javascripts/purchase.js"></script>
+    <script src="/static/javascripts/member.js"></script>
+    <script src="/static/javascripts/validate.js"></script>
 </head>
 <body>
     <% include ../common/navigator %>
@@ -26,14 +28,20 @@
                             <col style="width: 30%">
                         </colgroup>
                         <tbody>
-                            <% if (operator != 'hoolamoolah') { %>
                             <tr>
                                 <th class="txt_l">Name</th>
-                                <td><%= name%></td>
+                                <% if (operator != 'hoolamoolah') { %>
+                                    <td><%= name%></td>
+                                <% } else { %>
+                                    <td></td>
+                                <% } %>
                                 <th class="txt_l">Phone number</th>
-                                <td><%= receiverPhone %></td>
+                                <% if (operator != 'hoolamoolah') { %>
+                                    <td><%= receiverPhone %></td>
+                                <% } else { %>
+                                    <td></td>
+                                <% } %>
                             </tr>
-                            <% } %>
                             <tr>
                                 <th class="txt_l">Operator</th>
                                 <td><%= operator %></td>
@@ -46,17 +54,32 @@
                                 <th class="txt_l">Price</th>
                                 <td><%= salesAmount%>$</td>
                             </tr>
+                            <tr>
+                                <th class="txt_l">My HM Dollar</th>
+                                <td><%= totalPoint %>$</td>
+                            </tr>
                             <% if (description != '') { %>
                             <tr>
                                 <th class="txt_l">Description</th>
                                 <td colspan="3"><%= description %></td>
                             </tr>
                             <% } %>
+                            <% if (service != 1) { %>
                             <tr>
-                                <th class="txt_l">My HM Dollar</th>
-                                <td><%= totalPoint %>$</td>
+                                <th class="txt_l">Account</th>
+                                <td colspan="3"><input placeholder="Account (Optional)" id="account"></td>
                             </tr>
-
+                            <% } %>
+                            <% if (email == '') { %>
+                            <tr>
+                                <th class="txt_l">Email</th>
+                                <td colspan="3"><input placeholder="Email (Required)" id="noneMember"></td>
+                            </tr>
+                            <tr>
+                                <!-- <th class="txt_l">None member email</th> -->
+                                <td colspan="4">Nonmember purchase will not be kept recorded, and thus will not be credited toward any membership benefits</td>
+                            </tr>
+                            <% } %>
                         </tbody>
                     </table>
                 </div>
@@ -116,9 +139,13 @@
                 </div>
                     <form action="<%= paypalUrl %>" method="post" id="buyPaypal">
                         <div class="btn_group">
-                            <button class="on" id="signup" onclick="buySignUp(<%=productId%>, <%= receiverPhone %>)" type="button">Register</button>
-                            <button id="login" onclick="buyLogIn(<%=productId%>, <%= receiverPhone %>)" type="button">Log in</button>
-                            <button class="btn_buy" id="paypalBtn" onclick="buyItem()" type="button">Buy</button>
+                            <button class="on" id="signup" onclick="buySignUp()" type="button">Register</button>
+                            <button id="login" onclick="buyLogIn()" type="button">Log in</button>
+                            <% if (email != '') { %>
+                                <button class="btn_buy" id="paypalBtn" onclick="buyItem()" type="button">Buy</button>
+                            <% } else { %>
+                                <button class="on" id="paypalBtn" onclick="buyItem()" type="button">None Member</button>
+                            <% } %>
                             <button class="btn_buy" id="pointBtn" onclick="buyPoint()" type="button">Buy Point</button>
                         </div>
                         <!-- required -->
@@ -154,7 +181,7 @@
     const ablePoint = <%= totalPoint %>;
     const isPayable = <%= payable %>;
     const processFee = getProcessFee(productTotalAmount);
-    const referralCode = '<%= referralCode %>';
+    var email = '<%= email %>';
     const receivePhone = '<%= receiverPhone %>';
     $('#discountFee').val(0);
     $(document).ready(function(){
@@ -163,7 +190,7 @@
         feeProcess(productTotalAmount);
         var usePoint = 0;
         isAblePoint();
-        const memberCode = "<%= referralCode %>";
+        const memberCode = "<%= email %>";
         if (memberCode == "") {
             initNonMember(true);
         } else {

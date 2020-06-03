@@ -2,6 +2,8 @@
 <html>
   <head>
     <% include ../common/header %>
+    <script src="/static/javascripts/purchase.js"></script>
+    <script src="/static/javascripts/member.js"></script>
 </head>
 <body>
   <% include ../common/navigator %>
@@ -11,12 +13,13 @@
     </h1>
     <h2 class="sub_title">
       <% if(buyMonth < 20) { %>
-        In order to withdraw HM Dollar, your purchase during the month must be more than $20.
+        <p>In order to withdraw HM Dollar, your purchase during the month must be more than $20.</p>
       <% } %>
+      <p>You will receive a verification email on withdrawal. The withdrawal will not be processed if not verified.</p>
   </h2>
     <div class="conts_wrap">
       <div class="puchase_wrap">
-        <div class="purchase_tbl2 mt_50">
+        <div class="withdraw_tbl2 mt_50">
           <table>
               <caption class="blind">Purchase table</caption>
               <colgroup>
@@ -84,6 +87,8 @@
             <input type="hidden" name="fee" id="requestFee">
             <input type="hidden" name="amount" id="requestAmount">
             <button class="btn_request" type="button" onclick="requestCheck()">Request</button>
+            <button class="on" id="signup" onclick="buySignUp()" type="button">Register</button>
+            <button id="login" onclick="buyLogIn()" type="button">Log in</button>
           </div>
         </form>
       </div>
@@ -122,7 +127,12 @@
         requestFee = <%= fee %>;
         underRequestAmount(buyMonth);
         $('#viewAmount').val(requestAmount);
-        initNoneUser();
+        const memberCode = "<%= token %>";
+        if (memberCode == "null") {
+            initNonMember(true);
+        } else {
+            initNonMember(false);
+        }
         changeValue();
     }
     function underRequestAmount(value) {
@@ -131,11 +141,6 @@
         $('#viewAmount').attr('disabled', true);
         requestAmount = 0;
         requestFee = 0;
-      }
-    }
-    function initNoneUser() {
-      if('<%= token %>' == 'null') {
-        $('.btn_request').hide();
       }
     }
     function changeValue() {

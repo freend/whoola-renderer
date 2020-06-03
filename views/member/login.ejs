@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script>
+        localStorage.removeItem('token');
+    </script>
     <% include ../common/header %>
     <script src="/static/javascripts/validate.js"></script>
 </head>
@@ -31,8 +34,7 @@
                     </div>
                 </div>
             </div>
-            <input type="hidden" name="productId" value="<%= productId %>">
-            <input type="hidden" name="phoneNumber" value="<%= phoneNumber %>">
+            <input type="hidden" name="url" value="<%= url %>">
         </form>
     </section>
     <script>

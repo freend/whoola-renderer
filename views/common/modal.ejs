@@ -10,12 +10,18 @@
             alert(getMessage);
         }
         var redirectUrl = "<%= ahref%>";
+        if (localStorage.getItem('token') == null && redirectUrl == '/purchase?page=1') {
+            redirectUrl = null;
+        }
+        
         if (redirectUrl != null) {
-            if (redirectUrl == '/order' || redirectUrl == '/users/info') {
+            if (redirectUrl == '/order' || redirectUrl == '/users/info' || redirectUrl == '/service') {
                 location.href = redirectUrl + "?token=" + localStorage.getItem('token');
             } else {
                 location.href = redirectUrl + "&token=" + localStorage.getItem('token');
             }
+        } else {
+            location.href = '/purchase/success';
         }
     }
 </script>

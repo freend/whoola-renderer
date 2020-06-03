@@ -16,19 +16,24 @@ router.get('/signupReferral/:referralCode', function (req, res) {
     res.render('member/register', result);
 });
 router.get('/signup', function (req, res, next) {
-    const product = req.param('productId');
-    const number = req.param('phoneNumber');
+    const returnUrl = getUrl(req.header('referer'));
+    console.log('return url', returnUrl);
+    // const product = req.param('productId');
+    // const number = req.param('phoneNumber');
     const result = {
         "referralCode": null,
         'env': process.env.NODE_ENV,
-        "productId": (product == undefined) ? "" : product,
-        "phoneNumber": (number == undefined) ? "" : number
+        'url': returnUrl
+        // "productId": (product == undefined) ? "" : product,
+        // "phoneNumber": (number == undefined) ? "" : number
     }
   res.render('member/register', result);
 });
 router.post('/signup', function (req, res, next) {
-    const productId = req.body["productId"];
-    const phoneNumber = req.body["phoneNumber"];
+    const returnUrl = req.body["url"];
+    console.log('return url', returnUrl);
+    // const productId = req.body["productId"];
+    // const phoneNumber = req.body["phoneNumber"];
   unirest
       .post(process.env.API_HOST + '/member/signup')
       .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
@@ -44,24 +49,40 @@ router.post('/signup', function (req, res, next) {
               case 200:
                   res.render('common/loginmodal', {
                       "message" : response.body.message,
-                      "ahref": "/order",
+                      "ahref": returnUrl,
                       'env': process.env.NODE_ENV,
-                      "token": response.body.token.toString(),
-                      "productId": productId,
-                      "phoneNumber": phoneNumber
+                      "token": response.body.token.toString()
+                      // "productId": productId,
+                      // "phoneNumber": phoneNumber
                   });
                   break;
           }
       });
 });
+function getUrl(url) {
+    var result = url.split('/')[url.split('/').length - 1].split('token=')[0] + 'token=';
+    if (url.split('/')[url.split('/').length - 2] === 'order') {
+        result = '/order/' + result;
+    }
+    if (url.split('/')[url.split('/').length - 2] === 'withdraw') {
+        result = '/withdraw/' + result;
+    }
+    if (result === 'logintoken=') {
+        result = 'token=';
+    }
+    return (result === 'token=') ? '/order?token=' : result;
+}
 // call login page
 router.get('/login', function (req, res, next) {
-    const product = req.param('productId');
-    const number = req.param('phoneNumber');
+    const returnUrl = getUrl(req.header('referer'));
+    console.log('get login return url', returnUrl);
+    // const product = req.param('productId');
+    // const number = req.param('phoneNumber');
     const result = {
         'env': process.env.NODE_ENV,
-        "productId": (product == undefined) ? "" : product,
-        "phoneNumber": (number == undefined) ? "" : number
+        // "productId": (product == undefined) ? "" : product,
+        // "phoneNumber": (number == undefined) ? "" : number,
+        'url': returnUrl
     };
     res.render('member/login', result);
 });
@@ -73,8 +94,9 @@ router.get('/sample', function (req, res, next) {
 });
 // get login info
 router.post('/login', function (req, res, next) {
-    const productId = req.body["productId"];
-    const phoneNumber = req.body["phoneNumber"];
+    // const productId = req.body["productId"];
+    // const phoneNumber = req.body["phoneNumber"];
+    const returnUrl = req.body["url"];
     unirest
         .post(process.env.API_HOST + '/member/signin')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
@@ -87,15 +109,14 @@ router.post('/login', function (req, res, next) {
                 res.render('common/error', response.body);
             } else {
                 console.log("log in success");
-                response.body.token = response.body;
                 res.render('common/loginmodal',
                     {
                         "message" : "Log-in Successful",
-                        "ahref": "/order",
+                        "ahref": returnUrl,
                         'env': process.env.NODE_ENV,
-                        "token": response.body,
-                        "productId": productId,
-                        "phoneNumber": phoneNumber
+                        "token": response.body
+                        // "productId": productId,
+                        // "phoneNumber": phoneNumber
                     });
             }
         });
