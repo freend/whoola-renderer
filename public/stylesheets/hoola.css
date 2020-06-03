@@ -2376,6 +2376,30 @@ border-radius: 6px;
     padding: 5px
 }
 
+.withdraw_tbl2 {
+    width: 82%;
+    margin: 0 auto
+}
+.withdraw_tbl2 table
+{
+    border-top: 1px solid #c4c4c4;
+    table-layout: fixed
+}
+
+.withdraw_tbl2 th,
+.withdraw_tbl2 td{
+    border-bottom: none;
+    padding: 10px
+}
+.withdraw_tbl2 .btn_group button{
+    width: 30%;
+    opacity: 0.6
+}
+.withdraw_tbl2 .btn_group button:active,
+.withdraw_tbl2 .btn_group button:hover{
+    opacity: 1
+}
+
 
 /*myinfo*/
 .myinfo_wrap{
@@ -3060,10 +3084,15 @@ border-radius: 6px;
     .purchase_tbl2 tr:nth-child(4) td:nth-child(2)::before{
         content: "My HM Dollar";
     }
-    .purchase_tbl2 tr:nth-child(4) td:nth-child(4)::before{
-        content: "HM Dollar Total Fee";
+    /* .purchase_tbl2 tr:nth-child(5) td:nth-child(2)::before{
+        content: "Description";
     }
-    
+    .purchase_tbl2 tr:nth-child(6) td:nth-child(2)::before{
+        content: "Account number";
+    }
+    .purchase_tbl2 tr:nth-child(7) td:nth-child(2)::before{
+        content: "None Member Email";
+    } */
     .purchase_tbl3 tr:nth-child(1) td:nth-child(2)::before{
         content: "Use Point";
     }
