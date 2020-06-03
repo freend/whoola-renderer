@@ -2,8 +2,7 @@ function initNonMember(flag) {
     if(flag) {
         $('#signup').show();
         $('#login').show();
-        // $('#paypalBtn').hide();
-        // $('.btn_request').hide();
+        $('.btn_request').hide();
     } else {
         $('#signup').hide();
         $('#login').hide();
