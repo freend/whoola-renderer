@@ -4,7 +4,6 @@
     <% include ../common/header %>
 </head>
 <body>
-    <% include ../common/navigator %>
     <section>
         <h1 class="title">Purchase completed</h1>
         <div class="conts_wrap">
@@ -14,18 +13,15 @@
                         <p><img src="/static/images/img-letter.png"></p><br>
                         <p>We sent you a payment Email. Please make sure that you have received it. If it is not in your inbox, please check your spam folder and un-spam it.</p>
                     </div>
+                    <button class="on" onclick="home()" type="button">Home</button>
                 </div>
             </div>
         </div>
     </section>
     <script>
-        function setToken(value) {
-            location.href = value + localStorage.getItem('token');
+        function home() {
+            location.href = '/';
         }
     </script>
-
-    <footer>
-        <% include ../common/footers %>
-    </footer>
 </body>
 </html>
