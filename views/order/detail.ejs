@@ -70,7 +70,7 @@
                                 <td colspan="3"><input placeholder="Account (Optional)" id="account"></td>
                             </tr>
                             <% } %>
-                            <% if (email == '') { %>
+                            <% if (referralCode == '') { %>
                             <tr>
                                 <th class="txt_l">Email</th>
                                 <td colspan="3"><input placeholder="Email (Required)" id="noneMember"></td>
@@ -141,7 +141,7 @@
                         <div class="btn_group">
                             <button class="on" id="signup" onclick="buySignUp()" type="button">Register</button>
                             <button id="login" onclick="buyLogIn()" type="button">Log in</button>
-                            <% if (email != '') { %>
+                            <% if (referralCode != '') { %>
                                 <button class="btn_buy" id="paypalBtn" onclick="buyItem()" type="button">Buy</button>
                             <% } else { %>
                                 <button class="on" id="paypalBtn" onclick="buyItem()" type="button">None Member</button>
@@ -181,7 +181,7 @@
     const ablePoint = <%= totalPoint %>;
     const isPayable = <%= payable %>;
     const processFee = getProcessFee(productTotalAmount);
-    var email = '<%= email %>';
+    var referralCode = '<%= referralCode %>';
     const receivePhone = '<%= receiverPhone %>';
     $('#discountFee').val(0);
     $(document).ready(function(){
@@ -190,7 +190,7 @@
         feeProcess(productTotalAmount);
         var usePoint = 0;
         isAblePoint();
-        const memberCode = "<%= email %>";
+        const memberCode = "<%= referralCode %>";
         if (memberCode == "") {
             initNonMember(true);
         } else {

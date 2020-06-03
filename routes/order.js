@@ -108,7 +108,7 @@ router.get('/detail', function (req, res, next) {
                     "receiverId": receiver,
                     "operator": response.body.operator,
                     "token": token,
-                    "email": response.body.email,
+                    "referralCode": response.body.referralCode,
                     "paypalUrl": response.body.paypalUrl,
                     "paypalToken": response.body.paypalToken,
                     "paypalCommand": response.body.paypalCommand,

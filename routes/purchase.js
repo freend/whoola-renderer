@@ -43,7 +43,7 @@ router.get('/complete', function (req, res, next) {
     const result = {
         "amount": req.param('amt'),
         "currency": req.param('cc'),
-        "email": code,
+        "code": code,
         "receive": receive,
         "productName": req.param('item_name'),
         "productId": req.param('item_number'),

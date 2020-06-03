@@ -64,10 +64,8 @@ function beforePayment() {
             return false;
         }
     }
-    if ($('#noneMember').val() == '') {
-        alert('do not match email');
-        return false;
-    } else {
+    
+    if ($('#noneMember').val() != undefined) {
         if (!validateMail($('#noneMember').val())) {
             alert('do not match email');
             return false;
@@ -81,10 +79,10 @@ function customUpdate() {
         account = $('#account').val();
     }
     if ($('#noneMember').val() != undefined) {
-        email = $('#noneMember').val();
+        referralCode = $('#noneMember').val();
     }
     $('#custom').val(
-        'code:' + email + ',receiver:' + receivePhone + ',point:' + $('#discountFee').val()
+        'code:' + referralCode + ',receiver:' + receivePhone + ',point:' + $('#discountFee').val()
         + ',accountNumber:' + account
     );
     console.log('custom', $('#custom').val());
