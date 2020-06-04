@@ -66,6 +66,11 @@ function beforePayment() {
     }
     
     if ($('#noneMember').val() != undefined) {
+        if ($('#noneMember').val() == '') {
+            alert('Insert your email');
+            $('#noneMember').focus();
+            return false;
+        }
         if (!validateMail($('#noneMember').val())) {
             alert('do not match email');
             return false;
