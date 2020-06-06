@@ -3,40 +3,38 @@
         const token = localStorage.getItem('token');
     });
     </script>
-    <header>
-        <div class="head_wrap">
-            <div class="logo"><a href="/"><img src="/static/images/logo.png" alt=""></a></div>
-            <button class="btn_hamburger"><img src="/static/images/hamburger.png" alt=""></button>
-            <div class="gnb_wrap">
-                <ul class="gnb">
-                    <li><a href="#" onClick="setToken('/order?token=')">Top-up</a></li>
-                    <li><a href="#" onClick="setToken('/business?token=')">Business</a></li>
-                    <li><a href="#" onClick="setToken('/service?token=')">Others</a></li>
-                    <li><a href="#" onClick="setToken('/withdraw?token=')">Withdraw</a></li>
-                    <li><a href="#" onClick="setToken('/invite?page=1&token=')">Invite</a></li>
-                    <li>
-                        <div class="header_btn" id="isLogout">
-                            <button class="on" onclick="location.href='/signup'">Register</button>
-                            <button onclick="location.href='/login'">Log in</button>
+    <div class="head_wrap">
+        <div class="logo"><a href="/"><img src="/static/images/logo.png" alt=""></a></div>
+        <button class="btn_hamburger"><img src="/static/images/hamburger.png" alt=""></button>
+        <div class="gnb_wrap">
+            <ul class="gnb">
+                <li><a href="#" onClick="setToken('/order?token=')">Top-up</a></li>
+                <li><a href="#" onClick="setToken('/business?token=')">Business</a></li>
+                <li><a href="#" onClick="setToken('/service?token=')">Others</a></li>
+                <li><a href="#" onClick="setToken('/withdraw?token=')">Withdraw</a></li>
+                <li><a href="#" onClick="setToken('/invite?page=1&token=')">Invite</a></li>
+                <li>
+                    <div class="header_btn" id="isLogout">
+                        <button class="on" onclick="location.href='/signup'">Register</button>
+                        <button onclick="location.href='/login'">Log in</button>
+                    </div>
+                    <div class="header_btn" id="isLogin">
+                        <div class="mypage_open">
+                            <h2>My Page <i class="a"></i></h2>
+                            <ul class="mypage_menu">
+                                <li><a href="#" onClick="setToken('/users/info?token=')">Account</a></li>
+                                <li><a href="#" onClick="setToken('/purchase?page=1&token=')">Purchase History</a></li>
+                                <li><a href="#" onClick="setToken('/withdraw/list?page=1&token=')">Withdrawal History</a></li>
+                                <li><a href="#" onClick="setToken('/point?page=1&token=')">Point History</a></li>
+                                <li><a href="#" onClick="setToken('/tree?token=')">My Tree</a></li>
+                            </ul>
                         </div>
-                        <div class="header_btn" id="isLogin">
-                            <div class="mypage_open">
-                                <h2>My Page <i class="a"></i></h2>
-                                <ul class="mypage_menu">
-                                    <li><a href="#" onClick="setToken('/users/info?token=')">Account</a></li>
-                                    <li><a href="#" onClick="setToken('/purchase?page=1&token=')">Purchase History</a></li>
-                                    <li><a href="#" onClick="setToken('/withdraw/list?page=1&token=')">Withdrawal History</a></li>
-                                    <li><a href="#" onClick="setToken('/point?page=1&token=')">Point History</a></li>
-                                    <li><a href="#" onClick="setToken('/tree?token=')">My Tree</a></li>
-                                </ul>
-                            </div>
-                            <button onclick="logout();return false;">Log Out</button>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+                        <button onclick="logout();return false;">Log Out</button>
+                    </div>
+                </li>
+            </ul>
         </div>
-    </header>
+    </div>
     <script>
         function logout() {
             localStorage.removeItem('token');
