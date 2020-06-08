@@ -77,13 +77,14 @@
                                 <th class="txt_l">Email</th>
                                 <td colspan="3"><input placeholder="Email (Required)" id="noneMember" autofocus></td>
                             </tr>
-                            <tr>
-                                <!-- <th class="txt_l">None member email</th> -->
-                                <td colspan="4">Nonmember purchase will not be credited toward any membership benefits.</td>
-                            </tr>
                             <% } %>
                         </tbody>
                     </table>
+                <% if (referralCode == '') { %>
+                <div class="nonemember">
+                    Nonmember purchase will not be credited toward any membership benefits.
+                </div>
+                <% } %>
                 </div>
                 <div class="payment_wrap">
                     <div class="payment_box">
@@ -128,14 +129,12 @@
                             <span>Available :<b id="ablePoint"> <%= totalPoint %></b></span>
                             <span><input type="number" id="discountFee"></span>
                         </p>
-                        <p>
-                            <span id="message"></span>
-                        </p>
                     </div>
                     <div class="payment_box">
                         <div class="chk_wrap">
                             <input type="checkbox" id="term">
                             <label for="term">Did you check the payment and service user details?</label>
+                            <span id="message"></span>
                         </div>
                     </div>
                 </div>

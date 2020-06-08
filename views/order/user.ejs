@@ -6,6 +6,12 @@
 <body>
     <header>
         <% include ../common/navigator %>
+        <% if (token == "null") { %>
+        <!-- <div class="head_bar">
+            <a href="https://medium.com/hoolamoolah/how-to-use-hoolamoolah-fbbc7c117cd2" target="_blank"><img src="/static/images/icon_02.png">how to use hoolamoolah</a>
+            <a href="#" onClick="closedView()" class="close">X</a>
+        </div> -->
+        <% } %>
     </header>
     <section>
         <h1 class="title">
@@ -21,7 +27,7 @@
         </h1>
         <h2 class="sub_title">
             <% if(phone == null) { %>
-                Add Receive Phone Number
+                Add Receive Phone number
                 <% if(token != "null") { %>
                     , Or Select Below List
                 <% } %>
@@ -30,7 +36,7 @@
             <% } %>
         </h2>
         <div class="conts_wrap">
-            <div class="purchase_wrap">
+            <div class="userinfo_wrap">
                 <form class="form" action=
                 <% if (id == null) { 
                     if (category == "order") {%>
@@ -47,7 +53,7 @@
                     <h3>Phone Number</h3>
                     <div><input type="text" id="phoneId" name="phone"
                         <% if(phone == null) { %>
-                            placeholder="Enter Phone Number"
+                            placeholder="Enter the Number to Top-up"
                         <% } else { %>
                             value = "<%=phone %>"
                         <% } %>
@@ -60,7 +66,7 @@
                     <h3>Name</h3>
                     <div><input type="text" class="form-control" id="nameId" name="name"
                         <% if(name == null) { %>
-                            placeholder="Enter Receiver Name"
+                            placeholder="Insert Receiver Name"
                         <% } else { %>
                             value="<%= name %>"
                         <% } %>
@@ -71,14 +77,7 @@
                     <% } %>
                 </div>
                 <% } %>
-
-                <% if(id == null) { %>
-                <div class="input_box">
-                    <a style="color: blue; text-decoration: underline;" href="https://medium.com/hoolamoolah/why-and-how-paypal-is-used-on-hoolamoolah-b021471f2a30" target="_blank">Why and How Paypal is used on hoolamoolah</a>
-                </div>
-                <% } %>
-                    
-                <div class="btn_group">
+                <div class="btn_group btn_normal">
                     <button id="btnSubmit">
                         <% if(id == null) { 
                             if (category == 'order') {%>
@@ -92,15 +91,34 @@
                         </button>
                 </div>
                 </form>
+                <% if (id == null && token != "null") { %>
                 <div class="purchase_tbl mt_50">
-                    <% if (id == null && token != "null") { %>
                         <% include receiver %>
-                    <% } else { %>
-                        <div class="nbgo_box1">
-                            <p><img src="/static/images/using.png"></p>
-                        </div>
-                    <% } %>
                 </div>
+                <% } else if(token == "null") { %>
+                    <div class="bar">
+                        <a href="https://medium.com/hoolamoolah/why-and-how-paypal-is-used-on-hoolamoolah-b021471f2a30" target="_blank">Why and How PayPal is used on hoolamoolah</a>
+                    </div>
+                    <div class="userinfo">
+                        <div class="titleA">
+                            Using HM Dollar
+                        </div>
+                        <div class="userinfo_paypal">
+                            <p><img src="/static/images/icon_gift.png"></p>
+                            <p>
+                                <span class="bold">Making a Purchase</span>
+                                <span>5% Processing Fee</span>
+                            </p>
+                        </div>
+                        <div class="userinfo_paypal">
+                            <p><img src="/static/images/icon_card.png"></p>
+                            <p>
+                                <span class="bold">Withdraw using <b>PayPal <img src="/static/images/icon_p.png"></b></span>
+                                <span>10% Processing Fee</span>
+                            </p>
+                        </div>
+                    </div>
+                <% } %>
             </div>
         </div>
     </section>
@@ -126,18 +144,21 @@
             }
         });
         $(window).bind("pageshow", function (event) {
-        const match = $('#match');
-        const value = $('#phoneId').val();
-        if (/^[1-9][0-9]{6,14}$/.test(value)) {
-            match.css("color", 'blue');
-            match.text('Valid Phone Number');
-        } else {
-            if (value != '') {
-                match.css("color", 'red');
-                match.text('Invalid Phone Number');
+            const match = $('#match');
+            const value = $('#phoneId').val();
+            if (/^[1-9][0-9]{6,14}$/.test(value)) {
+                match.css("color", 'blue');
+                match.text('Valid Phone Number');
+            } else {
+                if (value != '') {
+                    match.css("color", 'red');
+                    match.text('Invalid Phone Number');
+                }
             }
+        });
+        function closedView() {
+            $(".close").parent(".head_bar").slideUp(1000);
         }
-    });
     </script>
     <footer>
         <% include ../common/footers %>
