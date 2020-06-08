@@ -82,7 +82,7 @@ button.btn_hamburger{
     color: #161719
 }
 h1.title{
-    font-size: 3rem;
+    font-size: 2rem;
     text-align: center;
     color: #6055cb;
     font-weight: bold;
@@ -1838,13 +1838,13 @@ h3.title{
     line-height: 8px;
     font-size: 1.8rem;
     color: #6055CB;
-   
 }
 
 .nbgo_wrap{
     display: flex;
     flex-direction: row;
-     margin-top: 200px
+     margin-top: 200px;
+    position: relative
 }
 
 .nbgo_box1,
@@ -2476,9 +2476,517 @@ border-radius: 6px;
     line-height: 25px
 }
 
+/*추가 userinfo - signup*/
+.btn_normal button{
+    height: 45px;
+    width: 200px;
+}
 
+.userinfo {
+    width: 82%;
+    margin: 0 auto;
+    margin-top: 50px;
+ 
+}
+.userinfo div.userinfo_paypal{
+    width: 30%;
+    display: inline-block;
+   vertical-align: middle
+}
+.userinfo .titleA{
+    width: 36%;
+    display: inline-block
+}
+.userinfo div p{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 9px
+}
+.userinfo div p span{
+    display: block;
+}
 
+.titleA{
+    font-size: 1.6rem;
+    color: #6055CB;
+    font-weight: bold
+}
+.userinfo_wrap .bar{
+    width: 82%; text-align: center; padding: 10px; box-shadow: 1px 1px 5px gray; color: #6055CB; font-weight: bold; font-size: 1.3rem; margin: 0 auto; margin-top: 50px
+}
 
+.userinfo_wrap .input_box{
+    width: 60%; margin: 0 auto; padding: 0px 20px 20px 20px
+}
+
+.userinfo_wrap .input_box input{
+    margin: 10px 0px
+}
+.userinfo_wrap .input_box h3{
+    color: #555
+}
+
+.userinfo div p span b{
+    color: #0076BF
+}
+.userinfo div p span b img{
+    vertical-align: middle
+}
+
+.head_bar{
+    height: 50px;
+    background-color: #6055CB;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    position: relative
+    
+}
+.head_bar img{
+    vertical-align: middle;
+    margin-right: 5px
+}
+.head_bar .close{
+    position: absolute;
+    right: 20%
+}
+
+.signup_info{
+    border-bottom: 2px solid #6055CB
+}
+.signup_info span{
+    display: inline-block;
+    width: 49.5%;
+    vertical-align: middle;
+}
+
+.mt_20{
+    margin-top: 20px
+}
+
+.signup_family,
+.signup_premium{
+    border: 1px solid #e5e5e5
+}
+.signup_family h1,
+.signup_premium h1{
+    text-align: center;
+    height: 80px;
+    background-color: #e5e5e5;
+    line-height: 80px;;
+    color: #6055CB;
+    font-weight: bold;
+    font-size: 1.5rem;
+   
+}
+.signup_family div p span b,
+.signup_premium div p span b{
+    display: block;
+    margin-bottom:10px
+}
+
+.signup_family h1 img,
+.signup_premium h1 img{
+    vertical-align: text-bottom
+}
+.signup_family p span,
+.signup_premium p span{
+    display: inline-block;
+    width: 65%
+}
+.signup_family p span:nth-child(1),
+.signup_premium p span:nth-child(1){
+    font-weight: bold;
+    width: 30%;
+    vertical-align: top
+}
+
+.signup_family div,
+.signup_premium div{
+    padding:38px 50px 30px 50px
+}
+
+.signup_family p,
+.signup_premium p{
+    margin-bottom: 20px
+}
+
+    .m_img{
+        display: none
+    }
+    .w_img{
+        display: block
+    }
+
+/*추가 main*/
+
+.top_img{
+    background-image: url(../images/bg01.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: contain;
+    height: 340px;
+    padding-top: 80px
+}
+
+.top_img2{
+    background-image: url(../images/bg02.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    height: 250px;
+    text-align: center
+}
+.top_img2 img{
+    margin-top: -50px
+}
+
+.top_title{
+    margin-top: -50px;
+    margin-bottom: 40px
+}
+.top_title h2.title2{
+    text-align: center;
+    font-size: 3rem;
+    color: #6055CB
+}
+.top_title h1.title{
+    margin: 10px 0px;
+}
+
+.top_title h3.title3{
+    font-size: 1.4rem;
+    text-align: center
+}
+
+.big_line2{
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    background-color: #fe9223;
+    left: 0px;
+    top: 890px
+}
+.big_line3{
+    display: none;
+     width: 100%;
+    height: 20px;
+    background-color: #fe9223;
+    clear: both
+}
+.select_st2 input[type="text"] {
+    border:none;
+    height: 40px;
+}
+.select_st2 {
+    display: block;
+    width: 35%;
+    height: 40px;
+    overflow: hidden;
+    vertical-align: top;
+    border: 1px solid #6055cb;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    margin-top: 20px;
+    margin: 0 auto
+}
+
+.select_st2 select {
+    width: 67%;
+    height: 100%;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+    border: none;
+    padding-left: 1rem;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+    float: left
+}
+
+.select_st2 button{
+    position: absolute;
+    right: -1px;
+    top: -1px;
+    border-radius:0px 0px 0px 0px;
+    /*border-top: 0px;*/
+    height: 40px;
+    background-color: #efeefa;
+    margin: 0px;
+    
+}
+
+.icon_wrap2{
+    text-align: center;
+    display: block;
+    width: 56%;
+    margin: 0 auto;
+    margin-top: 40px
+}
+.icon_box{
+    display: inline-block
+}
+.icon_box{
+    width: 100%
+}
+.icon_box{
+    float: left; text-align: left
+}
+
+.icon_box li{
+    width: 80px;
+    height: 80px;
+    border: 1px solid #6055cb;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 27%;
+    position: relative;
+    text-align: center
+}
+.icon_box li:last-child{
+    margin-right: 0px;
+}
+
+.icon_box li a::after{
+    content: "";
+    width: 50px;
+    height: 50px;
+    background-image: url(../images/icons4.png);
+    background-repeat: no-repeat;
+    display: block;
+    margin-left: 15px;
+    position: absolute;
+    top: 17px
+
+}
+.icon_box li:first-child a::after{
+    background-position: left top;
+}
+.icon_box li:nth-child(2) a::after{
+    background-position: -100px 0px;
+}
+.icon_box li:nth-child(3) a::after{
+    background-position:-50px 0px;
+}
+
+.icon_box li:nth-child(2)::before,
+.icon_box li:nth-child(3)::before{
+    content: "▶";
+    color: #FF9A43;
+    font-size: 3rem;
+    position: absolute;
+    left: -82px;
+    top: 10px;
+}
+
+.icon_box p{
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 74px;
+    width: 143px;
+    height: 50px;
+    margin-left: -32px;
+    margin-top: 90px
+}
+
+.icon_box a{
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%
+}
+
+.dots2 {
+    text-align: center;
+    width: 100%;
+    clear: both;
+    padding-top: 70px
+}
+.dots2 p{
+    line-height: 8px;
+    font-size: 1.8rem;
+    color: #FF9A43;
+}
+.dots2 p:last-child{
+    font-size: 5rem
+}
+.font_big{
+    text-align: center;
+    font-size: 2rem;
+    color: #FF9A43;
+    margin-top: 20px;
+    font-weight: bold
+}
+.mt_0{
+    margin-top: 0px !important;
+}
+
+.main_box{
+    border-bottom: 2px solid #6055CB;
+    width: 100%;
+    position: relative;
+    height: 432px;
+    margin-top: 40px
+    
+}
+.main_box > div{
+    width: 49%;
+    display: inline-block;
+    vertical-align: middle
+}
+/*.main_img{
+    position: absolute;
+    top: 0px
+}*/
+
+.main_img b{
+    position: absolute;
+    top: 34%;
+}
+
+.main_txt p:nth-child(1){
+    font-size: 2rem;
+    color: #4D4A55;
+    font-weight: bold;
+    margin-top: 10px
+}
+.main_txt p:nth-child(2) {
+    font-size: 2.2rem;
+    color: #6055CB;
+    margin-top: 10px;
+    font-weight: bold
+}
+.main_txt p:nth-child(3) {
+    font-size: 2.2rem;
+    color: #6055CB;
+    margin-top: 40px;
+    font-weight: bold
+}
+.main_txt p:nth-child(4){
+    font-size: 2rem;
+    color: #4D4A55;
+    font-weight: bold;
+    margin-top: 10px
+}
+
+.main_box2{
+    margin-top: 80px
+}
+.main_box2 > div{
+    width: 49%;
+    display: inline-block
+}
+.box2_02 .prim_box{
+    display: inline-block;
+    width: 61%;
+    float: left
+}
+.box2_02 .fam_box{
+    display: inline-block;
+    width: 38%;
+    float: left
+}
+
+.box2_02 thead th{
+    color: #6055CB;
+    font-size: 1.2rem;
+}
+.box2_02 thead th img{
+    vertical-align: text-bottom
+}
+.box2_02 tbody th{
+    text-align: left;
+    width: 115px
+}
+.box2_02 td{
+    padding: 20px 0px
+}
+
+.prim_box td p,
+.fam_box td p{
+    margin: 10px 0px
+}
+.fam_box tbody th{
+    display: none
+}
+.prim_box td p:nth-child(1),
+.fam_box td p:nth-child(1){
+    font-weight: bold
+}
+.prim_box td p:nth-child(2),
+.fam_box td p:nth-child(2){
+    font-weight: bold;
+     color: #6055CB;
+}
+.prim_box td p:nth-child(3),
+.fam_box td p:nth-child(3){
+    font-weight: bold;
+    color: #FF9A43;
+}
+.cautions_box{
+    padding-top: 30px;
+    clear: both
+}
+.cautions_box p{
+    display: inline-block;
+    vertical-align: top
+}
+.cautions_box p.title{
+    width: 115px;
+    font-weight: bold
+}
+
+.main_box2 > div.ftst_wrap{
+    width: 100%;
+    clear: both;
+    border-top: 2px solid #6055CB;
+    margin-top: 30px;
+    padding-top: 30px
+}
+
+.ftst_wrap > div{
+    display: inline-block;
+    width: 49%
+}
+.ftst_box01{
+    color: #6055CB;
+    font-size: 2.5rem
+}
+.ftst_wrap .ftst_box02 > span {
+    display: inline-block;
+   
+}
+.ftst_wrap .ftst_box02 .ft_box span:nth-child(1),
+.ftst_wrap .ftst_box02 .st_box span:nth-child(1){
+     margin: 0px 10px;
+    font-size: 1.5rem;
+}
+
+.txtB{
+    color: #4D4A55;
+    font-weight: bold;
+    font-size: 2rem
+}
+.txtC{
+    padding-left: 5px
+}
+
+.signup_btn{
+    background: rgba(96, 85, 203, 0.08);
+    color: #6055CB;
+    width: 200px;
+    height: 45px;
+    margin-top: 20px;
+    float: right;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-right: 10%
+}
 /********** media **************/
 @media (min-width: 986px){
     .gnb_wrap{
@@ -2953,7 +3461,202 @@ border-radius: 6px;
         width: 39%
     }
     
-  
+    /*0531 추가*/
+    .userinfo div.userinfo_paypal{
+        width:100%;
+         margin: 0 auto
+    }
+    .userinfo .titleA{
+        width: 100%;
+        text-align: center
+    }
+    .userinfo div.userinfo_paypal p{
+        margin-top: 10px
+    }
+    .userinfo div.userinfo_paypal p:nth-child(1){
+        width: 22%;
+        text-align: center;
+    }
+    .userinfo div.userinfo_paypal p:nth-child(2){
+        width: 70%
+    }
+    .userinfo_wrap .input_box {
+        width: 80%;
+    }
+    .head_bar .close{
+        right: 7%
+    }
+    .signup_family div, .signup_premium div {
+        padding: 20px 20px 0px 20px;
+    }
+    .signup_family p span,
+    .signup_premium p span{
+        width: 100%
+    }
+    .signup_family p span:nth-child(1),
+    .signup_premium p span:nth-child(1){
+        width: 100%;
+    }
+    .m_img{
+        display: block;
+        margin-left: 20%
+    }
+    .signup_info span.w_img{
+        display: none
+    }
+    .signup_info span {
+        width: 100%;
+        text-align: center;
+    }
+    .signup_info{
+        border-bottom: none
+    }
+    .signup_wrap .txt{
+        text-align: center
+    }
+    .select_st2 {
+        width: 89%;
+    }
+    .icon_box li{
+        display: block;
+        margin: 40px 0px
+    }
+    .icon_box li:nth-child(1){
+        margin-top: 0px
+    }
+    .icon_box li:nth-child(3){
+        margin-bottom: 0px
+    }
+    .icon_box p {
+
+        width: 220px;
+        height: 50px;
+        margin-left: 90px;
+        margin-top: 30px;
+        display: inline-block;
+        text-align: left
+        
+    }
+    .icon_box li:nth-child(2)::before, .icon_box li:nth-child(3)::before {
+        content: "▼";
+        left: 29px;
+        top: -46px;
+    }
+    .big_line2{
+        display: none
+    }
+    .big_line3{
+        display: block
+    }
+    .main_img b img{
+        display: none
+    }
+    .main_box > div{
+        display: block;
+        width: 100%;
+        text-align: center
+    }
+    .main_img img{
+        width: 80%;
+        
+    }
+    .main_box{
+       display: flex;
+        flex-direction: column-reverse
+    }
+    .main_box{
+        border-bottom: none;
+        height: auto
+    }
+    .main_img span{
+            border-top: 2px solid #6055CB;
+    }
+
+    .main_box2 > div{
+        display: block;
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 30px
+        
+    }
+    .main_txt p:nth-child(1){
+     margin-top: 50px   
+    }
+    .main_box2 .box2_01{
+        text-align: center
+    }
+    .box2_02 .prim_box,
+    .box2_02 .fam_box{
+        display: block;
+        width: 100%
+    }
+    .fam_box tbody th{
+        display: table-cell;
+        
+    }
+    .box2_02 tbody th{
+        width: auto
+    }
+    .icon_wrap2{
+        width: 80%;
+        float: left;
+    margin-left: 10%;
+    margin-bottom: 50px;
+    }
+    .icon_box br{
+        display: none
+    }
+    .box2_01 img{
+        width: 100%
+    }
+    .top_img2{
+        background-size: contain;
+    height: 180px;
+    }
+    .top_title {
+        margin-top: -89px
+    }
+    .dots2{
+        padding-top: 0px
+    }
+    .main_box2 > div.ftst_wrap{
+        width: 90%;
+        margin-left: 5%;
+    }
+    .ftst_wrap > div{
+        width: 100%;
+        display: block
+    }
+    .ftst_wrap .ftst_box02 > span {
+        vertical-align: top;
+            margin-right: 20px;
+    }
+    
+    .ftst_wrap .ftst_box02 .ft_box span:nth-child(1), 
+    .ftst_wrap .ftst_box02 .st_box span:nth-child(1){
+        margin: 25px 10px
+    }
+    .main_box2 > div.ftst_wrap{
+       border-top: 2px solid #e5e5e5;
+
+    }
+    .main_box2 th, .main_box2 td {
+        border-bottom: 0px solid #c4c4c4;
+    }
+    .prim_box thead th,
+    .fam_box thead th{
+        background-color: #F8F8F8;
+        height: 75px
+    }
+    .cautions_box{
+        border-top: 2px solid #e5e5e5
+    }
+    .signup_btn{
+        float: none;
+        margin-right: 0%
+    }
+    .top_img {
+        background-size: cover;}
 
 }
 
@@ -2985,6 +3688,9 @@ border-radius: 6px;
     
       .myinfo_wrap .right button{
         margin: 10px 0px
+    }
+    .ft_box span:nth-child(1), .st_box span:nth-child(1){
+     display: block   
     }
 
 }
@@ -3055,7 +3761,8 @@ border-radius: 6px;
         
         padding-right: 10px;
         display: inline-block;
-        font-weight: bold
+        font-weight: bold;
+        word-break: break-word;
     }
     
     
@@ -3084,15 +3791,6 @@ border-radius: 6px;
     .purchase_tbl2 tr:nth-child(4) td:nth-child(2)::before{
         content: "My HM Dollar";
     }
-    /* .purchase_tbl2 tr:nth-child(5) td:nth-child(2)::before{
-        content: "Description";
-    }
-    .purchase_tbl2 tr:nth-child(6) td:nth-child(2)::before{
-        content: "Account number";
-    }
-    .purchase_tbl2 tr:nth-child(7) td:nth-child(2)::before{
-        content: "None Member Email";
-    } */
     .purchase_tbl3 tr:nth-child(1) td:nth-child(2)::before{
         content: "Use Point";
     }
@@ -3150,6 +3848,9 @@ border-radius: 6px;
     .cautions div:nth-child(1){
         padding-left: 0px
     }
+    .nonemember {
+        padding-left: 10px
+    }
     
     .type03 td{
         padding: 15px 5px
@@ -3203,7 +3904,7 @@ border-radius: 6px;
     float: left;
     width: 100%;
     text-align: left;
-}
+    }
     
     .blank_link{
         border-left: none;
