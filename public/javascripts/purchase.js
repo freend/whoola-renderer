@@ -104,10 +104,15 @@ function buyPoint() {
 }
 // buy item to pay pal.
 function buyItem() {
-    if (beforePayment()) {
-        customUpdate();
-        alert("Please DO NOT CLOSE the Paypal window or click the Back button on your browser until the Payment Confirmation window pops up.");
-        document.getElementById('buyPaypal').submit();
+    const result = confirm("You have not entered your account number. Are you sure to proceed without one?");
+    if(result){
+        if (beforePayment()) {
+            customUpdate();
+            alert("Please DO NOT CLOSE the Paypal window or click the Back button on your browser until the Payment Confirmation window pops up.");
+            document.getElementById('buyPaypal').submit();
+        }
+    }else{
+        $('#account').focus();
     }
 }
 
