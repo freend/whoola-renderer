@@ -104,7 +104,10 @@ function buyPoint() {
 }
 // buy item to pay pal.
 function buyItem() {
-    const result = confirm("You have not entered your account number. Are you sure to proceed without one?");
+    var result = true;
+    if ($('#account').val() != undefined && $('#account').val() == '') {
+        result = confirm("You have not entered your account number. Are you sure to proceed without one?");
+    }
     if(result){
         if (beforePayment()) {
             customUpdate();
