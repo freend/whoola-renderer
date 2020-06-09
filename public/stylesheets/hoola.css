@@ -1457,6 +1457,18 @@ h3.title{
 .hmbp_box2 div p:nth-child(3){
     margin-top: 20px
 }
+.hmbp_box2 .box2_left p{
+    position: relative
+}
+.hmbp_box2 .box2_left p span{
+    font-size: 4rem;
+    color: #fe9223;
+    font-weight: bold;
+    position: absolute;
+    top: 31%;
+    left: -53px;
+    width: 100%
+}
 .hmbp_box3{
     background-color: #fff;
     padding: 47px;
@@ -1563,7 +1575,7 @@ h3.title{
     position: absolute;
     width: 45px;
     height:30px;
-    /* background-image: url(../images/icons3.png); */
+    background-image: url(/static/images/icons3.png);
     left: 50%;
     margin-left: -75px;
     top: 9px;
@@ -2849,29 +2861,18 @@ border-radius: 6px;
     top: 34%;
 }
 
-.main_txt p:nth-child(1){
+.main_txt p:nth-of-type(odd){
+    margin-top: 40px !important;
     font-size: 2rem;
     color: #4D4A55;
     font-weight: bold;
     margin-top: 10px
 }
-.main_txt p:nth-child(2) {
+.main_txt p:nth-of-type(even) {
     font-size: 2.2rem;
     color: #6055CB;
     margin-top: 10px;
     font-weight: bold
-}
-.main_txt p:nth-child(3) {
-    font-size: 2.2rem;
-    color: #6055CB;
-    margin-top: 40px;
-    font-weight: bold
-}
-.main_txt p:nth-child(4){
-    font-size: 2rem;
-    color: #4D4A55;
-    font-weight: bold;
-    margin-top: 10px
 }
 
 .main_box2{
