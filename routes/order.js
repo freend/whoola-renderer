@@ -120,7 +120,7 @@ router.get('/detail', function (req, res, next) {
                     "feePercentValue": response.body.feePercentValue,
                     "payable": response.body.payable,
                     "service": response.body.service,
-                    "buyThisMonth": response.body.buyThisMonth,
+                    "level": response.body.level,
                     'env': process.env.NODE_ENV
                 };
                 res.render('order/detail', result);

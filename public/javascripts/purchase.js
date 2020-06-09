@@ -16,8 +16,8 @@ function getProcessFee(amount) {
     return 0.6;
 }
 function isAblePoint() {
-    // console.log('buy this month', buyThisMonth);
-    if (buyThisMonth < 20) {
+    console.log('buy this month', level);
+    if (level < 2) {
         $('#discountFee').attr('disabled', true);
         $('#ablePoint').text(0);
         $('#message').text('To use your HM Dollar, your monthly purchase must be over $20.');
