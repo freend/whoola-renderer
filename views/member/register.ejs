@@ -33,7 +33,7 @@
                             <h2>Referral Code</h2>
                         <div class="input_box">
                             <% if (referralCode == null) { %>
-                                <input type="text" id="inputReferral" name="referralCode" placeholder="Enter an invitation code to claim your 2 HM Dollars!">
+                                <input type="text" id="inputReferral" name="referralCode" placeholder="Enter an invitation code to claim your HM 2$">
                             <% } else { %>
                                 <input type="text" value="<%= referralCode %>" id="inputReferral" name="referralCode" readonly>
                             <% } %>
@@ -71,7 +71,7 @@
                                   <span>Minimum monthly spending <b class="color_p">over $50</b></span>
                               </p>
                                <p>
-                                  <span>Benefits</span>
+                                  <span>Payback</span>
                                   <span>
                                      <b class="color_p bold">9% of Purchase Amount on First Tier Customers</b>
                                       <br>
@@ -90,7 +90,7 @@
                                   </span>
                               </p>
                                <p>
-                                  <span>Benefits</span>
+                                  <span>Payback</span>
                                   <span>
                                       <b class="color_p bold">5% of Purchase Amount on First Tier Customers</b><br>
                                       <b class="color_o">1% of Purchase Amount on Second Tier Customers</b>
@@ -101,7 +101,7 @@
                       <div class="cautions_box" style="width: 100%">
                           <p class="title">Note</p>
                           <p><span class="bold">*Tier 1</span> means Direct Customers <br>
-                              <span class="bold">*Tier 2</span> means Customers of Direct Customers(Tier 1) <br>
+                              <span class="bold">*Tier 2</span> means Direct customers of Tier 1 customer <br>
                               The monthly spending will be reset on the <span class="color_p">1st day of each month.</span></p>
                       </div>
                   </div>
