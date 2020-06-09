@@ -3,6 +3,10 @@ const unirest = require('unirest');
 const router = express.Router();
 
 router.get('/', function(req, res, next) {
+    const token = req.param('token');
+    if (token == 'null' || token == undefined) {
+        res.render('common/error', {'message':'please log in', 'ahref': '/login'});
+    }
     unirest
         .get(process.env.API_HOST + '/product/business')
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
