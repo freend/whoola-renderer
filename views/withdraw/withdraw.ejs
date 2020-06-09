@@ -179,7 +179,6 @@
       return parseFloat(new Number(value).toFixed(2));
     }
     function requestCheck() {
-      underRequestAmount(requestAmount + requestFee);
       if (requestAmount == 0 || $('#requestAmount').val() == '') {
         alert('Insufficient HM Dollar to withdraw');
         return false;
