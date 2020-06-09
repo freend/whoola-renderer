@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ../common/header %>
+  <link rel="stylesheet" type="text/css" href="/static/stylesheets/aos.css">
+    <script src="/static/javascripts/aos.js"></script>
+</head>
+
+<body>
+  <header>
+    <% include ../common/navigator %>
+  </header>
+  <div class="topTitle"> </div>
+  <section>
+    <h1 class="title">hoolamoolah<br>Business Partner</h1>
+    <div class="conts_wrap">
+        <div class="hmbp_wrap">
+           <div class="hmbp_box1" data-aos="fade-up" data-aos-easing="ease">
+               Become a hoolamoolah Business Partner.<br>
+               hoolamoolah Sincerely Supports the<br>
+               Success of our Business Partners.
+            </div>
+            <div class="hmbp_box2" data-aos="fade-up" data-aos-easing="ease">
+                <div class="box2_left">
+                    <p>
+                        <span>10%</span>
+                        <img src="/static/images/img02.png">
+                    </p>
+                    <p>10% Commission</p>
+                    <p>Up to 10% rebate on entire margin</p>
+                </div>
+                <div class="box2_right">
+                    <p><img src="/static/images/img01.png"></p>
+                    <p>1:1 Account Manager</p>
+                    <p>We support our Business Partners with 1:1 Support</p>
+                </div>
+            </div>
+            <div class="hmbp_box3" data-aos="fade-up" >
+               One and Only <br>
+                Industry Commission Rebate Program
+            </div>
+            <div class="hmbp_box4" data-aos="fade-up" >
+                <div class="box4_01">Commission Depending on Consumption Level</div>
+                <div class="box4_02">
+                    <img src="/static/images/img03.png">
+                </div>
+                <div class="box4_03">
+                    <span>First Tier</span>
+                    <span><b class="firTier">9%</b></span>
+                    <span><b class="firTier2">5%</b></span>
+                    <span class="color_o">Second Tier</span>
+                    <span><b class="secTier">1%</b></span>
+                </div>
+            </div>
+            
+            <div class="tab_wrap" data-aos="fade-up">
+                
+                <div class="tab" >
+                  <button class="tablinks" onclick="openCity(event, 'Premium')" id="defaultOpen">Premium</button>
+                  <button class="tablinks" onclick="openCity(event, 'family')">Family</button>
+                
+                </div>
+
+                <div id="Premium" class="tabcontent">
+                    <div class="tab mobile">
+                        <button class="on">Premium</button>
+                    </div>
+                  <p>
+                      <span>Requirements</span>
+                      <span>Minimum monthly spending <b class="color_p">over $50</b></span>
+                  </p>
+                  <p>
+                      <span>Payback</span>
+                      <span>
+                        <b class="firTier">9%</b>
+                        <b class="color_p">9% of Purchase Amount on First Tier Cuctomers</b>
+                      </span>
+                      <span>
+                        <b class="secTier">1%</b>
+                        <b class="color_o">1% of Purchase Amount on Second Tier Cuctomers</b>
+                      </span>
+                  </p>
+                </div>
+
+                <div id="family" class="tabcontent">
+                    <div class="tab mobile">
+                        <button class="on">family</button>
+                    </div>
+                  <p>
+                      <span>Requirements</span>
+                      <span>Minimum monthly spending <b class="color_p">over $20</b></span>
+                  </p>
+                  <p>
+                      <span>Payback</span>
+                      <span>
+                        <b class="firTier">5%</b>
+                        <b class="color_p">5% of Purchase Amount on First Tier Cuctomers</b>
+                      </span>
+                      <span>
+                        <b class="secTier">1%</b>
+                        <b class="color_o">1% of Purchase Amount on Second Tier Cuctomers</b>
+                      </span>
+                  </p>
+                </div>
+
+                
+                
+                <div class="cautions">
+                    <div>Note</div>
+                    <div>
+                        <p><b class="bold">*Tier 1</b> means Direct Customers </p>
+                        <p><b class="bold">*Tier 2</b> means Tier 1's Direct Customers(Tier 1)</p>
+                        <p>The monthly spending will be reset on the <b class="color_p">1st day of each month.</b></p>
+                    </div>
+                </div>
+
+            
+            </div>
+
+            
+            <div class="hmbp_box5" data-aos="fade-up" >
+              <span>Business Enquiries</span>
+              <span>
+                  You will receive a response within 24 hours<br>
+                  support@hollamoolah.com
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+  <footer>
+    <% include ../common/footers %>
+</footer>
+</body>
+</html>
+<script>
+    function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" on", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " on";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+
+    AOS.init({
+        easing: 'ease-out-back',
+        duration: 3000
+    });
+
+    // hljs.initHighlightingOnLoad();
+
+    $('.hero__scroll').on('click', function (e) {
+        $('html, body').animate({
+            scrollTop: $(window).height()
+        }, 1200);
+    });
+</script>
