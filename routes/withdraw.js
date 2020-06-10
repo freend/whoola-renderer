@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
             'fee': 0,
             'paypalAccount': '',
             'token': 'null',
-            'buyMonth': 0,
+            'level': 1,
             'env': process.env.NODE_ENV
         };
         res.render('withdraw/withdraw', result);
@@ -40,7 +40,7 @@ router.get('/', function(req, res, next) {
                     'fee': response.body.fee,
                     'paypalAccount': response.body.paypalAccount,
                     'token': token,
-                    'buyMonth': response.body.buyThisMonth,
+                    'level': response.body.levelId,
                     'env': process.env.NODE_ENV
                 };
                 res.render('withdraw/withdraw', result);

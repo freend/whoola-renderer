@@ -14,7 +14,7 @@
         Withdraw
     </h1>
     <h2 class="sub_title">
-      <% if(buyMonth < 20) { %>
+      <% if(level < 2) { %>
         <p>In order to withdraw HM Dollar, your purchase during the month must be more than $20.</p>
       <% } %>
       <p>You will receive a verification email on withdrawal. The withdrawal will not be processed if not verified.</p>
@@ -34,8 +34,18 @@
                   <tr>
                       <th class="txt_l">Pay pal Account</th>
                       <td><%= paypalAccount %></td>
-                      <th class="txt_l">Buy This Month</th>
-                      <td><%= buyMonth %></td>
+                      <th class="txt_l">Business Level</th>
+                      <% switch (level) {
+                        case 1 :%>
+                        <td>Consumer</td>
+                      <% break;
+                      case 2 :%>
+                      <td>Family</td>
+                      <% break;
+                      case 3 :%>
+                      <td>Premium</td>
+                      <% break; 
+                      } %>
                   </tr>
               </tbody>
           </table>
@@ -118,16 +128,16 @@
     var totalFee = 0;
     var requestFee = 0;
     var limitAmount= 0;
-    var buyMonth = 0;
+    var level = 0;
 
     window.onload = function() {
-        buyMonth = <%= buyMonth %>;
+        level = <%= level %>;
         totalAmount = <%= haveAmount %>;
         requestAmount = <%= availAmount %>;
         limitAmount = <%= availAmount %>;
         totalFee = <%= fee %>;
         requestFee = <%= fee %>;
-        underRequestAmount(buyMonth);
+        underRequestAmount(level);
         $('#viewAmount').val(requestAmount);
         const memberCode = "<%= token %>";
         if (memberCode == "null") {
@@ -138,7 +148,7 @@
         changeValue();
     }
     function underRequestAmount(value) {
-      if (value < 20) {
+      if (value < 2) {
         $('.btn_request').attr('disabled', true);
         $('#viewAmount').attr('disabled', true);
         requestAmount = 0;
