@@ -20,7 +20,7 @@ function isAblePoint() {
     if (level < 2) {
         $('#discountFee').attr('disabled', true);
         $('#ablePoint').text(0);
-        $('#message').text('To use your HM Dollar, your monthly purchase must be over $20.');
+        $('#message').text('Only Family or Premium members can use and withdraw HM Dollar.');
     } else {
         $('#ablePoint').text(totalPoint);
     }

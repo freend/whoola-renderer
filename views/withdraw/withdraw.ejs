@@ -11,11 +11,11 @@
     </header>
   <section>
     <h1 class="title">
-        Withdraw
+      Withdrawal
     </h1>
     <h2 class="sub_title">
       <% if(level < 2) { %>
-        <p>In order to withdraw HM Dollar, your purchase during the month must be more than $20.</p>
+        <p>Only Family or Premium members can use and withdraw HM Dollar.</p>
       <% } %>
       <p>You will receive a verification email on withdrawal. The withdrawal will not be processed if not verified.</p>
   </h2>
@@ -32,7 +32,7 @@
               </colgroup>
               <tbody>
                   <tr>
-                      <th class="txt_l">Pay pal Account</th>
+                      <th class="txt_l">Paypal Account</th>
                       <td><%= paypalAccount %></td>
                       <th class="txt_l">Business Level</th>
                       <% switch (level) {
