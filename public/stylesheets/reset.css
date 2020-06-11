@@ -7,9 +7,6 @@ Twitter: @rich_clark
 */
 @charset "utf-8";
 @import url('Montserrat.css');
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700&subset=korean');
-
-
 
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,dtails,embed,figcaption,figure,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,adio,video {    margin: 0;
     padding: 0;
@@ -23,9 +20,8 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 }
 
 body {
-    font-family: 'MontserratM','Noto Sans KR', sans-serif;
+    font-family: 'MontserratM', sans-serif;
     font-weight: 300;
-    font-smoothing: antialiased;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     zoom: 1;
@@ -34,7 +30,7 @@ body {
 }
 
 textarea {
-    font-family: 'MontserratM', 'Noto Sans KR', sans-serif;
+    font-family: 'MontserratM', sans-serif;
     font-weight: normal;
     border: 1px solid #dcdee2;text-indent: 5px;
 }
@@ -145,7 +141,7 @@ input,
 button,
 a,
 select {
-    font-family: 'MontserratM', 'Noto Sans KR', sans-serif
+    font-family: 'MontserratM', sans-serif
 }
 
 input {
@@ -237,11 +233,11 @@ select::-webkit-scrollbar-thumb:hover {
 
 select {
     -webkit-appearance: none;
-    /* 네이티브 외형 감추기 */
+    /* hide native output */
     -moz-appearance: none;
     appearance: none;
-    /*background: url(이미지 경로) no-repeat 95% 50%; */
-    /* 화살표 모양의 이미지 */
+    /*background: url(image path) no-repeat 95% 50%; */
+    /* image arrow */
     border: 0;
     background-color: transparent;
     padding-left: 5px
@@ -258,7 +254,7 @@ select::-ms-expand {
     content: "\E66C";
 }
 
-/*공통사용 체크박스*/
+/*common check box*/
 input[type="checkbox"] {
     display: none;
 }
@@ -285,7 +281,7 @@ input[type="checkbox"]:checked + em {
 *:focus{
 	outline: none
 }
-/*공통팝업창*/
+/*common modal*/
 .popup-wrap{
     position: fixed;background-color: rgba(0,0,0,0.5); width: 100%; height: 100%; top: 0; z-index: 1000; display: none
 }
@@ -381,7 +377,7 @@ input[type="checkbox"]:checked + em {
 }
 
 
-/*경고창*/
+/*alert*/
 
 .popup.alert{
     width: 400px;
