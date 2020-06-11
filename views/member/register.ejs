@@ -17,8 +17,13 @@
                         <div class="signup_input">
                         <h2>Email address</h2>
                         <div class="input_box">
-                            <input type="email" id="inputEmail" name="id" autofocus>
-                            <small id="emailText">input Email address</small>
+                            <% if (mail == undefined) { %>
+                              <input type="email" id="inputEmail" name="id" autofocus>
+                              <small id="emailText">input Email address</small>
+                            <% } else { %>
+                              <input value="<%= mail %>" disabled>
+                              <input type="hidden" id="inputEmail" name="id" value="<%= mail %>">
+                            <% } %>
                         </div>
                         <h2>Password</h2>
                         <div class="input_box">
