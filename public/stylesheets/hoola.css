@@ -1414,7 +1414,7 @@ h3.title{
 
 
 
-/*수익구조*/
+/*benefit*/
 .hmbp_wrap{
     margin-top: 300px
 }
@@ -1706,7 +1706,7 @@ h3.title{
 }
 
 
-/*랜딩*/
+/*landing*/
 .icon_wrap{
     text-align: center
 }
@@ -2488,7 +2488,7 @@ border-radius: 6px;
     line-height: 25px
 }
 
-/*추가 userinfo - signup*/
+/*userinfo - signup*/
 .btn_normal button{
     height: 45px;
     width: 200px;
@@ -2630,7 +2630,7 @@ border-radius: 6px;
         display: block
     }
 
-/*추가 main*/
+/*add main*/
 
 .top_img{
     background-image: url(../images/bg01.png);
@@ -3464,7 +3464,7 @@ border-radius: 6px;
         width: 39%
     }
     
-    /*0531 추가*/
+    /*add 0531*/
     .userinfo div.userinfo_paypal{
         width:100%;
          margin: 0 auto
