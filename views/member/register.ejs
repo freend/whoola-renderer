@@ -150,7 +150,7 @@
         $(this).attr('disabled', false);
         return false;
       }
-      if (match.text() != 'Passwords Match!') {
+      if (!validateText(pass.val(), passCheck.val())) {
         alert('password not match');
         $(this).attr('disabled', false);
         return false;
@@ -175,4 +175,5 @@
       }
     });
   </script>
+  <script src="/static/javascripts/validate.js"></script>
 </html>
