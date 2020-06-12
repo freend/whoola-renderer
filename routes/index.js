@@ -37,18 +37,29 @@ router.post('/signup', function (req, res, next) {
           "mail": req.body["id"], "password": req.body["password"], "inviteReferralCode": req.body["referralCode"]
       })
       .then((response) => {
-          console.log("sign up result", response.body.token.toString());
           switch (response.status) {
               case 500 :
                   res.render('common/error', {"message" : response.body.message, "ahref": '/signup'});
                   break;
               case 200:
-                  res.render('common/loginmodal', {
-                      "message" : response.body.message,
-                      "ahref": returnUrl,
-                      'env': process.env.NODE_ENV,
-                      "token": response.body.token.toString()
-                  });
+                  if (!response.body.isSuccess) {
+                      res.render('common/error', {
+                          "message" : response.body.message,
+                          'ahref': '/signup',
+                          'referralCode': null,
+                          'env': process.env.NODE_ENV,
+                          'mail': null,
+                          'url': returnUrl
+                      });
+                  } else {
+                      res.render('common/loginmodal', {
+                          "message" : response.body.message,
+                          "ahref": returnUrl,
+                          'env': process.env.NODE_ENV,
+                          "token": response.body.token.toString()
+                      });
+                  }
+
                   break;
           }
       });
