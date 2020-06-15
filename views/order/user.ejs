@@ -2,6 +2,7 @@
 <html>
 <head>
     <% include ../common/header %>
+    <script src="/static/javascripts/validate.js"></script>
 </head>
 <body>
     <header>
@@ -143,7 +144,7 @@
         $(window).bind("pageshow", function (event) {
             const match = $('#match');
             const value = $('#phoneId').val();
-            if (validatePhone.test(value)) {
+            if (validatePhone(value)) {
                 match.css("color", 'blue');
                 match.text('Valid Phone Number');
             } else {
@@ -160,8 +161,6 @@
     <footer>
         <% include ../common/footers %>
     </footer>
-    <script src="/static/javascripts/validate.js"></script>
-
 </body>
 
 </html>
