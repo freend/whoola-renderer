@@ -121,6 +121,7 @@ router.get('/detail', function (req, res, next) {
                     "payable": response.body.payable,
                     "service": response.body.service,
                     "level": response.body.level,
+                    "fee": response.body.fee,
                     'env': process.env.NODE_ENV
                 };
                 res.render('order/detail', result);

@@ -1,3 +1,20 @@
+
+$('#discountFee').val(0);
+$(document).ready(function(){
+    $('#pointBtn').hide(); // disable all buy point
+    $('input[name=token]').val(localStorage.getItem('token'));
+    feeProcess(productTotalAmount);
+    var usePoint = 0;
+    isAblePoint();
+    if (memberCode == "") {
+        initNonMember(true);
+    } else {
+        initNonMember(false);
+    }
+});
+// var inputPoint;
+
+
 function getProcessFee(amount) {
     // console.log('amount', amount);
     if (amount >= 5.00 && amount < 10) {
@@ -42,14 +59,17 @@ function calculateDiscount(point) {
     $('#pointBtn').hide();
     if (point < 0) {
         $('#discountFee').val(0);
+        point = 0;
     }
     if (point > ablePoint) {
         $('#discountFee').val(ablePoint);
-    } if ($('#discountFee').val() >= strictFloat(productTotalAmount + processFee)) {
+    } if (point >= strictFloat(productTotalAmount + processFee)) {
         $('#discountFee').val(strictFloat(productTotalAmount + processFee));
         $('#paypalBtn').hide();
         $('#pointBtn').show();
+        point = strictFloat(productTotalAmount + processFee);
     }
+    console.log('point', point);
     var amount = strictFloat(productTotalAmount) - strictFloat(point);
     feeProcess(amount);
 }
@@ -90,20 +110,27 @@ function customUpdate() {
         'code:' + referralCode + ',receiver:' + receivePhone + ',point:' + $('#discountFee').val()
         + ',accountNumber:' + account
     );
-    console.log('custom', $('#custom').val());
 }
 function buyPoint() {
     if (beforePayment()) {
         customUpdate();
         document.getElementById('buyPoint').submit();
-        // console.log('productId', $('input[name = productId]').val());
-        // console.log('amount', $('input[name = pointAmount]').val());
-        // console.log('receiver', $('input[name = receiver]').val());
-        // console.log('token', $('input[name = token]').val());
+    }
+}
+function validateAmount() {
+    const total = productTotalAmount + processFee;
+    const validate = strictFloat($('#discountFee').val()) + strictFloat($('#submitAmount').val());
+    if (total == validate) {
+        return true;
+    } else {
+        return false;
     }
 }
 // buy item to pay pal.
 function buyItem() {
+    if (!validateAmount()) {
+        return false;
+    }
     var result = true;
     if ($('#account').val() != undefined && $('#account').val() == '') {
         result = confirm("You have not entered your account number. Are you sure to proceed without one?");

@@ -181,24 +181,10 @@
     const totalPoint = <%= totalPoint %>;
     const ablePoint = <%= totalPoint %>;
     const isPayable = <%= payable %>;
-    const processFee = getProcessFee(productTotalAmount);
+    const processFee = <%= fee %>;
     var referralCode = '<%= referralCode %>';
     const receivePhone = '<%= receiverPhone %>';
-    $('#discountFee').val(0);
-    $(document).ready(function(){
-        $('#pointBtn').hide(); // disable all buy point
-        $('input[name=token]').val(localStorage.getItem('token'));
-        feeProcess(productTotalAmount);
-        var usePoint = 0;
-        isAblePoint();
-        const memberCode = "<%= referralCode %>";
-        if (memberCode == "") {
-            initNonMember(true);
-        } else {
-            initNonMember(false);
-        }
-    });
-    // var inputPoint;
+    const memberCode = "<%= referralCode %>";
     $('#discountFee').on("propertychange change keyup paste input", function () {
         calculateDiscount($(this).val());
     });
