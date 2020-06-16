@@ -2660,7 +2660,9 @@ border-radius: 6px;
 .top_title h2.title2{
     text-align: center;
     font-size: 3rem;
-    color: #6055CB
+    color: #6055CB;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .top_title h1.title{
     margin: 10px 0px;
@@ -2677,7 +2679,7 @@ border-radius: 6px;
     height: 20px;
     background-color: #fe9223;
     left: 0px;
-    top: 890px
+    top: 816px
 }
 .big_line3{
     display: none;
@@ -2686,7 +2688,7 @@ border-radius: 6px;
     background-color: #fe9223;
     clear: both
 }
-.select_st2 input[type="text"] {
+.select_st2 input[type="number"] {
     border:none;
     width: 65%;
     height: 40px;
