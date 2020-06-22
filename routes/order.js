@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
             "phone": null,
             "token": "null",
             "url": 'receiver/list',
-            'category': 'order',
+            'category': 'topup',
             'env': process.env.NODE_ENV
         };
         res.render('order/user', result);
@@ -43,7 +43,7 @@ router.get('/', function(req, res, next) {
                         "phone": null,
                         "token": req.query.token,
                         "url": 'receiver/list',
-                        'category': 'order',
+                        'category': 'topup',
                         'env': process.env.NODE_ENV
                     };
                     res.render('order/user', result);
@@ -51,11 +51,12 @@ router.get('/', function(req, res, next) {
             });
     }
 });
-router.post('/', function(req, res, next) {
-    const token = req.body["token"];
-    if (/^[1-9][0-9]{6,14}$/.test(req.body["phone"])) {
+router.get('/topup', function (req, res, next) {
+        const token = req.param('token');
+        const phoneNumber = req.param('phoneNumber');
+    if (/^[1-9][0-9]{6,14}$/.test(phoneNumber)) {
         unirest
-            .get(process.env.API_HOST + '/product?phoneNumber=' + req.body["phone"])
+            .get(process.env.API_HOST + '/product?phoneNumber=' + phoneNumber)
             .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
             .send()
             .then((response) => {
@@ -64,7 +65,7 @@ router.post('/', function(req, res, next) {
                         res.render('order/product', {
                             'list': response.body,
                             'env': process.env.NODE_ENV,
-                            'receiver': req.body["phone"]
+                            'receiver': phoneNumber
                         });
                         break;
                     default:
@@ -136,6 +137,7 @@ router.get('/edit', function(req, res, next) {
         "name": req.param('name'),
         "phone": phone,
         "token": req.param('token'),
+        'category': null,
         'env': process.env.NODE_ENV
     };
     res.render('order/user', result);

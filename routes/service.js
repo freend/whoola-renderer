@@ -51,11 +51,12 @@ router.get('/', function(req, res, next) {
             });
     }
 });
-router.post('/', function(req, res, next) {
-    const token = req.body["token"];
-    if (/^[1-9][0-9]{6,14}$/.test(req.body["phone"])) {
+router.get('/others', function (req, res, next) {
+    const token = req.param('token');
+    const phoneNumber = req.param('phoneNumber');
+    if (/^[1-9][0-9]{6,14}$/.test(phoneNumber)) {
         unirest
-            .get(process.env.API_HOST + '/product/service?phoneNumber=' + req.body["phone"])
+            .get(process.env.API_HOST + '/product/service?phoneNumber=' + phoneNumber)
             .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': token})
             .send()
             .then((response) => {
@@ -65,7 +66,7 @@ router.post('/', function(req, res, next) {
                             'service': response.body.service,
                             'env': process.env.NODE_ENV,
                             'isoCode': response.body.isoCode,
-                            'receiver': req.body["phone"]
+                            'receiver': phoneNumber
                         });
                         break;
                     default:

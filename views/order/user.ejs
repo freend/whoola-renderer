@@ -36,21 +36,20 @@
         </h2>
         <div class="conts_wrap">
             <div class="userinfo_wrap">
-                <form class="form" action=
+                <form class="form" 
                 <% if (id == null) { 
                     if (category == "order") {%>
-                    "/order"
+                    >
                     <% } else { %>
-                    "/service"
+                    action="/service" method="POST" id="submit-form">
                     <% } %>
                 <% } else { %>
-                    "/receiver/edit"
+                    action="/receiver/edit" method="POST" id="submit-form">
                 <% } %>
-                method="POST" id="submit-form">
                 <input type="hidden" value="<%= token %>" id="token" name="token">
                 <div class="input_box">
                     <h3>Phone Number</h3>
-                    <div><input type="number" id="phoneId" name="phone"
+                    <div>+<input style="width: 92%;" type="number" id="phoneId" name="phone"
                         <% if(phone == null) { %>
                             placeholder="Enter the Number to Top-up"
                         <% } else { %>
@@ -76,11 +75,14 @@
                     <% } %>
                 </div>
                 <% } %>
+                <% if (id == null) { %>
+                </form>
+                <% } %>
                 <div class="btn_group btn_normal">
                     <button id="btnSubmit">
                         <% if(id == null) { 
-                            if (category == 'order') {%>
-                            Select Plan
+                            if (category == 'topup') {%>
+                            Select Topup
                             <% } else { %>
                                 Select Service
                             <% } %>
@@ -89,45 +91,31 @@
                         <% } %>
                         </button>
                 </div>
+                <% if (id != null) { %>
                 </form>
+                <% } %>
                 <% if (id == null && token != "null") { %>
                 <div class="purchase_tbl mt_50">
                         <% include receiver %>
                 </div>
-                <% } else if(token == "null") { %>
-                    <div class="bar">
-                        <a href="https://medium.com/hoolamoolah/why-and-how-paypal-is-used-on-hoolamoolah-b021471f2a30" target="_blank">Why and How PayPal is used on hoolamoolah</a>
-                    </div>
-                    <div class="userinfo">
-                        <div class="titleA">
-                            Using HM Dollar
-                        </div>
-                        <div class="userinfo_paypal">
-                            <p><img src="/static/images/icon_gift.png"></p>
-                            <p>
-                                <span class="bold">Making a Purchase</span>
-                                <span>5% Processing Fee</span>
-                            </p>
-                        </div>
-                        <div class="userinfo_paypal">
-                            <p><img src="/static/images/icon_card.png"></p>
-                            <p>
-                                <span class="bold">Withdraw using <b>PayPal <img src="/static/images/icon_p.png"></b></span>
-                                <span>10% Processing Fee</span>
-                            </p>
-                        </div>
-                    </div>
                 <% } %>
             </div>
         </div>
     </section>
     <script>
+        const category = '<%= category%>';
         $('#btnSubmit').click(function(event){
             if (!validatePhone($('#phoneId').val())) {
                 alert('Invalid Phone Number');
                 return false;
             }
-            $('#submit-form').submit();
+            if (category == '') {
+                $('#submit-form').submit();
+            } else {
+                const value = $('#phoneId').val();
+                var urls = (category == 'topup') ? '/order/topup' : '/service/others'
+                location.href = urls + '?phoneNumber=' + value + '&token=' + localStorage.getItem('token');
+            }
         });
         $('#phoneId').keyup(function(event){
             const match = $('#match');
