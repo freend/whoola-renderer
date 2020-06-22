@@ -118,8 +118,9 @@ function buyPoint() {
     }
 }
 function validateAmount() {
-    const total = productTotalAmount + processFee;
+    const total = strictFloat(productTotalAmount + processFee);
     const validate = strictFloat($('#discountFee').val()) + strictFloat($('#submitAmount').val());
+    console.log(total, validate);
     if (total == validate) {
         return true;
     } else {
