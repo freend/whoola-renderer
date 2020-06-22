@@ -753,7 +753,8 @@ h1.title span:last-child{
 }
 
 h2.sub_title{
-    text-align: center;  margin: -50px 0 34px 0px;;
+    /*text-align: center;  margin: 0px 0 34px 0px;;*/
+    text-align: center;  margin: -50px 0 34px 0px;
 }
 
 .purchase_wrap .input_box{
@@ -799,7 +800,6 @@ table{
 th,td{
     border-bottom: 1px solid #c4c4c4;
     padding: 10px 0px;
-    word-break: keep-all;
 }
 td{
     word-break: break-all
@@ -1795,38 +1795,6 @@ h3.title{
     border:none;
     height: 40px;
 }
-.select_st {
-    display: inline-block;
-    min-width: 450px;
-    height: 40px;
-    overflow: hidden;
-   
-    vertical-align: top;
-    border: 1px solid #6055cb;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    position: relative;
-    margin-top: 4px;
-
-    filter: drop-shadow(5px 5px 5px);
-}
-
-.select_st select {
-    width: 70%;
-    height: 100%;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    background-color: transparent;
-    background-image: none;
-    border: none;
-    padding-left: 1rem;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    text-align: center;
-    float: left
-}
 
 .select_st button{
     position: absolute;
@@ -2577,10 +2545,12 @@ border-radius: 6px;
 }
 
 .signup_family,
+.signup_consumer,
 .signup_premium{
     border: 1px solid #e5e5e5
 }
 .signup_family h1,
+.signup_consumer h1,
 .signup_premium h1{
     text-align: center;
     height: 80px;
@@ -2592,12 +2562,14 @@ border-radius: 6px;
    
 }
 .signup_family div p span b,
+.signup_consumer div p span b,
 .signup_premium div p span b{
     display: block;
     margin-bottom:10px
 }
 
 .signup_family h1 img,
+.signup_consumer h1 img,
 .signup_premium h1 img{
     vertical-align: text-bottom
 }
@@ -2607,6 +2579,7 @@ border-radius: 6px;
     width: 65%
 }
 .signup_family p span:nth-child(1),
+.signup_consumer p span:nth-child(1),
 .signup_premium p span:nth-child(1){
     font-weight: bold;
     width: 30%;
@@ -2614,11 +2587,13 @@ border-radius: 6px;
 }
 
 .signup_family div,
+.signup_consumer div,
 .signup_premium div{
     padding:38px 50px 30px 50px
 }
 
 .signup_family p,
+.signup_consumer p,
 .signup_premium p{
     margin-bottom: 20px
 }
@@ -2710,7 +2685,7 @@ border-radius: 6px;
 }
 
 .select_st2 select {
-    width: 67%;
+    width: 100%;
     height: 100%;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -2821,6 +2796,7 @@ border-radius: 6px;
     text-align: center;
     width: 100%;
     clear: both;
+    /*padding-top: 140px*/
     padding-top: 70px
 }
 .dots2 p{
@@ -2886,14 +2862,25 @@ border-radius: 6px;
     width: 49%;
     display: inline-block
 }
+.box2_02 tbody:last-child td {
+    word-break: break-word;
+    padding-left: 20px;
+    padding-right: 11px;
+}
 .box2_02 .prim_box{
     display: inline-block;
-    width: 61%;
+    width: 30%;
     float: left
 }
+.box2_02 .con_box {
+    display: inline-block;
+    width: 40%;
+    float: left
+}
+
 .box2_02 .fam_box{
     display: inline-block;
-    width: 38%;
+    width: 30%;
     float: left
 }
 
@@ -2908,27 +2895,38 @@ border-radius: 6px;
     text-align: left;
     width: 115px
 }
-.box2_02 td{
-    padding: 20px 0px
+.con_box #td1 {
+    padding-top: 16px;
+    padding-bottom: 20px;
 }
-
+.con_box #td2 {
+    padding-bottom: 36px;
+    padding-left: 11px;
+}
 .prim_box td p,
+.con_box td p,
 .fam_box td p{
     margin: 10px 0px
+}
+.prim_box tbody th {
+    display: none
 }
 .fam_box tbody th{
     display: none
 }
 .prim_box td p:nth-child(1),
+.con_box td p:nth-child(1),
 .fam_box td p:nth-child(1){
     font-weight: bold
 }
 .prim_box td p:nth-child(2),
+.con_box td p:nth-child(2),
 .fam_box td p:nth-child(2){
     font-weight: bold;
      color: #6055CB;
 }
 .prim_box td p:nth-child(3),
+.con_box td p:nth-child(3),
 .fam_box td p:nth-child(3){
     font-weight: bold;
     color: #FF9A43;
@@ -3024,7 +3022,6 @@ border-radius: 6px;
 
 }
 @media (max-width: 986px){
-    
     /*.conts_wrap{
         padding: 0px 10px
     }*/
@@ -3491,7 +3488,7 @@ border-radius: 6px;
     .head_bar .close{
         right: 7%
     }
-    .signup_family div, .signup_premium div {
+    .signup_family div, .signup_premium div, .signup_consumer div {
         padding: 20px 20px 0px 20px;
     }
     .signup_family p span,
@@ -3499,6 +3496,7 @@ border-radius: 6px;
         width: 100%
     }
     .signup_family p span:nth-child(1),
+    .signup_consumer p span:nth-child(1),
     .signup_premium p span:nth-child(1){
         width: 100%;
     }
@@ -3591,9 +3589,14 @@ border-radius: 6px;
         text-align: center
     }
     .box2_02 .prim_box,
+    .box2_02 .con_box,
     .box2_02 .fam_box{
         display: block;
         width: 100%
+    }
+    .prim_box tbody th{
+        display: table-cell;
+        
     }
     .fam_box tbody th{
         display: table-cell;
@@ -3634,7 +3637,7 @@ border-radius: 6px;
     }
     .ftst_wrap .ftst_box02 > span {
         vertical-align: top;
-            margin-right: 20px;
+            margin-right: 10px;
     }
     
     .ftst_wrap .ftst_box02 .ft_box span:nth-child(1), 
@@ -3648,7 +3651,12 @@ border-radius: 6px;
     .main_box2 th, .main_box2 td {
         border-bottom: 0px solid #c4c4c4;
     }
+    .con_box #td2 {
+        padding-bottom: 1px;
+        padding-left: 11px;
+    }
     .prim_box thead th,
+    .con_box thead th,
     .fam_box thead th{
         background-color: #F8F8F8;
         height: 75px
