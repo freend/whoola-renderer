@@ -6,6 +6,8 @@
 <body>
     <header>
         <% include ../common/navigator %>
+        <script src="/static/javascripts/validate.js"></script>
+        <!-- <script src="/static/javascripts/countries.js"></script> -->
     </header>
     <div class="big_line2"></div>
     <section>
@@ -15,6 +17,13 @@
             </div>
         </div>
         <div class="top_title">
+            <!-- <div class="select_st2">
+                <select name="select01" id="select01">
+                    <option value="1">Choose Country</option>
+                    <option value="2">Log in</option>
+                    <option value="3">Account</option>
+                </select>
+            </div> -->
             <div class="select_st2">
                 <input id="marker" value="+" disabled>
                 <input type="number" id="phoneId" name="phone" placeholder="Enter the Number to Top-up" width="40%">
@@ -204,16 +213,36 @@
         <% include ../common/footers %>
     </footer>
     <script>
-        // AOS.init({
-        //     easing: 'ease-out-back',
-        //     duration: 3000
-        // });
+        var len = 0;
+        window.onload = function() {
+            // console.log('data', countries[0].key);
+            // console.log('data', countries[0]);
+        }
+        $('#marker').click(
+            function() {
+                console.log('marker click');
+            }
+        );
         function gotoRegist() {
             location.href='/signup';
         }
         function closePop() {
             $('#earlyPop').css("display", 'none');
         }
+        function selectMenu() {
+                    const item = $('#select01').val();
+                    switch (item) {
+                        case "1":
+                            location.href='/signup';
+                        break;
+                        case "2":
+                            location.href='/login';
+                        break;
+                        case "3":
+                            location.href='/users/info?token=' + localStorage.getItem('token');
+                        break;
+                    }
+                }
         $('#btnSubmit').click(function() {
             gtag('event','click', {'event_catagory':'topup', 'event_label':'landing'});
             const value = $('#phoneId').val();
