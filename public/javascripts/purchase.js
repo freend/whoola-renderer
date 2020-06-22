@@ -140,6 +140,7 @@ function buyItem() {
         if (beforePayment()) {
             customUpdate();
             alert("Please DO NOT CLOSE the Paypal window or click the Back button on your browser until the Payment Confirmation window pops up.");
+            gtag('event','click', {'event_catagory':'purchase', 'event_label':'buy item'});
             document.getElementById('buyPaypal').submit();
         }
     }else{
