@@ -177,6 +177,16 @@
         function closePop() {
             $('#earlyPop').css("display", 'none');
         }
+        $('#btnSubmit').click(function() {
+            gtag('event','click', {'event_catagory':'topup', 'event_label':'landing'});
+            const value = $('#phoneId').val();
+            if (!validatePhone($('#phoneId').val())) {
+                alert('Invalid Phone Number');
+                return false;
+            }
+            location.href = '/order/topup?phoneNumber=' + value + '&token=' + localStorage.getItem('token');
+            // console.log('phoneId', $('#phoneId').val(), 'token', localStorage.getItem('token'));
+        });
     </script>
 </body>
 </html>
