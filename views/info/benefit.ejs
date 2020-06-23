@@ -45,77 +45,102 @@
                 <div class="box4_02">
                     <img src="/static/images/img03.png">
                 </div>
-                <div class="box4_03">
-                    <span>First Tier</span>
-                    <span><b class="firTier">9%</b></span>
-                    <span><b class="firTier2">5%</b></span>
-                    <span class="color_o">Second Tier</span>
-                    <span><b class="secTier">1%</b></span>
-                </div>
             </div>
             
             <div class="tab_wrap" data-aos="fade-up">
-                
-                <div class="tab" >
-                  <button class="tablinks" onclick="openCity(event, 'Premium')" id="defaultOpen">Premium</button>
-                  <button class="tablinks" onclick="openCity(event, 'family')">Family</button>
-                
-                </div>
-
-                <div id="Premium" class="tabcontent">
-                    <div class="tab mobile">
-                        <button class="on">Premium</button>
+                <div class="main_box2">
+                    <div class="box2_02" style="vertical-align: top">
+                        <div class="con_box">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">
+                                            <img src="/static/images/icon_user.png">
+                                            Consumer
+                                        </th>
+                                    </tr>                                    
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Requirements</th>
+                                        <td id="td1">None</td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            Payback
+                                        </th>
+                                        <td id="td2">
+                                            <p>3% in Total</p>
+                                            <p>3% of Purchase Amount<br>on Tier 1 Customers</p>
+                                            <p></p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="prim_box">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">
+                                            <img src="/static/images/icon_premium.png">
+                                            Premium
+                                        </th>
+                                    </tr>                                    
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Requirements</th>
+                                        <td>Minimum monthly<br>spending over $50</td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            Payback
+                                        </th>
+                                        <td>
+                                            <p>10% in Total</p>
+                                            <p>9% of Purchase Amount<br>on Tier 1 Customers</p>
+                                            <p>1% of Purchase Amount on<br>Tier 2 Customers</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="fam_box">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">
+                                            <img src="/static/images/icon_family.png">
+                                            Family
+                                        </th>
+                                    </tr>                                    
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Requirements </th>
+                                        <td>Minimum monthly<br>spending over $20</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Payback </th>
+                                        <td>
+                                            <p>6% in Total</p>
+                                            <p>5% of Purchase Amount<br>on Tier 1 Customers</p>
+                                            <p>1% of Purchase Amount on<br>Tier 2 Customers</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="cautions_box">
+                            <p class="title">Note</p>
+                            
+                            <p><span class="bold">*Tier 1</span> means Direct Customers <br>
+                            <span class="bold">*Tier 2</span> means Direct customers of Tier 1 customer <br>
+                            The monthly spending will be reset on the <b class="color_p">1st day of each month.</b>
+                        </div>
                     </div>
-                  <p>
-                      <span>Requirements</span>
-                      <span>Minimum monthly spending <b class="color_p">over $50</b></span>
-                  </p>
-                  <p>
-                      <span>Payback</span>
-                      <span>
-                        <b class="firTier">9%</b>
-                        <b class="color_p">9% of Purchase Amount on First Tier Cuctomers</b>
-                      </span>
-                      <span>
-                        <b class="secTier">1%</b>
-                        <b class="color_o">1% of Purchase Amount on Second Tier Cuctomers</b>
-                      </span>
-                  </p>
                 </div>
-
-                <div id="family" class="tabcontent">
-                    <div class="tab mobile">
-                        <button class="on">family</button>
-                    </div>
-                  <p>
-                      <span>Requirements</span>
-                      <span>Minimum monthly spending <b class="color_p">over $20</b></span>
-                  </p>
-                  <p>
-                      <span>Payback</span>
-                      <span>
-                        <b class="firTier">5%</b>
-                        <b class="color_p">5% of Purchase Amount on First Tier Cuctomers</b>
-                      </span>
-                      <span>
-                        <b class="secTier">1%</b>
-                        <b class="color_o">1% of Purchase Amount on Second Tier Cuctomers</b>
-                      </span>
-                  </p>
-                </div>
-
-                
-                
-                <div class="cautions">
-                    <div>Note</div>
-                    <div>
-                        <p><b class="bold">*Tier 1</b> means Direct Customers </p>
-                        <p><b class="bold">*Tier 2</b> means Tier 1's Direct Customers(Tier 1)</p>
-                        <p>The monthly spending will be reset on the <b class="color_p">1st day of each month.</b></p>
-                    </div>
-                </div>
-
-            
             </div>
 
             
@@ -135,22 +160,22 @@
 </body>
 </html>
 <script>
-    function openCity(evt, cityName) {
-  var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" on", "");
-        }
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " on";
-    }
+//     function openCity(evt, cityName) {
+//   var i, tabcontent, tablinks;
+//         tabcontent = document.getElementsByClassName("tabcontent");
+//         for (i = 0; i < tabcontent.length; i++) {
+//             tabcontent[i].style.display = "none";
+//         }
+//         tablinks = document.getElementsByClassName("tablinks");
+//         for (i = 0; i < tablinks.length; i++) {
+//             tablinks[i].className = tablinks[i].className.replace(" on", "");
+//         }
+//         document.getElementById(cityName).style.display = "block";
+//         evt.currentTarget.className += " on";
+//     }
 
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
+//     // Get the element with id="defaultOpen" and click on it
+//     document.getElementById("defaultOpen").click();
 
     AOS.init({
         easing: 'ease-out-back',
