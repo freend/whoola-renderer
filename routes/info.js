@@ -10,4 +10,7 @@ router.get('/about', function(req, res, next) {
 router.get('/benefit', function(req, res, next) {
     res.render('info/benefit', {'env': process.env.NODE_ENV});
 });
+router.get('/simulate', function(req, res, next) {
+    res.render('main/interact', {'env': process.env.NODE_ENV});
+});
 module.exports = router;
