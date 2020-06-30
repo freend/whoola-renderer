@@ -29,7 +29,12 @@ router.get('/signup', function (req, res, next) {
   res.render('member/register', result);
 });
 router.post('/signup', function (req, res, next) {
-    const returnUrl = req.body["url"];
+    let returnUrl = req.body["url"];
+    switch (returnUrl) {
+        case 'simulatetoken=':
+            returnUrl = '/?token='
+            break;
+    }
   unirest
       .post(process.env.API_HOST + '/member/signup')
       .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
