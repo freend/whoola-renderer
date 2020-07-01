@@ -417,6 +417,10 @@ footer .copyright{
     line-height: 20px
 }
 
+.list {
+    margin-left: 10px;
+}
+
 .chk_wrap{
     margin-top: 20px
 }
