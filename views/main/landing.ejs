@@ -244,7 +244,9 @@
                     }
                 }
         $('#btnSubmit').click(function() {
-            gtag('event','click', {'event_catagory':'topup', 'event_label':'landing'});
+            <% if(env == 'prod') { %>
+                gtag('event','click', {'event_catagory':'topup', 'event_label':'landing'});
+            <% } %>
             const value = $('#phoneId').val();
             if (!validatePhone($('#phoneId').val())) {
                 alert('Invalid Phone Number');

@@ -10,6 +10,12 @@ router.get('/about', function(req, res, next) {
 router.get('/benefit', function(req, res, next) {
     res.render('info/benefit', {'env': process.env.NODE_ENV});
 });
+router.get('/privacy', function(req, res, next) {
+    res.render('info/privacy', {'env': process.env.NODE_ENV});
+});
+router.get('/cookie', function(req, res, next) {
+    res.render('info/cookie', {'env': process.env.NODE_ENV});
+});
 router.get('/simulate', function(req, res, next) {
     res.render('main/interact', {'env': process.env.NODE_ENV});
 });
