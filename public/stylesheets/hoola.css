@@ -3849,7 +3849,13 @@ border-radius: 6px;
         content: "Price";
     }
     .type02 td:nth-child(6)::before{
+        content: "Use Point";
+    }
+    .type02 td:nth-child(7)::before{
         content: "Date";
+    }
+    .type02 td:nth-child(8)::before{
+        content: "State";
     }
     .tabcontent .mobile{display: block}
     .tab{display: none;border-bottom:0px}
