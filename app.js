@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const compression = require('compression');
+const i18n = require('./i18n');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -41,7 +42,7 @@ app.use('/js', express.static(path.join(__dirname, '/node_modules/jquery/dist'))
 app.use('/css', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css')));
 
 app.use(express.json());
-
+app.use(i18n);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
