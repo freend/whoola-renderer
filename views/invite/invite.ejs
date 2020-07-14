@@ -11,14 +11,14 @@
     <section>
         <h1 class="title">Invite</h1>
         <h2 class="sub_title">
-          Today Invited : <%= invited %> / Today Total : <%= total %>
+          <%= __('invite_1_1') %> : <%= invited %> / Today Total : <%= total %>
       </h2>
         <form class="form" action="/invite/add" method="POST" id="form-submit">
           <input type="hidden" value="<%= token%>" id="token" name="token">
           <div class="conts_wrap">
               <div class="login_wrap">
                   <div class="login_email">
-                      <h2>Invite Email Address</h2>
+                      <h2><%= __('invite_1_2') %></h2>
                       <div class="input_box">
                           <input type="text" id="mail" name="mail">
                       </div>

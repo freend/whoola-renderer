@@ -30,14 +30,14 @@
         <% include ../common/navigator %>
     </header>
     <section>
-        <h1 class="title">My Tree</h1>
+        <h1 class="title"><%= __('tree_1_1') %></h1>
         <div class="conts_wrap">
             <input type="hidden" id="myJsonData" value="<%=JSON.stringify(trees)%>" />
             <br>
             <div id="container">
                 <table>
                     <tr>
-                        <td width="10%"> My Tree</td>
+                        <td width="10%"> <%= __('tree_1_2') %></td>
                         <td width="80%"> <svg></svg> </td>
                         <td width="10%"> </td>
                     </tr>

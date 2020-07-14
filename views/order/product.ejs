@@ -10,9 +10,9 @@
     </header>
     <section>
         <h1 class="title">
-            <span><b>Step2</b> View Product Category</span>
-            Select Plan
-            <span><b>Step4</b> Payment</span>
+            <span><b><%= __('oder_product_1') %></b> <%= __('oder_product_2') %></span>
+            <%= __('oder_product_3') %>
+            <span><b><%= __('oder_product_4') %></b> <%= __('oder_product_5') %></span>
         </h1>
         <div class="conts_wrap">
             <input type="hidden" value="<%=receiver%>" id="productReceiver">
@@ -24,7 +24,7 @@
                         <p><span><%= list[i].name %></span></p>
                     </div>
                     <div class="purchase_btn">
-                        <button onClick="buyDetail(<%= list[i].id %>)">Buy</button>
+                        <button onClick="buyDetail(<%= list[i].id %>)"><%= __('oder_product_6') %></button>
                     </div>
                 </div>
                 <% } %>

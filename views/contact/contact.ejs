@@ -9,25 +9,25 @@
     </header>
     <script src="/static/javascripts/validate.js"></script>
     <section>
-        <h1 class="title">Contact</h1>
+        <h1 class="title"><%= __('contact_1_1') %></h1>
         <div class="conts_wrap">
             <div class="contactus_wrap">
                 <div class="left">
                     <div class="box">
                         <p>
                             <span><img src="/static/images/icon_time.png" alt=""></span>
-                            <span>WORKING HOURS</span>
+                            <span><%= __('contact_1_2') %></span>
                         </p>
                         <p>
-                            <b>We are Open 24/7</b>
+                            <b><%= __('contact_1_3') %></b>
                             <br>
-                            <b>Everyday, Everywhere</b>
+                            <b><%= __('contact_1_4') %></b>
                         </p>
                     </div>
                     <div class="box">
                         <p>
                             <span><img src="/static/images/icon_letter.png" alt=""></span>
-                            <span>EMAIL US</span>
+                            <span><%= __('contact_1_5') %></span>
                         </p>
                         <p>
                             <b>support@hoolamoolah.com</b>
@@ -40,7 +40,7 @@
                         <div class="box"><input type="text" placeholder="Subject" name="title" id="title"></div>
                         <div class="box"><textarea placeholder="Message" name="content" id="content"></textarea></div>
                         <div class="btn_group">
-                            <button class="btn_send" id="btnSubmit">Send</button>
+                            <button class="btn_send" id="btnSubmit"><%= __('contact_1_6') %></button>
                         </div>
                     </form>
                 </div>

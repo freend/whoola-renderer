@@ -12,27 +12,27 @@
         <% include ../common/navigator %>
     </header>
     <section>
-        <h1 class="title">Log in</h1>
+        <h1 class="title"><%= __('member_login_1') %></h1>
         <form class="form-signin" action="/login" method=POST>
             <div class="conts_wrap">
                 <div class="login_wrap">
                     <div class="login_email">
-                        <h2>Email address</h2>
+                        <h2><%= __('member_login_2') %></h2>
                         <div class="input_box">
                             <input type="email" name="id" id="inputEmail" required autofocus>
                         </div>
-                        <h2>Password</h2>
+                        <h2><%= __('member_login_3') %></h2>
                         <div class="input_box">
                             <input type="password" name="password" required>
                         </div>
-                        <button class="btn_login" type="submit">Log in</button>
+                        <button class="btn_login" type="submit"><%= __('member_login_4') %></button>
                     </div>
                     <div class="or">
-                        <p>or</p>
+                        <p><%= __('member_login_5') %></p>
                     </div>
                     <div class="btn_group forget_sign">
-                        <button id="forget-password" class="btn_forget" type="button">Forgot Password?</button>
-                        <button href="#" onclick="location.href = '/signup'">Sign Up</button>
+                        <button id="forget-password" class="btn_forget" type="button"><%= __('member_login_6') %></button>
+                        <button href="#" onclick="location.href = '/signup'"><%= __('member_login_7') %></button>
                     </div>
                 </div>
             </div>

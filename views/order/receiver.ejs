@@ -1,11 +1,11 @@
 <table>
-    <caption class="blind">Purchase update delete table</caption>
+    <caption class="blind"><%= __('oder_receiver_7') %></caption>
     <thead>
         <tr>
-            <th class="txt_l">Receiver Name</th>
-            <th class="txt_l">Phone number</th>
-            <th>Update</th>
-            <th>Delete</th>
+            <th class="txt_l"><%= __('oder_receiver_1') %></th>
+            <th class="txt_l"><%= __('oder_receiver_2') %></th>
+            <th><%= __('oder_receiver_3') %></th>
+            <th><%= __('oder_receiver_4') %></th>
         </tr>
     </thead>
     <tbody>
@@ -15,9 +15,9 @@
             <td> <a href="#" onclick="fillField(<%= page.content[i].receiverNumber %>, '<%= page.content[i].receiverName %>');"><%= page.content[i].receiverNumber %></a> </td>
             <td class="txt_c"><button class="up"
                 onclick="location.href='/order/edit?id=<%= page.content[i].id %>&name=<%= page.content[i].receiverName %>&phone=<%= page.content[i].receiverNumber %>&token=<%= token %>'">
-                Update</button></td>
+                <%= __('oder_receiver_5') %></button></td>
             <td class="txt_c"><button class="del" onclick="deleteReceiver(<%= page.content[i].id %>, '<%= page.content[i].receiverName %>')">
-                Delete</button></td>
+                <%= __('oder_receiver_6') %></button></td>
         </tr>
         <% } %>
     </tbody>

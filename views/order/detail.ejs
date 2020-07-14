@@ -13,16 +13,16 @@
     </header>
     <section>
         <h1 class="title">
-            <span><b>Step3</b> Select Plan</span>
-            Payment
-            <span class="blind"><b>Step3</b> Purchase</span>
+            <span><b><%= __('oder_detail_1') %></b> <%= __('oder_detail_2') %></span>
+            <%= __('oder_detail_3') %>
+            <span class="blind"><b><%= __('oder_detail_4') %></b> <%= __('oder_detail_5') %></span>
         </h1>
 
         <div class="conts_wrap">
             <div class="purchase_wrap">
                 <div class="purchase_tbl2 mt_50">
                     <table>
-                        <caption class="blind">Purchase table</caption>
+                        <caption class="blind"><%= __('oder_detail_6') %></caption>
                         <colgroup>
                             <col style="width: 20%">
                             <col style="width: 30%">
@@ -31,13 +31,13 @@
                         </colgroup>
                         <tbody>
                             <tr>
-                                <th class="txt_l">Name</th>
+                                <th class="txt_l"><%= __('oder_detail_7') %></th>
                                 <% if (operator != 'hoolamoolah') { %>
                                     <td><%= name%></td>
                                 <% } else { %>
                                     <td></td>
                                 <% } %>
-                                <th class="txt_l">Phone number</th>
+                                <th class="txt_l"><%= __('oder_detail_8') %></th>
                                 <% if (operator != 'hoolamoolah') { %>
                                     <td><%= receiverPhone %></td>
                                 <% } else { %>
@@ -45,36 +45,36 @@
                                 <% } %>
                             </tr>
                             <tr>
-                                <th class="txt_l">Operator</th>
+                                <th class="txt_l"><%= __('oder_detail_9') %></th>
                                 <td><%= operator %></td>
-                                <th class="txt_l">Product Name</th>
+                                <th class="txt_l"><%= __('oder_detail_10') %></th>
                                 <td><%= productName%></td>
                             </tr>
                             <tr>
-                                <th class="txt_l">Currency</th>
+                                <th class="txt_l"><%= __('oder_detail_11') %></th>
                                 <td>USD</td>
-                                <th class="txt_l">Price</th>
+                                <th class="txt_l"><%= __('oder_detail_12') %></th>
                                 <td><%= salesAmount%>$</td>
                             </tr>
                             <tr>
-                                <th class="txt_l">My HM Dollar</th>
+                                <th class="txt_l"><%= __('oder_detail_13') %></th>
                                 <td><%= totalPoint %>$</td>
                             </tr>
                             <% if (description != '') { %>
                             <tr>
-                                <th class="txt_l">Description</th>
+                                <th class="txt_l"><%= __('oder_detail_14') %></th>
                                 <td colspan="3"><%= description %></td>
                             </tr>
                             <% } %>
                             <% if (service > 1) { %>
                             <tr>
-                                <th class="txt_l">Account</th>
+                                <th class="txt_l"><%= __('oder_detail_15') %></th>
                                 <td colspan="3"><input placeholder="Account (Optional)" id="account"></td>
                             </tr>
                             <% } %>
                             <% if (referralCode == '') { %>
                             <tr>
-                                <th class="txt_l">Email</th>
+                                <th class="txt_l"><%= __('oder_detail_16') %></th>
                                 <td colspan="3"><input placeholder="Email (Required)" id="noneMember" autofocus></td>
                             </tr>
                             <% } %>
@@ -82,72 +82,72 @@
                     </table>
                 <% if (referralCode == '') { %>
                 <div class="nonemember">
-                    Nonmember purchases will not be credited toward any membership benefits.
+                    <%= __('oder_detail_17') %>
                 </div>
                 <% } %>
                 </div>
                 <div class="payment_wrap">
                     <div class="payment_box">
-                        <span>Order Price</span>
+                        <span><%= __('oder_detail_18') %></span>
                         <span id="orderPrice"></span>
                         <i>-</i>
                     </div>
                     <div class="payment_box">
-                        <span>Discount</span>
+                        <span><%= __('oder_detail_19') %></span>
                         <span id="deductionAmount"></span>
                         <i>=</i>
                     </div>
                     <div class="payment_box">
-                        <span>Total Amount</span>
+                        <span><%= __('oder_detail_20') %></span>
                         <span id="finalPayment"></span>
                     </div>
                     <div class="payment_box">
                         <p>
-                            <span>Price</span>
+                            <span><%= __('oder_detail_21') %></span>
                             <span><%= salesAmount%>$</span>
                         </p>
                         <p>
-                            <span>Processing Fee
+                            <span><%= __('oder_detail_22') %>
                                 <!-- <b class="tip"><img src="/static/images/img_tip.png"></b> -->
                                 <em class="tipTxt">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                    <a href="#a" class="close">Close</a>
+                                    <%= __('oder_detail_23') %> 
+                                    <a href="#a" class="close"><%= __('oder_detail_24') %></a>
                                 </em>
                             </span>
                             <span id="processFee"></span>
                         </p>
                         <p>
-                            <span>Total Price</span>
+                            <span><%= __('oder_detail_25') %></span>
                             <span id="totalPrice"></span>
                         </p>
                     </div>
                     <div class="payment_box">
                         <p>
-                            <span>HM Dollar</span>
+                            <span><%= __('oder_detail_26') %></span>
                         </p>
                         <p>
-                            <span>Available :<b id="ablePoint"> <%= totalPoint %></b></span>
+                            <span><%= __('oder_detail_27') %> :<b id="ablePoint"> <%= totalPoint %></b></span>
                             <span><input type="number" id="discountFee"></span>
                         </p>
                     </div>
                     <div class="payment_box">
                         <div class="chk_wrap">
                             <input type="checkbox" id="term">
-                            <label for="term">Did you check the payment and service user details?</label>
+                            <label for="term"><%= __('oder_detail_28') %></label>
                             <span id="message"></span>
                         </div>
                     </div>
                 </div>
                     <form action="<%= paypalUrl %>" method="post" id="buyPaypal">
                         <div class="btn_group">
-                            <button class="on" id="signup" onclick="buySignUp()" type="button">Register</button>
-                            <button id="login" onclick="buyLogIn()" type="button">Log in</button>
+                            <button class="on" id="signup" onclick="buySignUp()" type="button"><%= __('oder_detail_29') %></button>
+                            <button id="login" onclick="buyLogIn()" type="button"><%= __('oder_detail_30') %></button>
                             <% if (referralCode != '') { %>
-                                <button class="btn_buy" id="paypalBtn" onclick="buyItem()" type="button">Buy</button>
+                                <button class="btn_buy" id="paypalBtn" onclick="buyItem()" type="button"><%= __('oder_detail_31') %></button>
                             <% } else { %>
-                                <button class="on" id="paypalBtn" onclick="buyItem()" type="button">None Member</button>
+                                <button class="on" id="paypalBtn" onclick="buyItem()" type="button"><%= __('oder_detail_32') %></button>
                             <% } %>
-                            <button class="btn_buy" id="pointBtn" onclick="buyPoint()" type="button">Buy Point</button>
+                            <button class="btn_buy" id="pointBtn" onclick="buyPoint()" type="button"><%= __('oder_detail_33') %></button>
                         </div>
                         <!-- required -->
                         <input type="hidden" name="cmd" value="_xclick"> 

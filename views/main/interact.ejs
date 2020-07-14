@@ -37,14 +37,14 @@
 <body>
     <section>
         <div class="top_title">
-            <h2 class="title2">What is hoolamoolah?</h2>
+            <h2 class="title2"><%= __('main_interact_1') %></h2>
         </div>
-        <p class="subtitle">Enriching the lives of foreign workers and their families around the world</p>
+        <p class="subtitle"><%= __('main_interact_2') %></p>
         <div align="center">
             <a href="#" onclick="callSignUp();">
                 <div style="text-decoration:none;display:block;color:#ffffff;background-color:#FF9A43;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;width:40%; width:calc(40% - 2px);;border-top:1px solid #FF9A43;border-right:1px solid #FF9A43;border-bottom:1px solid #FF9A43;border-left:1px solid #FF9A43;padding-top:5px;padding-bottom:05px;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;">
                     <span style="font-size:16px;display:inline-block;"></span>
-                        <span style="font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;">SIGN UP NOW</span>
+                        <span style="font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;"><%= __('main_interact_3') %></span>
                     </span>
                 </div>
             </a>
@@ -53,13 +53,13 @@
             <iframe width="80%" height="490px" src="/static/javascripts/interact.html"></iframe>
         </div>
         <div style="margin-left: 10px; margin-right: 10px;margin-bottom: 17.5px;">
-            hoolamoolah is the fastest way to generate a secondary income which requires no hard work. The core concept of hoolamoolah is sharing the profit we make from your daily expenses. We currently provide a top-up service for most of the carriers worldwide and give back a portion of your use in HM Dollar, which can be used to utilize hoolamoolah’s current and upcoming services. Moreover, by introducing hoolamoolah to your families, friends, and colleagues, you can get extra HM Dollar.
+            <%= __('main_interact_4') %>
         </div>
         <div align="center" style="padding-top: 10px;">
             <a href="#" onclick="callSignUp();">
                 <div style="text-decoration:none;display:block;color:#ffffff;background-color:#FF9A43;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;width:40%; width:calc(40% - 2px);;border-top:1px solid #FF9A43;border-right:1px solid #FF9A43;border-bottom:1px solid #FF9A43;border-left:1px solid #FF9A43;padding-top:5px;padding-bottom:05px;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;">
                     <span style="font-size:16px;display:inline-block;"></span>
-                        <span style="font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;">SIGN UP NOW</span>
+                        <span style="font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;"><%= __('main_interact_5') %></span>
                     </span>
                 </div>
             </a>
@@ -75,22 +75,22 @@
                             <tr>
                                 <th colspan="2">
                                     <img src="/static/images/icon_user.png">
-                                    Consumer
+                                    <%= __('main_interact_6') %>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <th>Requirements</th>
-                                <td id="td1">None</td>
+                                <th><%= __('main_interact_7') %></th>
+                                <td id="td1"><%= __('main_interact_8') %></td>
                             </tr>
                             <tr>
                                 <th>
-                                    Payback
+                                    <%= __('main_interact_9') %>
                                 </th>
                                 <td id="td2">
-                                    <p>3% in Total</p>
-                                    <p>3% of Purchase Amount<br>on Tier 1 Customers</p>
+                                    <p><%= __('main_interact_10') %></p>
+                                    <p><%= __('main_interact_11') %><br><%= __('main_interact_12') %></p>
                                     <p></p>
                                 </td>
                             </tr>
@@ -103,23 +103,23 @@
                             <tr>
                                 <th colspan="2">
                                     <img src="/static/images/icon_premium.png">
-                                    Premium
+                                    <%= __('main_interact_13') %>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <th>Requirements</th>
-                                <td>Minimum monthly<br>spending over $50</td>
+                                <th><%= __('main_interact_14') %></th>
+                                <td><%= __('main_interact_15') %><br><%= __('main_interact_16') %></td>
                             </tr>
                             <tr>
                                 <th>
-                                    Payback
+                                    <%= __('main_interact_17') %>
                                 </th>
                                 <td>
-                                    <p>10% in Total</p>
-                                    <p>9% of Purchase Amount<br>on Tier 1 Customers</p>
-                                    <p>1% of Purchase Amount on<br>Tier 2 Customers</p>
+                                    <p><%= __('main_interact_18') %></p>
+                                    <p><%= __('main_interact_19') %><br><%= __('main_interact_20') %></p>
+                                    <p><%= __('main_interact_21') %><br><%= __('main_interact_22') %></p>
                                 </td>
                             </tr>
                         </tbody>
@@ -131,32 +131,32 @@
                             <tr>
                                 <th colspan="2">
                                     <img src="/static/images/icon_family.png">
-                                    Family
+                                    <%= __('main_interact_23') %>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <th>Requirements </th>
-                                <td>Minimum monthly<br>spending over $20</td>
+                                <th><%= __('main_interact_24') %> </th>
+                                <td><%= __('main_interact_25') %><br><%= __('main_interact_26') %></td>
                             </tr>
                             <tr>
-                                <th>Payback </th>
+                                <th><%= __('main_interact_27') %> </th>
                                 <td>
-                                    <p>6% in Total</p>
-                                    <p>5% of Purchase Amount<br>on Tier 1 Customers</p>
-                                    <p>1% of Purchase Amount on<br>Tier 2 Customers</p>
+                                    <p><%= __('main_interact_28') %></p>
+                                    <p><%= __('main_interact_29') %><br><%= __('main_interact_30') %></p>
+                                    <p><%= __('main_interact_31') %><br><%= __('main_interact_32') %></p>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="cautions_box">
-                    <p class="title">Note</p>
+                    <p class="title"><%= __('main_interact_33') %></p>
         
-                    <p><span class="bold">*Tier 1</span> means Direct Customers <br>
-                        <span class="bold">*Tier 2</span> means Direct customers of Tier 1 customer <br>
-                        The monthly spending will be reset on the <b class="color_p">1st day of each month.</b>
+                    <p><span class="bold"><%= __('main_interact_34') %></span> <%= __('main_interact_35') %> <br>
+                        <span class="bold"><%= __('main_interact_36') %></span> <%= __('main_interact_37') %> <br>
+                        <%= __('main_interact_38') %> <b class="color_p"><%= __('main_interact_39') %></b>
                 </div>
             </div>
         </div>
@@ -164,7 +164,7 @@
             <a href="#" onclick="callSignUp();">
                 <div style="text-decoration:none;display:block;color:#ffffff;background-color:#FF9A43;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;width:40%; width:calc(40% - 2px);;border-top:1px solid #FF9A43;border-right:1px solid #FF9A43;border-bottom:1px solid #FF9A43;border-left:1px solid #FF9A43;padding-top:5px;padding-bottom:05px;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;">
                     <span style="font-size:16px;display:inline-block;"></span>
-                        <span style="font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;">SIGN UP NOW</span>
+                        <span style="font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;"><%= __('main_interact_40') %></span>
                     </span>
                 </div>
             </a>

@@ -9,33 +9,33 @@
         <% include ../common/navigator %>
     </header>
     <section>
-        <h1 class="title">hoolamoolah Sign Up</h1>
+        <h1 class="title"><%= __('member_register_1') %></h1>
         <form action="/signup" method=POST id="submit-form">
             <div class="conts_wrap">
                 <div class="signup_wrap">
                     <div class="left">
                         <div class="signup_input">
-                        <h2>Email address</h2>
+                        <h2><%= __('member_register_2') %></h2>
                         <div class="input_box">
                             <% if (mail == undefined) { %>
                               <input type="email" id="inputEmail" name="id" autofocus>
-                              <small id="emailText">input Email address</small>
+                              <small id="emailText"><%= __('member_register_3') %></small>
                             <% } else { %>
                               <input value="<%= mail %>" disabled>
                               <input type="hidden" id="inputEmail" name="id" value="<%= mail %>">
                             <% } %>
                         </div>
-                        <h2>Password</h2>
+                        <h2><%= __('member_register_4') %></h2>
                         <div class="input_box">
                             <input type="password" id="password" name="password">
                             <small></small>
                         </div>
-                            <h2>Re-Password</h2>
+                            <h2><%= __('member_register_5') %></h2>
                         <div class="input_box">
                             <input type="password" id="password-check" name="password-confirm">
                             <small id="match"></small>
                         </div>
-                            <h2>Referral Code</h2>
+                            <h2><%= __('member_register_6') %></h2>
                         <div class="input_box">
                             <% if (referralCode == null) { %>
                                 <input type="text" id="inputReferral" name="referralCode" placeholder="Enter an invitation code to claim your HM 2$">
@@ -46,82 +46,82 @@
                     </div>
                     <div class="chk_wrap">
                         <input type="checkbox" id="term">
-                        <label for="term">Please agree to the terms of service</label>
+                        <label for="term"><%= __('member_register_7') %></label>
                     </div>
                     <div class="signup_info mt_50">
                         <p class="m_img"><img src="/static/images/img15.png"></p>
-                        <span class="titleA">One and Only<br>Industry Commission<br>Rebate Program</span>
+                        <span class="titleA"><%= __('member_register_8') %><br><%= __('member_register_9') %><br><%= __('member_register_10') %></span>
                         <span class="w_img"><img src="/static/images/img14.png"></span>
                     </div>
                     <div class="txt mt_20">
-                      hoolamoolah offers the chance to make extra income for everyone by sharing the profits from our rewardable top-up service
+                      <%= __('member_register_11') %>
                     </div>
                     <div class="link">
-                      <a href="/info/terms" target="_blank">Terms</a>
-                      <a href="/info/privacy" target="_blank">Privacy</a>
-                      <a href="/info/cookie" target="_blank">Cookie</a>
+                      <a href="/info/terms" target="_blank"><%= __('member_register_12') %></a>
+                      <a href="/info/privacy" target="_blank"><%= __('member_register_13') %></a>
+                      <a href="/info/cookie" target="_blank"><%= __('member_register_14') %></a>
                     </div>
                     </div>
                     <div class="right">
                       <div class="signup_consumer">
-                        <h1><img src="/static/images/icon_user.png"> Consumer</h1>
+                        <h1><img src="/static/images/icon_user.png"> <%= __('member_register_15') %></h1>
                         <div>
                             <p>
-                                <span>Requirements </span>
-                                <span><b>None</b></span>
+                                <span><%= __('member_register_16') %> </span>
+                                <span><b><%= __('member_register_17') %></b></span>
                             </p>
                              <p>
-                                <span>Payback</span>
+                                <span><%= __('member_register_18') %></span>
                                 <span>
-                                   <b class="color_p bold">3% of Purchase Amount on Tier 1 Customers</b>
+                                   <b class="color_p bold"><%= __('member_register_19') %></b>
                                  </span>
                             </p>
                         </div>
                     </div>
                       <div class="signup_premium">
-                          <h1><img src="/static/images/icon_premium.png"> Premium</h1>
+                          <h1><img src="/static/images/icon_premium.png"> <%= __('member_register_20') %></h1>
                           <div>
                               <p>
-                                  <span>Requirements </span>
-                                  <span>Minimum monthly spending <b class="color_p">over $50</b></span>
+                                  <span><%= __('member_register_21') %> </span>
+                                  <span><%= __('member_register_22') %> <b class="color_p"><%= __('member_register_23') %></b></span>
                               </p>
                                <p>
-                                  <span>Payback</span>
+                                  <span><%= __('member_register_24') %></span>
                                   <span>
-                                     <b class="color_p bold">9% of Purchase Amount on Tier 1 Customers</b>
+                                     <b class="color_p bold"><%= __('member_register_25') %></b>
                                       <br>
-                                     <b class="color_o">1% of Purchase Amount on Tier 2 Customers</b>
+                                     <b class="color_o"><%= __('member_register_26') %></b>
                                    </span>
                               </p>
                           </div>
                       </div>
                        <div class="signup_family">
-                          <h1><img src="/static/images/icon_family.png"> Family</h1>
+                          <h1><img src="/static/images/icon_family.png"> <%= __('member_register_27') %></h1>
                           <div>
                               <p>
-                                  <span>Requirements </span>
+                                  <span><%= __('member_register_28') %> </span>
                                   <span>
-                                      Minimum monthly spending <b class="color_p">over $20</b>
+                                    <%= __('member_register_29') %> <b class="color_p"><%= __('member_register_30') %></b>
                                   </span>
                               </p>
                                <p>
-                                  <span>Payback</span>
+                                  <span><%= __('member_register_31') %></span>
                                   <span>
-                                      <b class="color_p bold">5% of Purchase Amount on Tier 1 Customers</b><br>
-                                      <b class="color_o">1% of Purchase Amount on Tier 2 Customers</b>
+                                      <b class="color_p bold"><%= __('member_register_32') %></b><br>
+                                      <b class="color_o"><%= __('member_register_33') %></b>
                                    </span>
                               </p>
                           </div>
                       </div>
                       <div class="cautions_box" style="width: 100%">
-                          <p class="title">Note</p>
-                          <p><span class="bold">*Tier 1</span> means Direct Customers <br>
-                              <span class="bold">*Tier 2</span> means Direct customers of Tier 1 customer <br>
-                              The monthly spending will be reset on the <span class="color_p">1st day of each month.</span></p>
+                          <p class="title"><%= __('member_register_34') %></p>
+                          <p><span class="bold"><%= __('member_register_35') %></span> <%= __('member_register_36') %> <br>
+                              <span class="bold"><%= __('member_register_37') %></span> <%= __('member_register_38') %> <br>
+                              <%= __('member_register_39') %> <span class="color_p"><%= __('member_register_40') %></span></p>
                       </div>
                   </div>
                     <div class="btn_group">
-                        <button class="btn_login" id="btnSubmit">Sign Up</button>
+                        <button class="btn_login" id="btnSubmit"><%= __('member_register_41') %></button>
                     </div>
                 </div>
             </div>

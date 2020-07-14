@@ -8,9 +8,9 @@
         <% } %>
         method="POST" id="submit-form">
           <div class="form-group">
-            <label >Phone Number</label>
-            <label >use only number not use dash or space</label>
-            <label id="match">Phone number</label>
+            <label ><%= __('receiver_1_1') %></label>
+            <label ><%= __('receiver_1_2') %></label>
+            <label id="match"><%= __('receiver_1_3') %></label>
             <input type="text" class="form-control" id="phoneId" name="phone"
             <% if(phone == null) { %>
                 placeholder="Insert phone number"
@@ -24,7 +24,7 @@
               <% if (id != null) {%>
                   <input type="hidden" value="<%= id %>" id="id" name="id">
               <% } %>
-              <label >Name</label>
+              <label ><%= __('receiver_1_4') %></label>
               <input type="text" class="form-control" id="nameId" name="name"
               <% if(name == null) { %>
                   placeholder="insert invite name"

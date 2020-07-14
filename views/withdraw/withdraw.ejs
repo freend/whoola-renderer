@@ -11,19 +11,19 @@
     </header>
   <section>
     <h1 class="title">
-      Withdrawal
+      <%= __('withdraw_2_1') %>
     </h1>
     <h2 class="sub_title">
       <% if(level < 2) { %>
-        <p>Only Family or Premium members can use and withdraw HM Dollar.</p>
+        <p><%= __('withdraw_2_2') %></p>
       <% } %>
-      <p>You will receive a verification email on withdrawal. The withdrawal will not be processed if not verified.</p>
+      <p><%= __('withdraw_2_3') %></p>
   </h2>
     <div class="conts_wrap">
       <div class="puchase_wrap">
         <div class="withdraw_tbl2 mt_50">
           <table>
-              <caption class="blind">Purchase table</caption>
+              <caption class="blind"><%= __('withdraw_2_4') %></caption>
               <colgroup>
                   <col style="width: 20%">
                   <col style="width: 30%">
@@ -32,18 +32,18 @@
               </colgroup>
               <tbody>
                   <tr>
-                      <th class="txt_l">Paypal Account</th>
+                      <th class="txt_l"><%= __('withdraw_2_5') %></th>
                       <td><%= paypalAccount %></td>
-                      <th class="txt_l">Business Level</th>
+                      <th class="txt_l"><%= __('withdraw_2_6') %></th>
                       <% switch (level) {
                         case 1 :%>
-                        <td>Consumer</td>
+                        <td><%= __('withdraw_2_7') %></td>
                       <% break;
                       case 2 :%>
-                      <td>Family</td>
+                      <td><%= __('withdraw_2_8') %></td>
                       <% break;
                       case 3 :%>
-                      <td>Premium</td>
+                      <td><%= __('withdraw_2_9') %></td>
                       <% break; 
                       } %>
                   </tr>
@@ -54,7 +54,7 @@
       <div class="withdraw_wrap">
         <div class="withdraw_tbl mt_50">
           <table>
-            <caption class="blind">Purchase table</caption>
+            <caption class="blind"><%= __('withdraw_2_10') %></caption>
             <colgroup>
               <col style="width: 75%">
               <col style="width: 25%">
@@ -62,15 +62,15 @@
             </colgroup>
             <tbody>
               <tr>
-                <th>My HM Dollar</th>
+                <th><%= __('withdraw_2_11') %></th>
                 <td><%= haveAmount %></td>
               </tr>
               <tr>
-                <th>Enter Withdrawal Amount</th>
+                <th><%= __('withdraw_2_12') %></th>
                 <td><input id="viewAmount" type="number" placeholder="<%= availAmount %>"></td>
               </tr>
               <tr>
-                <th>Withdrawal Fee</th>
+                <th><%= __('withdraw_2_13') %></th>
                 <td id="viewFee"></td>
               </tr>
               <tr></tr>
@@ -79,17 +79,17 @@
         </div>
         <div class="payment_wrap withdraw">
           <div class="payment_box withdraw">
-            <span>My HM Dollar</span>
+            <span><%= __('withdraw_2_14') %></span>
             <span><%= haveAmount %></span>
             <i>-</i>
           </div>
           <div class="payment_box withdraw">
-            <span>Withdraw Amount</span>
+            <span><%= __('withdraw_2_15') %></span>
             <span id="totalAmount"></span>
             <i>=</i>
           </div>
           <div class="payment_box withdraw">
-            <span>Balance</span>
+            <span><%= __('withdraw_2_16') %></span>
             <span id="remainAmount"></span>
           </div>
         </div>
@@ -98,9 +98,9 @@
             <input type="hidden" value="<%= token %>" id="token" name="token">
             <input type="hidden" name="fee" id="requestFee">
             <input type="hidden" name="amount" id="requestAmount">
-            <button class="btn_request" type="button" onclick="requestCheck()">Request</button>
-            <button class="on" id="signup" onclick="buySignUp()" type="button">Register</button>
-            <button id="login" onclick="buyLogIn()" type="button">Log in</button>
+            <button class="btn_request" type="button" onclick="requestCheck()"><%= __('withdraw_2_17') %></button>
+            <button class="on" id="signup" onclick="buySignUp()" type="button"><%= __('withdraw_2_18') %></button>
+            <button id="login" onclick="buyLogIn()" type="button"><%= __('withdraw_2_19') %></button>
           </div>
         </form>
       </div>
@@ -109,11 +109,11 @@
     <% if (paypalAccount == null && token != null) { %>
     <div class="conts_pop" style="display: block">
       <div class="pop_wrap" style="">
-        <h1>Withdrawal Invalid</h1>
-        <p>You do not have a registered Paypal account.</p>
-        <p class="bold">If you would like to withdraw, please register a Paypal account and please try again.</p>
+        <h1><%= __('withdraw_2_20') %></h1>
+        <p><%= __('withdraw_2_21') %></p>
+        <p class="bold"><%= __('withdraw_2_22') %></p>
         <div class="btn_group">
-          <button class="btn_submit" onClick="setToken('/users/paypal?token=')">Go</button>
+          <button class="btn_submit" onClick="setToken('/users/paypal?token=')"><%= __('withdraw_2_23') %></button>
         </div>
       </div>
       <% } %>

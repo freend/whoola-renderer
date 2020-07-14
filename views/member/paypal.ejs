@@ -9,21 +9,21 @@
         <% include ../common/navigator %>
     </header>
     <section>
-      <h1 class="title">PayPal Account Setting</h1>
+      <h1 class="title"><%= __('member_paypal_1') %></h1>
       <form class="form" action="/users/paypal" method="POST" id="submit-form">
         <input type="hidden" value="" id="token" name="token">
         <div class="conts_wrap">
             <div class="login_wrap">
                 <div class="login_email">
-                    <h2>PayPal Account</h2>
+                    <h2><%= __('member_paypal_2') %></h2>
                     <div class="input_box">
                         <input type="text" id="account" name="account" value="<%= paypalAccount %>">
                     </div>
                     
-                    <p class="mt_50">hoolamoolah does not take any responsibility for any incorrect input of account details.<br>
-                        Please double check your account details before registering.</p>
+                    <p class="mt_50"><%= __('member_paypal_3') %><br>
+                        <%= __('member_paypal_4') %></p>
                     
-                    <button class="btn_login" type="button">Ok</button>
+                    <button class="btn_login" type="button"><%= __('member_paypal_5') %></button>
                 </div>
                 
                 <!-- <div>

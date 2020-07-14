@@ -1,10 +1,10 @@
 <div class="purchaseH mt_50">
     <table class="type02">
-        <caption class="blind">Purchase update delete table</caption>
+        <caption class="blind"><%= __('invite_1_3') %></caption>
         <thead>
             <tr>
-                <th>E-mail Address</th>
-                <th>Status</th>
+                <th><%= __('invite_1_4') %></th>
+                <th><%= __('invite_1_5') %></th>
             </tr>
         </thead>
         <tbody>
@@ -12,9 +12,9 @@
             <tr>
                 <td><%= page.content[i].invitedUserMail %></td>
                 <% if(page.content[i].inviteResult == null) {%>
-                    <td>Not Signed Up</td>
+                    <td><%= __('invite_1_6') %></td>
                 <% } else {%>
-                    <td>Sign Up</td>
+                    <td><%= __('invite_1_7') %></td>
                 <% } %>
             </tr>
             <% } %>

@@ -8,19 +8,19 @@
     <header>
         <% include ../common/navigator %>
         <div class="head_bar">
-            <a href="https://medium.com/hoolamoolah/4-simple-steps-to-enjoy-hoolamoolah-aa04f15d7c39" target="_blank"><img src="/static/images/icon_02.png">how to use hoolamoolah</a>
+            <a href="https://medium.com/hoolamoolah/4-simple-steps-to-enjoy-hoolamoolah-aa04f15d7c39" target="_blank"><img src="/static/images/icon_02.png"><%= __('oder_user_1') %></a>
             <a href="#" onClick="closedView()" class="close">X</a>
         </div>
     </header>
     <section>
         <h1 class="title">
             <% if(phone == null) { %>
-            <span class="blind"><b>Step1</b> Number</span>
-            Purchase Step
+            <span class="blind"><b><%= __('oder_user_2') %></b> <%= __('oder_user_3') %></span>
+            <%= __('oder_user_4') %>
                 <% if(category == 'order') { %>
-                    <span><b>Step2 </b>Select Plan</span>
+                    <span><b><%= __('oder_user_5') %> </b><%= __('oder_user_6') %></span>
                 <% } else {%>
-                    <span><b>Step2 </b>Select Service</span>
+                    <span><b><%= __('oder_user_7') %> </b><%= __('oder_user_8') %></span>
                 <% } %>
             <% }%>
         </h1>
@@ -48,7 +48,7 @@
                 <% } %>
                 <input type="hidden" value="<%= token %>" id="token" name="token">
                 <div class="input_box">
-                    <h3>Phone Number</h3>
+                    <h3><%= __('oder_user_9') %></h3>
                     <div>+<input style="width: 92%;" type="number" id="phoneId" name="phone"
                         <% if(phone == null) { %>
                             placeholder="Enter the Number to Top-up"
@@ -56,12 +56,12 @@
                             value = "<%=phone %>"
                         <% } %>
                     ></div>
-                    <small style="color: red;">Please check if the recipient phone number and mobile carrier match.</small><br>
+                    <small style="color: red;"><%= __('oder_user_10') %></small><br>
                     <small><label id="match"></label></small>
                 </div>
                 <% if(token != "null" && name != null) { %>
                 <div class="input_box">
-                    <h3>Name</h3>
+                    <h3><%= __('oder_user_11') %></h3>
                     <div><input type="text" class="form-control" id="nameId" name="name"
                         <% if(name == null) { %>
                             placeholder="Insert Receiver Name"
