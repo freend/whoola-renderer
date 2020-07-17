@@ -1,6 +1,16 @@
-var express = require('express');
-var unirest = require('unirest');
-var router = express.Router();
+const express = require('express');
+const unirest = require('unirest');
+const router = express.Router();
+router.get('/en', function (req, res) {
+    console.log('check en');
+    res.cookie('lang', 'en');
+    res.redirect('back');
+});
+router.get('/ko', function (req, res) {
+    console.log('check ko');
+    res.cookie('lang', 'ko');
+    res.redirect('back');
+});
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('main/landing', {'env': process.env.NODE_ENV});

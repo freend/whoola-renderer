@@ -9,9 +9,9 @@
     </header>
   <script src="/static/javascripts/validate.js"></script>
     <section>
-        <h1 class="title">Invite</h1>
+        <h1 class="title"><%= __('invite_1_8') %></h1>
         <h2 class="sub_title">
-          <%= __('invite_1_1') %> : <%= invited %> / Today Total : <%= total %>
+          <%= __('invite_1_1') %> : <%= invited %> / <%= __('invite_1_9') %> : <%= total %>
       </h2>
         <form class="form" action="/invite/add" method="POST" id="form-submit">
           <input type="hidden" value="<%= token%>" id="token" name="token">
@@ -22,7 +22,7 @@
                       <div class="input_box">
                           <input type="text" id="mail" name="mail">
                       </div>
-                      <button class="btn_login" type="button" onclick="requestCheck()">Ok</button>
+                      <button class="btn_login" type="button" onclick="requestCheck()"><%= __('invite_1_10') %></button>
                   </div>
                   <div>
                     <% include invitelist %>

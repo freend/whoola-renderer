@@ -13,7 +13,7 @@
             <label id="match"><%= __('receiver_1_3') %></label>
             <input type="text" class="form-control" id="phoneId" name="phone"
             <% if(phone == null) { %>
-                placeholder="Insert phone number"
+                placeholder="<%= __('receiver_1_5') %>"
             <% } else { %>
                 value="<%= phone %>"
             <% } %>
@@ -27,7 +27,7 @@
               <label ><%= __('receiver_1_4') %></label>
               <input type="text" class="form-control" id="nameId" name="name"
               <% if(name == null) { %>
-                  placeholder="insert invite name"
+                  placeholder="<%= __('receiver_1_6') %>"
               <% } else { %>
                   value="<%= name %>"
               <% } %>
@@ -35,9 +35,9 @@
           </div>
           <button type="button" id="btnSubmit" class="btn btn-info">
           <% if(id == null) { %>
-              Select Category
+            <%= __('receiver_1_7') %>
           <% } else { %>
-              Edit
+            <%= __('receiver_1_8') %>
           <% } %>
           </button>
         </form>

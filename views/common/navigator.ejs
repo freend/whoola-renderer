@@ -14,6 +14,12 @@
                 <li><a href="#" onClick="setToken('/withdraw?token=')"><%= __('common_navigator_4') %></a></li>
                 <li><a href="#" onClick="setToken('/invite?page=1&token=')"><%= __('common_navigator_5') %></a></li>
                 <li>
+                    <div>
+                        <select name="select01" id="select01">
+                        </select>
+                    </div>
+                </li>
+                <li>
                     <div class="header_btn" id="isLogout">
                         <button class="on" onclick="location.href='/signup'"><%= __('common_navigator_6') %></button>
                         <button onclick="location.href='/login'"><%= __('common_navigator_7') %></button>
@@ -57,5 +63,63 @@
             }
             $('#isLogout').css("display", isLogin);
             $('#isLogin').css("display", isLogout);
+            createLanguage();
+            selectedLanguageItem();
         });
+        $('#select01').on("change", function() {
+            const select = $(this).val();
+            console.log('this value', select);
+            switch (select) {
+                case '1':
+                    location.href = "/en";
+                    break;
+                case '2':
+                    location.href = "/ko";
+                    break;
+                case '3':
+                    location.href = "/id";
+                    break;
+            }
+        });
+        function createLanguage() {
+            $('#select01').append("<option value='1'>En</option>");
+            $('#select01').append("<option value='2'>Ko</option>");
+            // $('#select01').append("<option value='3'>Id</option>");
+        }
+        function getCookie(name) {
+            // Split cookie string and get all individual name=value pairs in an array
+            var cookieArr = document.cookie.split(";");
+            
+            // Loop through the array elements
+            for(var i = 0; i < cookieArr.length; i++) {
+                var cookiePair = cookieArr[i].split("=");
+                
+                /* Removing whitespace at the beginning of the cookie name
+                and compare it with the given string */
+                if(name == cookiePair[0].trim()) {
+                    // Decode the cookie value and return
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+            
+            // Return null if not found
+            return null;
+        }
+        function selectedLanguageItem() {
+            allCookies = document.cookie;
+            switch (getCookie('lang')) {
+                case 'en':
+                    console.log('selected en');
+                    $('#select01 option:eq(0)').attr('selected', 'selected');
+                    break;
+                case 'ko':
+                    console.log('selected ko');
+                    $('#select01 option:eq(1)').attr('selected', 'selected');
+                    break;
+                case 'id':
+                    console.log('selected id');
+                    $('#select01 option:eq(2)').attr('selected', 'selected');
+                    break;
+            }
+        }
     </script>

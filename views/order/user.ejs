@@ -26,12 +26,12 @@
         </h1>
         <h2 class="sub_title">
             <% if(phone == null) { %>
-                Add Receive Phone number
+                <%= __('oder_user_12') %>
                 <% if(token != "null") { %>
-                    , Or Select Below List
+                    <%= __('oder_user_13') %>
                 <% } %>
             <% } else { %>
-                Update User Name And Phone Number
+                <%= __('oder_user_19') %>
             <% } %>
         </h2>
         <div class="conts_wrap">
@@ -51,7 +51,7 @@
                     <h3><%= __('oder_user_9') %></h3>
                     <div>+<input style="width: 92%;" type="number" id="phoneId" name="phone"
                         <% if(phone == null) { %>
-                            placeholder="Enter the Number to Top-up"
+                            placeholder="<%= __('oder_user_20') %>"
                         <% } else { %>
                             value = "<%=phone %>"
                         <% } %>
@@ -64,7 +64,7 @@
                     <h3><%= __('oder_user_11') %></h3>
                     <div><input type="text" class="form-control" id="nameId" name="name"
                         <% if(name == null) { %>
-                            placeholder="Insert Receiver Name"
+                            placeholder="<%= __('oder_user_21') %>"
                         <% } else { %>
                             value="<%= name %>"
                         <% } %>
@@ -82,12 +82,12 @@
                     <button id="btnSubmit">
                         <% if(id == null) { 
                             if (category == 'topup') {%>
-                            Select Topup
+                            <%= __('oder_user_16') %>
                             <% } else { %>
-                                Select Service
+                                <%= __('oder_user_18') %>
                             <% } %>
                         <% } else { %>
-                            Edit
+                            <%= __('oder_user_17') %>
                         <% } %>
                         </button>
                 </div>
@@ -123,10 +123,10 @@
             const value = $(this).val();
             if (validatePhone(value)) {
                 match.css("color", 'blue');
-                match.text('Valid Phone Number');
+                match.text('<%= __('oder_user_15') %>');
             } else {
                 match.css("color", 'red');
-                match.text('Invalid Phone Number');
+                match.text('<%= __('oder_user_14') %>');
             }
         });
         $(window).bind("pageshow", function (event) {
@@ -134,11 +134,11 @@
             const value = $('#phoneId').val();
             if (validatePhone(value)) {
                 match.css("color", 'blue');
-                match.text('Valid Phone Number');
+                match.text('<%= __('oder_user_15') %>');
             } else {
                 if (value != '') {
                     match.css("color", 'red');
-                    match.text('Invalid Phone Number');
+                    match.text('<%= __('oder_user_14') %>');
                 }
             }
         });

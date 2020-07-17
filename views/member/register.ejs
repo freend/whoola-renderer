@@ -38,7 +38,7 @@
                             <h2><%= __('member_register_6') %></h2>
                         <div class="input_box">
                             <% if (referralCode == null) { %>
-                                <input type="text" id="inputReferral" name="referralCode" placeholder="Enter an invitation code to claim your HM 2$">
+                                <input type="text" id="inputReferral" name="referralCode" placeholder="<%= __('member_register_42') %>">
                             <% } else { %>
                                 <input type="text" value="<%= referralCode %>" id="inputReferral" name="referralCode" readonly>
                             <% } %>

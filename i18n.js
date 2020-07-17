@@ -10,7 +10,9 @@ i18n.configure(
         locales:['en', 'ko'],
         directory: __dirname + '/locales',
         defaultLocale: 'en',
-        cookie: 'lang'
+        cookie: 'lang',
+        syncFiles:true,
+        updateFiles:true
     }
 )
 
