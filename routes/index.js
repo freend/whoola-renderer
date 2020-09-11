@@ -3,7 +3,8 @@ var unirest = require('unirest');
 var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('main/landing', {'env': process.env.NODE_ENV});
+    // res.render('main/landing', {'env': process.env.NODE_ENV});
+    res.render('main/landing-v2', {'env': process.env.NODE_ENV});
 });
 router.get('/checker', function (req, res) {
     res.json({"message": 'Hoola Moola 2020-04-28 v03'});
