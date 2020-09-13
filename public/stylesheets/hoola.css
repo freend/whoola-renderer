@@ -47,18 +47,18 @@ section{
 }
 
 button{
-    border: 1px solid #6055cb;
+    border: 1px solid #5B00CF;
     padding: 5px 20px;
-    color: #6055cb;
+    color: #5B00CF;
     border-radius: 5px;
     background-color: #fff;
     cursor: pointer;
     margin: 0px 5px;
 }
 button.on{
-    border: 1px solid #6055cb;
+    border: 1px solid #5B00CF;
     color: #fff;
-    background-color: #6055cb
+    background-color: #5B00CF
 }
 button.btn_hamburger{
     border: none;
@@ -84,7 +84,7 @@ button.btn_hamburger{
 h1.title{
     font-size: 2rem;
     text-align: center;
-    color: #6055cb;
+    color: #5B00CF;
     font-weight: bold;
     margin-top: 70px;
     margin-bottom: 60px
@@ -108,7 +108,7 @@ h1.title{
     line-height: 23px;
 }
 .gnb li a{
-    color: #6055cb;
+    color: #5B00CF;
     display: block;
     padding: 0px 15px
 }
@@ -130,7 +130,7 @@ h1.title{
 .btn_sign{}
 .mypage_open{
     display: inline-block;
-    color: #6055CB;
+    color: #5B00CF;
     font-family: "MontserratM";
     position: relative;
     cursor: pointer;
@@ -272,7 +272,7 @@ footer .copyright{
     
 }
 .link a{
-    color: #6055CB;
+    color: #5B00CF;
 }
 .bold{
     font-weight: bold
@@ -313,7 +313,7 @@ footer .copyright{
     border-left:none;
     border-bottom: 1px solid #c4c4c4;
     text-align: center;
-     color: #6055cb;
+     color: #5B00CF;
     width: 100%
 }
 .login_wrap  .input_box input[type="password"]:focus,
@@ -360,9 +360,9 @@ footer .copyright{
 .btn_login{
     margin-top: 50px;
     width: 100%;
-    border: 1px solid #6055cb;
+    border: 1px solid #5B00CF;
     color: #fff;
-    background-color: #6055cb;
+    background-color: #5B00CF;
     font-weight: bold;
      height: 51px;
     font-size: 1.3rem
@@ -378,7 +378,7 @@ footer .copyright{
     border-left:none;
     border-bottom: 1px solid #4D4A55;
     text-align: left;
-     color: #6055cb;
+     color: #5B00CF;
     width: 100%
 }
 .signup_wrap  .input_box input[type="password"]:active,
@@ -544,9 +544,9 @@ input[type="checkbox"]:checked + label:before {
 .btn_send{
      margin-top: 10px;
     width: 80%;
-    border: 1px solid #6055cb;
+    border: 1px solid #5B00CF;
     color: #fff;
-    background-color: #6055cb;
+    background-color: #5B00CF;
     font-weight: bold;
      height: 51px;
     font-size: 1.3rem
@@ -592,11 +592,11 @@ input[type="checkbox"]:checked + label:before {
 }
 
 .active, .accordion b:hover {
-    color: #6055CB;
+    color: #5B00CF;
     font-weight: bold
 }
 .accordion.active b{
-     color: #6055CB;
+     color: #5B00CF;
     font-weight: bold;
 }
 .accordion:after {
@@ -614,7 +614,7 @@ input[type="checkbox"]:checked + label:before {
 
 .active:after {
   content: "\2212";
-    color: #6055CB;
+    color: #5B00CF;
     font-weight: bold;
 }
 
@@ -661,7 +661,7 @@ input[type="checkbox"]:checked + label:before {
 h1.title span:first-child{
     float: left;
     margin-top: 30px;
-    color: #6055CB;
+    color: #5B00CF;
     opacity: 0.5;
     min-width: 120px
 }
@@ -673,7 +673,7 @@ h1.title span b{
 h1.title span:last-child{
     float: right;
     margin-top: 30px;
-    color: #6055CB;
+    color: #5B00CF;
     opacity: 0.5;
     min-width: 120px
 }
@@ -719,7 +719,7 @@ h1.title span:last-child{
     width: 100%;
     margin: 0;
     padding: 17px;
-    background-color: #6055cb;
+    background-color: #5B00CF;
     color: #fff;
     font-weight: bold;
         box-sizing: border-box;
@@ -727,7 +727,7 @@ h1.title span:last-child{
 
 .purchase_box:focus,
 .purchase_box.on{
-    border-top: 5px solid #6055cb;
+    border-top: 5px solid #5B00CF;
         box-sizing: border-box;
     box-shadow: 0px 4px 7px #c4c4c4
 }
@@ -838,8 +838,8 @@ button.del{
     font-weight: bold
 }
 button.up{
-    background-color:  #6055cb;
-    border: 1px solid #6055cb;
+    background-color:  #5B00CF;
+    border: 1px solid #5B00CF;
     color: #fff;
     font-weight: bold
 }
@@ -878,7 +878,7 @@ button.up{
     display: inline-block;
     margin-right: 30px;
     vertical-align: super;
-    color: #6055cb
+    color: #5B00CF
 }
 
 .totalPrice span{
@@ -915,10 +915,10 @@ button.up{
     border-right: none;
 }
 .purchase_tbl3 .total_txt b{
-    color: #6055cb
+    color: #5B00CF
 }
 .txt_pur{
-    color: #6055cb
+    color: #5B00CF
 }
 
 .purchase_tbl3 .total_txt em{
@@ -1386,7 +1386,7 @@ h3.title{
 }
 
 .ssc_box.on .iconsBox{
-    border: 1px solid #6055CB;
+    border: 1px solid #5B00CF;
     box-shadow: 0px 4px 4px #999
 }
 .ssc_box.on:nth-of-type(1) .iconsBox:after{
@@ -1423,7 +1423,7 @@ h3.title{
     margin-top: 300px
 }
 .hmbp_box1{
-    background-color: #6055CB;
+    background-color: #5B00CF;
     padding: 47px;
     font-size: 3rem;
     color: #fff;
@@ -1453,7 +1453,7 @@ h3.title{
     text-align: center
 }
 .hmbp_box2 div p:nth-child(2){
-    color: #6055CB;
+    color: #5B00CF;
     font-size: 2.5rem;
     margin-top: 20px;
     font-weight: bold;
@@ -1477,16 +1477,16 @@ h3.title{
     background-color: #fff;
     padding: 47px;
     font-size: 3rem;
-    color: #6055CB;
+    color: #5B00CF;
     margin-top: 150px;
      position: relative;
-    border: 1px solid #6055CB;
+    border: 1px solid #5B00CF;
 }
 .hmbp_box3::after{
     content: "";
     height: 50px;
     width: 40px;
-    background-color: #6055CB;
+    background-color: #5B00CF;
     position: absolute;
     right: 40px;
     bottom: 0px;
@@ -1497,7 +1497,7 @@ h3.title{
     text-align: left;
     margin-top: 150px;
     margin-bottom: 50px;
-        color: #6055CB;
+        color: #5B00CF;
     float: left
 }
 
@@ -1522,7 +1522,7 @@ h3.title{
 
 .hmbp_box5{
     clear: both;
-    background-color: #6055CB;
+    background-color: #5B00CF;
     padding: 47px;
  
     color: #fff;
@@ -1609,7 +1609,7 @@ h3.title{
 /* Create an active/current tablink class */
 .tab button.on {
   background-color: #F8F8F8;
-    color: #6055CB;
+    color: #5B00CF;
     font-weight: bold
 }
 
@@ -1636,7 +1636,7 @@ h3.title{
 }
 
 .color_p{
-    color: #6055CB
+    color: #5B00CF
 }
 .bold{
     font-weight: bold
@@ -1655,9 +1655,9 @@ h3.title{
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    border: 1px solid #6055CB;
-    box-shadow: 0px 3px 1px #6055CB;
-    color: #6055CB;
+    border: 1px solid #5B00CF;
+    box-shadow: 0px 3px 1px #5B00CF;
+    color: #5B00CF;
     font-size: 3rem;
     font-weight: bold;
     padding: 14px 10px;
@@ -1668,9 +1668,9 @@ h3.title{
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    border: 1px solid #6055CB;
-    box-shadow: 0px 3px 1px #6055CB;
-    color: #6055CB;
+    border: 1px solid #5B00CF;
+    box-shadow: 0px 3px 1px #5B00CF;
+    color: #5B00CF;
     font-size: 2.5rem;
     font-weight: bold;
     padding: 10px 10px;
@@ -1729,7 +1729,7 @@ h3.title{
 .icon_left li, .icon_right li{
     width: 43px;
     height: 43px;
-    border: 1px solid #6055cb;
+    border: 1px solid #5B00CF;
     border-radius: 50%;
     display: inline-block;
     margin: 0px 7%;
@@ -1821,7 +1821,7 @@ h3.title{
 .dots p{
     line-height: 8px;
     font-size: 1.8rem;
-    color: #6055CB;
+    color: #5B00CF;
 }
 
 .nbgo_wrap{
@@ -1877,7 +1877,7 @@ h3.title{
 }
 
 .nbgo_wrap .txtA{
-    color: #6055CB;
+    color: #5B00CF;
     font-size: 3rem;
     font-weight: bold;
     margin-bottom: 30px
@@ -1940,7 +1940,7 @@ h3.title{
     position: absolute;
     width: 100%;
     bottom: 17px;
-    color: #6055CB;
+    color: #5B00CF;
     font-weight: bold
 }
 
@@ -1966,7 +1966,7 @@ h3.title{
 }
 
 .history div p:nth-child(2){
-    color: #6055CB;
+    color: #5B00CF;
     font-size: 2rem;
     margin-bottom: 20px;
     font-weight: bold
@@ -1991,7 +1991,7 @@ h3.title{
 
 p.sub_title{
     text-align: center;
-    color: #6055CB;
+    color: #5B00CF;
     font-size: 1.1rem;
     margin-top: 10px
 }
@@ -2017,7 +2017,7 @@ p.sub_title{
     margin-right: 2%;
     text-align: right;
     vertical-align: top;
-    color: #6055CB;
+    color: #5B00CF;
     font-size: 2.2rem;
     font-weight: bold
 }
@@ -2042,7 +2042,7 @@ p.sub_title{
 .foot_logo span:nth-child(2){
     text-align: left;
     font-size: 2.5rem;
-    color: #6055CB;
+    color: #5B00CF;
     vertical-align: top;
     margin-left: 10px
     
@@ -2099,7 +2099,7 @@ p.sub_title{
     line-height: 0;
     font-style: normal;
     background: #fff;
-    color: #6055CB
+    color: #5B00CF
 }
 
 .payment_box span:nth-child(1){
@@ -2122,7 +2122,7 @@ p.sub_title{
 }
 
 .payment_box:nth-child(3) span:nth-child(1){
-    color: #6055CB
+    color: #5B00CF
 }
 .payment_box:nth-child(3) span:nth-child(2){
     font-size: 2rem;
@@ -2139,7 +2139,7 @@ p.sub_title{
 
 .payment_box input[type="text"],
 .payment_box input::placeholder{
-    color: #6055CB;
+    color: #5B00CF;
     text-align: right
 }
 
@@ -2201,7 +2201,7 @@ table-layout: fixed
 
 .type03 th,
 .type02 th{
-    border-bottom:2px solid #6055CB 
+    border-bottom:2px solid #5B00CF
 }
 
 .type02 th, .type02 td{
@@ -2241,7 +2241,7 @@ table-layout: fixed
 .withdraw_tbl input[type="text"]{
     width: 90%;
     text-align: right;
-    color: #6055CB;
+    color: #5B00CF;
     font-weight: bold
 }
 
@@ -2253,7 +2253,7 @@ table-layout: fixed
     margin-top: 13px
 }
 .payment_box:nth-child(2) span:nth-child(1){
-    color: #6055CB;
+    color: #5B00CF;
     font-weight: bold
 }
 
@@ -2267,7 +2267,7 @@ table-layout: fixed
     width: auto;
     opacity: 1;
         color: #fff;
-    background-color: #6055cb;
+    background-color: #5B00CF;
         margin-top: 50px;
 }
 .payment_wrap.withdraw{
@@ -2338,8 +2338,8 @@ border-radius: 6px;
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background-color: #6055CB;
-    border: 1px solid #6055CB;
+    background-color: #5B00CF;
+    border: 1px solid #5B00CF;
     display: inline-block
 }
 .dotB{
@@ -2444,7 +2444,7 @@ border-radius: 6px;
 .myinfo_wrap .left h1{
     font-size: 1.5rem;
     font-weight: bold;
-    color: #6055CB;
+    color: #5B00CF;
     text-align: center;
     padding: 0px 0px 20px;
     margin-bottom: 10px;
@@ -2492,11 +2492,11 @@ border-radius: 6px;
 
 .titleA{
     font-size: 1.6rem;
-    color: #6055CB;
+    color: #5B00CF;
     font-weight: bold
 }
 .userinfo_wrap .bar{
-    width: 82%; text-align: center; padding: 10px; box-shadow: 1px 1px 5px gray; color: #6055CB; font-weight: bold; font-size: 1.3rem; margin: 0 auto; margin-top: 50px
+    width: 82%; text-align: center; padding: 10px; box-shadow: 1px 1px 5px gray; color: #5B00CF; font-weight: bold; font-size: 1.3rem; margin: 0 auto; margin-top: 50px
 }
 
 .userinfo_wrap .input_box{
@@ -2519,7 +2519,7 @@ border-radius: 6px;
 
 .head_bar{
     height: 50px;
-    background-color: #6055CB;
+    background-color: #5B00CF;
     color: #fff;
     text-align: center;
     line-height: 50px;
@@ -2536,7 +2536,7 @@ border-radius: 6px;
 }
 
 .signup_info{
-    border-bottom: 2px solid #6055CB
+    border-bottom: 2px solid #5B00CF
 }
 .signup_info span{
     display: inline-block;
@@ -2560,7 +2560,7 @@ border-radius: 6px;
     height: 80px;
     background-color: #e5e5e5;
     line-height: 80px;;
-    color: #6055CB;
+    color: #5B00CF;
     font-weight: bold;
     font-size: 1.5rem;
    
@@ -2639,7 +2639,7 @@ border-radius: 6px;
 .top_title h2.title2{
     text-align: center;
     font-size: 3rem;
-    color: #6055CB;
+    color: #5B00CF;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -2679,7 +2679,7 @@ border-radius: 6px;
     height: 40px;
     overflow: hidden;
     vertical-align: top;
-    border: 1px solid #6055cb;
+    border: 1px solid #5B00CF;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -2736,7 +2736,7 @@ border-radius: 6px;
 .icon_box li{
     width: 80px;
     height: 80px;
-    border: 1px solid #6055cb;
+    border: 1px solid #5B00CF;
     border-radius: 50%;
     display: inline-block;
     margin-right: 27%;
@@ -2823,7 +2823,7 @@ border-radius: 6px;
 }
 
 .main_box{
-    border-bottom: 2px solid #6055CB;
+    border-bottom: 2px solid #5B00CF;
     width: 100%;
     position: relative;
     height: 432px;
@@ -2854,7 +2854,7 @@ border-radius: 6px;
 }
 .main_txt p:nth-of-type(even) {
     font-size: 2.2rem;
-    color: #6055CB;
+    color: #5B00CF;
     margin-top: 10px;
     font-weight: bold
 }
@@ -2889,7 +2889,7 @@ border-radius: 6px;
 }
 
 .box2_02 thead th{
-    color: #6055CB;
+    color: #5B00CF;
     font-size: 1.2rem;
 }
 .box2_02 thead th img{
@@ -2927,7 +2927,7 @@ border-radius: 6px;
 .con_box td p:nth-child(2),
 .fam_box td p:nth-child(2){
     font-weight: bold;
-     color: #6055CB;
+     color: #5B00CF;
 }
 .prim_box td p:nth-child(3),
 .con_box td p:nth-child(3),
@@ -2951,7 +2951,7 @@ border-radius: 6px;
 .main_box2 > div.ftst_wrap{
     width: 100%;
     clear: both;
-    border-top: 2px solid #6055CB;
+    border-top: 2px solid #5B00CF;
     margin-top: 30px;
     padding-top: 30px
 }
@@ -2961,7 +2961,7 @@ border-radius: 6px;
     width: 49%
 }
 .ftst_box01{
-    color: #6055CB;
+    color: #5B00CF;
     font-size: 2.5rem
 }
 .ftst_wrap .ftst_box02 > span {
@@ -2985,7 +2985,7 @@ border-radius: 6px;
 
 .signup_btn{
     background: rgba(96, 85, 203, 0.08);
-    color: #6055CB;
+    color: #5B00CF;
     width: 200px;
     height: 45px;
     margin-top: 20px;
@@ -3188,9 +3188,9 @@ border-radius: 6px;
         font-size: 2rem
     }
     .hmbp_box3 {
-        background-color: #6055CB;
+        background-color: #5B00CF;
         color: #fff;
-        border: 1px solid #6055CB;
+        border: 1px solid #5B00CF;
         padding: 33px
     }
     .hmbp_box5{
@@ -3330,7 +3330,7 @@ border-radius: 6px;
     }
     
     .ssc_box.on .iconsBox {
-         border: 0px solid #6055CB; 
+         border: 0px solid #5B00CF;
          box-shadow: 0px 0px 0px #999; 
     }
     .ssc_box:nth-of-type(1) .iconsBox:after{
@@ -3576,7 +3576,7 @@ border-radius: 6px;
         height: auto
     }
     .main_img span{
-            border-top: 2px solid #6055CB;
+            border-top: 2px solid #5B00CF;
     }
 
     .main_box2 > div{
@@ -3813,7 +3813,7 @@ border-radius: 6px;
     }
     .purchase_tbl3 tr:nth-child(1) td:nth-child(4)::before{
         content: "Payment Amount";
-        color: #6055cb;
+        color: #5B00CF;
         display: inherit;
         margin-top: 20px;
         
@@ -3828,7 +3828,7 @@ border-radius: 6px;
         background-size: contain
     }
     .type02 td:first-child{
-        border-top: 2px solid #6055CB
+        border-top: 2px solid #5B00CF
     }
      .type02 td:last-child{
         border-bottom: 0px
@@ -3879,7 +3879,7 @@ border-radius: 6px;
         padding: 15px 5px
     }
        .type03 td:first-child{
-        border-top: 2px solid #6055CB;
+        border-top: 2px solid #5B00CF;
            
     }
      .type03 td:last-child{
@@ -3905,7 +3905,7 @@ border-radius: 6px;
         content: " ";
     }
     .type03, .type02{
-        border-bottom: 2px solid #6055CB
+        border-bottom: 2px solid #5B00CF
     }
 }
 

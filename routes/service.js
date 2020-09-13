@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
             'category': 'service',
             'env': process.env.NODE_ENV
         };
-        res.render('order/user', result);
+        res.render('order/user-v2', result);
     } else {
         unirest
             .get(process.env.API_HOST + '/receiver')
@@ -46,7 +46,7 @@ router.get('/', function(req, res, next) {
                         'category': 'service',
                         'env': process.env.NODE_ENV
                     };
-                    res.render('order/user', result);
+                    res.render('order/user-v2', result);
                 }
             });
     }
@@ -180,7 +180,7 @@ router.get('/edit', function(req, res, next) {
         "token": req.param('token'),
         'env': process.env.NODE_ENV
     };
-    res.render('order/user', result);
+    res.render('order/user-v2', result);
 });
 router.post('/edit', function(req, res, next) {
     const token = req.body["token"];

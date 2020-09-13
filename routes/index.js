@@ -3,7 +3,6 @@ var unirest = require('unirest');
 var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    // res.render('main/landing', {'env': process.env.NODE_ENV});
     res.render('main/landing-v2', {'env': process.env.NODE_ENV});
 });
 router.get('/checker', function (req, res) {
@@ -101,11 +100,11 @@ router.post('/login', function (req, res, next) {
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
         .send({ "mail": req.body["id"], "password": req.body["password"] })
         .then((response) => {
-            console.log(response);
-            if (response.body.status != null) {
-                console.log("log in failed")
-                response.body.ahref = "/login";
-                res.render('common/error', response.body);
+            if (response.body == null) {
+                res.render('common/error', {
+                    'message': "log in failed",
+                    'ahref': '/login'
+                });
             } else {
                 console.log("log in success");
                 res.render('common/loginmodal',

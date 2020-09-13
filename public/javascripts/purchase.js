@@ -33,14 +33,7 @@ function getProcessFee(amount) {
     return 0.6;
 }
 function isAblePoint() {
-    console.log('buy this month', level);
-    if (level < 2) {
-        $('#discountFee').attr('disabled', true);
-        $('#ablePoint').text(0);
-        $('#message').text('Only Family or Premium members can use and withdraw HM Dollar.');
-    } else {
-        $('#ablePoint').text(totalPoint);
-    }
+    $('#ablePoint').text(totalPoint);
 }
 function feeProcess(salesAmount) {
     $('#processFee').text(processFee + '$');
@@ -118,6 +111,8 @@ function buyPoint() {
     }
 }
 function validateAmount() {
+    console.log('fee', processFee);
+    console.log('total', productTotalAmount);
     const total = strictFloat(productTotalAmount + processFee);
     const validate = strictFloat($('#discountFee').val()) + strictFloat($('#submitAmount').val());
     console.log(total, validate);
@@ -140,7 +135,6 @@ function buyItem() {
         if (beforePayment()) {
             customUpdate();
             alert("Please DO NOT CLOSE the Paypal window or click the Back button on your browser until the Payment Confirmation window pops up.");
-            gtag('event','click', {'event_catagory':'purchase', 'event_label':'buy item'});
             document.getElementById('buyPaypal').submit();
         }
     }else{

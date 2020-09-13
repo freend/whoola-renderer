@@ -30,7 +30,7 @@ router.get('/info', function (req, res, next) {
                         "link": process.env.URLS + "/signupReferral/" + response.body.myReferralCode,
                         "paypal": response.body.paypalAccount,
                         "buyThisMonth": response.body.buyThisMonth,
-                        "level": response.body.level,
+                        "level": 0,
                         'env': process.env.NODE_ENV
                     };
                     res.render('member/myinfo', result);

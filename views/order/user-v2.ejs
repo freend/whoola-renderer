@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <% include ../common/header-2 %>
+</head>
+<body>
+<% include ../common/googletag %>
+<div id="wrap">
+    <div id="fullpage">
+        <div class="section fp-auto-height">
+            <header>
+                <% include ../common/navigator-2 %>
+                <script src="/static/javascripts/validate.js"></script>
+            </header>
+            <div class="selectplan">
+                <div class="wrapper">
+                    <h3><strong>Send Top-up to Loved Ones in minutes</strong></h3>
+                    <form>
+                        <!-- 국가 코드 시작 -->
+                        <% include ../common/country %>
+                        <!-- 국가 코드 끝 -->
+                        <div class="phone">
+                            <input type="tel" placeholder="Your Mobile Number" id="phoneId"/>
+                        </div>
+                        <input type="button" value="Select Plan" id="btnSubmit"/>
+                    </form>
+                    <em>The phone number provided will be treated confidentially and in accordance with our privacy policy.</em>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <footer class="section fp-auto-height">
+            <% include ../common/footers %>
+        </footer>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $('#btnSubmit').click(function() {
+        <% if(env == 'prod') { %>
+        gtag('event','click', {'event_catagory':'topup', 'event_label':'landing'});
+        <% } %>
+        const value = $(".num").text().split("+")[1] + $('#phoneId').val();
+        console.log('value', value);
+        if (!validatePhone(value)) {
+            alert('Invalid Phone Number');
+            return false;
+        }
+        location.href = '/order/topup?phoneNumber=' + value + '&token=' + localStorage.getItem('token');
+        // console.log('phoneId', $('#phoneId').val(), 'token', localStorage.getItem('token'));
+    });
+</script>

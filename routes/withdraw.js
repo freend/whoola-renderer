@@ -49,7 +49,7 @@ router.get('/', function(req, res, next) {
 });
 router.get('/list', function(req, res, next) {
     unirest
-        .get(process.env.API_HOST + '/withdraw' + '/mywithdraw?page=' + req.param('page'))
+        .get(process.env.API_HOST + '/withdraw?page=' + req.param('page'))
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json', 'X-AUTH-TOKEN': req.query.token})
         .send()
         .then((response) => {

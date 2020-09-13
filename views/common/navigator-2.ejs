@@ -1,0 +1,56 @@
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(){
+        const token = localStorage.getItem('token');
+    });
+</script>
+<div class="wrapper">
+    <h1><a href="/">hoolamoolah</a></h1>
+    <nav>
+        <h2>menu</h2>
+        <ul class="mb_hidden">
+            <li><a href="#" onClick="setToken('/order?token=')">Top-up</a></li>
+<!--            <li><a href="#" onClick="setToken('/business?token=')">Business</a></li>-->
+            <li><a href="#" onClick="setToken('/service?token=')">Others</a></li>
+            <li><a href="#" onClick="setToken('/withdraw?token=')">Withdrawal</a></li>
+            <li><a href="#" onClick="setToken('/invite?page=1&token=')">Invite</a></li>
+            <div class="header_btn" id="isLogin">
+            <li><a href="#" onClick="setToken('/users/info?token=')">Account</a></li>
+            <li><a href="#" onClick="setToken('/purchase?page=1&token=')">Purchase History</a></li>
+            <li><a href="#" onClick="setToken('/withdraw/list?page=1&token=')">Withdrawal History</a></li>
+            <li><a href="#" onClick="setToken('/point?page=1&token=')">Point History</a></li>
+            <li><a href="#" onClick="setToken('/tree?token=')">My Tree</a></li>
+            <li><a href="#" onclick="logout();return false;">Log Out</a></li>
+            </div>
+        </ul>
+    </nav>
+    <ul class="util mb_hidden">
+        <div class="header_btn" id="isLogout">
+            <li><a href="#" onclick="location.href='/signup'">Register</a></li>
+            <li><a href="#" onclick="location.href='/login'">Log in</a></li>
+        </div>
+    </ul>
+</div>
+<script>
+    function logout() {
+        localStorage.removeItem('token');
+        location.href = "/";
+    }
+    function setToken(value) {
+        location.href = value + localStorage.getItem('token');
+    }
+    $(document).ready(function(){
+        const haveToken = localStorage.getItem('token');
+        var isLogin = '';
+        var isLogout = '';
+
+        if (haveToken != null) {
+            isLogin = 'none';
+            isLogout = 'inline';
+        } else {
+            isLogin = 'inline';
+            isLogout = 'none';
+        }
+        $('#isLogout').css("display", isLogin);
+        $('#isLogin').css("display", isLogout);
+    });
+</script>

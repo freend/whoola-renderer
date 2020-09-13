@@ -8,6 +8,7 @@
     <script src="/static/javascripts/validate.js"></script>
 </head>
 <body>
+<% include ../common/googletag %>
     <header>
         <% include ../common/navigator %>
     </header>
@@ -177,7 +178,6 @@
 
     <script>
     const productTotalAmount = <%= salesAmount %>;
-    const level = <%= level %>;
     const totalPoint = <%= totalPoint %>;
     const ablePoint = <%= totalPoint %>;
     const isPayable = <%= payable %>;

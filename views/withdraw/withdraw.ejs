@@ -6,6 +6,7 @@
     <script src="/static/javascripts/member.js"></script>
 </head>
 <body>
+<% include ../common/googletag %>
   <header>
         <% include ../common/navigator %>
     </header>
@@ -34,18 +35,6 @@
                   <tr>
                       <th class="txt_l">Paypal Account</th>
                       <td><%= paypalAccount %></td>
-                      <th class="txt_l">Business Level</th>
-                      <% switch (level) {
-                        case 1 :%>
-                        <td>Consumer</td>
-                      <% break;
-                      case 2 :%>
-                      <td>Family</td>
-                      <% break;
-                      case 3 :%>
-                      <td>Premium</td>
-                      <% break; 
-                      } %>
                   </tr>
               </tbody>
           </table>
@@ -98,9 +87,11 @@
             <input type="hidden" value="<%= token %>" id="token" name="token">
             <input type="hidden" name="fee" id="requestFee">
             <input type="hidden" name="amount" id="requestAmount">
-            <button class="btn_request" type="button" onclick="requestCheck()">Request</button>
-            <button class="on" id="signup" onclick="buySignUp()" type="button">Register</button>
-            <button id="login" onclick="buyLogIn()" type="button">Log in</button>
+            <button class="on" type="button" onclick="requestCheck()">Request</button>
+            <% if(token == "null") { %>
+              <button class="on" id="signup" onclick="buySignUp()" type="button">Register</button>
+              <button id="login" onclick="buyLogIn()" type="button">Log in</button>
+            <% } %>
           </div>
         </form>
       </div>
