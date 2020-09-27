@@ -15,9 +15,6 @@
       Withdrawal
     </h1>
     <h2 class="sub_title">
-      <% if(level < 2) { %>
-        <p>Only Family or Premium members can use and withdraw HM Dollar.</p>
-      <% } %>
       <p>You will receive a verification email on withdrawal. The withdrawal will not be processed if not verified.</p>
   </h2>
     <div class="conts_wrap">
@@ -87,8 +84,11 @@
             <input type="hidden" value="<%= token %>" id="token" name="token">
             <input type="hidden" name="fee" id="requestFee">
             <input type="hidden" name="amount" id="requestAmount">
-            <button class="on" type="button" onclick="requestCheck()">Request</button>
+            <% if (token != 'null') {%>
+              <button class="on" type="button" onclick="requestCheck()">Request</button>
+            <% } %>
             <% if(token == "null") { %>
+              <button class="on" type="button" onclick="requestCheck()" disabled>Request</button>
               <button class="on" id="signup" onclick="buySignUp()" type="button">Register</button>
               <button id="login" onclick="buyLogIn()" type="button">Log in</button>
             <% } %>
@@ -122,13 +122,11 @@
     var level = 0;
 
     window.onload = function() {
-        level = <%= level %>;
         totalAmount = <%= haveAmount %>;
         requestAmount = <%= availAmount %>;
         limitAmount = <%= availAmount %>;
         totalFee = <%= fee %>;
         requestFee = <%= fee %>;
-        underRequestAmount(level);
         $('#viewAmount').val(requestAmount);
         const memberCode = "<%= token %>";
         if (memberCode == "null") {
@@ -138,14 +136,7 @@
         }
         changeValue();
     }
-    function underRequestAmount(value) {
-      if (value < 2) {
-        $('.btn_request').attr('disabled', true);
-        $('#viewAmount').attr('disabled', true);
-        requestAmount = 0;
-        requestFee = 0;
-      }
-    }
+
     function changeValue() {
         // display fee
         $('#viewFee').text(strictFloat(requestFee));

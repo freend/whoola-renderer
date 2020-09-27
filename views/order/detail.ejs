@@ -14,9 +14,9 @@
     </header>
     <section>
         <h1 class="title">
-            <span><b>Step3</b> Select Plan</span>
+            <span><b>Step 2</b> Select Top-Up Plan</span>
             Payment
-            <span class="blind"><b>Step3</b> Purchase</span>
+            <!--<span class="blind"><b>Step3</b> Purchase</span>-->
         </h1>
 
         <div class="conts_wrap">
@@ -32,13 +32,13 @@
                         </colgroup>
                         <tbody>
                             <tr>
-                                <th class="txt_l">Name</th>
+                                <th class="txt_l">Nickname</th>
                                 <% if (operator != 'hoolamoolah') { %>
                                     <td><%= name%></td>
                                 <% } else { %>
                                     <td></td>
                                 <% } %>
-                                <th class="txt_l">Phone number</th>
+                                <th class="txt_l">Phone Number</th>
                                 <% if (operator != 'hoolamoolah') { %>
                                     <td><%= receiverPhone %></td>
                                 <% } else { %>
@@ -48,7 +48,7 @@
                             <tr>
                                 <th class="txt_l">Operator</th>
                                 <td><%= operator %></td>
-                                <th class="txt_l">Product Name</th>
+                                <th class="txt_l">Plan</th>
                                 <td><%= productName%></td>
                             </tr>
                             <tr>
@@ -110,10 +110,10 @@
                         <p>
                             <span>Processing Fee
                                 <!-- <b class="tip"><img src="/static/images/img_tip.png"></b> -->
-                                <em class="tipTxt">
+                                <!--<em class="tipTxt">
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                                     <a href="#a" class="close">Close</a>
-                                </em>
+                                </em>-->
                             </span>
                             <span id="processFee"></span>
                         </p>
@@ -142,11 +142,11 @@
                     <form action="<%= paypalUrl %>" method="post" id="buyPaypal">
                         <div class="btn_group">
                             <button class="on" id="signup" onclick="buySignUp()" type="button">Register</button>
-                            <button id="login" onclick="buyLogIn()" type="button">Log in</button>
+                            <button id="login" onclick="buyLogIn()" type="button">Login</button>
                             <% if (referralCode != '') { %>
                                 <button class="btn_buy" id="paypalBtn" onclick="buyItem()" type="button">Buy</button>
                             <% } else { %>
-                                <button class="on" id="paypalBtn" onclick="buyItem()" type="button">None Member</button>
+                                <button class="on" id="paypalBtn" onclick="buyItem()" type="button">Non Member</button>
                             <% } %>
                             <button class="btn_buy" id="pointBtn" onclick="buyPoint()" type="button">Buy Point</button>
                         </div>

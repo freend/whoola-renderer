@@ -24,7 +24,7 @@
                     <p class="mt_50">hoolamoolah does not take any responsibility for any incorrect input of account details.<br>
                         Please double check your account details before registering.</p>
                     
-                    <button class="btn_login" type="button">Ok</button>
+                    <button class="btn_login" type="button">OK</button>
                 </div>
                 
                 <!-- <div>
@@ -58,7 +58,7 @@
     });
     $('.btn_login').click(function(event) {
         if (!validateMail($('#account').val())) {
-            alert('do not match email');
+            alert('Invalid Email Address');
             return false;
         }
         $('#submit-form').submit();

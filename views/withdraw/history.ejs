@@ -29,11 +29,11 @@
                         </colgroup>
                         <thead>
                             <tr>
-                                <th class="txt_c">State</th>
+                                <th class="txt_c">Status</th>
                                 <th>Amount (USD)</th>
                                 <th>Fee</th>
-                                <th>Create Date</th>
-                                <th>Response</th>
+                                <th>Requested On</th>
+                                <th>Responsed On</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -92,12 +92,12 @@
                                 <%  break;
                                 } %>
                                 </td>
-                                <td><%= (page.content[i].amount / 100) %></td>
-                                <td><%= (page.content[i].fee / 100) %></td>
+                                <td><%= (page.content[i].amount) %></td>
+                                <td><%= (page.content[i].fee) %></td>
                                 <td><%= page.content[i].createAt %></td>
                                 <td><%= page.content[i].responseAt %></td>
                                 <% if (page.content[i].withdrawState == "REQUESTED" || page.content[i].withdrawState == "REQUEST_CONFIRMED") { %>
-                                    <td><button class="btn_submit" onclick="cancelPopup('<%= page.content[i].id %>', '<%= page.content[i].createAt %>', '<%= page.content[i].amount / 100 %>')">Cancel</button></td>
+                                    <td><button class="btn_submit" onclick="cancelPopup('<%= page.content[i].id %>', '<%= page.content[i].createAt %>', '<%= page.content[i].amount %>')">Cancel</button></td>
                                 <% } else { %>
                                     <td><button class="btn_done">Done</button></td>
                                 <% } %>
@@ -112,7 +112,7 @@
         </div>
         <div class="conts_pop" style="display: none">
             <div class="pop_wrap" style="">
-                <h1>Request for withdrawal cancellation</h1>
+                <h1>Request for Withdrawal Cancelation</h1>
                 <p id="cancelTitle"></p>
                 <p class="bold">Are you sure to cancel the withdrawal request?</p>
                 <div class="btn_group">

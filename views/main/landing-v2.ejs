@@ -27,11 +27,11 @@
             </div>
             <div class="selectplan">
                 <div class="wrapper">
-                    <h3><strong>Send Top-up to Loved Ones in minutes</strong></h3>
+                    <h3><strong>Send Top-up to Loved Ones in Minutes</strong></h3>
                     <form>
-                        <!-- 국가 코드 시작 -->
+                        <!-- start country code -->
                         <% include ../common/country %>
-                        <!-- 국가 코드 끝 -->
+                        <!-- end country code -->
                         <div class="phone">
                             <input type="tel" placeholder="Your Mobile Number" id="phoneId"/>
                         </div>
@@ -47,32 +47,32 @@
                 <ul class="txt_slide">
                     <li>
                         <div class="txt">
-                            <strong>“The Best Decision<br>I’ve Made In My Life”</strong>
-                            <p>Aileen</p>
+                            <strong>hoolamoolah is a must-have service if you live in another country. I was able to top-up my sister’s phone when she needed it the most. Thank you!</strong>
+                            <p>Veronica, Cuba</p>
                         </div>
                     </li>
                     <li>
                         <div class="txt">
-                            <strong>“It feels like we are<br>operating together, not<br>just using the service.”</strong>
-                            <p>Aileen</p>
+                            <strong>I live in the States and my family is in Philippines. We live so far away, yet we use the same service, hoolamoolah, for credit our phones. HM dollar system rocks!</strong>
+                            <p>Andre, U.S.A</p>
                         </div>
                     </li>
                     <li>
                         <div class="txt">
-                            <strong>“I am very, very satisfied<br>with the service.”</strong>
-                            <p>Aileen</p>
+                            <strong>"I top up my children's cell phones in the Philippines<br>through hoolamoolah. I am very satisfied."</strong>
+                            <p>Vincent, United Arab Emirates</p>
                         </div>
                     </li>
                     <li>
                         <div class="txt">
-                            <strong>“The Best Decision<br>I’ve Made In My Life”</strong>
-                            <p>Aileen</p>
+                            <strong>“I like the payback service. So I introduce it to my family, friends, and colleagues.<br>When I receive payback, I want to give it to my parents.”</strong>
+                            <p>Prasanna, India</p>
                         </div>
                     </li>
                     <li>
                         <div class="txt">
-                            <strong>“It feels like we are<br>operating together, not<br>just using the service.”</strong>
-                            <p>Aileen</p>
+                            <strong>“Hoolamoolah lets me to top up whenever I need to.<br>I am super satisfied with your simple and fast top-up service.”</strong>
+                            <p>Joseph, Canada</p>
                         </div>
                     </li>
                 </ul>
@@ -86,14 +86,14 @@
             <div class="payback">
                 <div class="wrapper">
                     <div class="top">
-                        <h3><strong>Get up to<br>10% Payback</strong></h3>
+                        <h3><strong>Get 10%<br>Payback</strong></h3>
                         <ul>
                             <li><em>8%</em> from Tier 1</li>
                             <li><em>2%</em> from Tier 2</li>
                         </ul>
                         <p>Minimum monthly spending</p>
                         <p>over $20 required to use HM$</p>
-                        <a href="#" onClick="setToken('/invite?page=1&token=')" class="more">Learn More</a>
+                        <a href="#" onClick="moreLink()" class="more">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="module_tit">
                                     <h3>HM$ 48,000</h3>
-                                    <p>Outstanding</p>
+                                    <p>Remaining</p>
                                 </div>
                             </div>
                             <div>
@@ -142,7 +142,7 @@
                                 </div>
                                 <div class="module_tit">
                                     <h3>HM$ 6,000</h3>
-                                    <p>Remaining</p>
+                                    <p>Outstanding</p>
                                 </div>
                             </div>
                         </div>
@@ -155,9 +155,9 @@
                 <div class="wrapper">
                     <p class="img"><img src="/static/images/pic/pic_refer.jpg" alt="Refer to Your Friends Give HM$2 to Them"></p>
                     <div class="tit">
-                        <h3><strong>Refer to<br>Your Friends<br>Give HM$2 to Them</strong></h3>
+                        <h3><strong>Refer<br>Your Friends<br>Give HM$2 to Them</strong></h3>
                         <span>HM dollar has a par value with US Dollar.</span>
-                        <a href="#" onClick="setToken('/invite?page=1&token=')" class="more">Learn More</a>
+                        <a href="#" onClick="moreLink()" class="more">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -165,10 +165,10 @@
         <div class="section fp-auto-height">
             <div class="signup">
                 <div class="wrapper">
-                    <h3><strong>Meet hoolamoolah in Your Language</strong></h3>
+                    <h3><strong>We Have What You Need</strong></h3>
                     <div class="txt">
-                        <p>Currently, we support English, Thai…..<span>We Have What You Need Top-up for Over 140 Countries Sign Up Now</span></p>
-                        <a href="#" onclick="location.href='/signup'">Sign-Up</a>
+                        <p>Top-up for Over 140 Countries</p>
+                        <a href="#" onclick="location.href='/signup'">Sign Up Now</a>
                     </div>
                 </div>
             </div>
@@ -176,7 +176,7 @@
         <div class="section fp-auto-height">
             <div class="secure">
                 <div class="wrapper">
-                    <h3><strong>hoolamoolah is safe and secure</strong></h3>
+                    <h3><strong>hoolamoolah is Safe and Secure</strong></h3>
                     <ul>
                         <li>
                             <p></p>
@@ -196,7 +196,7 @@
                                 <p>
                                     <span>hoolamoolah is using PayPal as a</span>
                                     <span>primary payment solution which will</span>
-                                    <span>keep your money both safe and<br>encrypted.</span>
+                                    <span>keep your money both safe and encrypted.</span>
                                 </p>
                             </div>
                         </li>
@@ -236,4 +236,12 @@
         location.href = '/order/topup?phoneNumber=' + value + '&token=' + localStorage.getItem('token');
         // console.log('phoneId', $('#phoneId').val(), 'token', localStorage.getItem('token'));
     });
+    function moreLink() {
+        const token = localStorage.getItem('token');
+        if (token != null) {
+            location.href = '/invite?page=1&token=' + token;
+        } else {
+            location.href='/login';
+        }
+    }
 </script>

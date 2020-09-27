@@ -10,20 +10,20 @@
     </header>
   <script src="/static/javascripts/validate.js"></script>
     <section>
-        <h1 class="title">Invite</h1>
+        <h1 class="title">Invite Friends</h1>
         <h2 class="sub_title">
-          Today Invited : <%= invited %> / Today Total : <%= total %>
+<!--          Today Invited : <%= invited %> / Total : <%= total %>-->
       </h2>
         <form class="form" action="/invite/add" method="POST" id="form-submit">
           <input type="hidden" value="<%= token%>" id="token" name="token">
           <div class="conts_wrap">
               <div class="login_wrap">
                   <div class="login_email">
-                      <h2>Invite Email Address</h2>
+                      <h2>Enter the email address of the person you want to invite.</h2>
                       <div class="input_box">
                           <input type="text" id="mail" name="mail">
                       </div>
-                      <button class="btn_login" type="button" onclick="requestCheck()">Ok</button>
+                      <button class="btn_login" type="button" onclick="requestCheck()">Send</button>
                   </div>
                   <div>
                     <% include invitelist %>
@@ -36,28 +36,24 @@
       <% include ../common/footers %>
   </footer>
   <script>
-    const total = <%= total %>;
+    const total = 100;
     const invited = <%= invited %>;
     
     function requestCheck() {
       const mail = $('#mail').val();
       if (!validateMail(mail)) {
-        alert('do not match email');
+        alert('Invalid Email Address');
         return false;
       }
-      if (ableMailSend() == true) {
         const result = confirm("Would you like to send an invitation email to " + mail);
         if(result){
-          $('#form-submit').submit();
+            $('#form-submit').submit();
         }else{
-            alert("Your invitation email was cancelled and did not send.");
+            alert("Your invitation email was canceled and was not sent.");
         }
-      }
     }
     window.onload = function() {
-      if (invited >= total) {
         ableMailSend();
-      }
     }
     function ableMailSend() {
       if (invited >= total) {

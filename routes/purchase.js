@@ -35,7 +35,7 @@ router.get('/complete', function (req, res, next) {
     const arr = req.param('cm').split(',');
     const code = arr[0].toString().split(':')[1].toString();
     const receive = arr[1].toString().split(':')[1].toString();
-    const point = arr[2].toString().split(':')[1].toString();
+    const point = (arr[2].toString().split(':')[1].toString() == null) ? '0' : arr[2].toString().split(':')[1].toString();
     let account = "";
     if (arr.length == 4) {
         account = arr[3].toString().split(':')[1].toString();

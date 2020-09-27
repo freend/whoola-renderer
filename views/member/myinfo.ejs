@@ -41,7 +41,7 @@
                             <dt>Referral Code</dt>
                             <dd class="bold">
                                 <input type="text" id="code" value="<%= myReferralCode %>" readonly>
-                                <a href="#" onclick="copyCode()"><img src="/static/images/icon_docu.png"></a>
+                                <a href="#" onclick="copyCode()"><img src="/static/images/icon_docu.png" alt="Copy"></a>
                            </dd>
                         </dl>
                         <dl>
@@ -50,7 +50,7 @@
                         </dl>
                         <dl>
                             <dt>HM Dollar</dt>
-                            <dd class="bold"><%= point %> $</dd>
+                            <dd class="bold"><%= point %> HM$</dd>
                         </dl>
                         <dl>
                             <dt>PayPal Account</dt>
@@ -61,7 +61,7 @@
                             <dd class="bold">
                                 <!-- <%= link %> -->
                                 <input type="text" id="link" value="<%= link %>" readonly>
-                                <a href="#" onClick="copyUrl();return false;"><img src="/static/images/icon_docu.png"></a>
+                                <a href="#" onClick="copyUrl();return false;"><img src="/static/images/icon_docu.png" alt="Copy"></a>
                             </dd>
                         </dl>
                     </div>
@@ -90,36 +90,16 @@
             copyText.select();
             copyText.setSelectionRange(0, 99999);
             document.execCommand("Copy");
-            alert('Copied');
+            alert('Referral Code Copied');
         }
         function copyUrl() {
             const copyText = document.getElementById("link");
             copyText.select();
             copyText.setSelectionRange(0, 99999);
             document.execCommand("Copy");
-            alert('Copied');
+            alert('Referral Link Copied');
         }
-        window.onload = function() {
-            const name = "<%= level.name %>";
-            const level1 = "<%= level.oneLevelPercent %>%";
-            const level2 = "<%= level.twoLevelPercent %>%";
-            $('#levelName').text(name);
-            $('#level1').text(level1);
-            $('#level2').text(level2);
-            
-            switch (name) {
-                case 'Family':
-                url = '/static/images/icon_family.png';
-                break;
-                case 'Premium':
-                url = '/static/images/icon_premium.png';
-                break;
-                default:
-                url = '/static/images/icon_user.png';
-                break;
-            }
-            $('#levelImg').attr("src", url);
-        };
+
         function setToken(value) {
             location.href = value + localStorage.getItem('token');
         }

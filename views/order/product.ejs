@@ -11,9 +11,9 @@
     </header>
     <section>
         <h1 class="title">
-            <span><b>Step2</b> View Product Category</span>
-            Select Plan
-            <span><b>Step4</b> Payment</span>
+            <span><b>Step 1</b> Enter The Number</span>
+            Select Top-Up Plans
+            <span><b>Step 3</b> Payment</span>
         </h1>
         <div class="conts_wrap">
             <input type="hidden" value="<%=receiver%>" id="productReceiver">
@@ -25,7 +25,7 @@
                         <p><span><%= list[i].name %></span></p>
                     </div>
                     <div class="purchase_btn">
-                        <button onClick="buyDetail(<%= list[i].id %>)">Buy</button>
+                        <button onClick="buyDetail(<%= list[i].id %>)">Select</button>
                     </div>
                 </div>
                 <% } %>

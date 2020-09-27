@@ -13,12 +13,12 @@
         <% include ../common/navigator %>
     </header>
     <section>
-        <h1 class="title">Log in</h1>
+        <h1 class="title">Login</h1>
         <form class="form-signin" action="/login" method=POST>
             <div class="conts_wrap">
                 <div class="login_wrap">
                     <div class="login_email">
-                        <h2>Email address</h2>
+                        <h2>Email Address</h2>
                         <div class="input_box">
                             <input type="email" name="id" id="inputEmail" required autofocus>
                         </div>
@@ -26,7 +26,7 @@
                         <div class="input_box">
                             <input type="password" name="password" required>
                         </div>
-                        <button class="btn_login" type="submit">Log in</button>
+                        <button class="btn_login" type="submit">Login</button>
                     </div>
                     <div class="or">
                         <p>or</p>
@@ -44,9 +44,9 @@
         $('#forget-password').click(function(){
           const mail = $('#inputEmail');
           if (mail.val() == '') {
-            alert('please insert sign up e-mail address');
+            alert('Please Enter The Email Address You Used To Sign Up');
           } else if(!validateMail(mail.val())) {
-            alert('do not match email');
+            alert('Invalid Email Address');
           } else {
             $(location).attr('href', 'validate/password/' + mail.val());
           }

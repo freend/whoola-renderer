@@ -17,19 +17,19 @@
         <h1 class="title">
             <% if(phone == null) { %>
             <span class="blind"><b>Step1</b> Number</span>
-            Purchase Step
+            Follow These Super Simple Steps
                 <% if(category == 'order') { %>
-                    <span><b>Step2 </b>Select Plan</span>
+                    <span><b>Step 2 </b>Select Top-Up Plan</span>
                 <% } else {%>
-                    <span><b>Step2 </b>Select Service</span>
+                    <span><b>Step 2 </b>Select Service</span>
                 <% } %>
             <% }%>
         </h1>
         <h2 class="sub_title">
             <% if(phone == null) { %>
-                Add Receive Phone number
+                Add The Phone Number To Top-up 
                 <% if(token != "null") { %>
-                    , Or Select Below List
+                    , or Select From The List Below
                 <% } %>
             <% } else { %>
                 Update User Name And Phone Number
@@ -62,7 +62,7 @@
                 </div>
                 <% if(token != "null" && name != null) { %>
                 <div class="input_box">
-                    <h3>Name</h3>
+                    <h3>Nickname</h3>
                     <div><input type="text" class="form-control" id="nameId" name="name"
                         <% if(name == null) { %>
                             placeholder="Insert Receiver Name"
@@ -83,7 +83,7 @@
                     <button id="btnSubmit">
                         <% if(id == null) { 
                             if (category == 'topup') {%>
-                            Select Topup
+                            Select Top-Up Plan
                             <% } else { %>
                                 Select Service
                             <% } %>
