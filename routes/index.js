@@ -100,11 +100,12 @@ router.post('/login', function (req, res, next) {
         .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
         .send({ "mail": req.body["id"], "password": req.body["password"] })
         .then((response) => {
-            if (response.body == null) {
-                res.render('common/error', {
-                    'message': "log in failed",
+            if (response.body === 'Invalid email or password.') {
+                const result = {
+                    'message': response.body,
                     'ahref': '/login'
-                });
+                }
+                res.render('common/error', result);
             } else {
                 console.log("log in success");
                 res.render('common/loginmodal',
