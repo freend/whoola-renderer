@@ -15,9 +15,9 @@
     %>
     <div class="paging_wrap">
         <% if(defaultNumber != 0) { %>
-        <a href="#" onclick="groupController('pre')" class="pre"><img src="/static/images/page_pre.png" alt="prev"></a>
+        <a href="#" onclick="groupController('pre')" class="pre"><img src="https://d1uvpyasv6rv5d.cloudfront.net/images/page_pre.png" alt="prev"></a>
         <% } else { %>
-        <a href="#" class="pre"><img src="/static/images/page_pre.png" alt="prev"></a>
+        <a href="#" class="pre"><img src="https://d1uvpyasv6rv5d.cloudfront.net/images/page_pre.png" alt="prev"></a>
         <% } %>
         <% for (var i = startNum; i <= endNum; i++) {
             if (i == (currentPage + 1)) { %>
@@ -27,9 +27,9 @@
             <% } %>
         <% } %>
         <% if (endNum == totalPage) { %>
-        <a href="#" class="next"><img src="/static/images/page_next.png" alt="next"></a>
+        <a href="#" class="next"><img src="https://d1uvpyasv6rv5d.cloudfront.net/images/page_next.png" alt="next"></a>
         <% } else { %>
-        <a href="#" onclick="groupController('next')" class="next"><img src="/static/images/page_next.png" alt="next"></a>
+        <a href="#" onclick="groupController('next')" class="next"><img src="https://d1uvpyasv6rv5d.cloudfront.net/images/page_next.png" alt="next"></a>
         <% } %>
     </div>
     <script>

@@ -8,11 +8,10 @@
   <header>
         <% include ../common/navigator %>
     </header>
-  <script src="/static/javascripts/validate.js"></script>
+  <script src="https://d1uvpyasv6rv5d.cloudfront.net/javascripts/validate.js"></script>
     <section>
         <h1 class="title">Invite Friends</h1>
         <h2 class="sub_title">
-<!--          Today Invited : <%= invited %> / Total : <%= total %>-->
       </h2>
         <form class="form" action="/invite/add" method="POST" id="form-submit">
           <input type="hidden" value="<%= token%>" id="token" name="token">
