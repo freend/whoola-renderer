@@ -80,7 +80,7 @@ function getUrl(url) {
     if (result === 'logintoken=') {
         result = 'token=';
     }
-    return (result === 'token=') ? '/order?token=' : result;
+    return (result === 'token=') ? '/?token=' : result;
 }
 // call login page
 router.get('/login', function (req, res, next) {
